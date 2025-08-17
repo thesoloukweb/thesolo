@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
 
-// API route - will be handled by Vercel Functions
+export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
   try {

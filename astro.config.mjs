@@ -3,11 +3,8 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 import compress from 'astro-compress';
-import vercel from '@astrojs/vercel';
-
 export default defineConfig({
   site: process.env.SITE_URL || 'https://thesolo.co.uk',
-
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'viewport'
