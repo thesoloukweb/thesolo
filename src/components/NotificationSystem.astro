@@ -136,29 +136,29 @@
   };
 
   function createCelebrationEffect() {
-    // Simple confetti-like effect
-    const colors = ['#C49A85', '#588157', '#ffffff', '#D4A574'];
+    // Subtle celebration effect - fewer particles
+    const colors = ['#C49A85', '#D4A574'];
     
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 8; i++) {
       setTimeout(() => {
         const confetti = document.createElement('div');
         confetti.style.cssText = `
           position: fixed;
-          top: 20%;
-          right: 10%;
-          width: 8px;
-          height: 8px;
+          top: 15%;
+          right: ${Math.random() * 20 + 5}%;
+          width: 6px;
+          height: 6px;
           background: ${colors[Math.floor(Math.random() * colors.length)]};
           border-radius: 50%;
           pointer-events: none;
           z-index: 9999;
-          animation: confetti-fall 2s ease-out forwards;
+          animation: confetti-fall 1.5s ease-out forwards;
         `;
         
         document.body.appendChild(confetti);
         
-        setTimeout(() => confetti.remove(), 2000);
-      }, i * 100);
+        setTimeout(() => confetti.remove(), 1500);
+      }, i * 150);
     }
   }
 

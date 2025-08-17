@@ -73,15 +73,25 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Josefin+Sans:wght@300;400;500;600;700&display=swap" />
     </noscript>
     
-    <!-- Preload only above-the-fold critical images based on page -->
+    <!-- Preload critical above-the-fold images -->
     {Astro.url.pathname === '/' && (
-      <link rel="preload" href="/images/hero-left.jpg" as="image" type="image/jpeg" />
+      <>
+        <link rel="preload" href="/images/hero-left.jpg" as="image" type="image/jpeg" />
+        <link rel="preload" href="/images/hero-right.jpg" as="image" type="image/jpeg" />
+      </>
     )}
     {Astro.url.pathname === '/menu' && (
-      <link rel="preload" href="/images/menu-3.jpg" as="image" type="image/jpeg" />
+      <>
+        <link rel="preload" href="/images/menu-1.jpg" as="image" type="image/jpeg" />
+        <link rel="preload" href="/images/menu-2.jpg" as="image" type="image/jpeg" />
+        <link rel="preload" href="/images/menu-3.jpg" as="image" type="image/jpeg" />
+      </>
     )}
     {Astro.url.pathname === '/gallery' && (
       <link rel="preload" href="/images/restaurant-1.jpg" as="image" type="image/jpeg" />
+    )}
+    {Astro.url.pathname === '/reservation' && (
+      <link rel="preload" href="/images/reservation-hero.jpg" as="image" type="image/jpeg" />
     )}
   </head>
   <body class="h-full font-josefin bg-brand-dark text-white antialiased">
