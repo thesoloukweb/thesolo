@@ -15,6 +15,7 @@
     "@astrojs/prefetch": "^0.4.1",
     "@astrojs/sitemap": "^3.1.6",
     "@astrojs/tailwind": "^5.1.1",
+    "@astrojs/vercel": "^8.2.6",
     "@types/nodemailer": "^7.0.0",
     "@vite-pwa/astro": "^1.1.0",
     "astro": "^4.15.9",
