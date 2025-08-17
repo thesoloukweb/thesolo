@@ -1,13 +1,12 @@
-const nodemailer = require('nodemailer');
-
-module.exports = async (req, res) => {
+// Vercel Serverless Function
+export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
-    return res.status(200).end();
+    return res.status(200).json({ message: 'OK' });
   }
 
   if (req.method !== 'POST') {
@@ -51,8 +50,11 @@ module.exports = async (req, res) => {
       });
     }
 
+    // Import nodemailer dynamically
+    const nodemailer = await import('nodemailer');
+    
     // Create SMTP transporter
-    const transporter = nodemailer.createTransport({
+    const transporter = nodemailer.default.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.SMTP_USER,
@@ -162,4 +164,4 @@ module.exports = async (req, res) => {
       error: 'Failed to send email: ' + error.message 
     });
   }
-};
+}
