@@ -1,0 +1,478 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+---
+
+<BaseLayout 
+  title="Mediterranean Menu | TheSolo Kitchen & Bar - East London" 
+  description="Authentic Mediterranean menu featuring breakfast, à la carte dishes, craft cocktails & party packages. Download PDF menus. Located in Bethnal Green, London."
+  image="/images/menu-3.jpg"
+>
+  <Header />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="relative h-96 sm:h-[500px] lg:h-[600px] flex items-center justify-center bg-brand-dark">
+      <!-- Hero Background Image -->
+      <div class="absolute inset-0 z-0">
+        <Image 
+          src="/images/menu-3.jpg" 
+          alt="TheSolo Kitchen & Bar Menu" 
+          class="w-full h-full object-cover"
+          loading="eager"
+          width={1200}
+          height={600}
+          format="webp"
+          quality={90}
+        />
+        <div class="absolute inset-0 bg-brand-dark/75"></div>
+      </div>
+      
+      <!-- Hero Content -->
+      <div class="relative z-10 container-custom text-center py-12 mt-16">
+        <!-- Content Background -->
+        <div class="bg-brand-dark/80 backdrop-blur-sm rounded-2xl px-8 py-12 max-w-4xl mx-auto border border-brand-gold/20">
+          <h1 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+            Our
+            <span class="text-brand-gold block">Menu Collection</span>
+          </h1>
+          <p class="font-josefin text-base sm:text-lg text-white/95 max-w-2xl mx-auto leading-relaxed">
+            Discover our authentic Mediterranean flavors through our diverse menu selection. Click any menu to view the full PDF.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Categories Section -->
+    <section id="menus" class="section-padding bg-brand-dark">
+      <div class="container-custom">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+          <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-gold mb-8">
+            Menu Categories
+          </h2>
+          <p class="font-josefin text-lg text-white/90 max-w-3xl mx-auto leading-relaxed">
+            From hearty breakfast options to exclusive party packages, our carefully curated menus offer something special for every occasion.
+          </p>
+        </div>
+
+        <!-- Menu Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-items-center">
+          
+          <!-- Breakfast & Brunch Menu -->
+          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/breakfast-and-brunch.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
+              <div class="relative">
+                <Image 
+                  src="/images/menu-1.jpg" 
+                  alt="Breakfast & Brunch Menu" 
+                  class="w-full h-64 object-cover"
+                  loading="lazy"
+                  width={463}
+                  height={256}
+                  format="webp"
+                  quality={80}
+                />
+                <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+                
+                <!-- PDF Icon Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="bg-brand-gold/90 rounded-full p-4 backdrop-blur-sm">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Time Badge -->
+                <div class="absolute top-4 right-4">
+                  <span class="bg-brand-gold/90 text-brand-dark px-3 py-1 text-sm font-josefin font-medium rounded-full backdrop-blur-sm">
+                    8AM - 12PM
+                  </span>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h3 class="font-crimson text-xl lg:text-2xl text-white mb-3">
+                  Breakfast & Brunch
+                </h3>
+                <p class="font-josefin text-white/80 text-sm leading-relaxed mb-4">
+                  Start your day with our Mediterranean-inspired breakfast selection featuring fresh ingredients and traditional flavors.
+                </p>
+                <div class="flex items-center text-brand-gold text-sm font-josefin">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
+                  </svg>
+                  Click to view PDF
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- A La Carte Menu -->
+          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/a-la-carte.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
+              <div class="relative">
+                <Image 
+                  src="/images/menu-2.jpg" 
+                  alt="A La Carte Menu" 
+                  class="w-full h-64 object-cover"
+                  loading="lazy"
+                  width={463}
+                  height={256}
+                  format="webp"
+                  quality={80}
+                />
+                <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+                
+                <!-- PDF Icon Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="bg-brand-gold/90 rounded-full p-4 backdrop-blur-sm">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Popular Badge -->
+                <div class="absolute top-4 right-4">
+                  <span class="bg-brand-gold/90 text-brand-dark px-3 py-1 text-sm font-josefin font-medium rounded-full backdrop-blur-sm">
+                    Popular
+                  </span>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h3 class="font-crimson text-xl lg:text-2xl text-white mb-3">
+                  À La Carte
+                </h3>
+                <p class="font-josefin text-white/80 text-sm leading-relaxed mb-4">
+                  Our signature dishes featuring the finest Mediterranean ingredients prepared with passion and expertise.
+                </p>
+                <div class="flex items-center text-brand-gold text-sm font-josefin">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
+                  </svg>
+                  Click to view PDF
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Drinks & Cocktails Menu -->
+          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/drinks.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
+              <div class="relative">
+                <Image 
+                  src="/images/menu-3.jpg" 
+                  alt="Drinks & Cocktails Menu" 
+                  class="w-full h-64 object-cover"
+                  loading="lazy"
+                  width={463}
+                  height={256}
+                  format="webp"
+                  quality={80}
+                />
+                <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+                
+                <!-- PDF Icon Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="bg-brand-gold/90 rounded-full p-4 backdrop-blur-sm">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Featured Badge -->
+                <div class="absolute top-4 right-4">
+                  <span class="bg-brand-gold/90 text-brand-dark px-3 py-1 text-sm font-josefin font-medium rounded-full backdrop-blur-sm">
+                    Featured
+                  </span>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h3 class="font-crimson text-xl lg:text-2xl text-white mb-3">
+                  Drinks & Cocktails
+                </h3>
+                <p class="font-josefin text-white/80 text-sm leading-relaxed mb-4">
+                  Expertly crafted cocktails, premium wines, and refreshing beverages to complement your dining experience.
+                </p>
+                <div class="flex items-center text-brand-gold text-sm font-josefin">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
+                  </svg>
+                  Click to view PDF
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- BBQ Party Menu -->
+          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/bbq.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
+              <div class="relative">
+                <Image 
+                  src="/images/menu-4.jpg" 
+                  alt="BBQ Party Menu" 
+                  class="w-full h-64 object-cover"
+                  loading="lazy"
+                  width={463}
+                  height={256}
+                  format="webp"
+                  quality={80}
+                />
+                <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+                
+                <!-- PDF Icon Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="bg-brand-gold/90 rounded-full p-4 backdrop-blur-sm">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Group Badge -->
+                <div class="absolute top-4 right-4">
+                  <span class="bg-brand-gold/90 text-brand-dark px-3 py-1 text-sm font-josefin font-medium rounded-full backdrop-blur-sm">
+                    Groups
+                  </span>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h3 class="font-crimson text-xl lg:text-2xl text-white mb-3">
+                  BBQ Party Menu
+                </h3>
+                <p class="font-josefin text-white/80 text-sm leading-relaxed mb-4">
+                  Perfect for outdoor gatherings with grilled specialties and Mediterranean BBQ favorites for groups.
+                </p>
+                <div class="flex items-center text-brand-gold text-sm font-josefin">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
+                  </svg>
+                  Click to view PDF
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Party Sharing Platter -->
+          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/party-platters.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
+              <div class="relative">
+                <Image 
+                  src="/images/menu-5.jpg" 
+                  alt="Party Sharing Platter Menu" 
+                  class="w-full h-64 object-cover"
+                  loading="lazy"
+                  width={463}
+                  height={256}
+                  format="webp"
+                  quality={80}
+                />
+                <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+                
+                <!-- PDF Icon Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="bg-brand-gold/90 rounded-full p-4 backdrop-blur-sm">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Sharing Badge -->
+                <div class="absolute top-4 right-4">
+                  <span class="bg-brand-gold/90 text-brand-dark px-3 py-1 text-sm font-josefin font-medium rounded-full backdrop-blur-sm">
+                    Sharing
+                  </span>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h3 class="font-crimson text-xl lg:text-2xl text-white mb-3">
+                  Party Sharing Platter
+                </h3>
+                <p class="font-josefin text-white/80 text-sm leading-relaxed mb-4">
+                  Generous platters designed for sharing, perfect for celebrations and special occasions with friends.
+                </p>
+                <div class="flex items-center text-brand-gold text-sm font-josefin">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
+                  </svg>
+                  Click to view PDF
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Party Drinks Package -->
+          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/drinks-package.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
+              <div class="relative">
+                <Image 
+                  src="/images/menu-6.jpg" 
+                  alt="Party Drinks Package Menu" 
+                  class="w-full h-64 object-cover"
+                  loading="lazy"
+                  width={463}
+                  height={256}
+                  format="webp"
+                  quality={80}
+                />
+                <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+                
+                <!-- PDF Icon Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="bg-brand-gold/90 rounded-full p-4 backdrop-blur-sm">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Package Badge -->
+                <div class="absolute top-4 right-4">
+                  <span class="bg-brand-gold/90 text-brand-dark px-3 py-1 text-sm font-josefin font-medium rounded-full backdrop-blur-sm">
+                    Package
+                  </span>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h3 class="font-crimson text-xl lg:text-2xl text-white mb-3">
+                  Party Drinks Package
+                </h3>
+                <p class="font-josefin text-white/80 text-sm leading-relaxed mb-4">
+                  Comprehensive drink packages for events and parties, featuring premium wines, spirits, and cocktails.
+                </p>
+                <div class="flex items-center text-brand-gold text-sm font-josefin">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
+                  </svg>
+                  Click to view PDF
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Christmas Party Menu -->
+          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/christmas-party.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
+              <div class="relative">
+                <Image 
+                  src="/images/menu-7.jpg" 
+                  alt="Christmas Party Menu" 
+                  class="w-full h-64 object-cover"
+                  loading="lazy"
+                  width={463}
+                  height={256}
+                  format="webp"
+                  quality={80}
+                />
+                <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+                
+                <!-- PDF Icon Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="bg-brand-gold/90 rounded-full p-4 backdrop-blur-sm">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <!-- Seasonal Badge -->
+                <div class="absolute top-4 right-4">
+                  <span class="bg-brand-gold/90 text-brand-dark px-3 py-1 text-sm font-josefin font-medium rounded-full backdrop-blur-sm">
+                    Seasonal
+                  </span>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h3 class="font-crimson text-xl lg:text-2xl text-white mb-3">
+                  Christmas Party Menu
+                </h3>
+                <p class="font-josefin text-white/80 text-sm leading-relaxed mb-4">
+                  Festive seasonal menu featuring traditional holiday favorites with a Mediterranean twist for Christmas celebrations.
+                </p>
+                <div class="flex items-center text-brand-gold text-sm font-josefin">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
+                  </svg>
+                  Click to view PDF
+                </div>
+              </div>
+            </div>
+          </article>
+
+
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom text-center">
+        <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl text-brand-gold mb-8">
+          Ready to Dine?
+        </h2>
+        <p class="font-josefin text-lg text-white/90 max-w-2xl mx-auto leading-relaxed mb-12">
+          Book your table now and experience the authentic Mediterranean flavors that make TheSolo Kitchen & Bar special.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a 
+            href="/contact"
+            class="btn-primary text-lg px-8 py-4"
+          >
+            Make a Reservation
+          </a>
+          <a 
+            href="/gallery"
+            class="btn-secondary text-lg px-8 py-4"
+          >
+            View Gallery
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Global function to open PDF in same tab
+  function openMenuPDF(pdfPath: string) {
+    window.location.href = pdfPath;
+  }
+  
+  // Make function globally available
+  (window as any).openMenuPDF = openMenuPDF;
+</script>
+
+<style>
+  .menu-card {
+    transition: all 0.3s ease;
+  }
+  
+  .menu-card:hover {
+    cursor: pointer;
+  }
+  
+  .menu-card img {
+    transition: transform 0.3s ease;
+  }
+  
+  .menu-card:hover img {
+    transform: scale(1.1);
+  }
+</style>

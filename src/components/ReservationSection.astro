@@ -1,0 +1,806 @@
+---
+// Reservation Section component with form and image
+---
+
+<section id="reservation-section" class="pt-4 sm:pt-6 pb-16 sm:pb-20 lg:pb-24 bg-brand-dark">
+  <div class="container-custom px-4 sm:px-6 lg:px-0">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
+      
+      <!-- Reservation Form -->
+      <div class="lg:col-span-2 bg-brand-dark-card border border-brand-gold/20 rounded-lg sm:rounded-xl p-4 sm:p-6 lg:p-8">
+        <!-- Header -->
+        <div class="mb-6 sm:mb-8 text-center lg:text-left">
+          <h2 class="font-crimson text-3xl sm:text-4xl lg:text-5xl text-white mb-3 sm:mb-4 leading-tight">
+            Reservation
+          </h2>
+          <p class="font-josefin text-lg sm:text-xl lg:text-2xl text-white mb-2">
+            Book A Table
+          </p>
+          <p class="font-josefin text-base sm:text-lg lg:text-xl font-light text-white">
+            *Reservations recommended
+          </p>
+        </div>
+        
+        <!-- Multi-Step Form -->
+        <form class="space-y-6" id="reservation-form">
+          
+          <!-- Step 1: Event & Basic Info -->
+          <div class="form-step" id="step-1">
+            <!-- Booking an Event -->
+            <div class="relative mb-6">
+              <label class="block font-crimson text-caption text-white mb-4">
+                Booking an Event?
+              </label>
+              <div class="flex space-x-4">
+                <label class="flex items-center cursor-pointer">
+                  <input type="radio" name="isEvent" value="yes" class="sr-only" required>
+                  <div class="w-4 h-4 border border-brand-gold rounded-full mr-2 flex items-center justify-center">
+                    <div class="w-2 h-2 bg-brand-gold rounded-full hidden"></div>
+                  </div>
+                  <span class="font-josefin text-white">Yes</span>
+                </label>
+                <label class="flex items-center cursor-pointer">
+                  <input type="radio" name="isEvent" value="no" class="sr-only" required>
+                  <div class="w-4 h-4 border border-brand-gold rounded-full mr-2 flex items-center justify-center">
+                    <div class="w-2 h-2 bg-brand-gold rounded-full hidden"></div>
+                  </div>
+                  <span class="font-josefin text-white">No</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Event Area (shown only if event = yes) -->
+            <div class="relative mb-6 hidden" id="event-area-section">
+              <label for="eventArea" class="block font-crimson text-caption text-white mb-2">
+                Event Area
+              </label>
+              
+              <!-- Desktop Select -->
+              <div class="relative hidden lg:block">
+                <select 
+                  id="eventArea" 
+                  name="eventArea"
+                  class="w-full bg-transparent border-b border-brand-gold/50 text-white font-crimson text-caption py-3 pr-8 focus:border-brand-gold focus:outline-none appearance-none"
+                >
+                  <option value="" class="bg-brand-dark-card">Select Area</option>
+                  <option value="rooftop-terrace" class="bg-brand-dark-card">Rooftop Terrace</option>
+                  <option value="olive-garden" class="bg-brand-dark-card">Olive Garden</option>
+                  <option value="palm-garden" class="bg-brand-dark-card">Palm Garden</option>
+                </select>
+                <div class="absolute right-0 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                  <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Mobile Modal Button -->
+              <div class="lg:hidden">
+                <button 
+                  type="button"
+                  id="event-area-modal-btn"
+                  class="w-full bg-transparent border-b border-brand-gold/50 text-white font-crimson text-caption py-3 text-left focus:border-brand-gold focus:outline-none flex items-center justify-between"
+                >
+                  <span id="event-area-selected-text">Select Event Area</span>
+                  <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </button>
+                <input type="hidden" id="event-area-mobile" name="eventArea" required>
+              </div>
+            </div>
+
+            <!-- Number of People -->
+            <div class="relative mb-6">
+              <label for="people" class="block font-crimson text-caption text-white mb-2">
+                Number of People
+              </label>
+              <!-- Desktop Select -->
+              <div class="relative hidden lg:block">
+                <select 
+                  id="people" 
+                  name="people"
+                  class="w-full bg-transparent border-b border-brand-gold/50 text-white font-crimson text-caption py-3 pr-8 focus:border-brand-gold focus:outline-none appearance-none"
+                  required
+                >
+                  <!-- Options will be populated by JavaScript based on event selection -->
+                </select>
+                <div class="absolute right-0 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                  <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Mobile Modal Button -->
+              <div class="lg:hidden">
+                <button 
+                  type="button"
+                  id="people-modal-btn"
+                  class="w-full bg-transparent border-b border-brand-gold/50 text-white font-crimson text-caption py-3 text-left focus:border-brand-gold focus:outline-none flex items-center justify-between"
+                >
+                  <span id="people-selected-text">Select Number of People</span>
+                  <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </button>
+                <!-- Hidden input for form submission -->
+                <input type="hidden" id="people-mobile" name="people" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Personal & Date/Time Info -->
+          <div class="form-step hidden" id="step-2">
+            <!-- Name -->
+            <div class="relative mb-6">
+              <label for="fullName" class="block font-crimson text-caption text-white mb-2">
+                Full Name
+              </label>
+              <input 
+                type="text" 
+                id="fullName" 
+                name="fullName"
+                class="w-full bg-transparent border-b border-brand-gold/50 text-white font-crimson text-caption py-3 focus:border-brand-gold focus:outline-none"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="relative mb-6">
+              <label for="email" class="block font-crimson text-caption text-white mb-2">
+                Email
+              </label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email"
+                class="w-full bg-transparent border-b border-brand-gold/50 text-white font-crimson text-caption py-3 focus:border-brand-gold focus:outline-none"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <!-- Mobile -->
+            <div class="relative mb-6">
+              <label for="mobile" class="block font-crimson text-caption text-white mb-2">
+                Mobile
+              </label>
+              <input 
+                type="tel" 
+                id="mobile" 
+                name="mobile"
+                class="w-full bg-transparent border-b border-brand-gold/50 text-white font-crimson text-caption py-3 focus:border-brand-gold focus:outline-none"
+                placeholder="Enter your mobile number"
+                required
+              />
+            </div>
+
+            <!-- Date -->
+            <div class="relative mb-6">
+              <label for="date" class="block font-crimson text-caption text-white mb-2">
+                Date
+              </label>
+              <div class="relative">
+                <input 
+                  type="date" 
+                  id="date" 
+                  name="date"
+                  class="w-full bg-transparent border-b border-brand-gold/50 text-white font-crimson text-caption py-3 pr-8 focus:border-brand-gold focus:outline-none"
+                  required
+                />
+                <div class="absolute right-0 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                  <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Time -->
+            <div class="relative mb-6">
+              <label for="time" class="block font-crimson text-caption text-white mb-2">
+                Time
+              </label>
+              <div class="relative">
+                <select 
+                  id="time" 
+                  name="time"
+                  class="w-full bg-transparent border-b border-brand-gold/50 text-white font-crimson text-caption py-3 pr-8 focus:border-brand-gold focus:outline-none appearance-none"
+                  required
+                >
+                  <option value="11:00" class="bg-brand-dark-card">11:00 AM</option>
+                  <option value="11:30" class="bg-brand-dark-card">11:30 AM</option>
+                  <option value="12:00" class="bg-brand-dark-card">12:00 PM</option>
+                  <option value="12:30" class="bg-brand-dark-card">12:30 PM</option>
+                  <option value="13:00" class="bg-brand-dark-card">1:00 PM</option>
+                  <option value="13:30" class="bg-brand-dark-card">1:30 PM</option>
+                  <option value="14:00" class="bg-brand-dark-card">2:00 PM</option>
+                  <option value="14:30" class="bg-brand-dark-card">2:30 PM</option>
+                  <option value="15:00" class="bg-brand-dark-card">3:00 PM</option>
+                  <option value="18:00" class="bg-brand-dark-card">6:00 PM</option>
+                  <option value="18:30" class="bg-brand-dark-card">6:30 PM</option>
+                  <option value="19:00" class="bg-brand-dark-card">7:00 PM</option>
+                  <option value="19:30" class="bg-brand-dark-card">7:30 PM</option>
+                  <option value="20:00" class="bg-brand-dark-card">8:00 PM</option>
+                  <option value="20:30" class="bg-brand-dark-card">8:30 PM</option>
+                  <option value="21:00" class="bg-brand-dark-card">9:00 PM</option>
+                  <option value="21:30" class="bg-brand-dark-card">9:30 PM</option>
+                  <option value="22:00" class="bg-brand-dark-card">10:00 PM</option>
+                </select>
+                <div class="absolute right-0 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                  <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Navigation Buttons -->
+          <div class="pt-6 flex flex-col space-y-4">
+            <!-- Next/Book Now Button -->
+            <button 
+              type="button" 
+              id="next-btn"
+              class="w-full btn-primary text-lg py-4 group flex items-center justify-center"
+            >
+              <span class="mr-3" id="btn-text">Next</span>
+              <svg 
+                class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </button>
+
+            <!-- Back Button (hidden on first step) -->
+            <button 
+              type="button" 
+              id="back-btn"
+              class="w-full border border-brand-gold text-brand-gold text-lg py-4 rounded-lg hover:bg-brand-gold hover:text-neutral-light transition-colors duration-300 hidden"
+            >
+              Back
+            </button>
+
+            <!-- OpenTable Alternative -->
+            <div class="text-center">
+              <div class="flex items-center justify-center space-x-4 text-white/60 text-sm">
+                <div class="flex-1 h-px bg-brand-gold/30"></div>
+                <span class="font-josefin">or</span>
+                <div class="flex-1 h-px bg-brand-gold/30"></div>
+              </div>
+              <a 
+                href="https://www.opentable.com/thesolo-kitchen-bar" 
+                target="_blank"
+                class="inline-flex items-center mt-4 px-6 py-3 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors duration-300 text-sm font-semibold"
+              >
+                <img 
+                  src="/images/opentable-logo.svg" 
+                  alt="OpenTable" 
+                  class="h-4 mr-2"
+                />
+                Book via OpenTable
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Hero Image -->
+      <div class="lg:col-span-3">
+        <div class="relative overflow-hidden rounded-xl">
+          <img 
+            src="/images/reservation-hero.jpg" 
+            alt="Beautifully set dining table at TheSolo Kitchen & Bar" 
+            class="w-full h-[600px] lg:h-[700px] object-cover hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            width="792"
+            height="700"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent"></div>
+          
+          <!-- Floating Restaurant Info -->
+          <div class="absolute bottom-8 left-8 right-8">
+            <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+              <h3 class="font-crimson text-2xl text-white mb-2">
+                Reserve Your Experience
+              </h3>
+              <p class="font-josefin text-white/90 text-sm leading-relaxed">
+                Secure your table for an unforgettable Mediterranean dining experience. Our team is ready to provide exceptional service for your special occasion.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- People Selection Modal (Mobile Only) -->
+  <div 
+    id="people-modal" 
+    class="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden"
+  >
+    <div class="absolute bottom-0 left-0 right-0 bg-brand-dark rounded-t-3xl">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-6 border-b border-brand-gold/20">
+        <h3 class="font-crimson text-xl text-white">Select Number of People</h3>
+        <button 
+          type="button" 
+          id="close-people-modal"
+          class="text-brand-gold hover:text-white transition-colors"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Modal Content -->
+      <div class="p-6 max-h-80 overflow-y-auto" id="people-modal-content">
+        <!-- Options will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Event Area Selection Modal (Mobile Only) -->
+  <div 
+    id="event-area-modal" 
+    class="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden"
+  >
+    <div class="absolute bottom-0 left-0 right-0 bg-brand-dark rounded-t-3xl">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-6 border-b border-brand-gold/20">
+        <h3 class="font-crimson text-xl text-white">Select Event Area</h3>
+        <button 
+          type="button" 
+          id="close-event-area-modal"
+          class="text-brand-gold hover:text-white transition-colors"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <!-- Modal Content -->
+      <div class="p-6 max-h-80 overflow-y-auto" id="event-area-modal-content">
+        <!-- Options will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('reservation-form');
+    const dateInput = document.getElementById('date');
+    const nextBtn = document.getElementById('next-btn');
+    const backBtn = document.getElementById('back-btn');
+    const btnText = document.getElementById('btn-text');
+    const step1 = document.getElementById('step-1');
+    const step2 = document.getElementById('step-2');
+    const eventRadios = document.querySelectorAll('input[name="isEvent"]');
+    const eventAreaSection = document.getElementById('event-area-section');
+    const eventAreaSelect = document.getElementById('eventArea');
+    const peopleSelect = document.getElementById('people');
+    
+    // Mobile modal elements
+    const peopleModalBtn = document.getElementById('people-modal-btn');
+    const peopleModal = document.getElementById('people-modal');
+    const closePeopleModal = document.getElementById('close-people-modal');
+    const peopleModalContent = document.getElementById('people-modal-content');
+    const peopleSelectedText = document.getElementById('people-selected-text');
+    const peopleMobileInput = document.getElementById('people-mobile');
+    
+    // Event Area modal elements
+    const eventAreaModalBtn = document.getElementById('event-area-modal-btn');
+    const eventAreaModal = document.getElementById('event-area-modal');
+    const closeEventAreaModalBtn = document.getElementById('close-event-area-modal');
+    const eventAreaModalContent = document.getElementById('event-area-modal-content');
+    const eventAreaSelectedText = document.getElementById('event-area-selected-text');
+    const eventAreaMobileInput = document.getElementById('event-area-mobile');
+    
+    let currentStep = 1;
+    
+    // Set minimum date to today
+    if (dateInput) {
+      const today = new Date();
+      const formattedDate = today.toISOString().split('T')[0];
+      (dateInput as HTMLInputElement).min = formattedDate;
+    }
+    
+    // Handle event selection
+    eventRadios.forEach(radio => {
+      radio.addEventListener('change', function(this: HTMLInputElement) {
+        const isEvent = this.value === 'yes';
+        
+        // Show/hide event area section
+        if (eventAreaSection) {
+          if (isEvent) {
+            eventAreaSection.classList.remove('hidden');
+            if (eventAreaSelect) (eventAreaSelect as HTMLSelectElement).required = true;
+          } else {
+            eventAreaSection.classList.add('hidden');
+            if (eventAreaSelect) (eventAreaSelect as HTMLSelectElement).required = false;
+          }
+        }
+        
+        // Update people options
+        updatePeopleOptions(isEvent);
+        
+        // Update radio button visual state
+        updateRadioVisuals();
+      });
+    });
+    
+    // Update people options based on event selection
+    function updatePeopleOptions(isEvent: boolean) {
+      if (!peopleSelect || !peopleModalContent) return;
+      
+      // Update desktop select
+      peopleSelect.innerHTML = '';
+      
+      // Update mobile modal content
+      peopleModalContent.innerHTML = '';
+      
+      let options: { value: string; text: string }[] = [];
+      
+      if (isEvent) {
+        // Event options
+        options = [
+          { value: '6-12', text: '6-12 People' },
+          { value: '15-30', text: '15-30 People' },
+          { value: '50+', text: '50+ People' }
+        ];
+      } else {
+        // Regular dining options
+        for (let i = 1; i <= 12; i++) {
+          options.push({
+            value: i.toString(),
+            text: i === 1 ? '1 Person' : `${i} Persons`
+          });
+        }
+      }
+      
+      // Populate desktop select
+      options.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option.value;
+        optionElement.textContent = option.text;
+        optionElement.className = 'bg-brand-dark-card';
+        peopleSelect.appendChild(optionElement);
+      });
+      
+      // Populate mobile modal
+      options.forEach(option => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'w-full text-left p-4 text-white font-josefin hover:bg-brand-gold/10 transition-colors border-b border-brand-gold/10 last:border-b-0';
+        button.textContent = option.text;
+        button.addEventListener('click', () => {
+          selectPeopleOption(option.value, option.text);
+        });
+        peopleModalContent.appendChild(button);
+      });
+    }
+    
+    // Mobile modal functions
+    function selectPeopleOption(value: string, text: string) {
+      if (peopleMobileInput && peopleSelectedText) {
+        (peopleMobileInput as HTMLInputElement).value = value;
+        peopleSelectedText.textContent = text;
+        closeMobileModal();
+      }
+    }
+    
+    function openMobileModal() {
+      if (peopleModal) {
+        peopleModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    
+    function closeMobileModal() {
+      if (peopleModal) {
+        peopleModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+    
+    // Event Area Modal Functions
+    function openEventAreaModal() {
+      if (eventAreaModal) {
+        eventAreaModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        populateEventAreaOptions();
+      }
+    }
+    
+    function closeEventAreaModal() {
+      if (eventAreaModal) {
+        eventAreaModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+    
+    function populateEventAreaOptions() {
+      if (!eventAreaModalContent) return;
+      
+      eventAreaModalContent.innerHTML = '';
+      
+      const areas = [
+        { value: 'rooftop-terrace', text: 'Rooftop Terrace' },
+        { value: 'olive-garden', text: 'Olive Garden' },
+        { value: 'palm-garden', text: 'Palm Garden' }
+      ];
+      
+      areas.forEach(area => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'w-full text-left p-4 border-b border-brand-gold/20 hover:bg-brand-gold/10 transition-colors duration-200 font-crimson text-white text-lg';
+        button.textContent = area.text;
+        
+        button.addEventListener('click', () => {
+          selectEventAreaOption(area.value, area.text);
+        });
+        
+        eventAreaModalContent.appendChild(button);
+      });
+    }
+    
+    function selectEventAreaOption(value: string, text: string) {
+      if (eventAreaMobileInput && eventAreaSelectedText) {
+        (eventAreaMobileInput as HTMLInputElement).value = value;
+        eventAreaSelectedText.textContent = text;
+        closeEventAreaModal();
+      }
+    }
+    
+    // Modal event listeners
+    if (peopleModalBtn) {
+      peopleModalBtn.addEventListener('click', openMobileModal);
+    }
+    
+    if (closePeopleModal) {
+      closePeopleModal.addEventListener('click', closeMobileModal);
+    }
+    
+    if (peopleModal) {
+      peopleModal.addEventListener('click', (e) => {
+        if (e.target === peopleModal) {
+          closeMobileModal();
+        }
+      });
+    }
+    
+    // Event Area Modal event listeners
+    if (eventAreaModalBtn) {
+      eventAreaModalBtn.addEventListener('click', openEventAreaModal);
+    }
+    
+    if (closeEventAreaModalBtn) {
+      closeEventAreaModalBtn.addEventListener('click', closeEventAreaModal);
+    }
+    
+    if (eventAreaModal) {
+      eventAreaModal.addEventListener('click', (e) => {
+        if (e.target === eventAreaModal) {
+          closeEventAreaModal();
+        }
+      });
+    }
+    
+    // ESC key support for Event Area modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && eventAreaModal && !eventAreaModal.classList.contains('hidden')) {
+        closeEventAreaModal();
+      }
+    });
+    
+    // Update radio button visual state
+    function updateRadioVisuals() {
+      eventRadios.forEach(radio => {
+        const dot = radio.parentElement?.querySelector('.w-2');
+        if (dot) {
+          if ((radio as HTMLInputElement).checked) {
+            dot.classList.remove('hidden');
+          } else {
+            dot.classList.add('hidden');
+          }
+        }
+      });
+    }
+    
+    // Handle radio button clicks
+    document.querySelectorAll('input[name="isEvent"]').forEach(radio => {
+      const label = radio.closest('label');
+      if (label) {
+        label.addEventListener('click', function(e) {
+          e.preventDefault();
+          (radio as HTMLInputElement).checked = true;
+          radio.dispatchEvent(new Event('change'));
+        });
+      }
+    });
+    
+    // Handle next button
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function() {
+        if (currentStep === 1) {
+          // Validate step 1
+          if (validateStep1()) {
+            showStep2();
+          }
+        } else if (currentStep === 2) {
+          // Validate step 2 and submit
+          if (validateStep2()) {
+            submitForm();
+          }
+        }
+      });
+    }
+    
+    // Handle back button
+    if (backBtn) {
+      backBtn.addEventListener('click', function() {
+        if (currentStep === 2) {
+          showStep1();
+        }
+      });
+    }
+    
+    // Validate step 1
+    function validateStep1(): boolean {
+      const isEventSelected = document.querySelector('input[name="isEvent"]:checked');
+      const peopleSelected = (peopleSelect as HTMLSelectElement)?.value;
+      const peopleMobileSelected = (peopleMobileInput as HTMLInputElement)?.value;
+      const eventAreaSelected = (eventAreaSelect as HTMLSelectElement)?.value;
+      const eventAreaMobileSelected = (eventAreaMobileInput as HTMLInputElement)?.value;
+      const isEvent = (isEventSelected as HTMLInputElement)?.value === 'yes';
+      
+      if (!isEventSelected) {
+        alert('Please select whether this is an event booking.');
+        return false;
+      }
+      
+      if (isEvent && !eventAreaSelected && !eventAreaMobileSelected) {
+        alert('Please select an event area.');
+        return false;
+      }
+      
+      // Check both desktop and mobile people selection
+      if (!peopleSelected && !peopleMobileSelected) {
+        alert('Please select number of people.');
+        return false;
+      }
+      
+      return true;
+    }
+    
+    // Validate step 2
+    function validateStep2(): boolean {
+      const fullName = (document.getElementById('fullName') as HTMLInputElement)?.value;
+      const email = (document.getElementById('email') as HTMLInputElement)?.value;
+      const mobile = (document.getElementById('mobile') as HTMLInputElement)?.value;
+      const date = (document.getElementById('date') as HTMLInputElement)?.value;
+      const time = (document.getElementById('time') as HTMLSelectElement)?.value;
+      
+      if (!fullName || !email || !mobile || !date || !time) {
+        alert('Please fill in all required fields.');
+        return false;
+      }
+      
+      return true;
+    }
+    
+    // Show step 2
+    function showStep2() {
+      currentStep = 2;
+      if (step1) step1.classList.add('hidden');
+      if (step2) step2.classList.remove('hidden');
+      if (backBtn) backBtn.classList.remove('hidden');
+      if (btnText) btnText.textContent = 'Book Now';
+    }
+    
+    // Show step 1
+    function showStep1() {
+      currentStep = 1;
+      if (step1) step1.classList.remove('hidden');
+      if (step2) step2.classList.add('hidden');
+      if (backBtn) backBtn.classList.add('hidden');
+      if (btnText) btnText.textContent = 'Next';
+    }
+    
+    // Submit form
+    async function submitForm() {
+      const formData = new FormData(form as HTMLFormElement);
+      
+      // Get submit button and show loading state
+      const submitBtn = nextBtn as HTMLButtonElement;
+      const originalText = btnText?.textContent;
+      if (submitBtn) submitBtn.disabled = true;
+      if (btnText) btnText.textContent = 'Sending...';
+      
+      try {
+        const isEvent = formData.get('isEvent');
+        const eventArea = formData.get('eventArea');
+        const people = formData.get('people');
+        const fullName = formData.get('fullName');
+        const email = formData.get('email');
+        const mobile = formData.get('mobile');
+        const date = formData.get('date');
+        const time = formData.get('time');
+        
+        // Format date for email
+        const dateObj = new Date(date as string);
+        const formattedDate = dateObj.toLocaleDateString('en-GB', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        
+        // Prepare data for API
+        const emailData = {
+          type: 'reservation',
+          name: fullName,
+          email: email,
+          mobile: mobile,
+          date: formattedDate,
+          time: time,
+          people: people,
+          isEvent: isEvent,
+          eventArea: eventArea,
+          message: `Reservation request for ${fullName} on ${formattedDate} at ${time} for ${people} ${isEvent === 'yes' ? '(Event booking)' : 'people'}`
+        };
+        
+        // Send to API
+        const response = await fetch('/api/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(emailData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          // Success message
+          alert('Reservation request sent successfully! We will contact you to confirm availability.');
+          
+          // Reset form to step 1
+          showStep1();
+          (form as HTMLFormElement).reset();
+          updatePeopleOptions(false);
+          
+          // Reset radio visuals
+          eventRadios.forEach(radio => {
+            const dot = radio.parentElement?.querySelector('.w-2');
+            if (dot) dot.classList.add('hidden');
+          });
+          
+          // Hide event area section
+          if (eventAreaSection) eventAreaSection.classList.add('hidden');
+        } else {
+          throw new Error(result.error || 'Failed to send reservation');
+        }
+        
+      } catch (error) {
+        console.error('Reservation form error:', error);
+        alert('Sorry, there was an error sending your reservation. Please try again or call us directly at 020 3340 8082.');
+      } finally {
+        // Reset button state
+        if (submitBtn) (submitBtn as HTMLButtonElement).disabled = false;
+        if (btnText) btnText.textContent = originalText || 'Book Now';
+      }
+    }
+    
+    // Initialize with regular dining options
+    updatePeopleOptions(false);
+  });
+</script>

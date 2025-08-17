@@ -1,0 +1,29 @@
+{
+  "name": "thesolo-restaurant",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.3",
+    "@astrojs/mdx": "^3.1.9",
+    "@astrojs/prefetch": "^0.4.1",
+    "@astrojs/sitemap": "^3.1.6",
+    "@astrojs/tailwind": "^5.1.1",
+    "@types/nodemailer": "^7.0.0",
+    "@vite-pwa/astro": "^1.1.0",
+    "astro": "^4.15.9",
+    "astro-compress": "^2.3.8",
+    "nodemailer": "^7.0.5",
+    "tailwindcss": "^3.4.10",
+    "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.5"
+  }
+}

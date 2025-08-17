@@ -1,0 +1,206 @@
+---
+import '@/styles/globals.css';
+import GoogleAnalytics from '@/components/GoogleAnalytics.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalURL?: URL | string;
+}
+
+const {
+  title = 'TheSolo Kitchen & Bar - Mediterranean Restaurant in London',
+  description = 'Experience vibrant Mediterranean flavors at TheSolo Kitchen & Bar. Authentic dishes, elegant surroundings, and exceptional service in the heart of London.',
+  image = '/images/restaurant-1.jpg',
+  canonicalURL = new URL(Astro.url.pathname, Astro.site)
+} = Astro.props;
+
+const siteTitle = 'TheSolo Kitchen & Bar';
+const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#001223" />
+    
+    <title>{fullTitle}</title>
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:site_name" content="TheSolo Kitchen & Bar" />
+    <meta property="og:locale" content="en_GB" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.url)} />
+    <meta name="twitter:site" content="@thesolo_london" />
+    
+    <!-- Additional SEO -->
+    <meta name="author" content="TheSolo Kitchen & Bar" />
+    <meta name="keywords" content="Mediterranean restaurant London, East London dining, Bethnal Green restaurant, Mediterranean cuisine, rooftop bar London, private dining London, authentic Mediterranean food" />
+    <meta name="geo.region" content="GB-LND" />
+    <meta name="geo.placename" content="London" />
+    <meta name="geo.position" content="51.5285;-0.0563" />
+    <meta name="ICBM" content="51.5285, -0.0563" />
+    
+    <!-- Google Analytics -->
+    <GoogleAnalytics />
+    
+    <!-- Performance Optimizations -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Critical CSS for fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Josefin+Sans:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Josefin+Sans:wght@300;400;500;600;700&display=swap" />
+    </noscript>
+    
+    <!-- Preload only above-the-fold critical images based on page -->
+    {Astro.url.pathname === '/' && (
+      <link rel="preload" href="/images/hero-left.jpg" as="image" type="image/jpeg" />
+    )}
+    {Astro.url.pathname === '/menu' && (
+      <link rel="preload" href="/images/menu-3.jpg" as="image" type="image/jpeg" />
+    )}
+    {Astro.url.pathname === '/gallery' && (
+      <link rel="preload" href="/images/restaurant-1.jpg" as="image" type="image/jpeg" />
+    )}
+  </head>
+  <body class="h-full font-josefin bg-brand-dark text-white antialiased">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src={`https://www.googletagmanager.com/ns.html?id=${import.meta.env.GOOGLE_TAG_MANAGER_ID}`}
+              height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 z-50 btn-primary">
+      Skip to main content
+    </a>
+    
+    <div class="min-h-full flex flex-col">
+      <slot />
+    </div>
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "TheSolo Kitchen & Bar",
+        "alternateName": "The Solo Kitchen & Bar",
+        "description": "Mediterranean restaurant offering vibrant flavors, rooftop dining, and exceptional service in the heart of East London",
+        "url": "https://thesolo.co.uk",
+        "telephone": "02033408082",
+        "email": "info@thesolo.co.uk",
+        "logo": "https://thesolo.co.uk/images/logo.png",
+        "image": [
+          "https://thesolo.co.uk/images/restaurant-1.jpg",
+          "https://thesolo.co.uk/images/restaurant-3.jpg",
+          "https://thesolo.co.uk/images/restaurant-5.jpg"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Museum Gardens",
+          "addressLocality": "London",
+          "addressRegion": "Greater London",
+          "addressCountry": "GB",
+          "postalCode": "E2 9PA"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "51.5285",
+          "longitude": "-0.0563"
+        },
+        "servesCuisine": ["Mediterranean", "Turkish", "Greek", "Italian"],
+        "priceRange": "$$",
+        "paymentAccepted": ["Cash", "Credit Card", "Debit Card"],
+        "currenciesAccepted": "GBP",
+        "openingHours": [
+          "Mo-Th 08:00-23:00",
+          "Fr-Sa 08:00-24:00",
+          "Su 09:00-22:00"
+        ],
+        "acceptsReservations": true,
+        "hasMenu": "https://thesolo.co.uk/menu",
+        "menu": "https://thesolo.co.uk/menu",
+        "amenityFeature": [
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Rooftop Terrace",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification", 
+            "name": "Private Dining",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Cocktail Bar",
+            "value": true
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Outdoor Seating",
+            "value": true
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "127",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "sameAs": [
+          "https://www.instagram.com/thesolo_london",
+          "https://www.facebook.com/thesolokitchenbar",
+          "https://www.opentable.com/thesolo-kitchen-bar"
+        ]
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  .focus\\:not-sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+</style>

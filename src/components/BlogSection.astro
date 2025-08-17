@@ -1,0 +1,130 @@
+---
+// Blog Section component - Latest News & Blogs
+import { getCollection } from 'astro:content';
+
+// Get latest 3 blog posts
+const allPosts = await getCollection('blog');
+const latestPosts = allPosts
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 3);
+
+// Fallback data if no posts exist
+const fallbackPosts = [
+  {
+    slug: '#',
+    data: {
+      title: 'Every day is a good day for your restaurant The only thing love more than food!',
+      pubDate: new Date('2024-03-22'),
+      heroImage: '/images/blog-1.jpg'
+    }
+  },
+  {
+    slug: '#',
+    data: {
+      title: 'The only thing we\'re serious about is food. Your grub hub taste Rain.',
+      pubDate: new Date('2024-06-10'),
+      heroImage: '/images/blog-2.jpg'
+    }
+  },
+  {
+    slug: '#',
+    data: {
+      title: 'If you can call out organic beef sustainable farming great to highlight.',
+      pubDate: new Date('2024-07-05'),
+      heroImage: '/images/blog-3.jpg'
+    }
+  }
+];
+
+const postsToShow = latestPosts.length > 0 ? latestPosts : fallbackPosts;
+---
+
+<section id="blog" class="section-padding bg-brand-dark">
+  <div class="container-custom">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <!-- Description -->
+      <p class="font-josefin text-body-sm text-white leading-relaxed mb-8 max-w-3xl mx-auto">
+        Stay updated with the latest news from TheSolo Kitchen & Bar. Discover our culinary stories, seasonal menus, special events, and insights from our Mediterranean kitchen.
+      </p>
+      
+      <!-- Title -->
+      <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-brand-gold mb-8">
+        Latest News & Blogs
+      </h2>
+    </div>
+    
+    <!-- Blog Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      
+      {postsToShow.map((post, index) => {
+        const { title, pubDate, heroImage } = post.data;
+        const formattedDate = pubDate.toLocaleDateString('en-GB', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
+        const imageAlt = index === 0 ? 'Mediterranean dining experience' : 
+                        index === 1 ? 'Chef preparing Mediterranean cuisine' : 
+                        'Organic ingredients and sustainable farming';
+        
+        return (
+          <article class="group">
+            <a href={post.slug !== '#' ? `/blog/${post.slug}` : '#'}>
+              <div class="relative overflow-hidden rounded-xl mb-6">
+                <img 
+                  src={heroImage || `/images/blog-${index + 1}.jpg`}
+                  alt={imageAlt}
+                  class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  width="560"
+                  height="288"
+                />
+                <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+              </div>
+              
+              <div class="space-y-4">
+                <!-- Date -->
+                <time class="font-josefin text-small text-white block">
+                  {formattedDate}
+                </time>
+                
+                <!-- Title -->
+                <h3 class="font-crimson text-body-lg text-white group-hover:text-brand-gold transition-colors duration-300 leading-tight">
+                  {title}
+                </h3>
+              </div>
+            </a>
+          </article>
+        );
+      })}
+      
+    </div>
+    
+    <!-- Read More Button -->
+    <div class="text-center">
+      <a 
+        href="/blog" 
+        class="inline-flex items-center btn-secondary group"
+        aria-label="Read more blog posts"
+      >
+        <span class="mr-3">Read More</span>
+        <svg 
+          class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+    
+    <!-- Decorative Line -->
+    <div class="mt-16">
+      <div class="h-px bg-brand-gold/30 w-full"></div>
+    </div>
+    
+  </div>
+</section>

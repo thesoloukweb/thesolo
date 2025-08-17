@@ -1,0 +1,114 @@
+---
+// Events Section component
+---
+
+<section id="events" class="section-padding bg-brand-dark">
+  <div class="container-custom px-4 sm:px-6 lg:px-0">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-10 sm:mb-12 lg:mb-16">
+      <div class="lg:w-1/2 text-center lg:text-left">
+        <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-6 sm:mb-8">
+          Events
+        </h2>
+      </div>
+      
+      <!-- Description -->
+      <div class="lg:w-1/2">
+        <p class="font-josefin text-sm sm:text-base text-white leading-relaxed mb-6 sm:mb-8 text-center lg:text-left">
+          Get ready to elevate your weekends — every Saturday from 12 PM to 3 PM, we're turning up the vibes on the rooftop with live jazz, mouthwatering food, and panoramic views. Let the smooth, soulful sounds set the tone for your perfect Saturday escape. Great music, great company, and unforgettable moments await!
+        </p>
+      </div>
+    </div>
+    
+    <!-- Events Grid - 3 Cards Side by Side -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 xl:gap-10 mb-8 sm:mb-10 lg:mb-12 justify-items-center">
+      
+      <!-- Live Music Event -->
+      <article class="event-item group w-full max-w-64 sm:max-w-72 lg:max-w-80 xl:max-w-96 mx-auto">
+        <div class="relative overflow-hidden rounded-lg sm:rounded-xl w-full" style="aspect-ratio: 3/4; height: 480px;">
+          <img 
+            src="/images/live-music.jpg" 
+            alt="Live jazz performance at TheSolo rooftop" 
+            class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            width="360"
+            height="480"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 to-transparent"></div>
+          
+          <!-- Event Info Overlay -->
+          <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
+            <div class="bg-white/10 backdrop-blur-md rounded-lg p-3 sm:p-4 border border-white/20">
+              <h3 class="font-crimson text-lg sm:text-xl text-white mb-1 sm:mb-2">Saturday Jazz Sessions</h3>
+              <p class="text-white/90 text-xs sm:text-sm">Every Saturday 12 PM - 3 PM</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Private Dining Event -->
+      <article class="event-item group w-full max-w-64 sm:max-w-72 lg:max-w-80 xl:max-w-96 mx-auto">
+        <div class="relative overflow-hidden rounded-lg sm:rounded-xl w-full" style="aspect-ratio: 3/4; height: 480px;">
+          <img 
+            src="/images/private-dining-event.jpg" 
+            alt="Elegant private dining setup" 
+            class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            width="360"
+            height="480"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 to-transparent"></div>
+          
+          <!-- Event Info Overlay -->
+          <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
+            <div class="bg-white/10 backdrop-blur-md rounded-lg p-3 sm:p-4 border border-white/20">
+              <h3 class="font-crimson text-lg sm:text-xl text-white mb-1 sm:mb-2">Private Events</h3>
+              <p class="text-white/90 text-xs sm:text-sm">Customized experiences for groups</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Breakfast & Lunch Event -->
+      <article class="event-item group w-full max-w-64 sm:max-w-72 lg:max-w-80 xl:max-w-96 mx-auto">
+        <div class="relative overflow-hidden rounded-lg sm:rounded-xl w-full" style="aspect-ratio: 3/4; height: 480px;">
+          <img 
+            src="/images/breakfast-lunch.jpg" 
+            alt="Mediterranean breakfast and lunch offerings" 
+            class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            width="360"
+            height="480"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 to-transparent"></div>
+          
+          <!-- Event Info Overlay -->
+          <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
+            <div class="bg-white/10 backdrop-blur-md rounded-lg p-3 sm:p-4 border border-white/20">
+              <h3 class="font-crimson text-lg sm:text-xl text-white mb-1 sm:mb-2">All-Day Dining</h3>
+              <p class="text-white/90 text-xs sm:text-sm">Breakfast & lunch experiences</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      
+    </div>
+    
+  </div>
+  
+  <!-- Decorative Line -->
+  <div class="container-custom mt-16">
+    <div class="h-px bg-brand-gold/30 w-full"></div>
+  </div>
+</section>
+
+<script>
+  // No JavaScript needed - all events are displayed simultaneously
+</script>
+
+<style>
+  .event-item {
+    transition: all 0.3s ease;
+  }
+</style>

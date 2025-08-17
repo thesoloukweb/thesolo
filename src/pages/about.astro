@@ -1,0 +1,209 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<BaseLayout
+  title="About Us | TheSolo Kitchen & Bar"
+  description="Discover TheSolo Kitchen & Bar's story - passionate Mediterranean cuisine, rooftop dining in East London, and exceptional service. Located near Bethnal Green station."
+  image="/images/restaurant-1.jpg"
+>
+  <main id="main-content" class="min-h-screen">
+    <!-- Header with Navigation -->
+    <Header />
+    
+    <!-- Hero Section -->
+    <section class="relative h-96 sm:h-[500px] lg:h-[600px] flex items-center justify-center bg-brand-dark">
+      <!-- Hero Background Image -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/restaurant-1.jpg" 
+          alt="TheSolo Kitchen & Bar interior" 
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-brand-dark/75"></div>
+      </div>
+      
+      <!-- Hero Content -->
+      <div class="relative z-10 container-custom text-center py-12 mt-16">
+        <!-- Content Background -->
+        <div class="bg-brand-dark/80 backdrop-blur-sm rounded-2xl px-8 py-12 max-w-4xl mx-auto border border-brand-gold/20">
+          <h1 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+            About
+            <span class="text-brand-gold block">TheSolo Kitchen & Bar</span>
+          </h1>
+          <p class="font-josefin text-base sm:text-lg text-white/95 max-w-2xl mx-auto leading-relaxed">
+            Where Mediterranean passion meets London elegance, creating unforgettable culinary experiences since our founding.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <!-- Content -->
+          <div class="order-2 lg:order-1">
+            <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-gold mb-8">
+              Our Story
+            </h2>
+            <div class="space-y-6">
+              <p class="font-josefin text-base sm:text-lg text-white leading-relaxed">
+                Welcome to Solo kitchen – An Elevated Dining Journey. Nestled in the vibrant heart of London, Solo kitchen offers a refined culinary experience, live performances, chic outdoor seating, exquisite cocktails, and more.
+              </p>
+              <p class="font-josefin text-base sm:text-lg text-white leading-relaxed">
+                Our dishes are crafted with passion and precision, inspired by our rich Mediterranean roots. At home, we dedicate hours to perfecting dishes with diverse and unforgettable flavors. Naturally, we seek the same excellence when dining out.
+              </p>
+              <p class="font-josefin text-base sm:text-lg text-white leading-relaxed">
+                At Solo kitchen, we are dedicated to delivering the thrilling and genuine tastes of the Mediterranean Coast – traditional recipes with a distinctive and captivating regional twist.
+              </p>
+            </div>
+          </div>
+          
+          <!-- Image -->
+          <div class="order-1 lg:order-2">
+            <div class="relative overflow-hidden rounded-2xl">
+              <img 
+                src="/images/hero-left.jpg" 
+                alt="Mediterranean cooking and fresh ingredients" 
+                class="w-full h-96 lg:h-[500px] object-cover hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Our Spaces Section -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom">
+        <div class="text-center mb-16">
+          <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-gold mb-8">
+            Our Spaces
+          </h2>
+          <p class="font-josefin text-lg text-white/90 max-w-3xl mx-auto leading-relaxed">
+            Each of our dining areas offers a unique ambiance, perfect for any occasion.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Rooftop Terrace -->
+          <div class="group">
+            <div class="relative overflow-hidden rounded-2xl mb-6">
+              <img 
+                src="/images/restaurant-1.jpg" 
+                alt="Rooftop Terrace with panoramic London views" 
+                class="w-full h-64 lg:h-80 object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/90 to-transparent"></div>
+              <!-- Space Name Overlay -->
+              <div class="absolute top-6 left-6 right-6">
+                <div class="bg-brand-dark/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-brand-gold/30">
+                  <h3 class="font-crimson text-lg sm:text-xl text-brand-gold font-semibold text-center">
+                    Rooftop Terrace
+                  </h3>
+                </div>
+              </div>
+              <div class="absolute bottom-6 left-6 right-6">
+                <p class="font-josefin text-white/95 text-sm text-center leading-relaxed">
+                  Panoramic views of London with an open-air dining experience
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Olive Garden -->
+          <div class="group">
+            <div class="relative overflow-hidden rounded-2xl mb-6">
+              <img 
+                src="/images/restaurant-3.jpg" 
+                alt="Olive Garden intimate dining area" 
+                class="w-full h-64 lg:h-80 object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/90 to-transparent"></div>
+              <!-- Space Name Overlay -->
+              <div class="absolute top-6 left-6 right-6">
+                <div class="bg-brand-dark/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-brand-gold/30">
+                  <h3 class="font-crimson text-lg sm:text-xl text-brand-gold font-semibold text-center">
+                    Olive Garden
+                  </h3>
+                </div>
+              </div>
+              <div class="absolute bottom-6 left-6 right-6">
+                <p class="font-josefin text-white/95 text-sm text-center leading-relaxed">
+                  Serene courtyard setting perfect for intimate gatherings
+                </p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Palm Garden -->
+          <div class="group">
+            <div class="relative overflow-hidden rounded-2xl mb-6">
+              <img 
+                src="/images/restaurant-5.jpg" 
+                alt="Palm Garden elegant dining space" 
+                class="w-full h-64 lg:h-80 object-cover group-hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/90 to-transparent"></div>
+              <!-- Space Name Overlay -->
+              <div class="absolute top-6 left-6 right-6">
+                <div class="bg-brand-dark/80 backdrop-blur-sm px-4 py-2 rounded-lg border border-brand-gold/30">
+                  <h3 class="font-crimson text-lg sm:text-xl text-brand-gold font-semibold text-center">
+                    Palm Garden
+                  </h3>
+                </div>
+              </div>
+              <div class="absolute bottom-6 left-6 right-6">
+                <p class="font-josefin text-white/95 text-sm text-center leading-relaxed">
+                  Sophisticated space ideal for special celebrations
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- Call to Action Section -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom text-center">
+        <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-brand-gold mb-8">
+          Experience TheSolo
+        </h2>
+        <p class="font-josefin text-lg text-white/90 max-w-3xl mx-auto leading-relaxed mb-12">
+          Join us for an unforgettable Mediterranean dining experience in the heart of London. Whether it's a romantic dinner, business meeting, or special celebration, we're here to make it memorable.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a 
+            href="#reservation"
+            class="btn-primary text-lg px-8 py-4"
+          >
+            Make a Reservation
+          </a>
+          <a 
+            href="/menu"
+            class="btn-secondary text-lg px-8 py-4"
+          >
+            View Our Menu
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <Footer />
+</BaseLayout>

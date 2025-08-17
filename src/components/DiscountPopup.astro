@@ -1,0 +1,127 @@
+---
+// Simple Discount Popup with Image and NHS Offer
+---
+
+<!-- Discount Popup Overlay -->
+<div id="discount-popup" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 opacity-0 invisible transition-all duration-300">
+  <div class="bg-white rounded-xl sm:rounded-2xl shadow-2xl max-w-xs sm:max-w-sm lg:max-w-md w-full mx-auto transform scale-95 transition-all duration-300" id="popup-content">
+    
+    <!-- Close Button -->
+    <button id="close-popup" class="absolute top-2 sm:top-3 right-2 sm:right-3 w-7 h-7 sm:w-8 sm:h-8 bg-black/20 hover:bg-black/40 rounded-full flex items-center justify-center transition-colors duration-200 z-10">
+      <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    
+    <!-- Discount Image -->
+    <div class="relative">
+      <img src="/images/nhs-discount-offer.jpg" alt="NHS Discount Offer" class="w-full h-64 sm:h-72 lg:h-80 object-cover rounded-t-xl sm:rounded-t-2xl">
+    </div>
+    
+    <!-- Content -->
+    <div class="p-4 sm:p-6 lg:p-8 text-center">
+      <p class="font-josefin text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 leading-relaxed">
+        Eating out offers for families, students, employees & more
+      </p>
+      
+      <div class="rounded-lg sm:rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 border border-brand-gold/30" style="background-color: #0E1B1F;">
+        <h3 class="font-crimson text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 leading-tight">
+          NHS<br>
+          BLUE CARD HOLDER
+        </h3>
+        <div class="text-2xl sm:text-3xl font-bold text-brand-gold mb-3 sm:mb-4">
+          10% OFF
+        </div>
+        <p class="font-josefin text-xs sm:text-sm text-white/80 mb-2 sm:mb-3 leading-relaxed">
+          To Show Our Appreciation For The Amazing NHS Staff
+        </p>
+        <p class="font-josefin text-xs text-brand-gold uppercase tracking-wider font-semibold">
+          WITH A VALID NHS ID
+        </p>
+      </div>
+      
+      <!-- Call to Action -->
+      <button id="claim-discount" class="w-full bg-brand-gold hover:bg-brand-gold/90 text-white font-crimson text-base sm:text-lg font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+        Book Now & Claim Discount
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('discount-popup');
+    const popupContent = document.getElementById('popup-content');
+    const closeBtn = document.getElementById('close-popup');
+    const claimBtn = document.getElementById('claim-discount');
+    
+    // Check if user has seen popup before (localStorage)
+    const hasSeenPopup = localStorage.getItem('thesolo-discount-popup-seen');
+    
+    if (!hasSeenPopup) {
+      // Show popup after a short delay
+      setTimeout(() => {
+        showPopup();
+      }, 1000);
+      
+      // No auto-close - only manual close with X button or ESC key
+    }
+    
+    function showPopup() {
+      if (popup) {
+        popup.classList.remove('opacity-0', 'invisible');
+        popup.classList.add('opacity-100', 'visible');
+        if (popupContent) {
+          popupContent.classList.remove('scale-95');
+          popupContent.classList.add('scale-100');
+        }
+      }
+    }
+    
+    function hidePopup() {
+      if (popup) {
+        popup.classList.remove('opacity-100', 'visible');
+        popup.classList.add('opacity-0', 'invisible');
+        if (popupContent) {
+          popupContent.classList.remove('scale-100');
+          popupContent.classList.add('scale-95');
+        }
+        // Mark as seen in localStorage
+        localStorage.setItem('thesolo-discount-popup-seen', 'true');
+      }
+    }
+    
+    // Close button event
+    if (closeBtn) {
+      closeBtn.addEventListener('click', hidePopup);
+    }
+    
+    // Claim discount button event
+    if (claimBtn) {
+      claimBtn.addEventListener('click', () => {
+        // Scroll to reservation section
+        const reservationSection = document.getElementById('reservation-section');
+        if (reservationSection) {
+          reservationSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        hidePopup();
+      });
+    }
+    
+    // Close on overlay click
+    if (popup) {
+      popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+          hidePopup();
+        }
+      });
+    }
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popup && !popup.classList.contains('invisible')) {
+        hidePopup();
+      }
+    });
+  });
+</script>

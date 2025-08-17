@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://thesolo.co.uk/sitemap-index.xml
+
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all content for SEO
+Allow: /images/
+Allow: /pdfs/
+Allow: /fonts/

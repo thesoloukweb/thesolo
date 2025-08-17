@@ -1,0 +1,233 @@
+---
+// About Section component
+---
+
+<section id="about" class="pt-4 sm:pt-8 lg:pt-24 pb-16 lg:pb-24 bg-brand-dark">
+  <div class="container-custom">
+    <!-- Mobil Layout -->
+    <div class="lg:hidden px-4 sm:px-6">
+      <!-- Görseller Mobilde Slider - Önce Gelecek -->
+      <div class="mobile-about-slider relative w-full h-64 sm:h-80 overflow-hidden rounded-2xl mb-8" id="mobile-about-slider">
+        <!-- Slide 1 -->
+        <div class="slider-item absolute inset-0 transition-transform duration-500 ease-in-out" data-slide="0">
+          <img 
+            src="/images/about-secondary.jpg" 
+            alt="Fresh Mediterranean ingredients" 
+            class="w-full h-full object-cover"
+            loading="lazy"
+            width="500"
+            height="600"
+          />
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="slider-item absolute inset-0 transition-transform duration-500 ease-in-out translate-x-full" data-slide="1">
+          <img 
+            src="/images/about-tertiary.jpg" 
+            alt="Professional chefs preparing dishes" 
+            class="w-full h-full object-cover"
+            loading="lazy"
+            width="400"
+            height="450"
+          />
+          <div class="absolute inset-0 bg-brand-gold/20 opacity-100"></div>
+        </div>
+        
+        <!-- Slider Navigation Dots -->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <button class="about-slider-dot w-2 h-2 bg-white/50 rounded-full transition-all duration-300" data-slide="0"></button>
+          <button class="about-slider-dot w-2 h-2 bg-white/50 rounded-full transition-all duration-300" data-slide="1"></button>
+        </div>
+      </div>
+      
+      <!-- İçerik Mobilde Slider Altında -->
+      <div class="text-center">
+        <!-- Section Title -->
+        <h2 class="font-crimson text-3xl sm:text-4xl font-normal text-brand-gold mb-4 leading-tight">
+          Relax In Our<br>
+          <span class="text-white">Comfortable</span>
+        </h2>
+        
+        <!-- Restaurant Name -->
+        <h3 class="font-crimson text-xl sm:text-2xl text-white mb-4">
+          The Solo Kitchen & Bar
+        </h3>
+        
+        <!-- Description -->
+        <p class="font-josefin text-sm sm:text-base text-white leading-relaxed mb-6">
+          Unwind and savor the Mediterranean spirit at The Solo Kitchen & Bar. From perfectly plated dishes to exquisite wines and tempting small bites, every detail is crafted to delight.
+        </p>
+        
+        <!-- CTA Button -->
+        <div class="flex justify-center">
+          <a 
+            href="/about" 
+            class="inline-flex items-center btn-secondary group"
+            aria-label="Read more about TheSolo Kitchen & Bar"
+          >
+            <span class="mr-3">Read More</span>
+            <svg 
+              class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop Layout -->
+    <div class="hidden lg:flex items-center gap-12" style="padding-left: calc((100% - 1600px) / 2); max-width: none;">
+      
+      <!-- Sol Büyük Görsel -->
+      <div class="flex-shrink-0">
+        <div class="relative overflow-hidden rounded-2xl">
+          <img 
+            src="/images/about-secondary.jpg" 
+            alt="Fresh Mediterranean ingredients" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            width="500"
+            height="600"
+            style="width: 500px; height: 600px;"
+          />
+        </div>
+      </div>
+      
+      <!-- Ortada Dar İçerik -->
+      <div class="flex-1 max-w-md mx-8">
+        <!-- Section Title -->
+        <h2 class="font-crimson text-5xl font-normal text-brand-gold mb-6 leading-tight">
+          Relax In Our<br>
+          <span class="text-white">Comfortable</span>
+        </h2>
+        
+        <!-- Restaurant Name -->
+        <h3 class="font-crimson text-2xl text-white mb-6">
+          The Solo Kitchen & Bar
+        </h3>
+        
+        <!-- Description -->
+        <p class="font-josefin text-base text-white leading-relaxed mb-8">
+          Unwind and savor the Mediterranean spirit at The Solo Kitchen & Bar. From perfectly plated dishes to exquisite wines and tempting small bites, every detail is crafted to delight.
+        </p>
+        
+        <!-- CTA Button -->
+        <div class="flex items-center">
+          <a 
+            href="/about" 
+            class="inline-flex items-center btn-secondary group"
+            aria-label="Read more about TheSolo Kitchen & Bar"
+          >
+            <span class="mr-3">Read More</span>
+            <svg 
+              class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Sağda Orta Boy Görsel -->
+      <div class="flex-shrink-0">
+        <div class="relative overflow-hidden rounded-xl">
+          <img 
+            src="/images/about-tertiary.jpg" 
+            alt="Professional chefs preparing dishes" 
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            width="400"
+            height="450"
+            style="width: 400px; height: 450px;"
+          />
+          <!-- Decorative overlay -->
+          <div class="absolute inset-0 bg-brand-gold/20 opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- Decorative Line -->
+  <div class="container-custom mt-8 sm:mt-12 lg:mt-16 px-4 sm:px-6 lg:px-0">
+    <div class="h-px bg-brand-gold/30 w-full"></div>
+  </div>
+</section>
+
+<!-- About Mobile Slider JavaScript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const aboutSlider = document.getElementById('mobile-about-slider');
+    if (!aboutSlider) return;
+    
+    const slides = aboutSlider.querySelectorAll('.slider-item');
+    const dots = aboutSlider.querySelectorAll('.about-slider-dot');
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    
+    function updateAboutSlider() {
+      slides.forEach((slide, index) => {
+        (slide as HTMLElement).style.transform = `translateX(${(index - currentSlide) * 100}%)`;
+      });
+      
+      dots.forEach((dot, index) => {
+        if (index === currentSlide) {
+          dot.classList.add('bg-white');
+          dot.classList.remove('bg-white/50');
+        } else {
+          dot.classList.add('bg-white/50');
+          dot.classList.remove('bg-white');
+        }
+      });
+    }
+    
+    // Dot navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentSlide = index;
+        updateAboutSlider();
+      });
+    });
+    
+    // Auto-rotate disabled for manual control
+    // setInterval(() => {
+    //   currentSlide = (currentSlide + 1) % totalSlides;
+    //   updateAboutSlider();
+    // }, 5000);
+    
+    // Touch/Swipe support
+    let startX = 0;
+    let endX = 0;
+    
+    aboutSlider.addEventListener('touchstart', (e) => {
+      startX = e.changedTouches[0].screenX;
+    });
+    
+    aboutSlider.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].screenX;
+      const swipeThreshold = 50;
+      const swipeDistance = startX - endX;
+      
+      if (Math.abs(swipeDistance) > swipeThreshold) {
+        if (swipeDistance > 0) {
+          // Swiped left - next slide
+          currentSlide = (currentSlide + 1) % totalSlides;
+        } else {
+          // Swiped right - previous slide
+          currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        }
+        updateAboutSlider();
+      }
+    });
+    
+    // Initialize
+    updateAboutSlider();
+  });
+</script>

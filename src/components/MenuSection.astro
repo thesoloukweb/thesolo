@@ -1,0 +1,591 @@
+---
+// Menu Section component with categories
+import { Image } from 'astro:assets';
+---
+
+<section id="menu" class="section-padding bg-brand-dark">
+  <div class="container-custom px-4 sm:px-6 lg:px-0">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-10 sm:mb-12 lg:mb-16">
+      <div class="text-center lg:text-left">
+        <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-6 lg:mb-0">
+          Our Menu
+        </h2>
+      </div>
+      
+      <!-- Navigation Arrow - Hidden on Mobile -->
+      <div class="hidden lg:flex items-center justify-start text-white group cursor-pointer" id="next-menu-btn">
+        <span class="font-crimson text-2xl mr-4 group-hover:text-brand-gold transition-colors">
+          Next Menu
+        </span>
+        <svg class="w-14 h-6 text-brand-gold group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 56 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 12h54m0 0l-6-6m6 6l-6 6" />
+        </svg>
+      </div>
+    </div>
+    
+    <!-- Current Menu Title -->
+    <div class="text-center mb-8 sm:mb-10 lg:mb-12">
+      <h3 id="current-menu-title" class="font-crimson text-xl sm:text-2xl lg:text-3xl text-brand-gold mb-2">
+        Breakfast & Brunch
+      </h3>
+      <p class="font-josefin text-sm sm:text-base text-white/80">
+        Click on any menu to view PDF
+      </p>
+      <!-- Mobile Swipe Hint -->
+      <p class="lg:hidden font-josefin text-xs text-white/60 mt-1">
+        Swipe to see more menus
+      </p>
+    </div>
+    
+    <!-- Menu PDF Carousel -->
+    <div class="relative overflow-hidden mb-8 sm:mb-10 lg:mb-12" style="max-width: 100%;">
+      <div class="menu-carousel flex" id="menu-carousel" style="will-change: transform;">
+        
+        <!-- Breakfast & Brunch Menu -->
+        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="0" onclick="openMenuPDF('/pdfs/breakfast-and-brunch.pdf')">
+          <div class="bg-brand-accent rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
+            <div class="relative">
+              <Image 
+                src="/images/menu-1.jpg" 
+                alt="Breakfast & Brunch Menu" 
+                class="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                loading="lazy"
+                width={463}
+                height={256}
+                format="webp"
+                quality={80}
+              />
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+              
+              <!-- PDF Icon Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="bg-brand-gold/90 rounded-full p-4">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Category Label -->
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-brand-gold text-neutral-light px-3 py-1 text-sm font-semibold rounded-full">
+                  Breakfast & Brunch
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+        
+        <!-- A La Carte Menu -->
+        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="1" onclick="openMenuPDF('/pdfs/a-la-carte.pdf')">
+          <div class="bg-brand-accent rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
+            <div class="relative">
+              <Image 
+                src="/images/menu-2.jpg" 
+                alt="A La Carte Menu" 
+                class="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                loading="lazy"
+                width={463}
+                height={256}
+                format="webp"
+                quality={80}
+              />
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+              
+              <!-- PDF Icon Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="bg-brand-gold/90 rounded-full p-4">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Category Label -->
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-brand-gold text-neutral-light px-3 py-1 text-sm font-semibold rounded-full">
+                  A La Carte
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+        
+        <!-- Drinks Menu (Featured) -->
+        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="2" onclick="openMenuPDF('/pdfs/drinks.pdf')">
+          <div class="bg-brand-accent rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
+            <div class="relative">
+              <Image 
+                src="/images/menu-3.jpg" 
+                alt="Drinks & Cocktails Menu" 
+                class="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                loading="lazy"
+                width={463}
+                height={256}
+                format="webp"
+                quality={80}
+              />
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+              
+              <!-- PDF Icon Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="bg-brand-gold/90 rounded-full p-4">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Featured Badge -->
+              <div class="absolute top-4 left-4">
+                <span class="bg-brand-gold text-neutral-light px-3 py-1 text-sm font-semibold rounded-full">
+                  Featured
+                </span>
+              </div>
+              
+              <!-- Category Label -->
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-brand-gold text-neutral-light px-3 py-1 text-sm font-semibold rounded-full">
+                  Drinks
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+        
+        <!-- BBQ Party Menu -->
+        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="3" onclick="openMenuPDF('/pdfs/bbq.pdf')">
+          <div class="bg-brand-accent rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
+            <div class="relative">
+              <Image 
+                src="/images/menu-4.jpg" 
+                alt="BBQ Party Menu" 
+                class="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                loading="lazy"
+                width={463}
+                height={256}
+                format="webp"
+                quality={80}
+              />
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+              
+              <!-- PDF Icon Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="bg-brand-gold/90 rounded-full p-4">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Category Label -->
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-brand-gold text-neutral-light px-3 py-1 text-sm font-semibold rounded-full">
+                  BBQ Party Menu
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Party Sharing Platter -->
+        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="4" onclick="openMenuPDF('/pdfs/party-platters.pdf')">
+          <div class="bg-brand-accent rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
+            <div class="relative">
+              <Image 
+                src="/images/menu-5.jpg" 
+                alt="Party Sharing Platter Menu" 
+                class="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                loading="lazy"
+                width={463}
+                height={256}
+                format="webp"
+                quality={80}
+              />
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+              
+              <!-- PDF Icon Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="bg-brand-gold/90 rounded-full p-4">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Category Label -->
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-brand-gold text-neutral-light px-3 py-1 text-sm font-semibold rounded-full">
+                  Party Sharing Platter
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Party Drinks Package -->
+        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="5" onclick="openMenuPDF('/pdfs/drinks-package.pdf')">
+          <div class="bg-brand-accent rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
+            <div class="relative">
+              <Image 
+                src="/images/menu-6.jpg" 
+                alt="Party Drinks Package Menu" 
+                class="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                loading="lazy"
+                width={463}
+                height={256}
+                format="webp"
+                quality={80}
+              />
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+              
+              <!-- PDF Icon Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="bg-brand-gold/90 rounded-full p-4">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Category Label -->
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-brand-gold text-neutral-light px-3 py-1 text-sm font-semibold rounded-full">
+                  Party Drinks Package
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Christmas Party -->
+        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="6" onclick="openMenuPDF('/pdfs/christmas-party.pdf')">
+          <div class="bg-brand-accent rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
+            <div class="relative">
+              <Image 
+                src="/images/menu-7.jpg" 
+                alt="Christmas Party Menu" 
+                class="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                loading="lazy"
+                width={463}
+                height={256}
+                format="webp"
+                quality={80}
+              />
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+              
+              <!-- PDF Icon Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="bg-brand-gold/90 rounded-full p-4">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Category Label -->
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-brand-gold text-neutral-light px-3 py-1 text-sm font-semibold rounded-full">
+                  Christmas Party
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+        
+      </div>
+      
+      <!-- Carousel Indicators -->
+      <div class="flex justify-center mt-8 space-x-4">
+        <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold transition-all duration-300 touch-manipulation" data-slide="0"></button>
+        <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="1"></button>
+        <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="2"></button>
+        <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="3"></button>
+        <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="4"></button>
+        <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="5"></button>
+        <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="6"></button>
+      </div>
+      
+    </div>
+    
+    <!-- Action Button -->
+    <div class="text-center">
+      <div class="inline-flex items-center">
+        <button id="action-next-btn" class="w-16 h-16 bg-brand-gold rounded-full flex items-center justify-center text-white hover:bg-brand-gold/90 transition-colors duration-300">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Decorative Line -->
+  <div class="container-custom mt-16">
+    <div class="h-px bg-brand-gold/30 w-full"></div>
+  </div>
+</section>
+
+<script>
+  // Global function to open PDF in same tab
+  function openMenuPDF(pdfPath: string) {
+    window.location.href = pdfPath;
+  }
+  
+  // Make function globally available
+  (window as any).openMenuPDF = openMenuPDF;
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.getElementById('menu-carousel');
+    const nextMenuBtn = document.getElementById('next-menu-btn');
+    const actionNextBtn = document.getElementById('action-next-btn');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    const currentMenuTitle = document.getElementById('current-menu-title');
+    
+    let currentSlide = 0;
+    const totalMenus = 7;
+    let isInitialized = false;
+    
+    // Get max slides based on screen size to prevent overflow
+    function getTotalSlides() {
+      const isMobile = window.innerWidth < 640;
+      const isTablet = window.innerWidth < 1024;
+      
+      if (isMobile) {
+        return totalMenus; // 7 slides (each showing 1 item)
+      } else if (isTablet) {
+        return totalMenus - 1; // 6 slides (each showing 2 items, last slide shows items 5-6)
+      } else {
+        return totalMenus - 3; // 4 slides (each showing 4 items, last slide shows items 3-6)
+      }
+    }
+    
+    const menuTitles = [
+      'Breakfast & Brunch',
+      'A La Carte', 
+      'Drinks',
+      'BBQ Party',
+      'Party Sharing Platter',
+      'Party Drinks Package',
+      'Christmas Party'
+    ];
+    
+    // Smooth carousel animation function
+    function animateCarousel(fromX: number, toX: number) {
+      if (!carousel) return;
+      
+      const duration = 250; // 250ms animation
+      const startTime = performance.now();
+      
+      function animate(currentTime: number) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        
+        const currentX = fromX + (toX - fromX) * easeOutQuart;
+        if (carousel) {
+          carousel.style.transform = `translateX(${currentX}%)`;
+        }
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      }
+      
+      requestAnimationFrame(animate);
+    }
+    
+    // Function to update carousel position
+    function updateCarousel(slideIndex: number) {
+      if (!carousel) return;
+      
+
+      
+      // Responsive slide calculation
+      const isMobile = window.innerWidth < 640;
+      const isTablet = window.innerWidth < 1024;
+      
+      let translateX;
+      let maxSlide;
+      
+      if (isMobile) {
+        // Mobile: Each slide shows 1 item, can go to slide 6 (total 7 slides: 0-6)
+        maxSlide = totalMenus - 1; // 6
+        translateX = -(Math.min(slideIndex, maxSlide) * 100);
+      } else if (isTablet) {
+        // Tablet: Each slide shows 2 items, last slide shows items 5-6 (slide index 5)
+        maxSlide = totalMenus - 2; // 5
+        translateX = -(Math.min(slideIndex, maxSlide) * 50);
+      } else {
+        // Desktop: Each slide shows 4 items, last slide shows items 3-6 (slide index 3)
+        maxSlide = totalMenus - 4; // 3
+        translateX = -(Math.min(slideIndex, maxSlide) * 25);
+      }
+      
+      // Smooth animation with requestAnimationFrame (skip on first load)
+      if (!isInitialized) {
+        carousel.style.transform = `translateX(${translateX}%)`;
+        isInitialized = true;
+      } else {
+        const currentTransform = carousel.style.transform;
+        const match = currentTransform.match(/-?\d+\.?\d*/);
+        const currentX = match ? parseFloat(match[0]) || 0 : 0;
+        
+        // Animate to target position
+        animateCarousel(currentX, translateX);
+      }
+      
+      // Update indicators - show relevant dots based on screen size
+      indicators.forEach((indicator, index) => {
+        if (index <= maxSlide) {
+          (indicator as HTMLElement).style.display = 'block';
+          indicator.classList.toggle('bg-brand-gold', index === Math.min(slideIndex, maxSlide));
+          indicator.classList.toggle('bg-brand-gold/30', index !== Math.min(slideIndex, maxSlide));
+        } else {
+          (indicator as HTMLElement).style.display = 'none';
+        }
+      });
+      
+      // Update active card styling - disabled for now
+      // const menuCards = document.querySelectorAll('.menu-pdf-item');
+      // menuCards.forEach((card, index) => {
+      //   const cardContainer = card.querySelector('div');
+      //   if (cardContainer) {
+      //     // No active card styling for now
+      //   }
+      // });
+      
+      // Update title based on current slide
+      if (currentMenuTitle) {
+        // For mobile: show current single item
+        // For tablet: show first of 2 visible items  
+        // For desktop: show first of 4 visible items
+        const titleIndex = slideIndex;
+        // console.log('Updating title to:', menuTitles[titleIndex], 'for slide:', slideIndex);
+        currentMenuTitle.textContent = menuTitles[titleIndex];
+      }
+    }
+    
+    // Navigation functions
+    function goToNextSlide() {
+      const totalSlides = getTotalSlides();
+      // console.log('Current slide:', currentSlide, 'Total slides:', totalSlides);
+      currentSlide = (currentSlide + 1) % totalSlides;
+      // console.log('New slide:', currentSlide);
+      updateCarousel(currentSlide);
+    }
+    
+    function goToPreviousSlide() {
+      const totalSlides = getTotalSlides();
+      currentSlide = currentSlide > 0 ? currentSlide - 1 : totalSlides - 1;
+      updateCarousel(currentSlide);
+    }
+    
+    // Next menu button handlers
+    if (nextMenuBtn) {
+      nextMenuBtn.addEventListener('click', goToNextSlide);
+    }
+    
+    if (actionNextBtn) {
+      actionNextBtn.addEventListener('click', goToNextSlide);
+    }
+    
+    // Indicator click handlers - all 7 clickable
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        currentSlide = index;
+        updateCarousel(currentSlide);
+      });
+    });
+    
+    // Touch/Swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const swipeDistanceX = touchStartX - touchEndX;
+      const swipeDistanceY = Math.abs(touchStartY - touchEndY);
+      
+      // Only trigger horizontal swipes (avoid conflicts with vertical scrolling)
+      if (Math.abs(swipeDistanceX) > swipeThreshold && swipeDistanceY < 100) {
+        if (swipeDistanceX > 0) {
+          goToNextSlide();
+        } else {
+          goToPreviousSlide();
+        }
+      }
+    }
+    
+    if (carousel) {
+      carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+      
+      carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+      }, { passive: true });
+    }
+    
+    // Initialize carousel
+    updateCarousel(0);
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      const totalSlides = getTotalSlides();
+      if (currentSlide >= totalSlides) {
+        currentSlide = totalSlides - 1;
+      }
+      updateCarousel(currentSlide);
+    });
+    
+    // Auto-rotate - slower on mobile
+    const autoRotateInterval = window.innerWidth < 1024 ? 4000 : 3000;
+    setInterval(() => {
+      const totalSlides = getTotalSlides();
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel(currentSlide);
+    }, autoRotateInterval);
+  });
+</script>
+
+<style>
+  .menu-carousel {
+    transform: translateZ(0); /* Force hardware acceleration */
+    backface-visibility: hidden; /* Smooth rendering */
+    perspective: 1000px; /* 3D context */
+    transform-style: preserve-3d; /* 3D transforms */
+    -webkit-font-smoothing: antialiased; /* Smooth text */
+    -moz-osx-font-smoothing: grayscale; /* Smooth text */
+  }
+  
+  .menu-pdf-item {
+    transition: all 0.2s ease;
+  }
+  
+  .menu-pdf-item > div {
+    transition: transform 0.2s ease;
+  }
+  
+  .menu-category-btn.active .category-underline {
+    transform: scaleX(1);
+  }
+  
+  .menu-category-btn:hover .category-underline {
+    transform: scaleX(1);
+  }
+  
+  .menu-pdf-item:hover {
+    cursor: pointer;
+  }
+</style>

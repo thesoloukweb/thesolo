@@ -1,0 +1,144 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+// Get all blog posts and sort by date (newest first)
+const blogPosts = await getCollection('blog');
+const sortedPosts = blogPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+// SEO data
+const seoTitle = 'Mediterranean Food Blog | TheSolo Kitchen & Bar - East London';
+const seoDescription = 'Discover authentic Mediterranean recipes, dining tips, and culinary stories from TheSolo Kitchen & Bar. East London\'s premier Mediterranean restaurant blog.';
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  image="/images/blog-1.jpg"
+>
+  <Header />
+  
+  <main class="min-h-screen bg-brand-dark">
+    
+    <!-- Hero Section -->
+    <section class="relative h-96 sm:h-[500px] lg:h-[600px] flex items-center justify-center bg-brand-dark">
+      <!-- Hero Background Image -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/blog-default.jpg" 
+          alt="TheSolo Kitchen & Bar Blog" 
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-brand-dark/75"></div>
+      </div>
+      
+      <!-- Hero Content -->
+      <div class="relative z-10 container-custom text-center py-12 mt-16">
+        <!-- Content Background -->
+        <div class="bg-brand-dark/80 backdrop-blur-sm rounded-2xl px-8 py-12 max-w-4xl mx-auto border border-brand-gold/20">
+          <h1 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+            Latest News
+            <span class="text-brand-gold block">& Stories</span>
+          </h1>
+          <p class="font-josefin text-base sm:text-lg text-white/95 max-w-2xl mx-auto leading-relaxed">
+            Discover the stories behind our Mediterranean cuisine, restaurant updates, and culinary insights from the heart of East London.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="py-16 lg:py-24 bg-brand-dark">
+      <div class="container-custom">
+        
+        {sortedPosts.length === 0 ? (
+          <!-- No posts message -->
+          <div class="text-center py-16">
+            <div class="bg-brand-dark-card rounded-2xl p-12 max-w-2xl mx-auto border border-brand-gold/20">
+              <h2 class="font-crimson text-3xl text-brand-gold mb-4">Coming Soon</h2>
+              <p class="font-josefin text-white/80">We're working on exciting content for you. Check back soon!</p>
+            </div>
+          </div>
+        ) : (
+          <!-- Blog Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {sortedPosts.map((post) => {
+              const { title, description, pubDate, heroImage, tags } = post.data;
+              const formattedDate = pubDate.toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+              });
+              
+              return (
+                <article class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group hover:scale-105">
+                  <!-- Image -->
+                  <div class="relative overflow-hidden">
+                    <a href={`/blog/${post.slug}`}>
+                      <img 
+                        src={heroImage || '/images/blog-default.jpg'}
+                        alt={title}
+                        class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                        loading="lazy"
+                        width="560"
+                        height="256"
+                      />
+                      <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+                    </a>
+                    
+                    <!-- Tags -->
+                    {tags && tags.length > 0 && (
+                      <div class="absolute top-4 left-4">
+                        <span class="inline-block bg-brand-gold/90 text-brand-dark px-3 py-1 rounded-full text-sm font-josefin font-medium backdrop-blur-sm">
+                          {tags[0]}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  <!-- Content -->
+                  <div class="p-6 space-y-4">
+                    <!-- Date -->
+                    <time class="font-josefin text-sm text-white/60 block">
+                      {formattedDate}
+                    </time>
+                    
+                    <!-- Title -->
+                    <h3 class="font-crimson text-xl lg:text-2xl text-white group-hover:text-brand-gold transition-colors duration-300 leading-tight">
+                      <a href={`/blog/${post.slug}`}>
+                        {title}
+                      </a>
+                    </h3>
+                    
+                    <!-- Description -->
+                    <p class="font-josefin text-white/80 leading-relaxed">
+                      {description}
+                    </p>
+                    
+                    <!-- Read More -->
+                    <a 
+                      href={`/blog/${post.slug}`}
+                      class="inline-flex items-center gap-2 font-josefin text-brand-gold hover:text-white transition-colors duration-300 text-sm font-medium"
+                    >
+                      Read More
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                      </svg>
+                    </a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
+        
+      </div>
+    </section>
+
+  </main>
+  
+  <Footer />
+</BaseLayout>

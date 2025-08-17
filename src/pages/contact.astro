@@ -1,0 +1,496 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<BaseLayout
+  title="Contact & Location | TheSolo Kitchen & Bar - Bethnal Green London"
+  description="Contact TheSolo Kitchen & Bar in East London. Reservations, private events, and inquiries. Located at Museum Gardens, near Bethnal Green station. Call 020 3340 8082."
+  image="/images/restaurant-3.jpg"
+>
+  <main id="main-content" class="min-h-screen">
+    <!-- Header with Navigation -->
+    <Header />
+    
+    <!-- Hero Section -->
+    <section class="relative h-96 sm:h-[500px] lg:h-[600px] flex items-center justify-center bg-brand-dark">
+      <!-- Hero Background Image -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/restaurant-2.jpg" 
+          alt="TheSolo Kitchen & Bar contact" 
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-brand-dark/75"></div>
+      </div>
+      
+      <!-- Hero Content -->
+      <div class="relative z-10 container-custom text-center py-12 mt-16">
+        <!-- Content Background -->
+        <div class="bg-brand-dark/80 backdrop-blur-sm rounded-2xl px-8 py-12 max-w-4xl mx-auto border border-brand-gold/20">
+          <h1 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+            Contact
+            <span class="text-brand-gold block">TheSolo Kitchen & Bar</span>
+          </h1>
+          <p class="font-josefin text-base sm:text-lg text-white/95 max-w-2xl mx-auto leading-relaxed">
+            We'd love to hear from you. Get in touch for reservations, private events, or any inquiries.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+          
+          <!-- Contact Details -->
+          <div class="bg-brand-dark-card rounded-2xl border border-brand-gold/20 p-8 lg:p-10 space-y-12 lg:space-y-16">
+            <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl text-brand-gold mb-12 lg:mb-16">
+              Get In Touch
+            </h2>
+            
+            <!-- Address -->
+            <div class="flex items-start space-x-8 lg:space-x-10">
+              <div class="flex-shrink-0">
+                <div class="w-14 h-14 lg:w-16 lg:h-16 bg-brand-gold rounded-full flex items-center justify-center">
+                  <svg class="w-7 h-7 lg:w-8 lg:h-8 text-brand-dark" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="pb-6 lg:pb-8">
+                <h3 class="font-crimson text-xl lg:text-2xl text-brand-gold mb-3 lg:mb-4">Our Location</h3>
+                <p class="font-josefin text-base lg:text-lg text-white leading-relaxed">
+                  Museum Gardens, Cambridge Heath Road<br>
+                  London, United Kingdom<br>
+                  E2 9PA
+                </p>
+              </div>
+            </div>
+            
+            <!-- Phone -->
+            <div class="flex items-start space-x-8 lg:space-x-10">
+              <div class="flex-shrink-0">
+                <div class="w-14 h-14 lg:w-16 lg:h-16 bg-brand-gold rounded-full flex items-center justify-center">
+                  <svg class="w-7 h-7 lg:w-8 lg:h-8 text-brand-dark" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="pb-6 lg:pb-8">
+                <h3 class="font-crimson text-xl lg:text-2xl text-brand-gold mb-3 lg:mb-4">Call Us</h3>
+                <a href="tel:+442080142656" class="font-josefin text-base lg:text-lg text-white hover:text-brand-gold transition-colors duration-300">
+                  0208 0142656
+                </a>
+              </div>
+            </div>
+            
+            <!-- Email -->
+            <div class="flex items-start space-x-8 lg:space-x-10">
+              <div class="flex-shrink-0">
+                <div class="w-14 h-14 lg:w-16 lg:h-16 bg-brand-gold rounded-full flex items-center justify-center">
+                  <svg class="w-7 h-7 lg:w-8 lg:h-8 text-brand-dark" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="pb-6 lg:pb-8">
+                <h3 class="font-crimson text-xl lg:text-2xl text-brand-gold mb-3 lg:mb-4">Email Us</h3>
+                <div class="space-y-2 lg:space-y-3">
+                  <a href="mailto:info@thesolo.co.uk" class="block font-josefin text-base lg:text-lg text-white hover:text-brand-gold transition-colors duration-300">
+                    info@thesolo.co.uk
+                  </a>
+                  <a href="mailto:bookings@thesolo.co.uk" class="block font-josefin text-base lg:text-lg text-white hover:text-brand-gold transition-colors duration-300">
+                    bookings@thesolo.co.uk
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Opening Hours -->
+            <div class="flex items-start space-x-8 lg:space-x-10">
+              <div class="flex-shrink-0">
+                <div class="w-14 h-14 lg:w-16 lg:h-16 bg-brand-gold rounded-full flex items-center justify-center">
+                  <svg class="w-7 h-7 lg:w-8 lg:h-8 text-brand-dark" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                    <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                  </svg>
+                </div>
+              </div>
+              <div>
+                <h3 class="font-crimson text-xl lg:text-2xl text-brand-gold mb-3 lg:mb-4">Opening Hours</h3>
+                <div class="font-josefin text-base lg:text-lg text-white space-y-2 lg:space-y-3">
+                  <p>Monday-Thursday: 10:00am To 11:30pm</p>
+                  <p>Friday: 10:00am to 12:00am</p>
+                  <p>Saturday: 09:00am To 12:00am</p>
+                  <p>Sunday: 09:00am To 11:00pm</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Contact Form -->
+          <div class="bg-brand-dark-card rounded-2xl border border-brand-gold/20 p-8">
+            <h3 class="font-crimson text-2xl sm:text-3xl text-brand-gold mb-6">Send Us a Message</h3>
+            
+            <form class="space-y-6" id="contact-form">
+              <!-- Name -->
+              <div>
+                <label for="name" class="block font-crimson text-white mb-2">
+                  Full Name *
+                </label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  required
+                  class="w-full bg-transparent border-b border-brand-gold/50 text-white font-josefin py-3 focus:border-brand-gold focus:outline-none transition-colors duration-300"
+                  placeholder="Your full name"
+                />
+              </div>
+              
+              <!-- Email -->
+              <div>
+                <label for="email" class="block font-crimson text-white mb-2">
+                  Email Address *
+                </label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  required
+                  class="w-full bg-transparent border-b border-brand-gold/50 text-white font-josefin py-3 focus:border-brand-gold focus:outline-none transition-colors duration-300"
+                  placeholder="your.email@example.com"
+                />
+              </div>
+              
+              <!-- Phone -->
+              <div>
+                <label for="phone" class="block font-crimson text-white mb-2">
+                  Phone Number
+                </label>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  name="phone"
+                  class="w-full bg-transparent border-b border-brand-gold/50 text-white font-josefin py-3 focus:border-brand-gold focus:outline-none transition-colors duration-300"
+                  placeholder="Your phone number"
+                />
+              </div>
+              
+              <!-- Subject -->
+              <div>
+                <label for="subject" class="block font-crimson text-white mb-2">
+                  Subject *
+                </label>
+                
+                <!-- Desktop Select -->
+                <select 
+                  id="subject" 
+                  name="subject" 
+                  required
+                  class="hidden lg:block w-full bg-transparent border-b border-brand-gold/50 text-white font-josefin py-3 focus:border-brand-gold focus:outline-none appearance-none transition-colors duration-300"
+                >
+                  <option value="" class="bg-brand-dark-card">Select a subject</option>
+                  <option value="reservation" class="bg-brand-dark-card">Table Reservation</option>
+                  <option value="private-event" class="bg-brand-dark-card">Private Event</option>
+                  <option value="general" class="bg-brand-dark-card">General Inquiry</option>
+                  <option value="feedback" class="bg-brand-dark-card">Feedback</option>
+                  <option value="other" class="bg-brand-dark-card">Other</option>
+                </select>
+                
+                <!-- Mobile Modal Button -->
+                <div class="lg:hidden">
+                  <button type="button" id="subject-modal-btn" class="w-full bg-transparent border-b border-brand-gold/50 text-white font-josefin py-3 text-left focus:border-brand-gold focus:outline-none flex items-center justify-between">
+                    <span id="subject-selected-text">Select a subject</span>
+                    <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                  </button>
+                  <input type="hidden" id="subject-mobile" name="subject" required>
+                </div>
+              </div>
+              
+              <!-- Message -->
+              <div>
+                <label for="message" class="block font-crimson text-white mb-2">
+                  Message *
+                </label>
+                <textarea 
+                  id="message" 
+                  name="message" 
+                  rows="5" 
+                  required
+                  class="w-full bg-transparent border border-brand-gold/50 text-white font-josefin p-3 rounded-lg focus:border-brand-gold focus:outline-none transition-colors duration-300 resize-vertical"
+                  placeholder="Please tell us how we can help you..."
+                ></textarea>
+              </div>
+              
+              <!-- Submit Button -->
+              <button 
+                type="submit" 
+                class="w-full btn-primary text-lg py-4 font-semibold uppercase tracking-wider"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Subject Selection Modal (Mobile Only) -->
+      <div id="subject-modal" class="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+        <div class="absolute bottom-0 left-0 right-0 bg-brand-dark rounded-t-3xl">
+          <div class="flex items-center justify-between p-6 border-b border-brand-gold/20">
+            <h3 class="font-crimson text-xl text-white">Select Subject</h3>
+            <button type="button" id="close-subject-modal" class="text-brand-gold hover:text-white transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <div class="p-6 max-h-80 overflow-y-auto" id="subject-modal-content">
+            <!-- Dynamic content will be populated here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="bg-brand-dark py-16">
+      <div class="container-custom">
+        <div class="text-center mb-12">
+          <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl text-brand-gold mb-6">
+            Find Us
+          </h2>
+          <p class="font-josefin text-lg text-white/90 max-w-2xl mx-auto">
+            Located in the vibrant heart of London, we're easily accessible and ready to welcome you.
+          </p>
+        </div>
+        
+        <!-- Google Maps Embed -->
+        <div class="relative bg-brand-dark rounded-2xl border border-brand-gold/20 overflow-hidden">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2481.9976!2d-0.054089!3d51.530089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761d859d6f6c01%3A0x3ac9ded6304a3760!2sMuseum%20Gardens%2C%20Cambridge%20Heath%20Rd%2C%20London%20E2%209PA%2C%20UK!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+            width="100%" 
+            height="400" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            class="w-full h-96"
+            title="TheSolo Kitchen & Bar Location"
+          ></iframe>
+          
+          <!-- Map overlay with direct link -->
+          <div class="absolute bottom-4 right-4 bg-brand-dark/90 backdrop-blur-sm rounded-lg p-3 border border-brand-gold/30">
+            <a 
+              href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x48761d859d6f6c01:0x3ac9ded6304a3760?sa=X&ved=1t:8290&ictx=111" 
+              target="_blank"
+              class="text-brand-gold hover:text-white transition-colors duration-300 inline-flex items-center text-sm font-josefin"
+            >
+              <span class="mr-2">Open in Google Maps</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom text-center">
+        <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl text-brand-gold mb-8">
+          Ready to Visit?
+        </h2>
+        <p class="font-josefin text-lg text-white/90 max-w-2xl mx-auto leading-relaxed mb-12">
+          Join us for an unforgettable Mediterranean dining experience. Make your reservation today or visit us for a spontaneous culinary journey.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a 
+            href="#reservation"
+            class="btn-primary text-lg px-8 py-4"
+          >
+            Make a Reservation
+          </a>
+          <a 
+            href="tel:+442080142656"
+            class="btn-secondary text-lg px-8 py-4"
+          >
+            Call Now
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Contact form handling
+  document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contact-form') as HTMLFormElement;
+    
+    // Subject modal elements
+    const subjectModalBtn = document.getElementById('subject-modal-btn');
+    const subjectModal = document.getElementById('subject-modal');
+    const closeSubjectModalBtn = document.getElementById('close-subject-modal');
+    const subjectModalContent = document.getElementById('subject-modal-content');
+    const subjectSelectedText = document.getElementById('subject-selected-text');
+    const subjectMobileInput = document.getElementById('subject-mobile') as HTMLInputElement;
+    const subjectDesktopSelect = document.getElementById('subject') as HTMLSelectElement;
+    
+    // Subject options
+    const subjectOptions = [
+      { value: 'reservation', text: 'Table Reservation' },
+      { value: 'private-event', text: 'Private Event' },
+      { value: 'general', text: 'General Inquiry' },
+      { value: 'feedback', text: 'Feedback' },
+      { value: 'other', text: 'Other' }
+    ];
+    
+    // Subject Modal Functions
+    function openSubjectModal() {
+      if (subjectModal) {
+        subjectModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        populateSubjectOptions();
+      }
+    }
+    
+    function closeSubjectModal() {
+      if (subjectModal) {
+        subjectModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+    
+    function populateSubjectOptions() {
+      if (subjectModalContent) {
+        subjectModalContent.innerHTML = '';
+        subjectOptions.forEach(option => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'w-full text-left p-4 hover:bg-brand-gold/10 transition-colors duration-200 border-b border-brand-gold/10 last:border-b-0';
+          button.innerHTML = `<span class="font-josefin text-white text-lg">${option.text}</span>`;
+          button.addEventListener('click', () => selectSubjectOption(option.value, option.text));
+          subjectModalContent.appendChild(button);
+        });
+      }
+    }
+    
+    function selectSubjectOption(value: string, text: string) {
+      if (subjectSelectedText && subjectMobileInput) {
+        subjectSelectedText.textContent = text;
+        subjectMobileInput.value = value;
+        closeSubjectModal();
+      }
+    }
+    
+    // Subject Modal event listeners
+    if (subjectModalBtn) {
+      subjectModalBtn.addEventListener('click', openSubjectModal);
+    }
+    
+    if (closeSubjectModalBtn) {
+      closeSubjectModalBtn.addEventListener('click', closeSubjectModal);
+    }
+    
+    if (subjectModal) {
+      subjectModal.addEventListener('click', (e) => {
+        if (e.target === subjectModal) {
+          closeSubjectModal();
+        }
+      });
+    }
+    
+    // ESC key to close modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && subjectModal && !subjectModal.classList.contains('hidden')) {
+        closeSubjectModal();
+      }
+    });
+    
+    // Form submission handling
+    if (contactForm) {
+      contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const phone = formData.get('phone') || 'Not provided';
+        
+        // Get subject from appropriate input
+        let subject = '';
+        if (window.innerWidth >= 1024) {
+          subject = subjectDesktopSelect?.value || '';
+        } else {
+          subject = subjectMobileInput?.value || '';
+        }
+        
+        const message = formData.get('message');
+        
+        // Validate subject selection
+        if (!subject) {
+          alert('Please select a subject.');
+          return;
+        }
+        
+        // Get submit button and show loading state
+        const submitBtn = contactForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        
+        try {
+          // Prepare data for API
+          const emailData = {
+            type: 'contact',
+            name: name,
+            email: email,
+            phone: phone,
+            subject: subjectOptions.find(opt => opt.value === subject)?.text || subject,
+            message: message
+          };
+          
+          // Send to API
+          const response = await fetch('/api/send-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(emailData)
+          });
+          
+          const result = await response.json();
+          
+          if (result.success) {
+            // Success message
+            alert('Message sent successfully! We will get back to you soon.');
+            contactForm.reset();
+            
+            // Reset mobile selections
+            if (subjectSelectedText) subjectSelectedText.textContent = 'Select a subject';
+            if (subjectMobileInput) subjectMobileInput.value = '';
+          } else {
+            throw new Error(result.error || 'Failed to send message');
+          }
+          
+        } catch (error) {
+          console.error('Contact form error:', error);
+          alert('Sorry, there was an error sending your message. Please try again or contact us directly.');
+        } finally {
+          // Reset button state
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }
+      });
+    }
+  });
+</script>

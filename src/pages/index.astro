@@ -1,0 +1,59 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import HeroSlider from '@/components/HeroSlider.astro';
+import AboutSection from '@/components/AboutSection.astro';
+import CategorySection from '@/components/CategorySection.astro';
+import ReservationSection from '@/components/ReservationSection.astro';
+import MenuSection from '@/components/MenuSection.astro';
+import EventsSection from '@/components/EventsSection.astro';
+import RestaurantGallery from '@/components/RestaurantGallery.astro';
+import BlogSection from '@/components/BlogSection.astro';
+import GoogleReviews from '@/components/GoogleReviews.astro';
+import DiscountPopup from '@/components/DiscountPopup.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<BaseLayout
+  title="TheSolo Kitchen & Bar | Mediterranean Restaurant East London | Bethnal Green"
+  description="Experience authentic Mediterranean cuisine at TheSolo Kitchen & Bar in East London. Rooftop dining, craft cocktails, private events. Near Bethnal Green station. Book now!"
+  image="/images/restaurant-1.jpg"
+>
+  <main id="main-content" class="min-h-screen">
+    <!-- Header with Navigation -->
+    <Header />
+    
+    <!-- Hero Slider Section -->
+    <HeroSlider />
+    
+    <!-- About Us Section -->
+    <AboutSection />
+    
+    <!-- Category Section (Private Dining & Cocktail Bar) -->
+    <CategorySection />
+    
+    <!-- Menu Section -->
+    <MenuSection />
+    
+    <!-- Events Section -->
+    <EventsSection />
+    
+    <!-- Restaurant Gallery Section -->
+    <RestaurantGallery />
+    
+    <!-- Blog/News Section -->
+    <BlogSection />
+    
+    <!-- Google Reviews Section -->
+    <GoogleReviews />
+    
+    <!-- Reservation Form Section -->
+    <ReservationSection />
+  </main>
+  
+  <!-- Footer -->
+  <Footer />
+  
+  <!-- Discount Popup (First-time visitors only) -->
+  <DiscountPopup />
+</BaseLayout>

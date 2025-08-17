@@ -1,0 +1,1136 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+---
+
+<BaseLayout
+  title="Photo Gallery | TheSolo Kitchen & Bar - East London Restaurant"
+  description="Explore TheSolo Kitchen & Bar's stunning rooftop terrace, elegant dining areas, and authentic Mediterranean cuisine through our photo gallery. Bethnal Green, London."
+  image="/images/restaurant-1.jpg"
+>
+  <main id="main-content" class="min-h-screen">
+    <!-- Header with Navigation -->
+    <Header />
+    
+    <!-- Hero Section -->
+    <section class="relative h-96 sm:h-[500px] lg:h-[600px] flex items-center justify-center bg-brand-dark">
+      <!-- Hero Background Image -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/restaurant-4.jpg" 
+          alt="TheSolo Kitchen & Bar gallery" 
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-brand-dark/75"></div>
+      </div>
+      
+      <!-- Hero Content -->
+      <div class="relative z-10 container-custom text-center py-12 mt-16">
+        <!-- Content Background -->
+        <div class="bg-brand-dark/80 backdrop-blur-sm rounded-2xl px-8 py-12 max-w-4xl mx-auto border border-brand-gold/20">
+          <h1 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+            Gallery
+            <span class="text-brand-gold block">TheSolo Kitchen & Bar</span>
+          </h1>
+          <p class="font-josefin text-base sm:text-lg text-white/95 max-w-2xl mx-auto leading-relaxed">
+            Discover the beautiful ambiance, exquisite cuisine, and memorable moments that make TheSolo Kitchen & Bar special.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Categories -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom">
+        <!-- Category Navigation -->
+        <div class="text-center mb-12 lg:mb-16">
+          <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl text-brand-gold mb-8">
+            Explore Our Gallery
+          </h2>
+          <div class="flex flex-wrap justify-center gap-4 lg:gap-6">
+            <button 
+              class="gallery-category-btn active px-6 py-3 rounded-full border transition-all duration-300 font-josefin"
+              data-category="all"
+              style="background-color: #C49A85; border-color: #C49A85; color: #0A1114;"
+            >
+              All
+            </button>
+            <button 
+              class="gallery-category-btn px-6 py-3 rounded-full border border-brand-gold/50 text-white hover:border-brand-gold hover:text-brand-gold transition-all duration-300 font-josefin"
+              data-category="food"
+            >
+              Food & Drinks
+            </button>
+            <button 
+              class="gallery-category-btn px-6 py-3 rounded-full border border-brand-gold/50 text-white hover:border-brand-gold hover:text-brand-gold transition-all duration-300 font-josefin"
+              data-category="interior"
+            >
+              Interior & Outdoor
+            </button>
+            <button 
+              class="gallery-category-btn px-6 py-3 rounded-full border border-brand-gold/50 text-white hover:border-brand-gold hover:text-brand-gold transition-all duration-300 font-josefin"
+              data-category="events"
+            >
+              Events & Occasions
+            </button>
+          </div>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+          
+          <!-- Interior & Outdoor Images (gallery1) -->
+          <div class="gallery-item group" data-category="interior">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery1-1.jpg" 
+                alt="Elegant dining interior" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-brand-gold/90 text-brand-dark px-2 py-1 rounded-full text-xs font-josefin font-medium">
+                  Interior & Outdoor
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="interior">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery1-2.jpg" 
+                alt="Restaurant outdoor seating" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-brand-gold/90 text-brand-dark px-2 py-1 rounded-full text-xs font-josefin font-medium">
+                  Interior & Outdoor
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="interior">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery1-3.jpg" 
+                alt="Bar and lounge area" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-brand-gold/90 text-brand-dark px-2 py-1 rounded-full text-xs font-josefin font-medium">
+                  Interior & Outdoor
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="interior">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery1-4.jpg" 
+                alt="Private dining room" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-brand-gold/90 text-brand-dark px-2 py-1 rounded-full text-xs font-josefin font-medium">
+                  Interior & Outdoor
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="interior">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery1-5.jpg" 
+                alt="Garden seating area" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-brand-gold/90 text-brand-dark px-2 py-1 rounded-full text-xs font-josefin font-medium">
+                  Interior & Outdoor
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="interior">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery1-6.jpg" 
+                alt="Rooftop terrace view" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-brand-gold/90 text-brand-dark px-2 py-1 rounded-full text-xs font-josefin font-medium">
+                  Interior & Outdoor
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="interior">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery1-7.jpg" 
+                alt="Restaurant entrance area" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-brand-gold/90 text-brand-dark px-2 py-1 rounded-full text-xs font-josefin font-medium">
+                  Interior & Outdoor
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Food & Drinks Images (gallery2) - Random Order -->
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-8.jpg" 
+                alt="Fresh Mediterranean salads" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-brand-gold/90 text-brand-dark px-2 py-1 rounded-full text-xs font-josefin font-medium">
+                  Food & Drinks
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-3.jpg" 
+                alt="Signature cocktails" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Craft Cocktails</h3>
+                <p class="font-josefin text-sm text-white/90">Expertly mixed drinks</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-12.jpg" 
+                alt="Grilled seafood" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Grilled Seafood</h3>
+                <p class="font-josefin text-sm text-white/90">Ocean fresh catches</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-5.jpg" 
+                alt="Artisanal desserts" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Sweet Endings</h3>
+                <p class="font-josefin text-sm text-white/90">Artisanal desserts</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-1.jpg" 
+                alt="Mediterranean cuisine" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Mediterranean Delights</h3>
+                <p class="font-josefin text-sm text-white/90">Fresh, authentic flavors</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-15.jpg" 
+                alt="Wine selection" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Wine & Beverages</h3>
+                <p class="font-josefin text-sm text-white/90">Curated selection</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-7.jpg" 
+                alt="Gourmet presentation" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Gourmet Dishes</h3>
+                <p class="font-josefin text-sm text-white/90">Chef's specialties</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-20.jpg" 
+                alt="Premium spirits" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Premium Spirits</h3>
+                <p class="font-josefin text-sm text-white/90">Finest selections</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- More Food & Drinks Images -->
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-2.jpg" 
+                alt="Chef's special dishes" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Chef's Specials</h3>
+                <p class="font-josefin text-sm text-white/90">Signature creations</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-4.jpg" 
+                alt="Fresh ingredients" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Fresh Ingredients</h3>
+                <p class="font-josefin text-sm text-white/90">Quality sourcing</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-6.jpg" 
+                alt="Mediterranean appetizers" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Appetizers</h3>
+                <p class="font-josefin text-sm text-white/90">Mediterranean starters</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-9.jpg" 
+                alt="Grilled dishes" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Grilled Specialties</h3>
+                <p class="font-josefin text-sm text-white/90">Fire-grilled perfection</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-10.jpg" 
+                alt="Pasta dishes" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Pasta Selection</h3>
+                <p class="font-josefin text-sm text-white/90">Handmade perfection</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-11.jpg" 
+                alt="Breakfast selection" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Breakfast Menu</h3>
+                <p class="font-josefin text-sm text-white/90">Morning delights</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-13.jpg" 
+                alt="Fresh salads" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Garden Fresh</h3>
+                <p class="font-josefin text-sm text-white/90">Healthy choices</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-14.jpg" 
+                alt="Meat dishes" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Premium Meats</h3>
+                <p class="font-josefin text-sm text-white/90">Finest cuts</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-16.jpg" 
+                alt="Coffee and beverages" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Coffee & Tea</h3>
+                <p class="font-josefin text-sm text-white/90">Perfect brews</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-17.jpg" 
+                alt="Artisan bread" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Artisan Breads</h3>
+                <p class="font-josefin text-sm text-white/90">Fresh baked daily</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-18.jpg" 
+                alt="Cheese selection" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Cheese Board</h3>
+                <p class="font-josefin text-sm text-white/90">Curated selection</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-19.jpg" 
+                alt="Seasonal specials" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Seasonal Specials</h3>
+                <p class="font-josefin text-sm text-white/90">Chef's recommendations</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-21.jpg" 
+                alt="Cocktail presentation" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Cocktail Art</h3>
+                <p class="font-josefin text-sm text-white/90">Mixology mastery</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-22.jpg" 
+                alt="Wine pairing" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Wine Pairing</h3>
+                <p class="font-josefin text-sm text-white/90">Perfect combinations</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="food">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery2-23.jpg" 
+                alt="Fine dining presentation" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <h3 class="font-crimson text-lg font-semibold mb-1">Fine Dining</h3>
+                <p class="font-josefin text-sm text-white/90">Exquisite presentation</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Events & Occasions Images (gallery3) -->
+          <div class="gallery-item group" data-category="events">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery3-1.jpg" 
+                alt="Live music events" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-brand-gold/90 text-brand-dark px-2 py-1 rounded-full text-xs font-josefin font-medium">
+                  Events & Occasions
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-item group" data-category="events">
+            <div class="relative overflow-hidden rounded-xl bg-brand-dark-card border border-brand-gold/20 aspect-square">
+              <img 
+                src="/images/gallery/gallery3-2.jpg" 
+                alt="Private celebrations" 
+                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute top-3 left-3">
+                <span class="bg-brand-gold/90 text-brand-dark px-2 py-1 rounded-full text-xs font-josefin font-medium">
+                  Events & Occasions
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Infinite Scroll Loading Indicator -->
+        <div id="loading-indicator" class="hidden text-center py-8">
+          <div class="inline-block w-8 h-8 border-2 border-brand-gold border-t-transparent rounded-full animate-spin"></div>
+          <p class="mt-4 text-white font-josefin">Loading more images...</p>
+        </div>
+        
+        <!-- Scroll trigger element (invisible) -->
+        <div id="scroll-trigger" class="h-1 w-full"></div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center p-4" style="background-color: rgba(0, 0, 0, 0.9);">
+      
+      <!-- Close Button -->
+      <button id="lightbox-close" class="absolute top-4 right-4 z-20 w-12 h-12 bg-black/60 hover:bg-black/80 text-white rounded-full flex items-center justify-center transition-colors duration-200 backdrop-blur-sm">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      
+      <!-- Image Container -->
+      <div id="lightbox-content" class="relative max-w-[90vw] max-h-[90vh] flex items-center justify-center">
+        <img id="lightbox-image" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl">
+        
+        <!-- Image Info -->
+        <div class="absolute top-4 left-4">
+          <span id="lightbox-badge" class="bg-brand-gold/90 text-brand-dark px-3 py-1 rounded-full text-sm font-josefin font-medium backdrop-blur-sm"></span>
+        </div>
+      </div>
+      
+      <!-- Navigation Arrows -->
+      <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/60 hover:bg-black/80 text-white rounded-full flex items-center justify-center transition-colors duration-200 backdrop-blur-sm">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      
+      <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-black/60 hover:bg-black/80 text-white rounded-full flex items-center justify-center transition-colors duration-200 backdrop-blur-sm">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Gallery Statistics -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom">
+        <div class="flex justify-center gap-8 flex-col sm:flex-row">
+          <div class="bg-brand-dark-card rounded-xl p-6 border border-brand-gold/20 flex-1 max-w-xs text-center">
+            <div class="font-crimson text-3xl lg:text-4xl text-brand-gold font-bold mb-2">50+</div>
+            <div class="font-josefin text-white">Signature Dishes</div>
+          </div>
+          <div class="bg-brand-dark-card rounded-xl p-6 border border-brand-gold/20 flex-1 max-w-xs text-center">
+            <div class="font-crimson text-3xl lg:text-4xl text-brand-gold font-bold mb-2">15+</div>
+            <div class="font-josefin text-white">Event Spaces</div>
+          </div>
+          <div class="bg-brand-dark-card rounded-xl p-6 border border-brand-gold/20 flex-1 max-w-xs text-center">
+            <div class="font-crimson text-3xl lg:text-4xl text-brand-gold font-bold mb-2">1000+</div>
+            <div class="font-josefin text-white">Happy Guests</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom text-center">
+        <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl text-brand-gold mb-8">
+          Visit Us Today
+        </h2>
+        <p class="font-josefin text-lg text-white/90 max-w-2xl mx-auto leading-relaxed mb-12">
+          Experience the ambiance, taste the authentic Mediterranean cuisine, and create your own memorable moments at TheSolo Kitchen & Bar.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a 
+            href="/contact"
+            class="btn-primary text-lg px-8 py-4"
+          >
+            Make a Reservation
+          </a>
+          <a 
+            href="/about"
+            class="btn-secondary text-lg px-8 py-4"
+          >
+            Learn More About Us
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <Footer />
+</BaseLayout>
+
+<script>
+  // Gallery filtering and infinite scroll functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const categoryButtons = document.querySelectorAll('.gallery-category-btn') as NodeListOf<HTMLButtonElement>;
+    const galleryItems = document.querySelectorAll('.gallery-item') as NodeListOf<HTMLElement>;
+    const loadingIndicator = document.getElementById('loading-indicator') as HTMLElement;
+    const scrollTrigger = document.getElementById('scroll-trigger') as HTMLElement;
+    
+    let currentFilter = 'all';
+    let itemsToShow = 12; // Initial load: 12 images
+    const itemsPerLoad = 6; // Load 6 more each time (smoother)
+    let isLoading = false;
+    let allItemsLoaded = false;
+    
+    // Clean up hover content and apply category badges
+    galleryItems.forEach(item => {
+      const category = item.getAttribute('data-category');
+      
+      // Remove all hover content (gradients and text overlays)
+      const gradientOverlays = item.querySelectorAll('.absolute.inset-0');
+      const textOverlays = item.querySelectorAll('.absolute.bottom-4, .absolute.bottom-6');
+      
+      gradientOverlays.forEach(overlay => {
+        if (overlay.classList.contains('bg-gradient-to-t')) {
+          overlay.remove();
+        }
+      });
+      
+      textOverlays.forEach(overlay => {
+        if (overlay.querySelector('h3') || overlay.querySelector('p')) {
+          overlay.remove();
+        }
+      });
+      
+      // Ensure category badges exist for all items
+      let badgeContainer = item.querySelector('.absolute.top-3.left-3');
+      
+      if (!badgeContainer) {
+        // Create badge container if missing
+        badgeContainer = document.createElement('div');
+        badgeContainer.className = 'absolute top-3 left-3';
+        
+        const badge = document.createElement('span');
+        badge.className = 'bg-brand-gold/90 text-brand-dark px-2 py-1 rounded-full text-xs font-josefin font-medium';
+        
+        if (category === 'food') {
+          badge.textContent = 'Food & Drinks';
+        } else if (category === 'events') {
+          badge.textContent = 'Events & Occasions';
+        } else if (category === 'interior') {
+          badge.textContent = 'Interior & Outdoor';
+        }
+        
+        badgeContainer.appendChild(badge);
+        item.querySelector('.relative')?.appendChild(badgeContainer);
+      } else {
+        // Update existing badge text
+        const badge = badgeContainer.querySelector('span');
+        if (badge) {
+          if (category === 'food') {
+            badge.textContent = 'Food & Drinks';
+          } else if (category === 'events') {
+            badge.textContent = 'Events & Occasions';
+          } else if (category === 'interior') {
+            badge.textContent = 'Interior & Outdoor';
+          }
+        }
+      }
+    });
+    
+    // Get filtered items based on current filter
+    function getFilteredItems() {
+      return Array.from(galleryItems).filter(item => {
+        const itemCategory = item.getAttribute('data-category');
+        return currentFilter === 'all' || itemCategory === currentFilter;
+      });
+    }
+    
+    // Update gallery display
+    function updateGalleryDisplay(animate = true) {
+      const filteredItems = getFilteredItems();
+      
+      // Hide all items first
+      galleryItems.forEach(item => {
+        item.style.display = 'none';
+      });
+      
+      // Show filtered items up to current limit
+      filteredItems.forEach((item, index) => {
+        if (index < itemsToShow) {
+          item.style.display = '';
+          if (animate) {
+            item.style.opacity = '0';
+            setTimeout(() => {
+              item.style.opacity = '1';
+            }, index * 30); // Faster staggered animation
+          } else {
+            item.style.opacity = '1';
+          }
+        } else {
+          item.style.display = 'none';
+        }
+      });
+      
+      // Update allItemsLoaded status
+      allItemsLoaded = filteredItems.length <= itemsToShow;
+      
+      // Show/hide scroll trigger
+      if (allItemsLoaded) {
+        scrollTrigger.style.display = 'none';
+      } else {
+        scrollTrigger.style.display = 'block';
+      }
+    }
+    
+    // Load more items
+    function loadMoreItems() {
+      if (isLoading || allItemsLoaded) return;
+      
+      isLoading = true;
+      loadingIndicator.classList.remove('hidden');
+      
+      // Simulate loading delay for better UX
+      setTimeout(() => {
+        const filteredItems = getFilteredItems();
+        const newItemsToShow = Math.min(itemsToShow + itemsPerLoad, filteredItems.length);
+        
+        // Show new items with animation
+        for (let i = itemsToShow; i < newItemsToShow; i++) {
+          if (filteredItems[i]) {
+            filteredItems[i].style.display = '';
+            filteredItems[i].style.opacity = '0';
+            setTimeout(() => {
+              filteredItems[i].style.opacity = '1';
+            }, (i - itemsToShow) * 100);
+          }
+        }
+        
+        itemsToShow = newItemsToShow;
+        allItemsLoaded = filteredItems.length <= itemsToShow;
+        
+        // Hide loading indicator
+        loadingIndicator.classList.add('hidden');
+        isLoading = false;
+        
+        // Hide scroll trigger if all items loaded
+        if (allItemsLoaded) {
+          scrollTrigger.style.display = 'none';
+        }
+      }, 600); // 600ms loading simulation
+    }
+    
+    // Intersection Observer for infinite scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !isLoading && !allItemsLoaded) {
+          loadMoreItems();
+        }
+      });
+    }, {
+      rootMargin: '100px' // Start loading 100px before scroll trigger is visible
+    });
+    
+    // Initial load
+    updateGalleryDisplay();
+    
+    // Start observing scroll trigger
+    if (scrollTrigger) {
+      observer.observe(scrollTrigger);
+    }
+    
+    // Category filtering
+    categoryButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        currentFilter = category || 'all';
+        itemsToShow = 12; // Reset to initial load
+        isLoading = false;
+        allItemsLoaded = false;
+        
+        // Hide loading indicator
+        loadingIndicator.classList.add('hidden');
+        
+        // Update active button
+        categoryButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.style.backgroundColor = '';
+          btn.style.borderColor = '';
+          btn.style.color = '';
+          btn.classList.add('border-brand-gold/50', 'text-white');
+        });
+        
+        button.classList.add('active');
+        button.style.backgroundColor = '#C49A85';
+        button.style.borderColor = '#C49A85';
+        button.style.color = '#0A1114';
+        button.classList.remove('border-brand-gold/50', 'text-white');
+        
+        updateGalleryDisplay();
+        
+        // Re-enable scroll trigger
+        scrollTrigger.style.display = 'block';
+      });
+    });
+    
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox') as HTMLElement;
+    const lightboxContent = document.getElementById('lightbox-content') as HTMLElement;
+    const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+    const lightboxBadge = document.getElementById('lightbox-badge') as HTMLElement;
+    const lightboxClose = document.getElementById('lightbox-close') as HTMLButtonElement;
+    const lightboxPrev = document.getElementById('lightbox-prev') as HTMLButtonElement;
+    const lightboxNext = document.getElementById('lightbox-next') as HTMLButtonElement;
+    
+    let currentImageIndex = 0;
+    let currentImages: HTMLImageElement[] = [];
+    
+    // Get currently visible images for navigation
+    function getCurrentImages() {
+      const visibleItems = Array.from(galleryItems).filter(item => 
+        item.style.display !== 'none' && 
+        item.style.opacity !== '0'
+      );
+      return visibleItems.map(item => item.querySelector('img')).filter(img => img) as HTMLImageElement[];
+    }
+    
+    // Open lightbox
+    function openLightbox(img: HTMLImageElement, index: number) {
+      currentImages = getCurrentImages();
+      currentImageIndex = index;
+      
+      const category = img.closest('.gallery-item')?.getAttribute('data-category');
+      const categoryText = category === 'food' ? 'Food & Drinks' : 
+                          category === 'events' ? 'Events & Occasions' : 
+                          category === 'interior' ? 'Interior & Outdoor' : '';
+      
+      lightboxImage.src = img.src;
+      lightboxImage.alt = img.alt;
+      lightboxBadge.textContent = categoryText;
+      
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+      document.body.style.overflow = 'hidden'; // Prevent background scroll
+    }
+    
+    // Close lightbox
+    function closeLightbox() {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      document.body.style.overflow = ''; // Restore scroll
+    }
+    
+    // Navigate to previous image
+    function prevImage() {
+      if (currentImages.length > 1) {
+        currentImageIndex = (currentImageIndex - 1 + currentImages.length) % currentImages.length;
+        const img = currentImages[currentImageIndex];
+        openLightbox(img, currentImageIndex);
+      }
+    }
+    
+    // Navigate to next image
+    function nextImage() {
+      if (currentImages.length > 1) {
+        currentImageIndex = (currentImageIndex + 1) % currentImages.length;
+        const img = currentImages[currentImageIndex];
+        openLightbox(img, currentImageIndex);
+      }
+    }
+    
+    // Image click functionality
+    const galleryImages = document.querySelectorAll('.gallery-item img') as NodeListOf<HTMLImageElement>;
+    galleryImages.forEach((img) => {
+      img.addEventListener('click', function() {
+        const visibleImages = getCurrentImages();
+        const imgIndex = visibleImages.indexOf(this);
+        if (imgIndex !== -1) {
+          openLightbox(this, imgIndex);
+        }
+      });
+      
+      // Add cursor pointer style
+      img.style.cursor = 'pointer';
+    });
+    
+    // Lightbox event listeners
+    lightboxClose?.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeLightbox();
+    });
+    
+    lightboxPrev?.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      prevImage();
+    });
+    
+    lightboxNext?.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      nextImage();
+    });
+    
+    // Simple approach: any click on lightbox background closes it
+    lightbox?.addEventListener('click', (e) => {
+      // Only close if clicking directly on the lightbox (background)
+      // Don't close if clicking on content, buttons, or their children
+      const isContentClick = lightboxContent?.contains(e.target as Node);
+      const isCloseButton = lightboxClose?.contains(e.target as Node);
+      const isPrevButton = lightboxPrev?.contains(e.target as Node);
+      const isNextButton = lightboxNext?.contains(e.target as Node);
+      
+      if (!isContentClick && !isCloseButton && !isPrevButton && !isNextButton) {
+        closeLightbox();
+      }
+    });
+    
+    // Touch events for mobile
+    lightbox?.addEventListener('touchend', (e) => {
+      const isContentTouch = lightboxContent?.contains(e.target as Node);
+      const isCloseButton = lightboxClose?.contains(e.target as Node);
+      const isPrevButton = lightboxPrev?.contains(e.target as Node);
+      const isNextButton = lightboxNext?.contains(e.target as Node);
+      
+      if (!isContentTouch && !isCloseButton && !isPrevButton && !isNextButton) {
+        e.preventDefault();
+        closeLightbox();
+      }
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('hidden')) {
+        switch (e.key) {
+          case 'Escape':
+            closeLightbox();
+            break;
+          case 'ArrowLeft':
+            prevImage();
+            break;
+          case 'ArrowRight':
+            nextImage();
+            break;
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .gallery-item {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .gallery-category-btn.active {
+    background-color: #C49A85;
+    color: #0A1114;
+    border-color: #C49A85;
+  }
+  
+  .gallery-category-btn:hover:not(.active) {
+    border-color: #C49A85;
+    color: #C49A85;
+  }
+  
+  .gallery-item img {
+    transition: transform 0.3s ease;
+  }
+  
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+  
+  .gallery-item span {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  
+  /* Lightbox Styles */
+  #lightbox {
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  #lightbox.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  #lightbox:not(.hidden) {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  #lightbox-image {
+    max-width: 90vw;
+    max-height: 90vh;
+    animation: lightboxZoom 0.3s ease-out;
+  }
+  
+  @keyframes lightboxZoom {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    #lightbox-prev,
+    #lightbox-next {
+      display: none;
+    }
+    
+    #lightbox-close {
+      width: 48px;
+      height: 48px;
+      top: 16px;
+      right: 16px;
+    }
+    
+    #lightbox-content {
+      max-width: 95vw;
+      max-height: 85vh;
+    }
+    
+  }
+  
+  /* Content area should not close lightbox */
+  #lightbox-content {
+    pointer-events: auto;
+    cursor: default;
+  }
+</style>

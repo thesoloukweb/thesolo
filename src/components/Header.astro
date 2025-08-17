@@ -1,0 +1,181 @@
+---
+// Header component for TheSolo Kitchen & Bar
+---
+
+<header class="fixed top-0 left-0 w-full z-50 bg-brand-dark/90 backdrop-blur-md border-b border-brand-gold/20">
+  <div class="container-custom">
+    <nav class="flex items-center justify-between py-1 sm:py-2" role="navigation" aria-label="Main navigation">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center" aria-label="TheSolo Kitchen & Bar Home">
+          <img 
+            src="/images/logo.png" 
+            alt="TheSolo Kitchen & Bar Logo" 
+            class="h-16 sm:h-24 lg:h-[90px] w-auto"
+            width="187"
+            height="182"
+          />
+        </a>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center space-x-8">
+        <a 
+          href="/" 
+          class="font-crimson text-lg tracking-wider text-white hover:text-brand-gold transition-colors duration-300"
+          aria-current="page"
+        >
+          Home
+        </a>
+        <a 
+          href="/about" 
+          class="font-crimson text-lg tracking-wider text-white hover:text-brand-gold transition-colors duration-300"
+        >
+          About us
+        </a>
+        <a 
+          href="/menu" 
+          class="font-crimson text-lg tracking-wider text-white hover:text-brand-gold transition-colors duration-300"
+        >
+          Menu
+        </a>
+        <a 
+          href="/gallery" 
+          class="font-crimson text-lg tracking-wider text-white hover:text-brand-gold transition-colors duration-300"
+        >
+          Gallery
+        </a>
+        <a 
+          href="/contact" 
+          class="font-crimson text-lg tracking-wider text-white hover:text-brand-gold transition-colors duration-300"
+        >
+          Contact Us
+        </a>
+      </div>
+      
+      <!-- Reservation Button -->
+      <div class="hidden sm:block">
+        <a 
+          href="/reservation"
+          class="btn-primary text-sm uppercase tracking-wider font-semibold"
+          aria-label="Make a reservation"
+        >
+          Reservation
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button 
+        class="lg:hidden flex items-center justify-center w-10 h-10 text-white hover:text-brand-gold transition-colors"
+        id="mobile-menu-button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Toggle mobile menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path 
+            class="hamburger-line" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            stroke-width="2" 
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+          <path 
+            class="close-line hidden" 
+            stroke-linecap="round" 
+            stroke-linejoin="round" 
+            stroke-width="2" 
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </nav>
+    
+    <!-- Mobile Menu -->
+    <div 
+      class="lg:hidden hidden bg-brand-dark/95 backdrop-blur-md border-t border-brand-gold/20"
+      id="mobile-menu"
+      aria-hidden="true"
+    >
+      <div class="px-4 py-6 space-y-4">
+        <a 
+          href="/" 
+          class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
+        >
+          Home
+        </a>
+        <a 
+          href="/about" 
+          class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
+        >
+          About us
+        </a>
+        <a 
+          href="/menu" 
+          class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
+        >
+          Menu
+        </a>
+        <a 
+          href="/gallery" 
+          class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
+        >
+          Gallery
+        </a>
+        <a 
+          href="/contact" 
+          class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
+        >
+          Contact Us
+        </a>
+        <div class="pt-4">
+          <a 
+            href="/reservation"
+            class="btn-primary w-full text-center block"
+          >
+            Reservation
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerLine = document.querySelector('.hamburger-line');
+    const closeLine = document.querySelector('.close-line');
+    
+    if (mobileMenuButton && mobileMenu && hamburgerLine && closeLine) {
+      mobileMenuButton.addEventListener('click', function() {
+        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+        
+        // Toggle aria-expanded
+        mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
+        mobileMenu.setAttribute('aria-hidden', isExpanded.toString());
+        
+        // Toggle menu visibility
+        mobileMenu.classList.toggle('hidden');
+        
+        // Toggle icon
+        hamburgerLine.classList.toggle('hidden');
+        closeLine.classList.toggle('hidden');
+      });
+      
+      // Close mobile menu when clicking on links
+      const mobileLinks = mobileMenu.querySelectorAll('a');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+          hamburgerLine.classList.remove('hidden');
+          closeLine.classList.add('hidden');
+        });
+      });
+    }
+  });
+</script>

@@ -1,0 +1,314 @@
+---
+// Restaurant Gallery Section component
+---
+
+<section id="gallery" class="section-padding bg-brand-dark">
+  <div class="container-custom px-4 sm:px-6 lg:px-0">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-10 sm:mb-12 lg:mb-16">
+      <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-brand-gold mb-6 sm:mb-8">
+        Our Restaurant Looks<br>
+        <span class="text-white">Dining Area</span>
+      </h2>
+    </div>
+    
+    <!-- Gallery Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10 lg:mb-12">
+      
+      <!-- Main Large Image -->
+      <div class="lg:col-span-2">
+        <div class="relative overflow-hidden rounded-lg sm:rounded-xl group">
+          <img 
+            src="/images/restaurant-1.jpg" 
+            alt="Main dining hall at TheSolo Kitchen & Bar" 
+            class="w-full h-[300px] sm:h-[400px] lg:h-[500px] xl:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+            width="860"
+            height="600"
+          />
+          <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+          
+          <!-- Image Overlay Info - Hidden on Mobile -->
+          <div class="absolute bottom-8 left-8 right-8 hidden lg:block">
+            <h3 class="font-crimson text-title-lg text-white mb-2">
+              Rooftop<br>
+              Terrace
+            </h3>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Information Panel -->
+      <div class="lg:col-span-1">
+        <div class="bg-brand-dark-card rounded-xl border border-brand-gold/20 p-8 h-[500px] lg:h-[650px] flex flex-col">
+          
+          <!-- Title -->
+          <div class="mb-8">
+            <h3 class="font-crimson text-title-lg text-brand-gold mb-4">
+              Rooftop<br>
+              Terrace
+            </h3>
+          </div>
+          
+          <!-- Content -->
+          <div class="h-80 overflow-y-auto">
+            <!-- Capacities -->
+            <div class="mb-8">
+              <h4 class="font-crimson text-xl text-white mb-4">Capacities:</h4>
+              <ul class="font-josefin text-base text-white/80 space-y-2" id="initial-capacities">
+                <li>• 50-60 sitting</li>
+                <li>• 100 mingling</li>
+              </ul>
+            </div>
+            
+            <!-- Amenities -->
+            <div class="mb-8" id="initial-amenities">
+              <h4 class="font-crimson text-xl text-white mb-4">Amenities:</h4>
+              <ul class="font-josefin text-base text-white/80 space-y-2" id="initial-amenities-list">
+                <li>• TVs</li>
+                <li>• DJ BOX – bluetooth and aux</li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Events Brochure Button -->
+          <div class="mt-8">
+            <button
+              onclick="openEventsBrochure()"
+              class="inline-flex items-center bg-brand-gold text-neutral-light px-6 py-3 rounded-lg font-crimson text-base font-semibold hover:bg-brand-gold/90 transition-colors duration-300 group w-full justify-center"
+            >
+              <span class="mr-3">Events Brochure</span>
+              <svg
+                class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </button>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- Gallery Navigation -->
+    <div class="flex items-center justify-between">
+      
+      <!-- Previous Button - Hidden on Mobile -->
+      <div class="hidden lg:flex items-center text-white group cursor-pointer" id="gallery-prev">
+        <div class="w-28 h-28 rounded-full border border-brand-gold flex items-center justify-center group-hover:bg-brand-gold/10 transition-colors duration-300 mr-4">
+          <svg class="w-8 h-8 text-brand-gold group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </div>
+        <span class="font-josefin text-xl group-hover:text-brand-gold transition-colors">
+          Previous
+        </span>
+      </div>
+      
+      <!-- Gallery Counter -->
+      <div class="text-center flex-1 lg:flex-none">
+        <!-- Progress Bar -->
+        <div class="flex items-center justify-center space-x-4 mb-4">
+          <div class="w-48 sm:w-64 lg:w-96 h-0.5 bg-brand-gold/30 relative">
+            <div class="h-full bg-brand-gold w-1/3 transition-all duration-500" id="gallery-progress"></div>
+          </div>
+        </div>
+        
+        <!-- Counter -->
+        <span class="font-crimson text-lg sm:text-xl text-white" id="gallery-counter">
+          01 / 03
+        </span>
+        
+        <!-- Mobile Swipe Hint -->
+        <p class="lg:hidden font-josefin text-sm text-white/60 mt-2">
+          Swipe to navigate
+        </p>
+      </div>
+      
+      <!-- Next Button - Hidden on Mobile -->
+      <div class="hidden lg:flex items-center text-white group cursor-pointer" id="gallery-next">
+        <span class="font-josefin text-xl group-hover:text-brand-gold transition-colors mr-4">
+          Next
+        </span>
+        <div class="w-28 h-28 rounded-full border border-brand-gold flex items-center justify-center group-hover:bg-brand-gold/10 transition-colors duration-300">
+          <svg class="w-8 h-8 text-brand-gold group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <!-- Decorative Line -->
+  <div class="container-custom mt-16">
+    <div class="h-px bg-brand-gold/30 w-full"></div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const galleryImages = [
+      {
+        main: '/images/restaurant-1.jpg',
+        title: 'Rooftop<br>Terrace',
+        alt: 'Rooftop terrace at TheSolo Kitchen & Bar',
+        capacities: ['50-60 sitting', '100 mingling'],
+        amenities: ['TVs', 'DJ BOX – bluetooth and aux']
+      },
+      {
+        main: '/images/restaurant-3.jpg',
+        title: 'OLIVE<br>GARDEN',
+        alt: 'Elegant olive garden dining area',
+        capacities: ['80 sitting', '120 mingling'],
+        amenities: []
+      },
+      {
+        main: '/images/restaurant-5.jpg',
+        title: 'PALM<br>GARDEN',
+        alt: 'Beautiful palm garden area',
+        capacities: ['40 sitting', '60 mingling'],
+        amenities: []
+      },
+
+    ];
+    
+    let currentImageIndex = 0;
+    
+    const mainImg = document.querySelector('.lg\\:col-span-2 img');
+    const titleElement = document.querySelector('.lg\\:col-span-2 h3');
+    const infoPanelTitle = document.querySelector('.lg\\:col-span-1 .bg-brand-dark-card h3');
+    const capacitiesList = document.getElementById('initial-capacities');
+    const amenitiesList = document.getElementById('initial-amenities-list');
+    const counterElement = document.getElementById('gallery-counter');
+    const progressBar = document.getElementById('gallery-progress');
+    const prevBtn = document.getElementById('gallery-prev');
+    const nextBtn = document.getElementById('gallery-next');
+    
+    // Function to update gallery
+    function updateGallery(index: number) {
+      const image = galleryImages[index];
+      
+      // Update main image
+      if (mainImg) {
+        (mainImg as HTMLImageElement).src = image.main;
+        (mainImg as HTMLImageElement).alt = image.alt;
+      }
+      
+      // Update main title
+      if (titleElement) {
+        titleElement.innerHTML = image.title;
+      }
+      
+      // Update info panel title
+      if (infoPanelTitle) {
+        infoPanelTitle.innerHTML = image.title;
+      }
+      
+      // Update capacities
+      if (capacitiesList) {
+        capacitiesList.innerHTML = image.capacities.map(capacity => `<li>• ${capacity}</li>`).join('');
+      }
+      
+      // Update amenities
+      if (amenitiesList) {
+        const amenitiesContainer = document.getElementById('initial-amenities');
+        if (image.amenities.length > 0) {
+          amenitiesList.innerHTML = image.amenities.map(amenity => `<li>• ${amenity}</li>`).join('');
+          if (amenitiesContainer) amenitiesContainer.style.display = 'block';
+        } else {
+          if (amenitiesContainer) amenitiesContainer.style.display = 'none';
+        }
+      }
+      
+      // Update counter
+      if (counterElement) {
+        const displayIndex = (index + 1).toString().padStart(2, '0');
+        counterElement.textContent = `${displayIndex} / 03`;
+      }
+      
+      // Update progress bar
+      if (progressBar) {
+        const progressPercent = ((index + 1) / galleryImages.length) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+      }
+    }
+    
+    // Navigation functions
+    function goToPrevious() {
+      currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : galleryImages.length - 1;
+      updateGallery(currentImageIndex);
+    }
+    
+    function goToNext() {
+      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+      updateGallery(currentImageIndex);
+    }
+    
+    // Previous button
+    if (prevBtn) {
+      prevBtn.addEventListener('click', goToPrevious);
+    }
+    
+    // Next button
+    if (nextBtn) {
+      nextBtn.addEventListener('click', goToNext);
+    }
+    
+    // Touch/Swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const gallerySlider = document.querySelector('.gallery-slider');
+    if (gallerySlider) {
+      gallerySlider.addEventListener('touchstart', (e) => {
+        const touchEvent = e as TouchEvent;
+        touchStartX = touchEvent.changedTouches[0].screenX;
+      });
+      
+      gallerySlider.addEventListener('touchend', (e) => {
+        const touchEvent = e as TouchEvent;
+        touchEndX = touchEvent.changedTouches[0].screenX;
+        handleSwipe();
+      });
+      
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = touchStartX - touchEndX;
+        
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+          if (swipeDistance > 0) {
+            // Swiped left - go to next
+            goToNext();
+          } else {
+            // Swiped right - go to previous
+            goToPrevious();
+          }
+        }
+      }
+    }
+    
+    // Auto-advance gallery every 6 seconds
+    setInterval(() => {
+      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+      updateGallery(currentImageIndex);
+    }, 6000);
+    
+    // Initialize gallery
+    updateGallery(0);
+  });
+  
+  // Events Brochure function - opens events.pdf in same tab
+  function openEventsBrochure() {
+    window.location.href = '/pdfs/events.pdf';
+  }
+  
+  // Make function globally available
+  (window as any).openEventsBrochure = openEventsBrochure;
+</script>

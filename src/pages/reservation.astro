@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import ReservationSection from '../components/ReservationSection.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout 
+  title="Book a Table | TheSolo Kitchen & Bar - Mediterranean Restaurant London" 
+  description="Reserve your table at TheSolo Kitchen & Bar, East London's premier Mediterranean restaurant. Rooftop dining, private events. Book online or call 020 3340 8082."
+  image="/images/reservation-hero.jpg"
+>
+  <Header />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="relative h-96 sm:h-[500px] lg:h-[600px] flex items-center justify-center bg-brand-dark">
+      <!-- Hero Background Image -->
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/reservation-hero.jpg" 
+          alt="Beautifully set dining table at TheSolo Kitchen & Bar" 
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-brand-dark/75"></div>
+      </div>
+      
+      <!-- Hero Content -->
+      <div class="relative z-10 container-custom text-center py-12 mt-16">
+        <!-- Content Background -->
+        <div class="bg-brand-dark/80 backdrop-blur-sm rounded-2xl px-8 py-12 max-w-4xl mx-auto border border-brand-gold/20">
+          <h1 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-6">
+            Book Your
+            <span class="text-brand-gold block">Table</span>
+          </h1>
+          <p class="font-josefin text-base sm:text-lg text-white/95 max-w-2xl mx-auto leading-relaxed">
+            Reserve your table for an unforgettable Mediterranean dining experience. Whether it's an intimate dinner or a special celebration, we're here to make it memorable.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reservation Form Section -->
+    <ReservationSection />
+
+    <!-- Additional Info Section -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          <!-- Info Content -->
+          <div>
+            <h2 class="font-crimson text-3xl sm:text-4xl lg:text-5xl text-brand-gold mb-8">
+              Reservation Information
+            </h2>
+            
+            <div class="space-y-6">
+              <div>
+                <h3 class="font-crimson text-xl text-white mb-3">Opening Hours</h3>
+                <div class="font-josefin text-white/80 space-y-1">
+                  <p>Monday - Thursday: 8:00 AM - 11:00 PM</p>
+                  <p>Friday - Saturday: 8:00 AM - 12:00 AM</p>
+                  <p>Sunday: 9:00 AM - 10:00 PM</p>
+                </div>
+              </div>
+              
+              <div>
+                <h3 class="font-crimson text-xl text-white mb-3">Reservation Policy</h3>
+                <div class="font-josefin text-white/80 space-y-2">
+                  <p>• Reservations are recommended, especially for dinner service</p>
+                  <p>• Large parties (8+ people) require advance booking</p>
+                  <p>• Event bookings require 48-hour advance notice</p>
+                  <p>• Cancellations accepted up to 2 hours before reservation time</p>
+                </div>
+              </div>
+              
+              <div>
+                <h3 class="font-crimson text-xl text-white mb-3">Contact Information</h3>
+                <div class="font-josefin text-white/80 space-y-1">
+                  <p>Email: <a href="mailto:bookings@thesolo.co.uk" class="text-brand-gold hover:text-white transition-colors">bookings@thesolo.co.uk</a></p>
+                  <p>Phone: <a href="tel:02033408082" class="text-brand-gold hover:text-white transition-colors">020 3340 8082</a></p>
+                  <p>Address: Museum Gardens, London, E2 9PA</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Image -->
+          <div>
+            <div class="relative overflow-hidden rounded-2xl">
+              <img 
+                src="/images/restaurant-3.jpg" 
+                alt="Elegant dining area at TheSolo Kitchen & Bar" 
+                class="w-full h-96 lg:h-[500px] object-cover hover:scale-105 transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent"></div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom text-center">
+        <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl text-brand-gold mb-8">
+          Can't Find What You're Looking For?
+        </h2>
+        <p class="font-josefin text-lg text-white/90 max-w-2xl mx-auto leading-relaxed mb-12">
+          Our team is here to help you plan the perfect dining experience. Get in touch with us directly for special requests or custom arrangements.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a 
+            href="/contact"
+            class="btn-primary text-lg px-8 py-4"
+          >
+            Contact Us
+          </a>
+          <a 
+            href="/menu"
+            class="btn-secondary text-lg px-8 py-4"
+          >
+            View Our Menu
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- Footer -->
+  <Footer />
+</BaseLayout>
