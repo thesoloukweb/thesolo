@@ -17,12 +17,26 @@ module.exports = async (req, res) => {
   try {
     const formData = req.body;
     
-    // Validate required fields
-    if (!formData.name || !formData.email || !formData.message) {
-      return res.status(400).json({ 
-        success: false, 
-        error: 'Missing required fields' 
-      });
+    // Debug logging
+    console.log('Received form data:', JSON.stringify(formData, null, 2));
+    console.log('Request method:', req.method);
+    console.log('Content-Type:', req.headers['content-type']);
+    
+    // Validate required fields based on form type
+    if (formData.type === 'reservation') {
+      if (!formData.name || !formData.email || !formData.mobile || !formData.date || !formData.time) {
+        return res.status(400).json({ 
+          success: false, 
+          error: 'Missing required reservation fields' 
+        });
+      }
+    } else {
+      if (!formData.name || !formData.email || !formData.message) {
+        return res.status(400).json({ 
+          success: false, 
+          error: 'Missing required contact fields' 
+        });
+      }
     }
 
     // Create SMTP transporter
