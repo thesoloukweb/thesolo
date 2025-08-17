@@ -1,29 +1,45 @@
-import nodemailer from 'nodemailer';
-export { renderers } from '../../renderers.mjs';
+const nodemailer = require('nodemailer');
 
-const prerender = false;
-const POST = async ({ request }) => {
+module.exports = async (req, res) => {
+  // CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
   try {
-    const formData = await request.json();
+    const formData = req.body;
+    
+    // Validate required fields
     if (!formData.name || !formData.email || !formData.message) {
-      return new Response(JSON.stringify({
-        success: false,
-        error: "Missing required fields"
-      }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" }
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Missing required fields' 
       });
     }
+
+    // Create SMTP transporter
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      service: 'gmail',
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS
       }
     });
+
+    // Determine email content based on form type
     let subject;
     let htmlContent;
-    if (formData.type === "reservation") {
+
+    if (formData.type === 'reservation') {
+      // Reservation form
       subject = `🍽️ Reservation Request - ${formData.name}`;
       htmlContent = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -35,7 +51,7 @@ const POST = async ({ request }) => {
             <h3 style="color: #001223; margin-top: 0;">👤 Customer Details:</h3>
             <p><strong>Name:</strong> ${formData.name}</p>
             <p><strong>Email:</strong> ${formData.email}</p>
-            <p><strong>Mobile:</strong> ${formData.mobile || "Not provided"}</p>
+            <p><strong>Mobile:</strong> ${formData.mobile || 'Not provided'}</p>
           </div>
           
           <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
@@ -43,8 +59,8 @@ const POST = async ({ request }) => {
             <p><strong>Date:</strong> ${formData.date}</p>
             <p><strong>Time:</strong> ${formData.time}</p>
             <p><strong>Number of People:</strong> ${formData.people}</p>
-            <p><strong>Event Booking:</strong> ${formData.isEvent === "yes" ? "Yes ✅" : "No ❌"}</p>
-            ${formData.eventArea ? `<p><strong>Event Area:</strong> ${formData.eventArea}</p>` : ""}
+            <p><strong>Event Booking:</strong> ${formData.isEvent === 'yes' ? 'Yes ✅' : 'No ❌'}</p>
+            ${formData.eventArea ? `<p><strong>Event Area:</strong> ${formData.eventArea}</p>` : ''}
           </div>
           
           <div style="margin-top: 30px; padding: 20px; background: #001223; color: white; border-radius: 8px;">
@@ -56,6 +72,7 @@ const POST = async ({ request }) => {
         </div>
       `;
     } else {
+      // Contact form
       subject = `💬 Contact Form - ${formData.name} (${formData.subject})`;
       htmlContent = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -67,7 +84,7 @@ const POST = async ({ request }) => {
             <h3 style="color: #001223; margin-top: 0;">👤 Contact Details:</h3>
             <p><strong>Name:</strong> ${formData.name}</p>
             <p><strong>Email:</strong> ${formData.email}</p>
-            <p><strong>Phone:</strong> ${formData.phone || "Not provided"}</p>
+            <p><strong>Phone:</strong> ${formData.phone || 'Not provided'}</p>
             <p><strong>Subject:</strong> ${formData.subject}</p>
           </div>
           
@@ -85,39 +102,30 @@ const POST = async ({ request }) => {
         </div>
       `;
     }
+
+    // Email options
     const mailOptions = {
       from: `"TheSolo Website" <${process.env.SMTP_USER}>`,
-      to: "bookings@thesolo.co.uk",
-      subject,
+      to: 'bookings@thesolo.co.uk',
+      subject: subject,
       html: htmlContent,
       replyTo: formData.email
     };
+
+    // Send email
     await transporter.sendMail(mailOptions);
-    return new Response(JSON.stringify({
-      success: true,
-      message: "Email sent successfully"
-    }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" }
+
+    return res.status(200).json({ 
+      success: true, 
+      message: 'Email sent successfully' 
     });
+
   } catch (error) {
-    console.error("Email sending error:", error);
-    return new Response(JSON.stringify({
-      success: false,
-      error: "Failed to send email"
-    }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" }
+    console.error('Email sending error:', error);
+    
+    return res.status(500).json({ 
+      success: false, 
+      error: 'Failed to send email' 
     });
   }
 };
-
-const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
-  __proto__: null,
-  POST,
-  prerender
-}, Symbol.toStringTag, { value: 'Module' }));
-
-const page = () => _page;
-
-export { page };
