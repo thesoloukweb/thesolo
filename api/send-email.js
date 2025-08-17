@@ -39,6 +39,18 @@ module.exports = async (req, res) => {
       }
     }
 
+    // Check environment variables
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+      console.error('Missing SMTP credentials:', {
+        SMTP_USER: process.env.SMTP_USER ? 'SET' : 'NOT_SET',
+        SMTP_PASS: process.env.SMTP_PASS ? 'SET' : 'NOT_SET'
+      });
+      return res.status(500).json({ 
+        success: false, 
+        error: 'SMTP credentials not configured' 
+      });
+    }
+
     // Create SMTP transporter
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -136,10 +148,18 @@ module.exports = async (req, res) => {
 
   } catch (error) {
     console.error('Email sending error:', error);
+    console.error('Error details:', {
+      message: error.message,
+      stack: error.stack,
+      env: {
+        SMTP_USER: process.env.SMTP_USER ? 'SET' : 'NOT_SET',
+        SMTP_PASS: process.env.SMTP_PASS ? 'SET' : 'NOT_SET'
+      }
+    });
     
     return res.status(500).json({ 
       success: false, 
-      error: 'Failed to send email' 
+      error: 'Failed to send email: ' + error.message 
     });
   }
 };
