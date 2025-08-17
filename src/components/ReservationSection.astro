@@ -663,18 +663,18 @@
       const isEvent = (isEventSelected as HTMLInputElement)?.value === 'yes';
       
       if (!isEventSelected) {
-        alert('Please select whether this is an event booking.');
+        (window as any).showNotification('Please select whether this is an event booking.', 'warning');
         return false;
       }
       
       if (isEvent && !eventAreaSelected && !eventAreaMobileSelected) {
-        alert('Please select an event area.');
+        (window as any).showNotification('Please select an event area for your event booking.', 'warning');
         return false;
       }
       
       // Check both desktop and mobile people selection
       if (!peopleSelected && !peopleMobileSelected) {
-        alert('Please select number of people.');
+        (window as any).showNotification('Please select number of people for your reservation.', 'warning');
         return false;
       }
       
@@ -690,7 +690,7 @@
       const time = (document.getElementById('time') as HTMLSelectElement)?.value;
       
       if (!fullName || !email || !mobile || !date || !time) {
-        alert('Please fill in all required fields.');
+        (window as any).showNotification('Please fill in all required fields to complete your reservation.', 'warning');
         return false;
       }
       
@@ -724,6 +724,9 @@
       const originalText = btnText?.textContent;
       if (submitBtn) submitBtn.disabled = true;
       if (btnText) btnText.textContent = 'Sending...';
+      
+      // Show loading notification
+      const loadingNotification = (window as any).showLoadingNotification('Sending your reservation request...');
       
       try {
         const isEvent = formData.get('isEvent');
@@ -770,8 +773,11 @@
         const result = await response.json();
         
         if (result.success) {
-          // Success message
-          alert('Reservation request sent successfully! We will contact you to confirm availability.');
+          // Remove loading notification
+          (window as any).removeLoadingNotification(loadingNotification);
+          
+          // Success message with celebration
+          (window as any).showSuccessWithCelebration('🎉 Reservation request sent successfully! We will contact you within 24 hours to confirm availability.');
           
           // Reset form to step 1
           showStep1();
@@ -792,7 +798,12 @@
         
       } catch (error) {
         console.error('Reservation form error:', error);
-        alert('Sorry, there was an error sending your reservation. Please try again or call us directly at 020 3340 8082.');
+        
+        // Remove loading notification
+        (window as any).removeLoadingNotification(loadingNotification);
+        
+        // Show error message
+        (window as any).showNotification('Sorry, there was an error sending your reservation. Please try again or call us directly at 020 3340 8082.', 'error', 8000);
       } finally {
         // Reset button state
         if (submitBtn) (submitBtn as HTMLButtonElement).disabled = false;

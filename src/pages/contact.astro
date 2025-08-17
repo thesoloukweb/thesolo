@@ -438,7 +438,7 @@ import Footer from '@/components/Footer.astro';
         
         // Validate subject selection
         if (!subject) {
-          alert('Please select a subject.');
+          (window as any).showNotification('Please select a subject for your message.', 'warning');
           return;
         }
         
@@ -447,6 +447,9 @@ import Footer from '@/components/Footer.astro';
         const originalText = submitBtn.textContent;
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending...';
+        
+        // Show loading notification
+        const loadingNotification = (window as any).showLoadingNotification('Sending your message...');
         
         try {
           // Prepare data for API
@@ -471,8 +474,12 @@ import Footer from '@/components/Footer.astro';
           const result = await response.json();
           
           if (result.success) {
-            // Success message
-            alert('Message sent successfully! We will get back to you soon.');
+            // Remove loading notification
+            (window as any).removeLoadingNotification(loadingNotification);
+            
+            // Success message with celebration
+            (window as any).showSuccessWithCelebration('✨ Message sent successfully! We will get back to you within 24 hours.');
+            
             contactForm.reset();
             
             // Reset mobile selections
@@ -484,7 +491,12 @@ import Footer from '@/components/Footer.astro';
           
         } catch (error) {
           console.error('Contact form error:', error);
-          alert('Sorry, there was an error sending your message. Please try again or contact us directly.');
+          
+          // Remove loading notification
+          (window as any).removeLoadingNotification(loadingNotification);
+          
+          // Show error message
+          (window as any).showNotification('Sorry, there was an error sending your message. Please try again or contact us directly at 020 3340 8082.', 'error', 8000);
         } finally {
           // Reset button state
           submitBtn.disabled = false;
