@@ -9,9 +9,18 @@
 
 <script>
   // Notification System
+  declare global {
+    interface Window {
+      showNotification: (message: string, type?: 'success' | 'error' | 'warning' | 'info', duration?: number) => HTMLElement | undefined;
+      showLoadingNotification: (message: string) => HTMLElement | undefined;
+      removeLoadingNotification: (notification: HTMLElement) => void;
+      showSuccessWithCelebration: (message: string) => void;
+    }
+  }
+
   window.showNotification = function(message: string, type: 'success' | 'error' | 'warning' | 'info' = 'info', duration: number = 5000) {
     const container = document.getElementById('notification-container');
-    if (!container) return;
+    if (!container) return undefined;
 
     // Create notification element
     const notification = document.createElement('div');
@@ -79,7 +88,7 @@
   // Loading notification
   window.showLoadingNotification = function(message: string) {
     const container = document.getElementById('notification-container');
-    if (!container) return;
+    if (!container) return undefined;
 
     const notification = document.createElement('div');
     notification.className = `
@@ -120,7 +129,7 @@
   // Success with celebration effect
   window.showSuccessWithCelebration = function(message: string) {
     // Show success notification
-    showNotification(message, 'success', 6000);
+    window.showNotification(message, 'success', 6000);
     
     // Add celebration effect
     createCelebrationEffect();
