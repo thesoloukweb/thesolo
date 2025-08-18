@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
+import HeaderAbout from '@/components/HeaderAbout.astro';
+import FooterAbout from '@/components/FooterAbout.astro';
 ---
 
 <BaseLayout
@@ -11,7 +11,7 @@ import Footer from '@/components/Footer.astro';
 >
   <main id="main-content" class="min-h-screen">
     <!-- Header with Navigation -->
-    <Header />
+    <HeaderAbout />
     
     <!-- Hero Section -->
     <section class="relative h-96 sm:h-[500px] lg:h-[600px] flex items-center justify-center" style="background-color: #102B2A;">
@@ -23,7 +23,7 @@ import Footer from '@/components/Footer.astro';
           class="w-full h-full object-cover"
           loading="eager"
         />
-        <div class="absolute inset-0" style="background-color: rgba(16, 43, 42, 0.75);"></div>
+        <div class="absolute inset-0 bg-black/60"></div>
       </div>
       
       <!-- Hero Content -->
@@ -205,5 +205,5 @@ import Footer from '@/components/Footer.astro';
   </main>
   
   <!-- Footer -->
-  <Footer />
+  <FooterAbout />
 </BaseLayout>

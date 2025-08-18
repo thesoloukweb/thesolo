@@ -1,0 +1,153 @@
+---
+// Header component specifically for About page with custom background
+---
+
+<header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300" style="background-color: #102B2A;" id="header">
+  <div class="container-custom">
+    <div class="flex items-center justify-between py-4 px-4 sm:px-6 lg:px-0">
+      
+      <!-- Logo -->
+      <a href="/" class="flex-shrink-0" aria-label="TheSolo Kitchen & Bar - Home">
+        <img 
+          src="/images/logo.png" 
+          alt="TheSolo Kitchen & Bar Logo" 
+          class="h-12 sm:h-14 lg:h-16 w-auto"
+          width="146"
+          height="141"
+        />
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center space-x-8 xl:space-x-12" aria-label="Main navigation">
+        <a 
+          href="/" 
+          class="font-crimson text-lg xl:text-xl text-white hover:text-brand-gold transition-colors duration-300"
+        >
+          Home
+        </a>
+        <a 
+          href="/about" 
+          class="font-crimson text-lg xl:text-xl text-brand-gold"
+          aria-current="page"
+        >
+          About us
+        </a>
+        <a 
+          href="/menu" 
+          class="font-crimson text-lg xl:text-xl text-white hover:text-brand-gold transition-colors duration-300"
+        >
+          Menu
+        </a>
+        <a 
+          href="/gallery" 
+          class="font-crimson text-lg xl:text-xl text-white hover:text-brand-gold transition-colors duration-300"
+        >
+          Gallery
+        </a>
+        <a 
+          href="/contact" 
+          class="font-crimson text-lg xl:text-xl text-white hover:text-brand-gold transition-colors duration-300"
+        >
+          Contact Us
+        </a>
+      </nav>
+      
+      <!-- Reservation Button & Mobile Menu -->
+      <div class="flex items-center space-x-4">
+        <!-- Reservation Button (Desktop) -->
+        <a 
+          href="/reservation"
+          class="hidden lg:inline-flex btn-primary px-6 py-2"
+        >
+          Reservation
+        </a>
+        
+        <!-- Mobile Menu Button -->
+        <button 
+          class="lg:hidden p-2 text-white hover:text-brand-gold transition-colors duration-300"
+          aria-label="Toggle mobile menu"
+          aria-expanded="false"
+          id="mobile-menu-button"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div 
+      class="lg:hidden border-t border-brand-gold/20 hidden" 
+      style="background-color: #102B2A;"
+      id="mobile-menu"
+      aria-hidden="true"
+    >
+      <div class="px-4 py-6 space-y-4">
+        <a 
+          href="/" 
+          class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
+        >
+          Home
+        </a>
+        <a 
+          href="/about" 
+          class="block font-crimson text-xl text-brand-gold py-2"
+          aria-current="page"
+        >
+          About us
+        </a>
+        <a 
+          href="/menu" 
+          class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
+        >
+          Menu
+        </a>
+        <a 
+          href="/gallery" 
+          class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
+        >
+          Gallery
+        </a>
+        <a 
+          href="/contact" 
+          class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
+        >
+          Contact Us
+        </a>
+        <div class="pt-4">
+          <a 
+            href="/reservation"
+            class="btn-primary w-full text-center block"
+          >
+            Reservation
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', function() {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        
+        if (isHidden) {
+          mobileMenu.classList.remove('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', 'true');
+          mobileMenu.setAttribute('aria-hidden', 'false');
+        } else {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          mobileMenu.setAttribute('aria-hidden', 'true');
+        }
+      });
+    }
+  });
+</script>
