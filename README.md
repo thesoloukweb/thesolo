@@ -142,7 +142,7 @@ public/
 
 ### Contact Information
 - **Address**: Museum Gardens, Cambridge Heath Road, London E2 9PA
-- **Phone**: 0208 0142656
+- **Phone**: 020 8014 2656
 - **Email**: info@thesolo.co.uk
 - **Reservations**: bookings@thesolo.co.uk
 

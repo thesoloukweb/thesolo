@@ -94,7 +94,7 @@ export default async function handler(req, res) {
           <div style="margin-top: 30px; padding: 20px; background: #001223; color: white; border-radius: 8px;">
             <p style="margin: 0;"><strong>🏛️ TheSolo Kitchen & Bar</strong></p>
             <p style="margin: 5px 0 0 0;">📍 Museum Gardens, London, E2 9PA</p>
-            <p style="margin: 5px 0 0 0;">📞 Phone: 020 3340 8082</p>
+            <p style="margin: 5px 0 0 0;">📞 Phone: 020 8014 2656</p>
             <p style="margin: 5px 0 0 0;">📧 Reply to: ${formData.email}</p>
           </div>
         </div>
@@ -124,7 +124,7 @@ export default async function handler(req, res) {
           <div style="margin-top: 30px; padding: 20px; background: #001223; color: white; border-radius: 8px;">
             <p style="margin: 0;"><strong>🏛️ TheSolo Kitchen & Bar</strong></p>
             <p style="margin: 5px 0 0 0;">📍 Museum Gardens, London, E2 9PA</p>
-            <p style="margin: 5px 0 0 0;">📞 Phone: 020 3340 8082</p>
+            <p style="margin: 5px 0 0 0;">📞 Phone: 020 8014 2656</p>
             <p style="margin: 5px 0 0 0;">📧 Reply to: ${formData.email}</p>
           </div>
         </div>
