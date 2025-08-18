@@ -6,7 +6,7 @@ export default {
       colors: {
         // TheSolo Brand Colors from Figma
         'brand': {
-          'dark': '#001223',     // Main dark navy
+          'dark': '#102B2A',     // Main dark green
           'gold': '#C49A85',     // Brand gold/copper
           'accent': '#588157',   // Green accent
           'dark-card': '#0D1B1E' // Card backgrounds
