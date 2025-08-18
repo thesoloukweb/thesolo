@@ -63,8 +63,8 @@ import { Image } from 'astro:assets';
           
           <!-- Breakfast & Brunch Menu -->
           <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/breakfast-and-brunch.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
-              <div class="relative">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+              <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src="/images/menu-1.jpg" 
                   alt="Breakfast & Brunch Menu" 
@@ -113,10 +113,10 @@ import { Image } from 'astro:assets';
 
           <!-- A La Carte Menu -->
           <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/a-la-carte.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
-              <div class="relative">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+              <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
-                  src="/images/menu-2.jpg" 
+                  src="/images/menu-1.jpg" 
                   alt="A La Carte Menu" 
                   class="w-full h-64 object-cover"
                   loading="lazy"
@@ -163,8 +163,8 @@ import { Image } from 'astro:assets';
 
           <!-- Drinks & Cocktails Menu -->
           <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/drinks.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
-              <div class="relative">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+              <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src="/images/menu-3.jpg" 
                   alt="Drinks & Cocktails Menu" 
@@ -213,8 +213,8 @@ import { Image } from 'astro:assets';
 
           <!-- BBQ Party Menu -->
           <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/bbq.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
-              <div class="relative">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+              <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src="/images/menu-4.jpg" 
                   alt="BBQ Party Menu" 
@@ -263,10 +263,10 @@ import { Image } from 'astro:assets';
 
           <!-- Party Sharing Platter -->
           <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/party-platters.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
-              <div class="relative">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+              <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
-                  src="/images/menu-5.jpg" 
+                  src="/images/menu-2.jpg" 
                   alt="Party Sharing Platter Menu" 
                   class="w-full h-64 object-cover"
                   loading="lazy"
@@ -313,8 +313,8 @@ import { Image } from 'astro:assets';
 
           <!-- Party Drinks Package -->
           <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/drinks-package.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
-              <div class="relative">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+              <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src="/images/menu-6.jpg" 
                   alt="Party Drinks Package Menu" 
@@ -363,8 +363,8 @@ import { Image } from 'astro:assets';
 
           <!-- Christmas Party Menu -->
           <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/christmas-party.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group-hover:scale-105">
-              <div class="relative">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+              <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src="/images/menu-7.jpg" 
                   alt="Christmas Party Menu" 
@@ -459,20 +459,4 @@ import { Image } from 'astro:assets';
   (window as any).openMenuPDF = openMenuPDF;
 </script>
 
-<style>
-  .menu-card {
-    transition: all 0.3s ease;
-  }
-  
-  .menu-card:hover {
-    cursor: pointer;
-  }
-  
-  .menu-card img {
-    transition: transform 0.3s ease;
-  }
-  
-  .menu-card:hover img {
-    transform: scale(1.1);
-  }
-</style>
+
