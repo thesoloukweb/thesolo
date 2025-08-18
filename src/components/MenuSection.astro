@@ -45,8 +45,8 @@ import { Image } from 'astro:assets';
         
         <!-- Breakfast & Brunch Menu -->
         <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="0" onclick="openMenuPDF('/pdfs/breakfast-and-brunch.pdf')">
-          <div class="bg-brand-dark-card rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
-            <div class="relative">
+          <div class="bg-brand-dark-card rounded-xl overflow-hidden group">
+            <div class="relative hover:scale-105 transition-transform duration-200">
               <Image 
                 src="/images/menu-1.jpg" 
                 alt="Breakfast & Brunch Menu" 
@@ -80,8 +80,8 @@ import { Image } from 'astro:assets';
         
         <!-- A La Carte Menu -->
         <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="1" onclick="openMenuPDF('/pdfs/a-la-carte.pdf')">
-          <div class="bg-brand-dark-card rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
-            <div class="relative">
+          <div class="bg-brand-dark-card rounded-xl overflow-hidden group">
+            <div class="relative hover:scale-105 transition-transform duration-200">
               <Image 
                 src="/images/menu-1.jpg" 
                 alt="A La Carte Menu" 
@@ -115,8 +115,8 @@ import { Image } from 'astro:assets';
         
         <!-- Drinks Menu (Featured) -->
         <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="2" onclick="openMenuPDF('/pdfs/drinks.pdf')">
-          <div class="bg-brand-dark-card rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
-            <div class="relative">
+          <div class="bg-brand-dark-card rounded-xl overflow-hidden group">
+            <div class="relative hover:scale-105 transition-transform duration-200">
               <Image 
                 src="/images/menu-3.jpg" 
                 alt="Drinks & Cocktails Menu" 
@@ -157,8 +157,8 @@ import { Image } from 'astro:assets';
         
         <!-- BBQ Party Menu -->
         <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="3" onclick="openMenuPDF('/pdfs/bbq.pdf')">
-          <div class="bg-brand-dark-card rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
-            <div class="relative">
+          <div class="bg-brand-dark-card rounded-xl overflow-hidden group">
+            <div class="relative hover:scale-105 transition-transform duration-200">
               <Image 
                 src="/images/menu-4.jpg" 
                 alt="BBQ Party Menu" 
@@ -192,8 +192,8 @@ import { Image } from 'astro:assets';
 
         <!-- Party Sharing Platter -->
         <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="4" onclick="openMenuPDF('/pdfs/party-platters.pdf')">
-          <div class="bg-brand-dark-card rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
-            <div class="relative">
+          <div class="bg-brand-dark-card rounded-xl overflow-hidden group">
+            <div class="relative hover:scale-105 transition-transform duration-200">
               <Image 
                 src="/images/menu-2.jpg" 
                 alt="Party Sharing Platter Menu" 
@@ -227,8 +227,8 @@ import { Image } from 'astro:assets';
 
         <!-- Party Drinks Package -->
         <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="5" onclick="openMenuPDF('/pdfs/drinks-package.pdf')">
-          <div class="bg-brand-dark-card rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
-            <div class="relative">
+          <div class="bg-brand-dark-card rounded-xl overflow-hidden group">
+            <div class="relative hover:scale-105 transition-transform duration-200">
               <Image 
                 src="/images/menu-6.jpg" 
                 alt="Party Drinks Package Menu" 
@@ -262,8 +262,8 @@ import { Image } from 'astro:assets';
 
         <!-- Christmas Party -->
         <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="6" onclick="openMenuPDF('/pdfs/christmas-party.pdf')">
-          <div class="bg-brand-dark-card rounded-xl overflow-hidden group hover:scale-105 transition-transform duration-200">
-            <div class="relative">
+          <div class="bg-brand-dark-card rounded-xl overflow-hidden group">
+            <div class="relative hover:scale-105 transition-transform duration-200">
               <Image 
                 src="/images/menu-7.jpg" 
                 alt="Christmas Party Menu" 
@@ -410,8 +410,8 @@ import { Image } from 'astro:assets';
       const isMobile = window.innerWidth < 640;
       const isTablet = window.innerWidth < 1024;
       
-      let translateX;
-      let maxSlide;
+      let translateX: number;
+      let maxSlide: number;
       
       if (isMobile) {
         // Mobile: Each slide shows 1 item, can go to slide 6 (total 7 slides: 0-6)
