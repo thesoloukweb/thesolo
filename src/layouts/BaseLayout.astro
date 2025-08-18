@@ -82,8 +82,8 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
     )}
     {Astro.url.pathname === '/menu' && (
       <>
+        <link rel="preload" href="/images/menu-breakfast.jpg" as="image" type="image/jpeg" />
         <link rel="preload" href="/images/menu-1.jpg" as="image" type="image/jpeg" />
-        <link rel="preload" href="/images/menu-2.jpg" as="image" type="image/jpeg" />
         <link rel="preload" href="/images/menu-3.jpg" as="image" type="image/jpeg" />
       </>
     )}
