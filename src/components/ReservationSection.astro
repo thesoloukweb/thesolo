@@ -91,7 +91,7 @@
             </div>
 
             <!-- Number of People -->
-            <div class="relative mb-6">
+            <div class="relative mb-6 hidden" id="people-section">
               <label for="people" class="block font-crimson text-caption text-white mb-2">
                 Number of People
               </label>
@@ -244,7 +244,7 @@
             <button 
               type="button" 
               id="next-btn"
-              class="w-full btn-primary text-lg py-4 group flex items-center justify-center"
+              class="w-full btn-primary text-lg py-4 group flex items-center justify-center hidden"
             >
               <span class="mr-3" id="btn-text">Next</span>
               <svg 
@@ -276,14 +276,22 @@
               <a 
                 href="https://www.opentable.co.uk/restref/client/?rid=354252&restref=354252&lang=en-GB&color=1&r3uid=cfe&dark=true&partysize=2&datetime=2025-04-10T10%3A30&ot_source=Restaurant%20website&corrid=d07eec59-7f05-4fbd-913c-ae5f2136a5af" 
                 target="_blank"
-                class="inline-flex items-center mt-4 px-6 py-3 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors duration-300 text-sm font-semibold"
+                class="w-full btn-primary text-lg py-4 group flex items-center justify-center mt-4"
               >
                 <img 
                   src="/images/opentable-logo.svg" 
                   alt="OpenTable" 
-                  class="h-4 mr-2"
+                  class="h-5 mr-3"
                 />
                 Book via OpenTable
+                <svg 
+                  class="w-5 h-5 ml-3 transform group-hover:translate-x-1 transition-transform duration-300" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </a>
             </div>
           </div>
@@ -387,6 +395,7 @@
     const eventAreaSection = document.getElementById('event-area-section');
     const eventAreaSelect = document.getElementById('eventArea');
     const peopleSelect = document.getElementById('people');
+    const peopleSection = document.getElementById('people-section');
     
     // Mobile modal elements
     const peopleModalBtn = document.getElementById('people-modal-btn');
@@ -426,6 +435,24 @@
           } else {
             eventAreaSection.classList.add('hidden');
             if (eventAreaSelect) (eventAreaSelect as HTMLSelectElement).required = false;
+          }
+        }
+        
+        // Show/hide people section
+        if (peopleSection) {
+          if (isEvent) {
+            peopleSection.classList.remove('hidden');
+          } else {
+            peopleSection.classList.add('hidden');
+          }
+        }
+        
+        // Show/hide next button
+        if (nextBtn) {
+          if (isEvent) {
+            nextBtn.classList.remove('hidden');
+          } else {
+            nextBtn.classList.add('hidden');
           }
         }
         
@@ -790,8 +817,12 @@
             if (dot) dot.classList.add('hidden');
           });
           
-          // Hide event area section
+          // Hide event area section and people section
           if (eventAreaSection) eventAreaSection.classList.add('hidden');
+          if (peopleSection) peopleSection.classList.add('hidden');
+          
+          // Hide next button
+          if (nextBtn) nextBtn.classList.add('hidden');
         } else {
           throw new Error(result.error || 'Failed to send reservation');
         }
