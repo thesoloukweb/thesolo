@@ -711,14 +711,42 @@
     
     // Validate step 2
     function validateStep2(): boolean {
-      const fullName = (document.getElementById('fullName') as HTMLInputElement)?.value;
-      const email = (document.getElementById('email') as HTMLInputElement)?.value;
-      const mobile = (document.getElementById('mobile') as HTMLInputElement)?.value;
+      const fullName = (document.getElementById('fullName') as HTMLInputElement)?.value?.trim();
+      const email = (document.getElementById('email') as HTMLInputElement)?.value?.trim();
+      const mobile = (document.getElementById('mobile') as HTMLInputElement)?.value?.trim();
       const date = (document.getElementById('date') as HTMLInputElement)?.value;
       const time = (document.getElementById('time') as HTMLSelectElement)?.value;
       
+      // Check if all fields are filled
       if (!fullName || !email || !mobile || !date || !time) {
         (window as any).showNotification('Please fill in all required fields to complete your reservation.', 'warning');
+        return false;
+      }
+      
+      // Validate full name (minimum 4 characters, no numbers)
+      if (fullName.length < 4) {
+        (window as any).showNotification('Full name must be at least 4 characters long.', 'warning');
+        return false;
+      }
+      
+      if (!/^[a-zA-Z\s]+$/.test(fullName)) {
+        (window as any).showNotification('Full name should only contain letters and spaces.', 'warning');
+        return false;
+      }
+      
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        (window as any).showNotification('Please enter a valid email address (e.g., name@gmail.com).', 'warning');
+        return false;
+      }
+      
+      // Validate UK phone number (11 digits starting with 0)
+      const phoneRegex = /^0[1-9]\d{8,9}$/;
+      const cleanPhone = mobile.replace(/\s+/g, '');
+      
+      if (!phoneRegex.test(cleanPhone)) {
+        (window as any).showNotification('Please enter a valid UK phone number (11 digits starting with 0).', 'warning');
         return false;
       }
       
