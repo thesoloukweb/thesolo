@@ -244,7 +244,7 @@
             <button 
               type="button" 
               id="next-btn"
-              class="w-full btn-primary text-lg py-4 group flex items-center justify-center hidden"
+              class="w-full btn-primary text-lg py-4 group items-center justify-center hidden"
             >
               <span class="mr-3" id="btn-text">Next</span>
               <svg 
@@ -451,8 +451,10 @@
         if (nextBtn) {
           if (isEvent) {
             nextBtn.classList.remove('hidden');
+            nextBtn.classList.add('flex');
           } else {
             nextBtn.classList.add('hidden');
+            nextBtn.classList.remove('flex');
           }
         }
         
@@ -851,7 +853,10 @@
           if (peopleSection) peopleSection.classList.add('hidden');
           
           // Hide next button
-          if (nextBtn) nextBtn.classList.add('hidden');
+          if (nextBtn) {
+            nextBtn.classList.add('hidden');
+            nextBtn.classList.remove('flex');
+          }
         } else {
           throw new Error(result.error || 'Failed to send reservation');
         }
