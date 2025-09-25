@@ -13,36 +13,36 @@
       </svg>
     </button>
     
-    <!-- Discount Image -->
+    <!-- Christmas Event Image -->
     <div class="relative">
-      <img src="/images/nhs-discount-offer.jpg" alt="NHS Discount Offer" class="w-full h-64 sm:h-72 lg:h-80 object-cover rounded-t-xl sm:rounded-t-2xl">
+      <img src="/images/christmas-popup.jpg" alt="Christmas Event 2026" class="w-full h-64 sm:h-72 lg:h-80 object-cover rounded-t-xl sm:rounded-t-2xl">
     </div>
     
     <!-- Content -->
     <div class="p-4 sm:p-6 lg:p-8 text-center">
+      <h2 class="font-crimson text-2xl sm:text-3xl font-bold text-brand-dark mb-4 sm:mb-6 leading-tight">
+        🎄 Christmas Events 2026 🎄
+      </h2>
+      
       <p class="font-josefin text-sm sm:text-base text-gray-600 mb-6 sm:mb-8 leading-relaxed">
-        Eating out offers for families, students, employees & more
+        Join us for magical Christmas celebrations with special festive menus, live entertainment, and unforgettable moments at The Solo Kitchen & Bar.
       </p>
       
       <div class="rounded-lg sm:rounded-xl p-4 sm:p-6 mb-6 sm:mb-8 border border-brand-gold/30" style="background-color: #0E1B1F;">
         <h3 class="font-crimson text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4 leading-tight">
-          NHS<br>
-          BLUE CARD HOLDER
+          🎉 FESTIVE SEASON 🎉
         </h3>
-        <div class="text-2xl sm:text-3xl font-bold text-brand-gold mb-3 sm:mb-4">
-          10% OFF
-        </div>
-        <p class="font-josefin text-xs sm:text-sm text-white/80 mb-2 sm:mb-3 leading-relaxed">
-          To Show Our Appreciation For The Amazing NHS Staff
+        <p class="font-josefin text-sm sm:text-base text-white/90 mb-3 sm:mb-4 leading-relaxed">
+          Special Christmas menus, live music, and holiday atmosphere
         </p>
         <p class="font-josefin text-xs text-brand-gold uppercase tracking-wider font-semibold">
-          WITH A VALID NHS ID
+          BOOK YOUR CHRISTMAS CELEBRATION
         </p>
       </div>
       
       <!-- Call to Action -->
-      <button id="claim-discount" class="w-full bg-brand-gold hover:bg-brand-gold/90 text-white font-crimson text-base sm:text-lg font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-        Book Now & Claim Discount
+      <button id="view-events" class="w-full bg-brand-gold hover:bg-brand-gold/90 text-white font-crimson text-base sm:text-lg font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
+        View Events
       </button>
     </div>
   </div>
@@ -53,10 +53,10 @@
     const popup = document.getElementById('discount-popup');
     const popupContent = document.getElementById('popup-content');
     const closeBtn = document.getElementById('close-popup');
-    const claimBtn = document.getElementById('claim-discount');
+    const viewEventsBtn = document.getElementById('view-events');
     
     // Check if user has seen popup before (localStorage)
-    const hasSeenPopup = localStorage.getItem('thesolo-discount-popup-seen');
+    const hasSeenPopup = localStorage.getItem('thesolo-christmas-popup-seen');
     
     if (!hasSeenPopup) {
       // Show popup after a short delay
@@ -87,7 +87,7 @@
           popupContent.classList.add('scale-95');
         }
         // Mark as seen in localStorage
-        localStorage.setItem('thesolo-discount-popup-seen', 'true');
+        localStorage.setItem('thesolo-christmas-popup-seen', 'true');
       }
     }
     
@@ -96,14 +96,11 @@
       closeBtn.addEventListener('click', hidePopup);
     }
     
-    // Claim discount button event
-    if (claimBtn) {
-      claimBtn.addEventListener('click', () => {
-        // Scroll to reservation section
-        const reservationSection = document.getElementById('reservation-section');
-        if (reservationSection) {
-          reservationSection.scrollIntoView({ behavior: 'smooth' });
-        }
+    // View events button event
+    if (viewEventsBtn) {
+      viewEventsBtn.addEventListener('click', () => {
+        // Open Christmas events PDF
+        window.open('/pdfs/Christmas-event-2026.pdf', '_blank');
         hidePopup();
       });
     }
