@@ -329,6 +329,41 @@ import { Image } from 'astro:assets';
             </div>
           </div>
         </article>
+
+        <!-- Christmas Party Menu 3 -->
+        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="8" onclick="openMenuPDF('/pdfs/christmas-menu3.pdf')">
+          <div class="bg-brand-dark-card rounded-xl overflow-hidden group">
+            <div class="relative hover:scale-105 transition-transform duration-200">
+              <Image 
+                src="/images/gallery/gallery1-3.jpg" 
+                alt="Christmas Party Menu 3" 
+                class="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                loading="lazy"
+                width={463}
+                height={256}
+                format="webp"
+                quality={80}
+              />
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+              
+              <!-- PDF Icon Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="bg-brand-gold/90 rounded-full p-4">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Category Label -->
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-brand-gold text-neutral-light px-3 py-1 text-sm font-semibold rounded-full">
+                  Christmas Party Menu 3 🎉
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
         
       </div>
       
@@ -342,6 +377,7 @@ import { Image } from 'astro:assets';
         <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="5"></button>
         <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="6"></button>
         <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="7"></button>
+        <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="8"></button>
       </div>
       
     </div>
@@ -382,7 +418,7 @@ import { Image } from 'astro:assets';
     const currentMenuTitle = document.getElementById('current-menu-title');
     
     let currentSlide = 0;
-    const totalMenus = 8;
+    const totalMenus = 9;
     let isInitialized = false;
     
     // Get max slides based on screen size to prevent overflow
@@ -407,7 +443,8 @@ import { Image } from 'astro:assets';
       'Party Sharing Platter',
       'Party Drinks Package',
       'Christmas Party Menu 2 🎉',
-      'Christmas Party 🎉'
+      'Christmas Party 🎉',
+      'Christmas Party Menu 3 🎉'
     ];
     
     // Smooth carousel animation function
