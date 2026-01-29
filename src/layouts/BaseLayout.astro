@@ -2,6 +2,7 @@
 import '@/styles/globals.css';
 import GoogleAnalytics from '@/components/GoogleAnalytics.astro';
 import NotificationSystem from '@/components/NotificationSystem.astro';
+import PdfModal from '@/components/PdfModal.astro';
 
 export interface Props {
   title?: string;
@@ -112,6 +113,9 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
     
     <!-- Notification System -->
     <NotificationSystem />
+    
+    <!-- PDF Modal Viewer -->
+    <PdfModal />
     
     <!-- JSON-LD Schema -->
     <script type="application/ld+json" is:inline>

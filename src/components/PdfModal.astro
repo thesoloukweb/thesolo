@@ -1,0 +1,270 @@
+---
+// PDF Modal Viewer Component
+// Displays PDF files in a modal overlay without leaving the site
+// Mobile: Opens in new tab for better UX
+// Desktop: Shows in modal with iframe
+---
+
+<!-- PDF Modal Overlay -->
+<div 
+  id="pdf-modal" 
+  class="fixed inset-0 z-[100] hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="pdf-modal-title"
+>
+  <!-- Backdrop -->
+  <div 
+    id="pdf-modal-backdrop" 
+    class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-300 opacity-0"
+  ></div>
+  
+  <!-- Modal Container -->
+  <div class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+    <div 
+      id="pdf-modal-content"
+      class="relative w-full max-w-6xl h-[90vh] bg-brand-dark rounded-2xl border border-brand-gold/30 shadow-2xl transform scale-95 opacity-0 transition-all duration-300 flex flex-col overflow-hidden"
+    >
+      <!-- Header -->
+      <div class="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-brand-gold/20 bg-brand-dark-card">
+        <div class="flex items-center space-x-3">
+          <!-- PDF Icon -->
+          <div class="w-10 h-10 bg-brand-gold/20 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <div>
+            <h2 id="pdf-modal-title" class="font-crimson text-lg sm:text-xl text-white truncate max-w-[200px] sm:max-w-[400px]">
+              Menu
+            </h2>
+            <p class="font-josefin text-xs text-white/60 hidden sm:block">TheSolo Kitchen & Bar</p>
+          </div>
+        </div>
+        
+        <!-- Actions -->
+        <div class="flex items-center space-x-2 sm:space-x-3">
+          <!-- Download Button -->
+          <a 
+            id="pdf-download-btn"
+            href="#"
+            download
+            class="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-brand-gold/20 hover:bg-brand-gold/30 text-brand-gold rounded-lg transition-colors duration-200 group"
+            title="Download PDF"
+          >
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            <span class="font-josefin text-sm hidden sm:inline">Download</span>
+          </a>
+          
+          <!-- Open in New Tab Button -->
+          <a 
+            id="pdf-newtab-btn"
+            href="#"
+            target="_blank"
+            class="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 bg-brand-gold/20 hover:bg-brand-gold/30 text-brand-gold rounded-lg transition-colors duration-200"
+            title="Open in new tab"
+          >
+            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+          
+          <!-- Close Button -->
+          <button 
+            id="pdf-modal-close"
+            class="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors duration-200"
+            aria-label="Close modal"
+          >
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <!-- PDF Content -->
+      <div class="flex-1 bg-neutral-900 relative overflow-hidden">
+        <!-- Loading State -->
+        <div id="pdf-loading" class="absolute inset-0 flex items-center justify-center bg-brand-dark z-10">
+          <div class="text-center">
+            <div class="w-12 h-12 border-4 border-brand-gold/30 border-t-brand-gold rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="font-josefin text-white/80">Loading menu...</p>
+          </div>
+        </div>
+        
+        <!-- PDF iframe -->
+        <iframe 
+          id="pdf-iframe"
+          class="w-full h-full border-0"
+          title="PDF Viewer"
+        ></iframe>
+      </div>
+      
+      <!-- Footer -->
+      <div class="px-4 sm:px-6 py-3 border-t border-brand-gold/20 bg-brand-dark-card">
+        <div class="flex items-center justify-between">
+          <p class="font-josefin text-xs text-white/50">
+            <span class="hidden sm:inline">Press </span>ESC<span class="hidden sm:inline"> to close</span>
+          </p>
+          <p class="font-josefin text-xs text-white/50">
+            <span class="text-brand-gold">TheSolo</span> Kitchen & Bar
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // PDF Modal Controller
+  (function() {
+    const modal = document.getElementById('pdf-modal');
+    const backdrop = document.getElementById('pdf-modal-backdrop');
+    const content = document.getElementById('pdf-modal-content');
+    const closeBtn = document.getElementById('pdf-modal-close');
+    const iframe = document.getElementById('pdf-iframe') as HTMLIFrameElement;
+    const loading = document.getElementById('pdf-loading');
+    const title = document.getElementById('pdf-modal-title');
+    const downloadBtn = document.getElementById('pdf-download-btn') as HTMLAnchorElement;
+    const newTabBtn = document.getElementById('pdf-newtab-btn') as HTMLAnchorElement;
+    
+    // Check if mobile device
+    function isMobile(): boolean {
+      return window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+    
+    // Menu title mapping
+    const menuTitles: { [key: string]: string } = {
+      'breakfast-and-brunch.pdf': 'Breakfast & Brunch Menu',
+      'a-la-carte.pdf': 'À La Carte Menu',
+      'drinks.pdf': 'Drinks & Cocktails Menu',
+      'bbq.pdf': 'BBQ Party Menu',
+      'party-platters.pdf': 'Party Sharing Platter',
+      'drinks-package.pdf': 'Party Drinks Package',
+      'christmas-party.pdf': 'Christmas Party Menu',
+      'christmas-menu2.pdf': 'Christmas Party Menu 2',
+      'christmas-menu3.pdf': 'Christmas Party Menu 3',
+      'events.pdf': 'Events Menu',
+      'terms-and-conditions.pdf': 'Terms & Conditions'
+    };
+    
+    // Get menu title from PDF path
+    function getMenuTitle(pdfPath: string): string {
+      const fileName = pdfPath.split('/').pop() || '';
+      return menuTitles[fileName] || fileName.replace('.pdf', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    }
+    
+    // Open modal with PDF
+    function openPdfModal(pdfPath: string) {
+      // Mobile: open in new tab directly
+      if (isMobile()) {
+        window.open(pdfPath, '_blank');
+        return;
+      }
+      
+      if (!modal || !iframe || !backdrop || !content) return;
+      
+      // Set PDF source and title
+      const menuTitle = getMenuTitle(pdfPath);
+      if (title) title.textContent = menuTitle;
+      if (downloadBtn) {
+        downloadBtn.href = pdfPath;
+        downloadBtn.download = pdfPath.split('/').pop() || 'menu.pdf';
+      }
+      if (newTabBtn) newTabBtn.href = pdfPath;
+      
+      // Show loading
+      if (loading) loading.classList.remove('hidden');
+      
+      // Show modal
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      
+      // Trigger animations
+      requestAnimationFrame(() => {
+        backdrop.classList.remove('opacity-0');
+        backdrop.classList.add('opacity-100');
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+      });
+      
+      // Load PDF in iframe
+      iframe.src = pdfPath;
+      
+      // Hide loading when iframe loads
+      iframe.onload = () => {
+        if (loading) {
+          loading.classList.add('hidden');
+        }
+      };
+      
+      // Fallback: hide loading after timeout
+      setTimeout(() => {
+        if (loading) loading.classList.add('hidden');
+      }, 3000);
+    }
+    
+    // Close modal
+    function closePdfModal() {
+      if (!modal || !iframe || !backdrop || !content) return;
+      
+      // Trigger close animations
+      backdrop.classList.remove('opacity-100');
+      backdrop.classList.add('opacity-0');
+      content.classList.remove('scale-100', 'opacity-100');
+      content.classList.add('scale-95', 'opacity-0');
+      
+      // Hide modal after animation
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+        iframe.src = '';
+        if (loading) loading.classList.remove('hidden');
+      }, 300);
+    }
+    
+    // Event listeners
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closePdfModal);
+    }
+    
+    if (backdrop) {
+      backdrop.addEventListener('click', closePdfModal);
+    }
+    
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+        closePdfModal();
+      }
+    });
+    
+    // Expose global function
+    (window as any).openPdfModal = openPdfModal;
+    (window as any).closePdfModal = closePdfModal;
+  })();
+</script>
+
+<style>
+  /* Custom scrollbar for modal */
+  #pdf-modal-content::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  #pdf-modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+  
+  #pdf-modal-content::-webkit-scrollbar-thumb {
+    background: var(--brand-gold, #C49A85);
+    border-radius: 3px;
+  }
+  
+  /* PDF iframe styling */
+  #pdf-iframe {
+    background: #525659;
+  }
+</style>
