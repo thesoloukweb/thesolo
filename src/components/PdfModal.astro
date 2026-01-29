@@ -2,7 +2,7 @@
 // PDF Modal Viewer Component
 // Displays PDF files in a modal overlay without leaving the site
 // Mobile: Opens in new tab for better UX
-// Desktop: Shows in modal with iframe
+// Desktop: Shows in modal with embedded PDF viewer
 ---
 
 <!-- PDF Modal Overlay -->
@@ -94,10 +94,43 @@
           </div>
         </div>
         
-        <!-- PDF iframe -->
+        <!-- Error State -->
+        <div id="pdf-error" class="absolute inset-0 flex items-center justify-center bg-brand-dark z-10 hidden">
+          <div class="text-center px-6">
+            <div class="w-16 h-16 bg-brand-gold/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <p class="font-crimson text-xl text-white mb-2">Menu Ready</p>
+            <p class="font-josefin text-white/70 mb-6">Click below to view the menu</p>
+            <a 
+              id="pdf-error-btn"
+              href="#"
+              target="_blank"
+              class="inline-flex items-center space-x-2 px-6 py-3 bg-brand-gold hover:bg-brand-gold/90 text-white rounded-lg transition-colors duration-200"
+            >
+              <span class="font-josefin">Open Menu</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- PDF Object (better browser support than iframe for PDFs) -->
+        <object 
+          id="pdf-object"
+          type="application/pdf"
+          class="w-full h-full hidden"
+        >
+          <p>Your browser doesn't support embedded PDFs.</p>
+        </object>
+        
+        <!-- PDF iframe fallback -->
         <iframe 
           id="pdf-iframe"
-          class="w-full h-full border-0"
+          class="w-full h-full border-0 hidden"
           title="PDF Viewer"
         ></iframe>
       </div>
@@ -118,21 +151,37 @@
 </div>
 
 <script>
-  // PDF Modal Controller
+  // PDF Modal Controller with robust loading
   (function() {
     const modal = document.getElementById('pdf-modal');
     const backdrop = document.getElementById('pdf-modal-backdrop');
     const content = document.getElementById('pdf-modal-content');
     const closeBtn = document.getElementById('pdf-modal-close');
+    const pdfObject = document.getElementById('pdf-object') as HTMLObjectElement;
     const iframe = document.getElementById('pdf-iframe') as HTMLIFrameElement;
     const loading = document.getElementById('pdf-loading');
+    const errorState = document.getElementById('pdf-error');
+    const errorBtn = document.getElementById('pdf-error-btn') as HTMLAnchorElement;
     const title = document.getElementById('pdf-modal-title');
     const downloadBtn = document.getElementById('pdf-download-btn') as HTMLAnchorElement;
     const newTabBtn = document.getElementById('pdf-newtab-btn') as HTMLAnchorElement;
     
+    let currentPdfPath = '';
+    let loadAttempts = 0;
+    const maxAttempts = 2;
+    
     // Check if mobile device
     function isMobile(): boolean {
       return window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+    
+    // Check if browser supports PDF embedding
+    function supportsPdfEmbed(): boolean {
+      // Check for PDF plugin support
+      const hasPlugin = navigator.mimeTypes && navigator.mimeTypes['application/pdf'];
+      // Chrome, Edge, Firefox generally support it
+      const isModernBrowser = /Chrome|Firefox|Safari|Edge/.test(navigator.userAgent);
+      return !!(hasPlugin || isModernBrowser);
     }
     
     // Menu title mapping
@@ -156,6 +205,109 @@
       return menuTitles[fileName] || fileName.replace('.pdf', '').replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     }
     
+    // Show loading state
+    function showLoading() {
+      if (loading) loading.classList.remove('hidden');
+      if (errorState) errorState.classList.add('hidden');
+      if (pdfObject) pdfObject.classList.add('hidden');
+      if (iframe) iframe.classList.add('hidden');
+    }
+    
+    // Show error/fallback state
+    function showFallback() {
+      if (loading) loading.classList.add('hidden');
+      if (errorState) errorState.classList.remove('hidden');
+      if (pdfObject) pdfObject.classList.add('hidden');
+      if (iframe) iframe.classList.add('hidden');
+    }
+    
+    // Show PDF content
+    function showPdfContent(useObject: boolean = true) {
+      if (loading) loading.classList.add('hidden');
+      if (errorState) errorState.classList.add('hidden');
+      
+      if (useObject && pdfObject) {
+        pdfObject.classList.remove('hidden');
+        if (iframe) iframe.classList.add('hidden');
+      } else if (iframe) {
+        iframe.classList.remove('hidden');
+        if (pdfObject) pdfObject.classList.add('hidden');
+      }
+    }
+    
+    // Try loading PDF with object tag
+    function tryLoadWithObject(pdfPath: string) {
+      if (!pdfObject) {
+        tryLoadWithIframe(pdfPath);
+        return;
+      }
+      
+      loadAttempts++;
+      
+      // Set up load handlers
+      pdfObject.onload = () => {
+        showPdfContent(true);
+      };
+      
+      pdfObject.onerror = () => {
+        if (loadAttempts < maxAttempts) {
+          tryLoadWithIframe(pdfPath);
+        } else {
+          showFallback();
+        }
+      };
+      
+      // Load PDF
+      pdfObject.data = pdfPath;
+      
+      // Timeout fallback - if not loaded in 3 seconds, try iframe
+      setTimeout(() => {
+        if (loading && !loading.classList.contains('hidden')) {
+          if (loadAttempts < maxAttempts) {
+            tryLoadWithIframe(pdfPath);
+          } else {
+            showFallback();
+          }
+        }
+      }, 3000);
+    }
+    
+    // Try loading PDF with iframe (Google Docs Viewer fallback)
+    function tryLoadWithIframe(pdfPath: string) {
+      if (!iframe) {
+        showFallback();
+        return;
+      }
+      
+      loadAttempts++;
+      
+      // Create full URL for PDF
+      const fullPdfUrl = new URL(pdfPath, window.location.origin).href;
+      const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(fullPdfUrl)}&embedded=true`;
+      
+      // Set up load handlers
+      iframe.onload = () => {
+        // Check if iframe actually loaded content
+        setTimeout(() => {
+          showPdfContent(false);
+        }, 500);
+      };
+      
+      iframe.onerror = () => {
+        showFallback();
+      };
+      
+      // Load with Google Docs Viewer
+      iframe.src = googleViewerUrl;
+      
+      // Timeout fallback
+      setTimeout(() => {
+        if (loading && !loading.classList.contains('hidden')) {
+          showFallback();
+        }
+      }, 6000);
+    }
+    
     // Open modal with PDF
     function openPdfModal(pdfPath: string) {
       // Mobile: open in new tab directly
@@ -164,23 +316,25 @@
         return;
       }
       
-      if (!modal || !iframe || !backdrop || !content) return;
+      if (!modal || !backdrop || !content) return;
+      
+      // Reset state
+      currentPdfPath = pdfPath;
+      loadAttempts = 0;
       
       // Set PDF source and title
       const menuTitle = getMenuTitle(pdfPath);
       if (title) title.textContent = menuTitle;
-      
-      // Create full URL for PDF
-      const fullPdfUrl = new URL(pdfPath, window.location.origin).href;
       
       if (downloadBtn) {
         downloadBtn.href = pdfPath;
         downloadBtn.download = pdfPath.split('/').pop() || 'menu.pdf';
       }
       if (newTabBtn) newTabBtn.href = pdfPath;
+      if (errorBtn) errorBtn.href = pdfPath;
       
       // Show loading
-      if (loading) loading.classList.remove('hidden');
+      showLoading();
       
       // Show modal
       modal.classList.remove('hidden');
@@ -194,26 +348,17 @@
         content.classList.add('scale-100', 'opacity-100');
       });
       
-      // Use Google Docs Viewer for better compatibility
-      const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(fullPdfUrl)}&embedded=true`;
-      iframe.src = googleViewerUrl;
-      
-      // Hide loading when iframe loads
-      iframe.onload = () => {
-        if (loading) {
-          loading.classList.add('hidden');
-        }
-      };
-      
-      // Fallback: hide loading after timeout
-      setTimeout(() => {
-        if (loading) loading.classList.add('hidden');
-      }, 5000);
+      // Start loading PDF - try object first, then iframe
+      if (supportsPdfEmbed()) {
+        tryLoadWithObject(pdfPath);
+      } else {
+        tryLoadWithIframe(pdfPath);
+      }
     }
     
     // Close modal
     function closePdfModal() {
-      if (!modal || !iframe || !backdrop || !content) return;
+      if (!modal || !backdrop || !content) return;
       
       // Trigger close animations
       backdrop.classList.remove('opacity-100');
@@ -225,8 +370,15 @@
       setTimeout(() => {
         modal.classList.add('hidden');
         document.body.style.overflow = '';
-        iframe.src = '';
-        if (loading) loading.classList.remove('hidden');
+        
+        // Clear sources
+        if (pdfObject) pdfObject.data = '';
+        if (iframe) iframe.src = '';
+        
+        // Reset states
+        showLoading();
+        currentPdfPath = '';
+        loadAttempts = 0;
       }, 300);
     }
     
@@ -268,8 +420,8 @@
     border-radius: 3px;
   }
   
-  /* PDF iframe styling */
-  #pdf-iframe {
+  /* PDF object/iframe styling */
+  #pdf-object, #pdf-iframe {
     background: #525659;
   }
 </style>
