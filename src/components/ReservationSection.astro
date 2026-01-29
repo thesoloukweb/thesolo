@@ -880,3 +880,21 @@
     updatePeopleOptions(false);
   });
 </script>
+
+<style>
+  /* Date input calendar icon - make it white/visible */
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+  
+  /* Firefox date input */
+  input[type="date"] {
+    color-scheme: dark;
+  }
+</style>
