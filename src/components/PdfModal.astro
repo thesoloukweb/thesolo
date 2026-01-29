@@ -169,6 +169,10 @@
       // Set PDF source and title
       const menuTitle = getMenuTitle(pdfPath);
       if (title) title.textContent = menuTitle;
+      
+      // Create full URL for PDF
+      const fullPdfUrl = new URL(pdfPath, window.location.origin).href;
+      
       if (downloadBtn) {
         downloadBtn.href = pdfPath;
         downloadBtn.download = pdfPath.split('/').pop() || 'menu.pdf';
@@ -190,8 +194,9 @@
         content.classList.add('scale-100', 'opacity-100');
       });
       
-      // Load PDF in iframe
-      iframe.src = pdfPath;
+      // Use Google Docs Viewer for better compatibility
+      const googleViewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(fullPdfUrl)}&embedded=true`;
+      iframe.src = googleViewerUrl;
       
       // Hide loading when iframe loads
       iframe.onload = () => {
@@ -203,7 +208,7 @@
       // Fallback: hide loading after timeout
       setTimeout(() => {
         if (loading) loading.classList.add('hidden');
-      }, 3000);
+      }, 5000);
     }
     
     // Close modal
