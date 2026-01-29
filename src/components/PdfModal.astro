@@ -166,7 +166,6 @@
     const downloadBtn = document.getElementById('pdf-download-btn') as HTMLAnchorElement;
     const newTabBtn = document.getElementById('pdf-newtab-btn') as HTMLAnchorElement;
     
-    let currentPdfPath = '';
     let loadAttempts = 0;
     const maxAttempts = 2;
     
@@ -177,11 +176,11 @@
     
     // Check if browser supports PDF embedding
     function supportsPdfEmbed(): boolean {
-      // Check for PDF plugin support
-      const hasPlugin = navigator.mimeTypes && navigator.mimeTypes['application/pdf'];
-      // Chrome, Edge, Firefox generally support it
+      // Modern browsers (Chrome, Edge, Firefox, Safari) support embedded PDFs
       const isModernBrowser = /Chrome|Firefox|Safari|Edge/.test(navigator.userAgent);
-      return !!(hasPlugin || isModernBrowser);
+      // Exclude old IE
+      const isOldIE = /MSIE|Trident/.test(navigator.userAgent);
+      return isModernBrowser && !isOldIE;
     }
     
     // Menu title mapping
@@ -319,7 +318,6 @@
       if (!modal || !backdrop || !content) return;
       
       // Reset state
-      currentPdfPath = pdfPath;
       loadAttempts = 0;
       
       // Set PDF source and title
@@ -377,7 +375,6 @@
         
         // Reset states
         showLoading();
-        currentPdfPath = '';
         loadAttempts = 0;
       }, 300);
     }
