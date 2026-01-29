@@ -413,15 +413,9 @@ import { Image } from 'astro:assets';
 </BaseLayout>
 
 <script>
-  // Global function to open PDF in modal (desktop) or new tab (mobile)
+  // Global function to open PDF in new tab
   function openMenuPDF(pdfPath: string) {
-    // Use global PDF modal if available
-    if (typeof (window as any).openPdfModal === 'function') {
-      (window as any).openPdfModal(pdfPath);
-    } else {
-      // Fallback: open in new tab
-      window.open(pdfPath, '_blank');
-    }
+    window.open(pdfPath, '_blank');
   }
   
   // Make function globally available
