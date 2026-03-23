@@ -3,6 +3,36 @@
 ---
 
 <header class="fixed top-0 left-0 w-full z-50 bg-brand-dark/90 backdrop-blur-md border-b border-brand-gold/20">
+  <!-- Blue Light Card Discount Banner -->
+  <div class="bg-brand-gold/10 border-b border-brand-gold/20 relative" id="blc-banner">
+    <div class="container-custom flex items-center justify-center py-1.5 px-4">
+      <a 
+        href="https://www.bluelightcard.co.uk/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 text-center group"
+      >
+        <svg class="w-4 h-4 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+        <span class="font-josefin text-xs sm:text-sm text-white/90 group-hover:text-brand-gold transition-colors duration-300">
+          <span class="text-brand-gold font-semibold">20% OFF</span> for Blue Light Card holders
+        </span>
+        <svg class="w-3 h-3 text-white/60 group-hover:text-brand-gold group-hover:translate-x-0.5 transition-all duration-300 flex-shrink-0 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <button 
+        class="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors duration-300 p-1"
+        id="close-blc-banner"
+        aria-label="Close banner"
+      >
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
   <div class="container-custom">
     <nav class="flex items-center justify-between py-1 sm:py-2" role="navigation" aria-label="Main navigation">
       <!-- Logo -->
@@ -142,8 +172,23 @@
 </header>
 
 <script>
-  // Mobile menu toggle functionality
   document.addEventListener('DOMContentLoaded', function() {
+    // Blue Light Card banner dismiss
+    const blcBanner = document.getElementById('blc-banner');
+    const closeBlcBtn = document.getElementById('close-blc-banner');
+    
+    if (blcBanner && sessionStorage.getItem('blc-banner-closed') === 'true') {
+      blcBanner.style.display = 'none';
+    }
+    
+    if (closeBlcBtn && blcBanner) {
+      closeBlcBtn.addEventListener('click', function() {
+        blcBanner.style.display = 'none';
+        sessionStorage.setItem('blc-banner-closed', 'true');
+      });
+    }
+
+    // Mobile menu toggle functionality
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const hamburgerLine = document.querySelector('.hamburger-line');
