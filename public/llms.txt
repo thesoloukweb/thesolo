@@ -63,6 +63,7 @@ We accept reservations for both regular dining and private events. Casual smart 
 - [About Us](https://thesolo.co.uk/about): Story, spaces and philosophy
 - [Menu](https://thesolo.co.uk/menu): All menu categories with PDFs
 - [Gallery](https://thesolo.co.uk/gallery): Photos of food, interior and atmosphere
+- [FAQ](https://thesolo.co.uk/faq): Comprehensive frequently asked questions
 - [Reservation](https://thesolo.co.uk/reservation): Booking form and information
 - [Contact](https://thesolo.co.uk/contact): Contact form, phone, email and location
 

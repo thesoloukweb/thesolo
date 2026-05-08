@@ -21,6 +21,7 @@ export default defineConfig({
         'https://thesolo.co.uk/about',
         'https://thesolo.co.uk/menu',
         'https://thesolo.co.uk/gallery',
+        'https://thesolo.co.uk/faq',
         'https://thesolo.co.uk/contact',
         'https://thesolo.co.uk/reservation',
         'https://thesolo.co.uk/blog'

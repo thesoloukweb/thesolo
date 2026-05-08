@@ -1,0 +1,235 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+
+const faqs = [
+  {
+    category: 'Location & Hours',
+    items: [
+      {
+        question: 'Where is The Solo Kitchen & Bar located?',
+        answer: 'We are located at Museum Gardens, Cambridge Heath Road, London, E2 9PA — in the heart of East London, near Bethnal Green station and within easy reach of Hackney and Shoreditch.'
+      },
+      {
+        question: 'What are your opening hours?',
+        answer: 'Monday – Thursday: 8:30 AM – 11:30 PM\nFriday: 8:30 AM – 12:30 AM\nSaturday: 8:30 AM – 12:30 AM\nSunday: 8:30 AM – 11:30 PM'
+      },
+      {
+        question: 'Do you serve breakfast all day?',
+        answer: 'Our Breakfast & Brunch menu is served daily from 8:30 AM until 3:00 PM. After 3:00 PM, our À La Carte menu is available.'
+      },
+      {
+        question: 'When is the À La Carte menu served?',
+        answer: 'Our À La Carte menu is served daily from 12:00 PM to 10:00 PM.'
+      }
+    ]
+  },
+  {
+    category: 'Cuisine & Menu',
+    items: [
+      {
+        question: 'What type of cuisine do you serve?',
+        answer: 'The Solo Kitchen & Bar serves authentic Mediterranean cuisine with Turkish, Greek, Italian and Middle Eastern influences. Our menu features fresh ingredients, hand-prepared dishes, and a wide variety of options including breakfast, brunch, à la carte, sharing platters, BBQ party menus, and an extensive drinks list.'
+      },
+      {
+        question: 'Do you have vegetarian and vegan options?',
+        answer: 'Yes, we offer a variety of vegetarian and vegan dishes across all our menus. Please ask our staff for recommendations or to accommodate any dietary requirements.'
+      },
+      {
+        question: 'Do you cater for dietary requirements and allergies?',
+        answer: 'Yes — please let our team know about any allergies or dietary requirements when booking or arriving, and we will do our best to accommodate you.'
+      },
+      {
+        question: 'Can I see your menu before visiting?',
+        answer: 'Absolutely. You can view all our menus on our Menu page, with downloadable PDFs for Breakfast & Brunch, À La Carte, Drinks, BBQ Party, Party Sharing Platter and Party Drinks Package.'
+      }
+    ]
+  },
+  {
+    category: 'Reservations & Events',
+    items: [
+      {
+        question: 'Do you accept reservations?',
+        answer: 'Yes, we accept reservations for both regular dining and private events. You can book directly via our Reservation page, through our Dojo booking partner, by phone (020 8014 2656) or by email (info@thesolo.co.uk).'
+      },
+      {
+        question: 'Can I host a private event at The Solo?',
+        answer: 'Yes, we offer private dining and event spaces accommodating groups from 6 to 200+ guests. We host birthdays, weddings, corporate events, anniversaries and special celebrations. Please contact us for tailored event packages.'
+      },
+      {
+        question: 'How far in advance should I book?',
+        answer: 'For regular dining, we recommend booking at least a few days in advance, especially for weekends. For private events and large parties, please contact us as early as possible to ensure availability.'
+      },
+      {
+        question: 'Is there a dress code?',
+        answer: 'A casual smart dress code is appreciated at The Solo Kitchen & Bar.'
+      }
+    ]
+  },
+  {
+    category: 'Experience & Atmosphere',
+    items: [
+      {
+        question: 'Do you have a rooftop?',
+        answer: 'Yes — we have a beautiful rooftop terrace with panoramic views of London. It is one of our most-loved spaces, especially in the warmer months.'
+      },
+      {
+        question: 'Tell me about Sunday Jazz Sessions',
+        answer: 'Every Sunday from 12 PM to 3 PM, we host live jazz on the rooftop with mouthwatering food, signature cocktails and panoramic views. Smooth, soulful sounds set the perfect tone for a memorable Sunday escape.'
+      },
+      {
+        question: 'Is The Solo Kitchen & Bar family-friendly?',
+        answer: 'Yes, we welcome guests of all ages. We are family-friendly with a relaxed atmosphere and a casual smart dress code.'
+      },
+      {
+        question: 'Is the venue wheelchair accessible?',
+        answer: 'Yes, our main dining areas are wheelchair accessible. Please contact us in advance if you have specific accessibility requirements so we can ensure the best possible experience.'
+      }
+    ]
+  },
+  {
+    category: 'Discounts & Offers',
+    items: [
+      {
+        question: 'Do you offer a Blue Light Card discount?',
+        answer: 'Yes — we proudly offer a 20% discount for Blue Light Card holders, including NHS staff, emergency services, armed forces, teachers and social care workers. Please show your valid Blue Light Card when ordering to receive the discount.'
+      },
+      {
+        question: 'Do you have any other special offers?',
+        answer: 'Our Sunday Jazz Sessions provide a unique experience with live music every Sunday from 12 PM to 3 PM. We also offer party packages including Party Sharing Platter and Party Drinks Package for groups and celebrations.'
+      }
+    ]
+  },
+  {
+    category: 'Payment & Practical Info',
+    items: [
+      {
+        question: 'Which payment methods do you accept?',
+        answer: 'We accept cash, all major credit and debit cards, and contactless payments. All transactions are in GBP (£).'
+      },
+      {
+        question: 'Do you have free WiFi?',
+        answer: 'Yes, complimentary WiFi is available for all our guests.'
+      },
+      {
+        question: 'How can I contact you?',
+        answer: 'Phone: 020 8014 2656\nEmail: info@thesolo.co.uk\nAddress: Museum Gardens, London, E2 9PA\nOr use the contact form on our Contact page.'
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="FAQ - Frequently Asked Questions | The Solo Kitchen & Bar"
+  description="Frequently asked questions about The Solo Kitchen & Bar. Opening hours, location, reservations, menu, private events, Blue Light Card discount, dress code and more. Mediterranean restaurant in East London."
+  image="/images/restaurant-3.jpg"
+>
+  <main id="main-content" class="min-h-screen">
+    <Header />
+
+    <!-- Hero Section -->
+    <section class="relative h-80 sm:h-96 lg:h-[450px] flex items-center justify-center bg-brand-dark">
+      <div class="absolute inset-0 z-0">
+        <img
+          src="/images/restaurant-2.jpg"
+          alt="The Solo Kitchen & Bar"
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-black/70"></div>
+      </div>
+
+      <div class="relative z-10 container-custom text-center py-12 mt-16">
+        <div class="bg-brand-dark/80 backdrop-blur-sm rounded-2xl px-8 py-10 max-w-4xl mx-auto border border-brand-gold/20">
+          <h1 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white mb-4">
+            Frequently Asked
+            <span class="text-brand-gold block">Questions</span>
+          </h1>
+          <p class="font-josefin text-base sm:text-lg text-white/95 max-w-2xl mx-auto leading-relaxed">
+            Everything you need to know about The Solo Kitchen & Bar — from opening hours to private events.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section-padding bg-brand-dark">
+      <div class="container-custom max-w-4xl">
+        {faqs.map((category) => (
+          <div class="mb-12 lg:mb-16">
+            <h2 class="font-crimson text-2xl sm:text-3xl lg:text-4xl text-brand-gold mb-6 lg:mb-8 border-b border-brand-gold/20 pb-3">
+              {category.category}
+            </h2>
+            <div class="space-y-4">
+              {category.items.map((faq) => (
+                <details class="faq-item bg-brand-dark-card rounded-xl border border-brand-gold/20 overflow-hidden group">
+                  <summary class="flex items-center justify-between cursor-pointer p-5 lg:p-6 hover:bg-brand-gold/5 transition-colors duration-300">
+                    <h3 class="font-crimson text-lg lg:text-xl text-white pr-4 leading-snug">
+                      {faq.question}
+                    </h3>
+                    <span class="flex-shrink-0 w-8 h-8 rounded-full bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center transition-transform duration-300 group-open:rotate-45">
+                      <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                      </svg>
+                    </span>
+                  </summary>
+                  <div class="px-5 lg:px-6 pb-5 lg:pb-6 -mt-1">
+                    <p class="font-josefin text-base text-white/85 leading-relaxed whitespace-pre-line">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+
+        <!-- Still have questions CTA -->
+        <div class="bg-brand-dark-card rounded-2xl border border-brand-gold/30 p-8 lg:p-12 text-center mt-16">
+          <h2 class="font-crimson text-2xl sm:text-3xl lg:text-4xl text-brand-gold mb-4">
+            Still have questions?
+          </h2>
+          <p class="font-josefin text-base lg:text-lg text-white/85 max-w-2xl mx-auto mb-8 leading-relaxed">
+            We're happy to help. Get in touch with our team and we'll get back to you as soon as possible.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a
+              href="/contact"
+              class="btn-primary text-base px-8 py-3 group flex items-center"
+            >
+              Contact Us
+              <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a
+              href="tel:+442080142656"
+              class="font-josefin text-base text-white hover:text-brand-gold transition-colors duration-300 flex items-center gap-2"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+              020 8014 2656
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <Footer />
+  </main>
+</BaseLayout>
+
+<style>
+  details.faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  details.faq-item summary {
+    list-style: none;
+  }
+  details.faq-item[open] {
+    border-color: rgba(196, 154, 133, 0.4);
+  }
+</style>
