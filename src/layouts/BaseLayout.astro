@@ -113,22 +113,31 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
     <!-- Notification System -->
     <NotificationSystem />
     
-    <!-- JSON-LD Schema -->
+    <!-- JSON-LD Schema: Restaurant -->
     <script type="application/ld+json" is:inline>
       {
         "@context": "https://schema.org",
-        "@type": "Restaurant",
-        "name": "TheSolo Kitchen & Bar",
-        "alternateName": "The Solo Kitchen & Bar",
-        "description": "Mediterranean restaurant offering vibrant flavors, rooftop dining, and exceptional service in the heart of East London",
+        "@type": ["Restaurant", "LocalBusiness", "FoodEstablishment"],
+        "@id": "https://thesolo.co.uk/#restaurant",
+        "name": "The Solo Kitchen & Bar",
+        "alternateName": ["TheSolo Kitchen & Bar", "The Solo Bistro Bar", "Solo Kitchen and Bar London"],
+        "description": "The Solo Kitchen & Bar is a premier Mediterranean restaurant in East London, offering authentic Turkish, Greek and Italian cuisine, rooftop dining, signature cocktails, live Sunday Jazz Sessions, and private event spaces. Family-friendly atmosphere with vibrant flavours from across the Mediterranean.",
+        "slogan": "Mediterranean flavours in the heart of East London",
         "url": "https://thesolo.co.uk",
-        "telephone": "02080142656",
+        "telephone": "+442080142656",
         "email": "info@thesolo.co.uk",
-        "logo": "https://thesolo.co.uk/images/logo.png",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://thesolo.co.uk/images/logo.png",
+          "width": 187,
+          "height": 182
+        },
         "image": [
           "https://thesolo.co.uk/images/restaurant-1.jpg",
           "https://thesolo.co.uk/images/restaurant-3.jpg",
-          "https://thesolo.co.uk/images/restaurant-5.jpg"
+          "https://thesolo.co.uk/images/restaurant-5.jpg",
+          "https://thesolo.co.uk/images/hero-left.jpg",
+          "https://thesolo.co.uk/images/hero-right.jpg"
         ],
         "address": {
           "@type": "PostalAddress",
@@ -143,40 +152,118 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
           "latitude": "51.5285",
           "longitude": "-0.0563"
         },
-        "servesCuisine": ["Mediterranean", "Turkish", "Greek", "Italian"],
-        "priceRange": "$$",
-        "paymentAccepted": ["Cash", "Credit Card", "Debit Card"],
-        "currenciesAccepted": "GBP",
-        "openingHours": [
-          "Mo-Th 08:30-23:30",
-          "Fr 08:30-00:30",
-          "Sa 08:30-00:30",
-          "Su 08:30-23:30"
-        ],
-        "acceptsReservations": true,
-        "hasMenu": "https://thesolo.co.uk/menu",
-        "menu": "https://thesolo.co.uk/menu",
-        "amenityFeature": [
+        "areaServed": [
           {
-            "@type": "LocationFeatureSpecification",
-            "name": "Rooftop Terrace",
-            "value": true
+            "@type": "City",
+            "name": "London"
           },
           {
-            "@type": "LocationFeatureSpecification", 
-            "name": "Private Dining",
-            "value": true
+            "@type": "Place",
+            "name": "East London"
           },
           {
-            "@type": "LocationFeatureSpecification",
-            "name": "Cocktail Bar",
-            "value": true
+            "@type": "Place",
+            "name": "Bethnal Green"
           },
           {
-            "@type": "LocationFeatureSpecification",
-            "name": "Outdoor Seating",
-            "value": true
+            "@type": "Place",
+            "name": "Hackney"
+          },
+          {
+            "@type": "Place",
+            "name": "Shoreditch"
           }
+        ],
+        "servesCuisine": ["Mediterranean", "Turkish", "Greek", "Italian", "Middle Eastern"],
+        "priceRange": "££",
+        "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Contactless"],
+        "currenciesAccepted": "GBP",
+        "keywords": "mediterranean restaurant london, turkish restaurant east london, rooftop dining london, cocktail bar bethnal green, private dining london, jazz brunch london, halal mediterranean, family restaurant east london, best mediterranean food london, breakfast brunch east london",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+            "opens": "08:30",
+            "closes": "23:30"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Friday", "Saturday"],
+            "opens": "08:30",
+            "closes": "00:30"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Sunday",
+            "opens": "08:30",
+            "closes": "23:30"
+          }
+        ],
+        "acceptsReservations": "True",
+        "hasMenu": [
+          {
+            "@type": "Menu",
+            "name": "Breakfast & Brunch Menu",
+            "url": "https://thesolo.co.uk/pdfs/breakfast-and-brunch.pdf",
+            "inLanguage": "en-GB"
+          },
+          {
+            "@type": "Menu",
+            "name": "À La Carte Menu",
+            "url": "https://thesolo.co.uk/pdfs/a-la-carte.pdf",
+            "inLanguage": "en-GB"
+          },
+          {
+            "@type": "Menu",
+            "name": "Drinks Menu",
+            "url": "https://thesolo.co.uk/pdfs/drinks.pdf",
+            "inLanguage": "en-GB"
+          },
+          {
+            "@type": "Menu",
+            "name": "Party Sharing Platter",
+            "url": "https://thesolo.co.uk/menu",
+            "inLanguage": "en-GB"
+          }
+        ],
+        "menu": "https://thesolo.co.uk/menu",
+        "makesOffer": [
+          {
+            "@type": "Offer",
+            "name": "Blue Light Card Discount",
+            "description": "20% discount for Blue Light Card holders (NHS, emergency services, armed forces, teachers and social care workers)",
+            "eligibleCustomerType": "Blue Light Card Holders"
+          },
+          {
+            "@type": "Offer",
+            "name": "Sunday Jazz Sessions",
+            "description": "Live jazz on the rooftop every Sunday from 12 PM to 3 PM, featuring Mediterranean cuisine and panoramic views"
+          }
+        ],
+        "amenityFeature": [
+          { "@type": "LocationFeatureSpecification", "name": "Rooftop Terrace", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Private Dining", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Cocktail Bar", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Outdoor Seating", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Live Music", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Family Friendly", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Wheelchair Accessible", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Vegetarian Options", "value": true },
+          { "@type": "LocationFeatureSpecification", "name": "Vegan Options", "value": true }
+        ],
+        "knowsAbout": [
+          "Mediterranean cuisine",
+          "Turkish cuisine",
+          "Greek cuisine",
+          "Italian cuisine",
+          "Cocktails and mixology",
+          "Wine pairing",
+          "Private events",
+          "Corporate dining",
+          "Birthday celebrations",
+          "Sunday brunch",
+          "Live jazz performances"
         ],
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -189,7 +276,111 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
           "https://www.instagram.com/thesolokitchenandbar/",
           "https://www.facebook.com/people/The-Solo-Bistro-Bar/61556764776020/",
           "https://www.tiktok.com/@thesolobistrobar",
-          "https://www.opentable.co.uk/restref/client/?rid=354252&restref=354252&lang=en-GB&color=1&r3uid=cfe&dark=true&partysize=2&datetime=2025-04-10T10%3A30&ot_source=Restaurant%20website&corrid=d07eec59-7f05-4fbd-913c-ae5f2136a5af"
+          "https://web.dojo.app/create_booking/vendor/rhkYepQTtlYY4_Zb8eocC3p7GrYTT9KN2K1P6Tdx4cA_restaurant"
+        ]
+      }
+    </script>
+
+    <!-- JSON-LD Schema: WebSite (for sitelinks search box) -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://thesolo.co.uk/#website",
+        "url": "https://thesolo.co.uk",
+        "name": "The Solo Kitchen & Bar",
+        "description": "Mediterranean restaurant in East London - Turkish, Greek, Italian cuisine with rooftop dining",
+        "publisher": { "@id": "https://thesolo.co.uk/#restaurant" },
+        "inLanguage": "en-GB"
+      }
+    </script>
+
+    <!-- JSON-LD Schema: FAQ Page (helps AI engines answer common questions) -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Where is The Solo Kitchen & Bar located?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Solo Kitchen & Bar is located at Museum Gardens, London E2 9PA, in the heart of East London, near Bethnal Green."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What type of cuisine does The Solo Kitchen & Bar serve?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We serve authentic Mediterranean cuisine with Turkish, Greek, Italian and Middle Eastern influences. Our menu features fresh ingredients, breakfast and brunch options, à la carte dining, sharing platters, signature cocktails and an extensive drinks list."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are the opening hours of The Solo Kitchen & Bar?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "We are open Monday to Thursday 8:30am to 11:30pm, Friday and Saturday 8:30am to 12:30am, and Sunday 8:30am to 11:30pm."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does The Solo Kitchen & Bar offer a Blue Light Card discount?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we offer a 20% discount for Blue Light Card holders, including NHS staff, emergency services, armed forces, teachers and social care workers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I book a table at The Solo Kitchen & Bar?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, you can book a table directly through our website at thesolo.co.uk/reservation or via Dojo at https://web.dojo.app/create_booking/vendor/rhkYepQTtlYY4_Zb8eocC3p7GrYTT9KN2K1P6Tdx4cA_restaurant. We accept reservations for both regular dining and private events."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does The Solo Kitchen & Bar have a rooftop?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we have a beautiful rooftop terrace with panoramic views of London. Every Sunday from 12pm to 3pm, we host live Sunday Jazz Sessions on the rooftop."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does The Solo Kitchen & Bar host private events?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we offer private dining and event spaces accommodating groups from 6 to 200+ guests. We host birthdays, corporate events, weddings and special celebrations. Contact us via 020 8014 2656 or info@thesolo.co.uk for bookings."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is The Solo Kitchen & Bar family-friendly?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we are family-friendly with a relaxed casual smart dress code. We welcome guests of all ages and offer a variety of menu options for everyone."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the dress code at The Solo Kitchen & Bar?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Casual smart dress code is appreciated at The Solo Kitchen & Bar."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does The Solo Kitchen & Bar serve breakfast?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, we serve our Breakfast & Brunch menu daily from 8:30am until 3:00pm, featuring Mediterranean-inspired dishes with fresh ingredients and traditional flavours."
+            }
+          }
         ]
       }
     </script>
