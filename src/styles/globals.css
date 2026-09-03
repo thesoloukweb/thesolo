@@ -40,11 +40,11 @@
     means the browser replaces the guess with the real height once it has
     rendered the section, so nothing jumps on the way back up.
 
-    Deliberately not applied to #about: it begins at the fold and is often partly
-    visible on load. Browsers without support simply render as before.
+    Deliberately not applied to #menus, the first section under the hero: it
+    begins at the fold and is often partly visible on load. Browsers without
+    support simply render as before.
   */
   #category,
-  #menu,
   #events,
   #gallery,
   #blog,

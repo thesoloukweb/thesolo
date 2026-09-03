@@ -3,10 +3,9 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 // HeroSlider.astro is kept in the repo untouched for an easy rollback.
 import HeroVideo from '@/components/HeroVideo.astro';
-import AboutSection from '@/components/AboutSection.astro';
 import CategorySection from '@/components/CategorySection.astro';
 import ReservationSection from '@/components/ReservationSection.astro';
-import MenuSection from '@/components/MenuSection.astro';
+import MenuGrid from '@/components/MenuGrid.astro';
 import EventsSection from '@/components/EventsSection.astro';
 import RestaurantGallery from '@/components/RestaurantGallery.astro';
 import BlogSection from '@/components/BlogSection.astro';
@@ -27,14 +26,11 @@ import Footer from '@/components/Footer.astro';
     <!-- Hero: the client's film mounted as a print, under a transparent header -->
     <HeroVideo />
     
-    <!-- About Us Section -->
-    <AboutSection />
+    <!-- The same menu grid the /menu/ page shows, one component, no drift. -->
+    <MenuGrid />
     
     <!-- Category Section (Private Dining & Cocktail Bar) -->
     <CategorySection />
-    
-    <!-- Menu Section -->
-    <MenuSection />
     
     <!-- Events Section -->
     <EventsSection />
