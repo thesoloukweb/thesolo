@@ -59,7 +59,14 @@ const blogPosting = {
   <main class="min-h-screen bg-brand-dark">
     
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center bg-brand-dark overflow-hidden">
+    <!--
+      On a phone a full-screen hero is a 390 x 914 portrait box, and filling it
+      from any landscape photo means upscaling: a 2400 x 1350 source has to grow
+      1.35x, which is why the old images looked soft. Capped at 70% of the screen
+      the same source covers it with pixels to spare, and the reader reaches the
+      article sooner. Desktop keeps the full-screen hero.
+    -->
+    <section class="relative min-h-[70svh] lg:min-h-screen flex items-center justify-center bg-brand-dark overflow-hidden">
       <!-- Hero Background Image -->
       <div class="absolute inset-0 z-0">
         <img 
@@ -75,13 +82,13 @@ const blogPosting = {
       </div>
       
       <!-- Hero Content -->
-      <div class="relative z-10 container-custom text-center py-20 mt-20">
+      <div class="relative z-10 container-custom text-center py-10 mt-16 sm:py-20 sm:mt-20 lg:pb-32">
         <div class="max-w-5xl mx-auto">
           <!-- Tags -->
           {tags.length > 0 && (
-            <div class="flex flex-wrap gap-3 justify-center mb-8">
+            <div class="flex flex-wrap gap-2 sm:gap-3 justify-center mb-5 sm:mb-8">
               {tags.map(tag => (
-                <span class="inline-block bg-brand-gold text-brand-dark px-4 py-2 rounded-full text-sm font-josefin font-semibold uppercase tracking-wider">
+                <span class="inline-block bg-brand-gold text-brand-dark px-3 py-1 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-josefin font-semibold uppercase tracking-wider">
                   {tag}
                 </span>
               ))}
@@ -89,17 +96,17 @@ const blogPosting = {
           )}
           
           <!-- Title -->
-          <h1 class="font-crimson text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-8 leading-tight">
+          <h1 class="font-crimson text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-white mb-5 sm:mb-8 leading-tight">
             {title}
           </h1>
           
           <!-- Description -->
-          <p class="font-josefin text-xl sm:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed mb-12">
+          <p class="font-josefin text-base sm:text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed mb-6 sm:mb-12">
             {description}
           </p>
           
           <!-- Meta info -->
-          <div class="flex flex-col sm:flex-row items-center justify-center gap-6 text-white/80">
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 text-white/80">
             <div class="flex items-center gap-4">
               <div class="w-12 h-12 bg-brand-gold rounded-full flex items-center justify-center">
                 <svg class="w-6 h-6 text-brand-dark" fill="currentColor" viewBox="0 0 24 24">
@@ -129,8 +136,12 @@ const blogPosting = {
         </div>
       </div>
       
-      <!-- Scroll Indicator -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+      <!--
+        Scroll cue, desktop only. It belongs to the full-screen hero: once the
+        hero is 70% of the screen the next section is already peeking through, and
+        on a phone the cue was landing on top of the published date.
+      -->
+      <div class="hidden lg:block absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
         <div class="flex flex-col items-center gap-2 text-white/60 animate-bounce">
           <span class="font-josefin text-sm uppercase tracking-wider">Scroll to read</span>
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
