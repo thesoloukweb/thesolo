@@ -52,13 +52,13 @@ We accept reservations for both regular dining and private events. Casual smart 
 - [Breakfast & Brunch Menu (PDF)](https://www.thesolo.co.uk/pdfs/breakfast-and-brunch.pdf): Mediterranean-inspired breakfast served until 3:00 PM
 - [À La Carte Menu (PDF)](https://www.thesolo.co.uk/pdfs/a-la-carte.pdf): Signature dishes served 12:00 PM – 10:00 PM
 - [Drinks Menu (PDF)](https://www.thesolo.co.uk/pdfs/drinks.pdf): Cocktails, wines, spirits and non-alcoholic options
-- [All Menus](https://www.thesolo.co.uk/menu): Full menu page
+- [All Menus](https://www.thesolo.co.uk/#menus): Every menu, on the home page
 
 ## Pages
 
 - [Home](https://www.thesolo.co.uk/): Hero, signature dishes and overview
 - [About Us](https://www.thesolo.co.uk/about): Story, spaces and philosophy
-- [Menu](https://www.thesolo.co.uk/menu): All menu categories with PDFs
+- [Menu](https://www.thesolo.co.uk/#menus): All menu categories with PDFs, on the home page
 - [Gallery](https://www.thesolo.co.uk/gallery): Photos of food, interior and atmosphere
 - [FAQ](https://www.thesolo.co.uk/faq): Comprehensive frequently asked questions
 - [Reservation](https://www.thesolo.co.uk/reservation): Booking form and information

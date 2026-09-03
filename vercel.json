@@ -1,5 +1,17 @@
 {
   "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/menu",
+      "destination": "/#menus",
+      "permanent": true
+    },
+    {
+      "source": "/menu/",
+      "destination": "/#menus",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

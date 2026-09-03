@@ -76,15 +76,14 @@ const VIDEO_VERSION = 'v2';
     </h1>
 
     <p class="hp-lede hp-rise hp-d4">
-      <span class="hp-dt">A Mediterranean kitchen and cocktail bar in Museum Gardens, Bethnal Green, with a rooftop terrace under a retractable roof, garden tables and bottomless brunch. <a href="/menu/">See the menu</a></span>
+      <span class="hp-dt">A Mediterranean kitchen and cocktail bar in Museum Gardens, Bethnal Green, with a rooftop terrace under a retractable roof, garden tables and bottomless brunch.</span>
       <span class="hp-mb">A Mediterranean kitchen and cocktail bar, with a rooftop terrace under a retractable roof.</span>
     </p>
 
     <!--
-      Reservation CTA, phones only. It was removed from the hero at the client's
-      request, but on a phone the header collapses to a burger, so nothing on the
-      first screen led to a booking. On a desktop the RESERVATION button sits in
-      the header and the lede carries "See the menu", so the block stays hidden
+      Reservation CTA, phones only. On a phone the header collapses to a burger,
+      so without this nothing on the first screen leads to a booking. On a desktop
+      the header's RESERVATION button is always visible, so the block stays hidden
       there and the mount rule is left clear.
     -->
     <div class="hp-cta-row hp-rise hp-d4">
@@ -92,7 +91,6 @@ const VIDEO_VERSION = 'v2';
         <span class="hp-cta-t">Book a table</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="hp-menu-link" href="/menu/">Menu</a>
     </div>
 
     <div class="hp-ledger">
@@ -224,11 +222,11 @@ const VIDEO_VERSION = 'v2';
     Phone-only reservation block. The client asked for it off the desktop hero,
     where the header's RESERVATION button is always visible; on a phone the
     header is just a burger, so without this the first screen offered no way to
-    book. Both children are hidden above 1023px, which leaves the mount rule
-    clear exactly as the desktop design intends.
+    book. Hidden above 1023px, which leaves the mount rule clear exactly as the
+    desktop design intends.
   */
   .hp-cta-row { position: absolute; z-index: 6; top: -28px; right: calc(var(--m) + 28px); }
-  .hp-cta, .hp-menu-link { display: none; }
+  .hp-cta { display: none; }
 
   /* Caption line under the print: hours, address and phone set like the foot of a menu. */
   .hp-ledger {
@@ -312,11 +310,6 @@ const VIDEO_VERSION = 'v2';
     .hp-cta:active { transform: translateY(1px); }
     .hp-cta:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
     .hp-cta-t { padding-top: 3px; }
-    .hp-menu-link {
-      display: flex; align-items: center; min-height: 44px; position: relative;
-      font-family: 'Crimson Text', Georgia, serif; font-size: 18px; line-height: 1; padding-top: 2px; color: var(--cream);
-    }
-    .hp-menu-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: var(--copper); }
     .hp-ledger { margin: 16px 0 0; padding: 14px 0 18px; font-size: 12.5px; }
     .hp-cell { padding: 0 12px; }
     .hp-cell.hp-hrs { flex-basis: 100%; padding-left: 0; border-left: 0; }

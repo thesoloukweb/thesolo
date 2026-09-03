@@ -23,6 +23,12 @@
   }
   
   /* Prevent CLS for hero section */
+  @media (max-width: 639px) { html { scroll-padding-top: 118px; } }
+  @media (min-width: 640px) and (max-width: 1023px) { html { scroll-padding-top: 162px; } }
+  html[data-blc="closed"] { scroll-padding-top: 123px; }
+  @media (max-width: 639px) { html[data-blc="closed"] { scroll-padding-top: 89px; } }
+  @media (min-width: 640px) and (max-width: 1023px) { html[data-blc="closed"] { scroll-padding-top: 129px; } }
+
   #hero {
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height for mobile */
@@ -79,6 +85,15 @@
   
   html {
     scroll-behavior: smooth;
+
+    /*
+      The header is fixed, so an anchor jump lands with the target tucked under
+      it. scroll-padding-top on the scrolling box is what that property is for:
+      every scroll-into-view, whether from a link, the keyboard or a script,
+      stops short by the header's height plus a little air. Same measurements the
+      hero uses, including the shorter header once the banner is dismissed.
+    */
+    scroll-padding-top: 156px;
   }
   
   body {
