@@ -27,6 +27,32 @@
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height for mobile */
   }
+
+  /*
+    Everything below the first screen is laid out and styled before the browser
+    can paint anything, and on this site that is seven long sections including a
+    carousel, a gallery and a marquee of review cards. Measured on a throttled
+    phone it was the largest remaining cost in front of the first paint.
+
+    content-visibility: auto lets the browser skip style, layout and paint for a
+    section while it is off screen, and do the work as it scrolls into view. The
+    intrinsic size keeps the scrollbar honest in the meantime; the auto keyword
+    means the browser replaces the guess with the real height once it has
+    rendered the section, so nothing jumps on the way back up.
+
+    Deliberately not applied to #about: it begins at the fold and is often partly
+    visible on load. Browsers without support simply render as before.
+  */
+  #category,
+  #menu,
+  #events,
+  #gallery,
+  #blog,
+  #google-reviews,
+  #reservation-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 1200px;
+  }
   
   /* Optimize image loading */
   img {
