@@ -1,5 +1,9 @@
 ---
 // Reservation Section component with form and image
+import { Image } from 'astro:assets';
+// Client asked for "a photo like this one but dinner" (Sep 2026): same red booth
+// and marble table as the old brunch shot, evening dish and cocktail.
+import reservationDinner from '@/assets/reservation-dinner.jpg';
 ---
 
 <section id="reservation-section" class="pt-4 sm:pt-6 pb-16 sm:pb-20 lg:pb-24 bg-brand-dark">
@@ -261,7 +265,7 @@
             <button 
               type="button" 
               id="back-btn"
-              class="w-full border border-brand-gold text-brand-gold text-lg py-4 rounded-lg hover:bg-brand-gold hover:text-neutral-light transition-colors duration-300 hidden"
+              class="w-full border border-brand-gold text-brand-gold text-lg py-4 rounded-lg hover:bg-brand-gold hover:text-brand-dark transition-colors duration-300 hidden"
             >
               Back
             </button>
@@ -276,9 +280,8 @@
               <a 
                 href="https://web.dojo.app/create_booking/vendor/rhkYepQTtlYY4_Zb8eocC3p7GrYTT9KN2K1P6Tdx4cA_restaurant" 
                 target="_blank"
-                class="w-full bg-white text-brand-dark text-lg py-4 group flex items-center justify-center mt-4 rounded-lg hover:bg-gray-100 transition-colors duration-300 font-semibold"
-              >
-                <img 
+                class="w-full bg-white text-brand-dark text-lg py-4 group flex items-center justify-center mt-4 rounded-lg hover:bg-gray-100 transition-colors duration-300 font-semibold" rel="noopener noreferrer">
+                <img width="1093" height="299" 
                   src="/images/dojo.svg" 
                   alt="Dojo" 
                   class="h-5 mr-3"
@@ -301,13 +304,16 @@
       <!-- Hero Image -->
       <div class="lg:col-span-3">
         <div class="relative overflow-hidden rounded-xl">
-          <img 
-            src="/images/reservation-hero.jpg" 
-            alt="Beautifully set dining table at TheSolo Kitchen & Bar" 
+          <Image
+            src={reservationDinner}
+            alt="Dinner at TheSolo Kitchen & Bar: slow-cooked lamb risotto and a signature cocktail on the marble table"
             class="w-full h-[600px] lg:h-[700px] object-cover hover:scale-105 transition-transform duration-700"
             loading="lazy"
-            width="792"
-            height="700"
+            format="webp"
+            quality={80}
+            width={960}
+            widths={[640, 960, 1440]}
+            sizes="(min-width: 1024px) 60vw, 100vw"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/40 to-transparent"></div>
           
@@ -339,7 +345,7 @@
         <h3 class="font-crimson text-xl text-white">Select Number of People</h3>
         <button 
           type="button" 
-          id="close-people-modal"
+          id="close-people-modal" aria-label="Close guest number selector"
           class="text-brand-gold hover:text-white transition-colors"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -366,7 +372,7 @@
         <h3 class="font-crimson text-xl text-white">Select Event Area</h3>
         <button 
           type="button" 
-          id="close-event-area-modal"
+          id="close-event-area-modal" aria-label="Close event area selector"
           class="text-brand-gold hover:text-white transition-colors"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
