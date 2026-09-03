@@ -5,9 +5,19 @@ import mdx from '@astrojs/mdx';
 import compress from 'astro-compress';
 export default defineConfig({
   site: process.env.SITE_URL || 'https://www.thesolo.co.uk',
+  /*
+   * prefetchAll with the default strategy pulls every internal link on the page
+   * while it is still loading. On the homepage that is a dozen documents, and
+   * the trace showed /menu/ and /reservation/ arriving before the first paint,
+   * competing with the hero for bandwidth on a phone.
+   *
+   * Prefetch on intent instead: the visitor hovers on a desktop or starts a tap
+   * on a phone, and only then is the next page fetched. The navigation still
+   * feels instant, and nothing is downloaded before the current page is drawn.
+   */
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: 'viewport'
+    defaultStrategy: 'hover',
   },
   integrations: [
     tailwind(),
