@@ -55,7 +55,16 @@ export default defineConfig({
   // Astro.url.pathname, which then leaks into every canonical tag.
   trailingSlash: 'always',
   build: {
-    inlineStylesheets: 'auto',
+    /*
+     * The stylesheet is one render-blocking round trip on every first visit:
+     * about 12 KB over the wire, but the browser cannot paint until it lands.
+     * 'always' folds it into the HTML, which brotli already compresses along
+     * with the markup, so first paint no longer waits for a second request.
+     * The trade is that the CSS is not cached across page navigations; on a
+     * site this small, and with most visitors arriving on one page, the earlier
+     * paint is worth more.
+     */
+    inlineStylesheets: 'always',
     assets: '_astro'
   },
   vite: {

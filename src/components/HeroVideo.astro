@@ -16,6 +16,8 @@
  *     after window.load plus a short delay (the mount draws first), then the
  *     film fades in over the poster.
  *   - prefers-reduced-motion, Save-Data and 2G get the poster only.
+ *   - Phones get an 854x480 encode (568 KB), desktops 1600x900 (1.9 MB). The
+ *     phone frame is 334 CSS px wide, so 854 still covers a 2x display.
  *   - A labelled pause control lives in the caption line (WCAG 2.2.2). It stays
  *     hidden until the film is really playing.
  *   - Header.astro is rendered with `overlay` on this page, so the bar is
@@ -26,7 +28,7 @@ import { Image } from 'astro:assets';
 import poster from '@/assets/hero-poster.jpg';
 
 // Bump when the encodes change so the immutable cache header cannot serve stale files.
-const VIDEO_VERSION = 'v1';
+const VIDEO_VERSION = 'v2';
 ---
 
 <section id="hero" class="hero-print" data-video-version={VIDEO_VERSION}>

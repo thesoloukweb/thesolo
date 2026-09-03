@@ -50,6 +50,7 @@ Rules
 
 - Photos go through `astro:assets` from `src/assets/` with explicit `width` and `widths`; `public/images/` is legacy.
 - Film: silent, looped, encoded twice (AV1 WebM, H.264 MP4) at two sizes, loaded only after `window.load`. Poster is the LCP element.
+- Stylesheets are inlined into the HTML (`build.inlineStylesheets: 'always'`) so first paint never waits on a second request.
 
 ## Facts that appear in design (identical to Google Business Profile)
 
