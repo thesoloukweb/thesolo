@@ -63,8 +63,16 @@ const GOOGLE_TAG_MANAGER_ID = import.meta.env.GOOGLE_TAG_MANAGER_ID;
         ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (e) {
           w.addEventListener(e, load, { once: true, passive: true });
         });
-        if ('requestIdleCallback' in w) w.requestIdleCallback(load, { timeout: 3000 });
-        else w.setTimeout(load, 3000);
+        // Idle can arrive before the first paint, while the main thread is
+        // simply waiting on the network, and then the container competes with
+        // the hero for bandwidth. Arm the idle callback only once the page has
+        // finished loading, so the tag can never sit in front of first paint.
+        function arm() {
+          if ('requestIdleCallback' in w) w.requestIdleCallback(load, { timeout: 3000 });
+          else w.setTimeout(load, 3000);
+        }
+        if (d.readyState === 'complete') arm();
+        else w.addEventListener('load', arm, { once: true });
       })(window, document, 'script', 'dataLayer', GOOGLE_TAG_MANAGER_ID);
     </script>
   </>
