@@ -49,6 +49,10 @@ Rules
 ## Media
 
 - Photos go through `astro:assets` from `src/assets/` with explicit `width` and `widths`; `public/images/` is legacy.
+- Menu cards hold a 4:5 box. Seven of the eight menu photos are portrait (0.67 or 0.80) and the two poster
+  designs are exactly 4:5, so this frame crops about 16% on average instead of the 55% a wide box was cutting.
+- The menu grid is two columns on phones, three from 1024px, and lives in one component shared by the home
+  page and /menu/ so the two cannot drift.
 - Film: silent, looped, encoded twice (AV1 WebM, H.264 MP4) at two sizes, loaded only after `window.load`. Poster is the LCP element.
 - Stylesheets are inlined into the HTML (`build.inlineStylesheets: 'always'`) so first paint never waits on a second request.
 
