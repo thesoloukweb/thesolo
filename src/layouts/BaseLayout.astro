@@ -8,17 +8,92 @@ export interface Props {
   description?: string;
   image?: string;
   canonicalURL?: URL | string;
+  /**
+   * Page-specific JSON-LD (FAQPage, BlogPosting, BreadcrumbList …). Rendered after
+   * the site-wide Restaurant and WebSite blocks. Site-wide markup must never claim
+   * something that is only true for one page, so page-level types live here.
+   */
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
   title = 'TheSolo Kitchen & Bar - Mediterranean Restaurant in London',
   description = 'Experience vibrant Mediterranean flavors at TheSolo Kitchen & Bar. Authentic dishes, elegant surroundings, and exceptional service in the heart of London.',
   image = '/images/restaurant-1.jpg',
-  canonicalURL = new URL(Astro.url.pathname, Astro.site)
+  canonicalURL = new URL(Astro.url.pathname, Astro.site),
+  jsonLd
 } = Astro.props;
 
+/**
+ * BreadcrumbList, derived from the URL so every page declares where it sits
+ * without each page repeating itself. The home page is skipped: a breadcrumb
+ * trail with a single item carries no information.
+ */
+const SEGMENT_LABELS: Record<string, string> = {
+  about: 'About Us',
+  menu: 'Menu',
+  gallery: 'Gallery',
+  contact: 'Contact',
+  reservation: 'Reservation',
+  faq: 'FAQ',
+  blog: 'Blog',
+};
+
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumb = segments.length === 0 ? null : {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: new URL('/', Astro.site).toString(),
+    },
+    ...segments.map((segment, i) => ({
+      '@type': 'ListItem',
+      position: i + 2,
+      // Known routes get a clean label; anything else (a blog slug) uses the
+      // page's own title, minus the brand suffix.
+      name: SEGMENT_LABELS[segment] ?? title.split('|')[0].trim(),
+      item: new URL(segments.slice(0, i + 1).join('/') + '/', Astro.site).toString(),
+    })),
+  ],
+};
+
+const provided = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const pageSchemas = [breadcrumb, ...provided].filter(Boolean) as Record<string, unknown>[];
+
+// A "<" inside the JSON (e.g. "</script>" in an answer) would terminate the
+// script element early; escaping it keeps the JSON valid and the HTML intact.
+const serialiseSchema = (schema: Record<string, unknown>) =>
+  JSON.stringify(schema).replace(/</g, '\\u003c');
+
 const siteTitle = 'TheSolo Kitchen & Bar';
-const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
+
+// Only append the brand when the title does not already carry it. Pages set their
+// own titles and most of them already name the restaurant, which previously
+// produced "... | TheSolo Kitchen & Bar | TheSolo Kitchen & Bar".
+const brandPattern = /the\s*solo\s+kitchen\s*(&|and)\s*bar/i;
+const fullTitle = brandPattern.test(title) ? title : `${title} | ${siteTitle}`;
+
+// One absolute origin for every URL this page declares about itself. Astro.url
+// is the URL being built and carries whatever host the build ran under, so the
+// canonical, Open Graph and Twitter tags are all derived from Astro.site instead.
+const pageURL = canonicalURL.toString();
+const imageURL = new URL(image, Astro.site).toString();
+
+/**
+ * Only the production build invites indexing.
+ *
+ * Vercel gives every preview deployment its own *.vercel.app address, and that is
+ * precisely how a staging copy of this site ended up publicly crawlable and
+ * competing with the live domain. VERCEL_ENV is 'production', 'preview' or
+ * 'development'; anything that is not production asks robots to stay away.
+ * A local build sets nothing, so it behaves like production.
+ */
+const vercelEnv = process.env.VERCEL_ENV;
+const indexable = !vercelEnv || vercelEnv === 'production';
 ---
 
 <!doctype html>
@@ -27,19 +102,19 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={indexable ? 'index, follow' : 'noindex, nofollow'} />
     <meta name="theme-color" content="#001223" />
     
     <title>{fullTitle}</title>
-    <link rel="canonical" href={canonicalURL} />
+    <link rel="canonical" href={pageURL} />
     <link rel="icon" type="image/png" href="/images/logo.png" />
     
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.url)} />
-    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:url" content={pageURL} />
     <meta property="og:site_name" content="TheSolo Kitchen & Bar" />
     <meta property="og:locale" content="en_GB" />
     
@@ -47,12 +122,11 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(image, Astro.url)} />
+    <meta name="twitter:image" content={imageURL} />
     <meta name="twitter:site" content="@thesolo_london" />
     
     <!-- Additional SEO -->
     <meta name="author" content="TheSolo Kitchen & Bar" />
-    <meta name="keywords" content="Mediterranean restaurant London, East London dining, Bethnal Green restaurant, Mediterranean cuisine, rooftop bar London, private dining London, authentic Mediterranean food" />
     <meta name="geo.region" content="GB-LND" />
     <meta name="geo.placename" content="London" />
     <meta name="geo.position" content="51.5285;-0.0563" />
@@ -61,38 +135,24 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
     <!-- Google Analytics -->
     <GoogleAnalytics />
     
-    <!-- Performance Optimizations -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <!-- Critical CSS for fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Josefin+Sans:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Josefin+Sans:wght@300;400;500;600;700&display=swap" />
-    </noscript>
-    
-    <!-- Preload critical above-the-fold images -->
-    {Astro.url.pathname === '/' && (
-      <>
-      <link rel="preload" href="/images/hero-left.jpg" as="image" type="image/jpeg" />
-        <link rel="preload" href="/images/hero-right.jpg" as="image" type="image/jpeg" />
-      </>
-    )}
-    {Astro.url.pathname === '/menu' && (
-      <>
-        <link rel="preload" href="/images/menu-breakfast.jpg" as="image" type="image/jpeg" />
-        <link rel="preload" href="/images/menu-1.jpg" as="image" type="image/jpeg" />
-      <link rel="preload" href="/images/menu-3.jpg" as="image" type="image/jpeg" />
-      </>
-    )}
-    {Astro.url.pathname === '/gallery' && (
-      <link rel="preload" href="/images/restaurant-1.jpg" as="image" type="image/jpeg" />
-    )}
-    {Astro.url.pathname === '/reservation' && (
-      <link rel="preload" href="/images/reservation-hero.jpg" as="image" type="image/jpeg" />
-    )}
+    <!--
+      Fonts are served from this domain (see src/styles/fonts.css), so the
+      fonts.googleapis.com → fonts.gstatic.com chain and its preconnect hints
+      are gone. Only the two faces that draw above-the-fold text are preloaded;
+      the rest arrive with the stylesheet.
+    -->
+    <link rel="preload" href="/fonts/crimson-text-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/josefin-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!--
+      There were per-page image preloads here for /menu, /gallery and /reservation.
+      They never fired: the conditions compared Astro.url.pathname against '/menu'
+      while the directory build makes it '/menu/', so the tags were dead on the live
+      site too. Rather than repair them, they are gone — every image they pointed at
+      is now either processed by astro:assets under a content-hashed name this layout
+      cannot know, or replaced entirely. The elements themselves carry loading and
+      fetchpriority, which is the better signal.
+    -->
   </head>
   <body class="h-full font-josefin bg-brand-dark text-white antialiased">
     <!-- Google Tag Manager (noscript) -->
@@ -118,30 +178,28 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
       {
         "@context": "https://schema.org",
         "@type": ["Restaurant", "LocalBusiness", "FoodEstablishment"],
-        "@id": "https://thesolo.co.uk/#restaurant",
+        "@id": "https://www.thesolo.co.uk/#restaurant",
         "name": "The Solo Kitchen & Bar",
         "alternateName": ["TheSolo Kitchen & Bar", "The Solo Bistro Bar", "Solo Kitchen and Bar London"],
-        "description": "The Solo Kitchen & Bar is a premier Mediterranean restaurant in East London, offering authentic Turkish, Greek and Italian cuisine, rooftop dining, signature cocktails, live Sunday Jazz Sessions, and private event spaces. Family-friendly atmosphere with vibrant flavours from across the Mediterranean.",
+        "description": "The Solo Kitchen & Bar is a premier Mediterranean restaurant in East London, offering authentic Turkish, Greek and Italian cuisine, rooftop dining, signature cocktails and private event spaces. Family-friendly atmosphere with vibrant flavours from across the Mediterranean.",
         "slogan": "Mediterranean flavours in the heart of East London",
-        "url": "https://thesolo.co.uk",
+        "url": "https://www.thesolo.co.uk",
         "telephone": "+442080142656",
         "email": "info@thesolo.co.uk",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://thesolo.co.uk/images/logo.png",
+          "url": "https://www.thesolo.co.uk/images/logo.png",
           "width": 187,
           "height": 182
         },
         "image": [
-          "https://thesolo.co.uk/images/restaurant-1.jpg",
-          "https://thesolo.co.uk/images/restaurant-3.jpg",
-          "https://thesolo.co.uk/images/restaurant-5.jpg",
-          "https://thesolo.co.uk/images/hero-left.jpg",
-          "https://thesolo.co.uk/images/hero-right.jpg"
+          "https://www.thesolo.co.uk/images/restaurant-1.jpg",
+          "https://www.thesolo.co.uk/images/restaurant-3.jpg",
+          "https://www.thesolo.co.uk/images/restaurant-5.jpg"
         ],
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Museum Gardens",
+          "streetAddress": "Museum Gardens, Cambridge Heath Road",
           "addressLocality": "London",
           "addressRegion": "Greater London",
           "addressCountry": "GB",
@@ -178,74 +236,89 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
         "priceRange": "££",
         "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Contactless"],
         "currenciesAccepted": "GBP",
-        "keywords": "mediterranean restaurant london, turkish restaurant east london, rooftop dining london, cocktail bar bethnal green, private dining london, jazz brunch london, halal mediterranean, family restaurant east london, best mediterranean food london, breakfast brunch east london",
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-            "opens": "08:30",
+            "opens": "10:00",
             "closes": "23:30"
           },
           {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Friday", "Saturday"],
-            "opens": "08:30",
+            "opens": "10:00",
             "closes": "00:30"
           },
           {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": "Sunday",
-            "opens": "08:30",
+            "opens": "10:00",
             "closes": "23:30"
           }
         ],
-        "acceptsReservations": "True",
+        "acceptsReservations": true,
         "hasMenu": [
           {
             "@type": "Menu",
             "name": "Breakfast & Brunch Menu",
-            "url": "https://thesolo.co.uk/pdfs/breakfast-and-brunch.pdf",
+            "url": "https://www.thesolo.co.uk/pdfs/breakfast-and-brunch.pdf",
             "inLanguage": "en-GB"
           },
           {
             "@type": "Menu",
             "name": "À La Carte Menu",
-            "url": "https://thesolo.co.uk/pdfs/a-la-carte.pdf",
+            "url": "https://www.thesolo.co.uk/pdfs/a-la-carte.pdf",
             "inLanguage": "en-GB"
           },
           {
             "@type": "Menu",
             "name": "Drinks Menu",
-            "url": "https://thesolo.co.uk/pdfs/drinks.pdf",
+            "url": "https://www.thesolo.co.uk/pdfs/drinks.pdf",
             "inLanguage": "en-GB"
           },
           {
             "@type": "Menu",
-            "name": "Party Sharing Platter",
-            "url": "https://thesolo.co.uk/menu",
+            "name": "Party Menu",
+            "url": "https://www.thesolo.co.uk/pdfs/party-menu.pdf",
+            "inLanguage": "en-GB"
+          },
+          {
+            "@type": "Menu",
+            "name": "Bottomless Brunch",
+            "url": "https://www.thesolo.co.uk/pdfs/bottomless-brunch.pdf",
             "inLanguage": "en-GB"
           }
         ],
-        "menu": "https://thesolo.co.uk/menu",
+        "menu": "https://www.thesolo.co.uk/menu",
         "makesOffer": [
           {
             "@type": "Offer",
             "name": "Blue Light Card Discount",
-            "description": "20% discount for Blue Light Card holders (NHS, emergency services, armed forces, teachers and social care workers)",
-            "eligibleCustomerType": "Blue Light Card Holders"
-          },
-          {
-            "@type": "Offer",
-            "name": "Sunday Jazz Sessions",
-            "description": "Live jazz on the rooftop every Sunday from 12 PM to 3 PM, featuring Mediterranean cuisine and panoramic views"
+            "description": "20% discount for Blue Light Card holders (NHS, emergency services, armed forces, teachers and social care workers)"
           }
         ],
+        "potentialAction": {
+          "@type": "ReserveAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://web.dojo.app/create_booking/vendor/rhkYepQTtlYY4_Zb8eocC3p7GrYTT9KN2K1P6Tdx4cA_restaurant",
+            "inLanguage": "en-GB",
+            "actionPlatform": [
+              "https://schema.org/DesktopWebPlatform",
+              "https://schema.org/IOSPlatform",
+              "https://schema.org/AndroidPlatform"
+            ]
+          },
+          "result": {
+            "@type": "FoodEstablishmentReservation",
+            "name": "Table reservation at The Solo Kitchen & Bar"
+          }
+        },
         "amenityFeature": [
           { "@type": "LocationFeatureSpecification", "name": "Rooftop Terrace", "value": true },
           { "@type": "LocationFeatureSpecification", "name": "Private Dining", "value": true },
           { "@type": "LocationFeatureSpecification", "name": "Cocktail Bar", "value": true },
           { "@type": "LocationFeatureSpecification", "name": "Outdoor Seating", "value": true },
-          { "@type": "LocationFeatureSpecification", "name": "Live Music", "value": true },
           { "@type": "LocationFeatureSpecification", "name": "Family Friendly", "value": true },
           { "@type": "LocationFeatureSpecification", "name": "Wheelchair Accessible", "value": true },
           { "@type": "LocationFeatureSpecification", "name": "Free WiFi", "value": true },
@@ -262,21 +335,13 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
           "Private events",
           "Corporate dining",
           "Birthday celebrations",
-          "Sunday brunch",
-          "Live jazz performances"
+          "Sunday brunch"
         ],
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "127",
-          "bestRating": "5",
-          "worstRating": "1"
-        },
         "sameAs": [
           "https://www.instagram.com/thesolokitchenandbar/",
           "https://www.facebook.com/people/The-Solo-Bistro-Bar/61556764776020/",
           "https://www.tiktok.com/@thesolobistrobar",
-          "https://web.dojo.app/create_booking/vendor/rhkYepQTtlYY4_Zb8eocC3p7GrYTT9KN2K1P6Tdx4cA_restaurant"
+          "https://www.google.com/maps/place/?q=place_id:ChIJAWxvnYUddkgRYDdKMNbeyTo"
         ]
       }
     </script>
@@ -286,104 +351,26 @@ const fullTitle = title === siteTitle ? title : `${title} | ${siteTitle}`;
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "@id": "https://thesolo.co.uk/#website",
-        "url": "https://thesolo.co.uk",
+        "@id": "https://www.thesolo.co.uk/#website",
+        "url": "https://www.thesolo.co.uk",
         "name": "The Solo Kitchen & Bar",
         "description": "Mediterranean restaurant in East London - Turkish, Greek, Italian cuisine with rooftop dining",
-        "publisher": { "@id": "https://thesolo.co.uk/#restaurant" },
+        "publisher": { "@id": "https://www.thesolo.co.uk/#restaurant" },
         "inLanguage": "en-GB"
       }
     </script>
 
-    <!-- JSON-LD Schema: FAQ Page (helps AI engines answer common questions) -->
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Where is The Solo Kitchen & Bar located?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The Solo Kitchen & Bar is located at Museum Gardens, London E2 9PA, in the heart of East London, near Bethnal Green."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What type of cuisine does The Solo Kitchen & Bar serve?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We serve authentic Mediterranean cuisine with Turkish, Greek, Italian and Middle Eastern influences. Our menu features fresh ingredients, breakfast and brunch options, à la carte dining, sharing platters, signature cocktails and an extensive drinks list."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What are the opening hours of The Solo Kitchen & Bar?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "We are open Monday to Thursday 8:30am to 11:30pm, Friday and Saturday 8:30am to 12:30am, and Sunday 8:30am to 11:30pm."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does The Solo Kitchen & Bar offer a Blue Light Card discount?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, we offer a 20% discount for Blue Light Card holders, including NHS staff, emergency services, armed forces, teachers and social care workers."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can I book a table at The Solo Kitchen & Bar?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, you can book a table directly through our website at thesolo.co.uk/reservation or via Dojo at https://web.dojo.app/create_booking/vendor/rhkYepQTtlYY4_Zb8eocC3p7GrYTT9KN2K1P6Tdx4cA_restaurant. We accept reservations for both regular dining and private events."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does The Solo Kitchen & Bar have a rooftop?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, we have a beautiful rooftop terrace with panoramic views of London. Every Sunday from 12pm to 3pm, we host live Sunday Jazz Sessions on the rooftop."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does The Solo Kitchen & Bar host private events?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, we offer private dining and event spaces accommodating groups from 6 to 200+ guests. We host birthdays, corporate events, weddings and special celebrations. Contact us via 020 8014 2656 or info@thesolo.co.uk for bookings."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is The Solo Kitchen & Bar family-friendly?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, we are family-friendly with a relaxed casual smart dress code. We welcome guests of all ages and offer a variety of menu options for everyone."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What is the dress code at The Solo Kitchen & Bar?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Casual smart dress code is appreciated at The Solo Kitchen & Bar."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does The Solo Kitchen & Bar serve breakfast?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, we serve our Breakfast & Brunch menu daily from 8:30am until 3:00pm, featuring Mediterranean-inspired dishes with fresh ingredients and traditional flavours."
-            }
-          }
-        ]
-      }
-    </script>
+    <!--
+      Page-specific JSON-LD. The FAQPage block that used to live here was emitted on
+      every page while the questions were visible on none — markup that does not
+      describe the page it sits on. The FAQ page now generates its own block from the
+      same array it renders, so the two cannot drift. (Google withdrew the FAQ rich
+      result in May 2026; an accurate block still describes the page for other
+      consumers, but it earns no search feature.)
+    -->
+    {pageSchemas.map((schema) => (
+      <script type="application/ld+json" is:inline set:html={serialiseSchema(schema)} />
+    ))}
   </body>
 </html>
 

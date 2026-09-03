@@ -79,5 +79,5 @@ Allow: /fonts/
 Allow: /llms.txt
 
 # Sitemaps
-Sitemap: https://thesolo.co.uk/sitemap-index.xml
-Sitemap: https://thesolo.co.uk/sitemap-0.xml
+Sitemap: https://www.thesolo.co.uk/sitemap-index.xml
+Sitemap: https://www.thesolo.co.uk/sitemap-0.xml

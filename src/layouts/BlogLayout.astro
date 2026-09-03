@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 
 export interface Props {
   title: string;
+  seoTitle?: string;
   description: string;
   pubDate: Date;
   heroImage?: string;
@@ -12,19 +13,46 @@ export interface Props {
   author?: string;
 }
 
-const { title, description, pubDate, heroImage, tags = [], author = 'TheSolo Kitchen & Bar' } = Astro.props;
+const { title, seoTitle, description, pubDate, heroImage, tags = [], author = 'TheSolo Kitchen & Bar' } = Astro.props;
 
 const formattedDate = pubDate.toLocaleDateString('en-GB', {
   day: 'numeric',
-  month: 'long', 
+  month: 'long',
   year: 'numeric'
 });
+
+/**
+ * BlogPosting for this article. Every value comes from the post's own frontmatter
+ * or from what the page renders, so the markup cannot describe something the
+ * reader does not see. Without it a post is indistinguishable from any other page.
+ */
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const blogPosting = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${canonical}#article`,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  inLanguage: 'en-GB',
+  ...(heroImage ? { image: new URL(heroImage, Astro.site).toString() } : {}),
+  ...(tags.length ? { keywords: tags.join(', ') } : {}),
+  // Both point at the business node already declared in BaseLayout. Spelling the
+  // author out as a fresh Organization created a second entity whose name differed
+  // by a space ("TheSolo" vs "The Solo"), splitting the identity the site just
+  // finished consolidating.
+  author: { '@id': 'https://www.thesolo.co.uk/#restaurant' },
+  publisher: { '@id': 'https://www.thesolo.co.uk/#restaurant' },
+  isPartOf: { '@type': 'Blog', '@id': 'https://www.thesolo.co.uk/blog/', name: 'The Solo Kitchen & Bar Blog' },
+};
 ---
 
-<BaseLayout 
-  title={`${title} | TheSolo Kitchen & Bar Blog`}
+<BaseLayout
+  title={`${seoTitle ?? title} | TheSolo Kitchen & Bar`}
   description={description}
   image={heroImage}
+  jsonLd={blogPosting}
 >
   <Header />
   
@@ -37,6 +65,8 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
         <img 
           src={heroImage || "/images/restaurant-2.jpg"}
           alt={title}
+          width="500"
+          height="288"
           class="w-full h-full object-cover"
           loading="eager"
           onerror="this.src='/images/restaurant-2.jpg'"
@@ -141,6 +171,8 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
                     <img 
                       src={heroImage}
                       alt={title}
+                      width="500"
+                      height="288"
                       class="w-full h-80 lg:h-96 object-cover"
                       loading="eager"
                       onerror="this.style.display='none'"
@@ -253,7 +285,7 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
                 <div class="bg-brand-dark-card rounded-2xl p-6 border border-brand-gold/20">
                   <h3 class="font-crimson text-lg text-white mb-4">Related Articles</h3>
                   <div class="space-y-4">
-                    <a href="/blog" class="block group">
+                    <a href="/blog/" class="block group">
                       <h4 class="font-josefin text-white/80 group-hover:text-brand-gold transition-colors duration-300 text-sm leading-tight">
                         Discover more Mediterranean culinary stories
                       </h4>
@@ -271,8 +303,8 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
           <div class="mt-20 pt-12 border-t border-brand-gold/30">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-8">
               <a 
-                href="/blog" 
-                class="inline-flex items-center gap-3 bg-brand-dark-card hover:bg-brand-gold text-white hover:text-brand-dark px-6 py-3 rounded-full transition-all duration-300 font-josefin font-medium"
+                href="/blog/" 
+                class="inline-flex items-center gap-3 bg-brand-dark-card hover:bg-brand-gold hover:text-brand-dark text-white hover:text-brand-dark px-6 py-3 rounded-full transition-all duration-300 font-josefin font-medium"
               >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
@@ -282,7 +314,7 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
               
               <div class="flex items-center gap-4">
                 <a 
-                  href="/contact" 
+                  href="/contact/" 
                   class="inline-flex items-center gap-2 text-brand-gold hover:text-white transition-colors duration-300 font-josefin"
                 >
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -291,7 +323,7 @@ const formattedDate = pubDate.toLocaleDateString('en-GB', {
                   Contact Us
                 </a>
                 <a 
-                  href="/menu" 
+                  href="/menu/" 
                   class="inline-flex items-center gap-2 bg-brand-gold hover:bg-brand-gold/90 text-brand-dark px-6 py-3 rounded-full transition-all duration-300 font-josefin font-medium"
                 >
                   View Our Menu

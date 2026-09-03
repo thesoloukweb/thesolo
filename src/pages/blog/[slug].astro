@@ -17,11 +17,12 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 
 // Extract frontmatter
-const { title, description, pubDate, heroImage, tags, author } = post.data;
+const { title, seoTitle, description, pubDate, heroImage, tags, author } = post.data;
 ---
 
 <BlogLayout
   title={title}
+  seoTitle={seoTitle}
   description={description}
   pubDate={pubDate}
   heroImage={heroImage}

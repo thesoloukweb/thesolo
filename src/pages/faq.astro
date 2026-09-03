@@ -9,15 +9,15 @@ const faqs = [
     items: [
       {
         question: 'Where is The Solo Kitchen & Bar located?',
-        answer: 'We are located at Museum Gardens, Cambridge Heath Road, London, E2 9PA — in the heart of East London, near Bethnal Green station and within easy reach of Hackney and Shoreditch.'
+        answer: 'We are located at Museum Gardens, Cambridge Heath Road, London E2 9PA — in the heart of East London, near Bethnal Green station and within easy reach of Hackney and Shoreditch.'
       },
       {
         question: 'What are your opening hours?',
-        answer: 'Monday – Thursday: 8:30 AM – 11:30 PM\nFriday: 8:30 AM – 12:30 AM\nSaturday: 8:30 AM – 12:30 AM\nSunday: 8:30 AM – 11:30 PM'
+        answer: 'Monday – Thursday: 10:00 AM – 11:30 PM\nFriday: 10:00 AM – 12:30 AM\nSaturday: 10:00 AM – 12:30 AM\nSunday: 10:00 AM – 11:30 PM'
       },
       {
         question: 'Do you serve breakfast all day?',
-        answer: 'Our Breakfast & Brunch menu is served daily from 8:30 AM until 3:00 PM. After 3:00 PM, our À La Carte menu is available.'
+        answer: 'Our Breakfast & Brunch menu is served daily from 10:00 AM until 3:00 PM. After 3:00 PM, our À La Carte menu is available.'
       },
       {
         question: 'When is the À La Carte menu served?',
@@ -75,10 +75,6 @@ const faqs = [
         answer: 'Yes — we have a beautiful rooftop terrace with panoramic views of London. It is one of our most-loved spaces, especially in the warmer months.'
       },
       {
-        question: 'Tell me about Sunday Jazz Sessions',
-        answer: 'Every Sunday from 12 PM to 3 PM, we host live jazz on the rooftop with mouthwatering food, signature cocktails and panoramic views. Smooth, soulful sounds set the perfect tone for a memorable Sunday escape.'
-      },
-      {
         question: 'Is The Solo Kitchen & Bar family-friendly?',
         answer: 'Yes, we welcome guests of all ages. We are family-friendly with a relaxed atmosphere and a casual smart dress code.'
       },
@@ -97,7 +93,7 @@ const faqs = [
       },
       {
         question: 'Do you have any other special offers?',
-        answer: 'Our Sunday Jazz Sessions provide a unique experience with live music every Sunday from 12 PM to 3 PM. We also offer party packages including Party Sharing Platter and Party Drinks Package for groups and celebrations.'
+        answer: 'We offer party packages including our Party Sharing Platter and Party Drinks Package for groups and celebrations, alongside our BBQ Party menu.'
       }
     ]
   },
@@ -114,17 +110,32 @@ const faqs = [
       },
       {
         question: 'How can I contact you?',
-        answer: 'Phone: 020 8014 2656\nEmail: info@thesolo.co.uk\nAddress: Museum Gardens, London, E2 9PA\nOr use the contact form on our Contact page.'
+        answer: 'Phone: 020 8014 2656\nEmail: info@thesolo.co.uk\nAddress: Museum Gardens, Cambridge Heath Road, London E2 9PA\nOr use the contact form on our Contact page.'
       }
     ]
   }
 ];
+
+// FAQPage markup is generated from the same array that renders the page, so the
+// structured data can never drift from the questions a visitor actually sees.
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.flatMap((category) =>
+    category.items.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: { '@type': 'Answer', text: faq.answer }
+    }))
+  )
+};
 ---
 
 <BaseLayout
   title="FAQ - Frequently Asked Questions | The Solo Kitchen & Bar"
-  description="Frequently asked questions about The Solo Kitchen & Bar. Opening hours, location, reservations, menu, private events, Blue Light Card discount, dress code and more. Mediterranean restaurant in East London."
+  description="Opening hours, location, reservations, private events, Blue Light Card discount and dress code — everything to know before visiting TheSolo."
   image="/images/restaurant-3.jpg"
+  jsonLd={faqSchema}
 >
   <main id="main-content" class="min-h-screen">
     <Header />
@@ -196,7 +207,7 @@ const faqs = [
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="/contact"
+              href="/contact/"
               class="btn-primary text-base px-8 py-3 group flex items-center"
             >
               Contact Us

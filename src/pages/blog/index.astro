@@ -9,8 +9,8 @@ const blogPosts = await getCollection('blog');
 const sortedPosts = blogPosts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 
 // SEO data
-const seoTitle = 'Mediterranean Food Blog | TheSolo Kitchen & Bar - East London';
-const seoDescription = 'Discover authentic Mediterranean recipes, dining tips, and culinary stories from TheSolo Kitchen & Bar. East London\'s premier Mediterranean restaurant blog.';
+const seoTitle = 'Mediterranean Food Blog | TheSolo Kitchen & Bar';
+const seoDescription = 'Mediterranean recipes, dining tips and stories from TheSolo Kitchen & Bar, East London\'s Mediterranean restaurant in Bethnal Green.';
 ---
 
 <BaseLayout
@@ -77,7 +77,7 @@ const seoDescription = 'Discover authentic Mediterranean recipes, dining tips, a
                 <article class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 group hover:scale-105">
                   <!-- Image -->
                   <div class="relative overflow-hidden">
-                    <a href={`/blog/${post.slug}`}>
+                    <a href={`/blog/${post.slug}/`}>
                       <img 
                         src={heroImage || '/images/blog-default.jpg'}
                         alt={title}
@@ -108,7 +108,7 @@ const seoDescription = 'Discover authentic Mediterranean recipes, dining tips, a
                     
                     <!-- Title -->
                     <h3 class="font-crimson text-xl lg:text-2xl text-white group-hover:text-brand-gold transition-colors duration-300 leading-tight">
-                      <a href={`/blog/${post.slug}`}>
+                      <a href={`/blog/${post.slug}/`}>
                         {title}
                       </a>
                     </h3>
@@ -118,10 +118,15 @@ const seoDescription = 'Discover authentic Mediterranean recipes, dining tips, a
                       {description}
                     </p>
                     
-                    <!-- Read More -->
-                    <a 
-                      href={`/blog/${post.slug}`}
+                    <!--
+                      The visible label stays "Read More" for the design, but on its
+                      own it tells a screen reader — and a search engine — nothing
+                      about where the link goes. The aria-label names the article.
+                    -->
+                    <a
+                      href={`/blog/${post.slug}/`}
                       class="inline-flex items-center gap-2 font-josefin text-brand-gold hover:text-white transition-colors duration-300 text-sm font-medium"
+                      aria-label={`Read the full article: ${title}`}
                     >
                       Read More
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

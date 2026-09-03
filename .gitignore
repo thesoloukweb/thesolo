@@ -36,3 +36,8 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+.vercel
+.env*.local
+
+# Local originals kept before recompression, not needed in the repo
+public/images/.original/
