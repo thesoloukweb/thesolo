@@ -39,11 +39,11 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
           55% a wide box was cutting, and the posters keep their titles.
         -->
         <!-- Menu Grid -->
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 justify-items-center">
+        <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 auto-rows-fr gap-3 sm:gap-5 lg:gap-6 justify-items-center max-w-[1400px] mx-auto">
           
           <!-- Breakfast & Brunch Menu -->
-          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/breakfast-and-brunch.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+          <article class="menu-card group cursor-pointer h-full w-full" onclick="openMenuPDF('/pdfs/breakfast-and-brunch.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 h-full flex flex-col">
               <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src={breakfastPancakes}
@@ -69,15 +69,15 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
                 
               </div>
               
-              <div class="p-3 sm:p-5 lg:p-6">
-                <h3 class="font-crimson text-sm sm:text-lg lg:text-2xl text-white mb-1.5 sm:mb-3">
+              <div class="p-3 sm:p-4 lg:p-5 flex flex-col flex-1">
+                <h3 class="font-crimson text-sm sm:text-lg lg:text-xl text-white mb-1.5 sm:mb-3">
                   Breakfast & Brunch
                 </h3>
                 <p class="font-josefin text-brand-gold text-[10px] sm:text-xs mb-1 sm:mb-2">Served until 3:00 PM</p>
                 <p class="font-josefin text-white/80 text-xs sm:text-sm leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                   Start your day with our Mediterranean-inspired breakfast selection featuring fresh ingredients and traditional flavors.
                 </p>
-                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin">
+                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin mt-auto">
                   <svg class="w-3 h-3 mr-1.5 sm:w-4 sm:h-4 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
                   </svg>
@@ -88,8 +88,8 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
           </article>
 
           <!-- A La Carte Menu -->
-          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/a-la-carte.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+          <article class="menu-card group cursor-pointer h-full w-full" onclick="openMenuPDF('/pdfs/a-la-carte.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 h-full flex flex-col">
               <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src={aLaCarteRisotto}
@@ -121,15 +121,15 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
                 </div>
               </div>
               
-              <div class="p-3 sm:p-5 lg:p-6">
-                <h3 class="font-crimson text-sm sm:text-lg lg:text-2xl text-white mb-1.5 sm:mb-3">
+              <div class="p-3 sm:p-4 lg:p-5 flex flex-col flex-1">
+                <h3 class="font-crimson text-sm sm:text-lg lg:text-xl text-white mb-1.5 sm:mb-3">
                   À La Carte
                 </h3>
                 <p class="font-josefin text-brand-gold text-[10px] sm:text-xs mb-1 sm:mb-2">Served 12:00 - 10:00 PM</p>
                 <p class="font-josefin text-white/80 text-xs sm:text-sm leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                   Our signature dishes featuring the finest Mediterranean ingredients prepared with passion and expertise.
                 </p>
-                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin">
+                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin mt-auto">
                   <svg class="w-3 h-3 mr-1.5 sm:w-4 sm:h-4 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
                   </svg>
@@ -140,8 +140,8 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
           </article>
 
           <!-- Drinks & Cocktails Menu -->
-          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/drinks.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+          <article class="menu-card group cursor-pointer h-full w-full" onclick="openMenuPDF('/pdfs/drinks.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 h-full flex flex-col">
               <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src={drinksCocktails}
@@ -173,14 +173,14 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
                 </div>
               </div>
               
-              <div class="p-3 sm:p-5 lg:p-6">
-                <h3 class="font-crimson text-sm sm:text-lg lg:text-2xl text-white mb-1.5 sm:mb-3">
+              <div class="p-3 sm:p-4 lg:p-5 flex flex-col flex-1">
+                <h3 class="font-crimson text-sm sm:text-lg lg:text-xl text-white mb-1.5 sm:mb-3">
                   Drinks & Cocktails
                 </h3>
                 <p class="font-josefin text-white/80 text-xs sm:text-sm leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                   Expertly crafted cocktails, premium wines, and refreshing beverages to complement your dining experience.
                 </p>
-                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin">
+                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin mt-auto">
                   <svg class="w-3 h-3 mr-1.5 sm:w-4 sm:h-4 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
                   </svg>
@@ -191,8 +191,8 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
           </article>
 
           <!-- BBQ Party Menu -->
-          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/party-menu.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+          <article class="menu-card group cursor-pointer h-full w-full" onclick="openMenuPDF('/pdfs/party-menu.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 h-full flex flex-col">
               <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src={partyMeze}
@@ -224,14 +224,14 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
                 </div>
               </div>
               
-              <div class="p-3 sm:p-5 lg:p-6">
-                <h3 class="font-crimson text-sm sm:text-lg lg:text-2xl text-white mb-1.5 sm:mb-3">
+              <div class="p-3 sm:p-4 lg:p-5 flex flex-col flex-1">
+                <h3 class="font-crimson text-sm sm:text-lg lg:text-xl text-white mb-1.5 sm:mb-3">
                   Party Menu
                 </h3>
                 <p class="font-josefin text-white/80 text-xs sm:text-sm leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                   One document for group bookings: the BBQ menu, sharing platters, canapes and the event drinks packages.
                 </p>
-                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin">
+                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin mt-auto">
                   <svg class="w-3 h-3 mr-1.5 sm:w-4 sm:h-4 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
                   </svg>
@@ -245,8 +245,8 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
               BOTTOMLESS BRUNCH — new tab requested by the client. Photo is a
               placeholder until they supply one.
             -->
-          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/bottomless-brunch.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+          <article class="menu-card group cursor-pointer h-full w-full" onclick="openMenuPDF('/pdfs/bottomless-brunch.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 h-full flex flex-col">
               <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src={bottomlessBrunch}
@@ -278,14 +278,14 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
                 </div>
               </div>
               
-              <div class="p-3 sm:p-5 lg:p-6">
-                <h3 class="font-crimson text-sm sm:text-lg lg:text-2xl text-white mb-1.5 sm:mb-3">
+              <div class="p-3 sm:p-4 lg:p-5 flex flex-col flex-1">
+                <h3 class="font-crimson text-sm sm:text-lg lg:text-xl text-white mb-1.5 sm:mb-3">
                   Bottomless Brunch
                 </h3>
                 <p class="font-josefin text-white/80 text-xs sm:text-sm leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                   Free-flowing drinks alongside brunch plates, served on the rooftop terrace at weekends.
                 </p>
-                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin">
+                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin mt-auto">
                   <svg class="w-3 h-3 mr-1.5 sm:w-4 sm:h-4 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
                   </svg>
@@ -296,8 +296,8 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
           </article>
 
           <!-- Weekly offers, in the order they fall in the week. -->
-          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/thursday-offer.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+          <article class="menu-card group cursor-pointer h-full w-full" onclick="openMenuPDF('/pdfs/thursday-offer.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 h-full flex flex-col">
               <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src={thursdayOffer}
@@ -328,14 +328,14 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
                 </div>
               </div>
               
-              <div class="p-3 sm:p-5 lg:p-6">
-                <h3 class="font-crimson text-sm sm:text-lg lg:text-2xl text-white mb-1.5 sm:mb-3">
+              <div class="p-3 sm:p-4 lg:p-5 flex flex-col flex-1">
+                <h3 class="font-crimson text-sm sm:text-lg lg:text-xl text-white mb-1.5 sm:mb-3">
                   Thursday Offer
                 </h3>
                 <p class="font-josefin text-white/80 text-xs sm:text-sm leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                   A sharing platter with a bottle of wine, £35. Choose from six wines.
                 </p>
-                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin">
+                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin mt-auto">
                   <svg class="w-3 h-3 mr-1.5 sm:w-4 sm:h-4 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
                   </svg>
@@ -345,8 +345,8 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
             </div>
           </article>
 
-          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/friday-offer.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+          <article class="menu-card group cursor-pointer h-full w-full" onclick="openMenuPDF('/pdfs/friday-offer.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 h-full flex flex-col">
               <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src={fridayOffer}
@@ -377,14 +377,14 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
                 </div>
               </div>
               
-              <div class="p-3 sm:p-5 lg:p-6">
-                <h3 class="font-crimson text-sm sm:text-lg lg:text-2xl text-white mb-1.5 sm:mb-3">
+              <div class="p-3 sm:p-4 lg:p-5 flex flex-col flex-1">
+                <h3 class="font-crimson text-sm sm:text-lg lg:text-xl text-white mb-1.5 sm:mb-3">
                   Friday Offer
                 </h3>
                 <p class="font-josefin text-white/80 text-xs sm:text-sm leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                   A pizza with a bottle of prosecco, £39. Choose one from the pizza list.
                 </p>
-                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin">
+                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin mt-auto">
                   <svg class="w-3 h-3 mr-1.5 sm:w-4 sm:h-4 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
                   </svg>
@@ -395,8 +395,8 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
           </article>
 
           <!-- Christmas Set Menu: seasonal, listed last so the year-round menus lead. -->
-          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/christmas-set-menu.pdf')">
-            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+          <article class="menu-card group cursor-pointer h-full w-full" onclick="openMenuPDF('/pdfs/christmas-set-menu.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300 h-full flex flex-col">
               <div class="relative group-hover:scale-105 transition-transform duration-300">
                 <Image 
                   src={christmasSetMenu}
@@ -427,14 +427,14 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
                 </div>
               </div>
               
-              <div class="p-3 sm:p-5 lg:p-6">
-                <h3 class="font-crimson text-sm sm:text-lg lg:text-2xl text-white mb-1.5 sm:mb-3">
+              <div class="p-3 sm:p-4 lg:p-5 flex flex-col flex-1">
+                <h3 class="font-crimson text-sm sm:text-lg lg:text-xl text-white mb-1.5 sm:mb-3">
                   Christmas Set Menu
                 </h3>
                 <p class="font-josefin text-white/80 text-xs sm:text-sm leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
                   A festive set menu for parties and gatherings through the Christmas season.
                 </p>
-                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin">
+                <div class="flex items-center text-brand-gold text-[11px] sm:text-sm font-josefin mt-auto">
                   <svg class="w-3 h-3 mr-1.5 sm:w-4 sm:h-4 sm:mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
                   </svg>
@@ -451,17 +451,17 @@ import christmasSetMenu from '@/assets/menu-christmas.jpg';
           <!-- HIDDEN: Christmas Menus - Uncomment when needed for seasonal use
           
           Christmas Party Menu 2
-          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/christmas-menu2.pdf')">
+          <article class="menu-card group cursor-pointer h-full w-full" onclick="openMenuPDF('/pdfs/christmas-menu2.pdf')">
             ...
           </article>
 
           Christmas Party Menu
-          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/christmas-party.pdf')">
+          <article class="menu-card group cursor-pointer h-full w-full" onclick="openMenuPDF('/pdfs/christmas-party.pdf')">
             ...
           </article>
 
           Christmas Party Menu 3
-          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/christmas-menu3.pdf')">
+          <article class="menu-card group cursor-pointer h-full w-full" onclick="openMenuPDF('/pdfs/christmas-menu3.pdf')">
             ...
           </article>
           
