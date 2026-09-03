@@ -75,6 +75,8 @@ const postsToShow = latestPosts.length > 0 ? latestPosts : fallbackPosts;
               <div class="relative overflow-hidden rounded-xl mb-6">
                 <img 
                   src={heroImage || `/images/blog-${index + 1}.jpg`}
+                  width="500"
+                  height="288"
                   alt={imageAlt}
                   class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
@@ -105,7 +107,7 @@ const postsToShow = latestPosts.length > 0 ? latestPosts : fallbackPosts;
     <!-- Read More Button -->
     <div class="text-center">
       <a 
-        href="/blog" 
+        href="/blog/" 
         class="inline-flex items-center btn-secondary group"
         aria-label="Read more blog posts"
       >

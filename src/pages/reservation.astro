@@ -3,11 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import ReservationSection from '../components/ReservationSection.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+// Same dinner photo the reservation section on the home page now uses.
+import reservationDinner from '@/assets/reservation-dinner.jpg';
 ---
 
 <BaseLayout 
-  title="Book a Table | TheSolo Kitchen & Bar - Mediterranean Restaurant London" 
-  description="Reserve your table at TheSolo Kitchen & Bar, East London's premier Mediterranean restaurant. Rooftop dining, private events. Book online or call 020 3340 8082."
+  title="Book a Table | TheSolo Kitchen & Bar, East London" 
+  description="Reserve your table at TheSolo Kitchen & Bar, East London. Rooftop dining and private events. Book online or call 020 8014 2656."
   image="/images/reservation-hero.jpg"
 >
   <Header />
@@ -17,11 +20,17 @@ import Footer from '../components/Footer.astro';
     <section class="relative h-96 sm:h-[500px] lg:h-[600px] flex items-center justify-center bg-brand-dark">
       <!-- Hero Background Image -->
       <div class="absolute inset-0 z-0">
-        <img 
-          src="/images/reservation-hero.jpg" 
-          alt="Beautifully set dining table at TheSolo Kitchen & Bar" 
+        <Image
+          src={reservationDinner}
+          alt="Dinner at TheSolo Kitchen & Bar: slow-cooked lamb risotto and a signature cocktail"
           class="w-full h-full object-cover"
           loading="eager"
+          fetchpriority="high"
+          format="webp"
+          quality={80}
+          width={1440}
+          widths={[640, 960, 1440]}
+          sizes="100vw"
         />
         <div class="absolute inset-0 bg-brand-dark/75"></div>
       </div>
@@ -59,10 +68,10 @@ import Footer from '../components/Footer.astro';
               <div>
                 <h3 class="font-crimson text-xl text-white mb-3">Opening Hours</h3>
                 <div class="font-josefin text-white/80 space-y-1">
-                  <p>Monday - Thursday: 8:30 AM - 11:30 PM</p>
-                  <p>Friday: 8:30 AM - 12:30 AM</p>
-                  <p>Saturday: 8:30 AM - 12:30 AM</p>
-                  <p>Sunday: 8:30 AM - 11:30 PM</p>
+                  <p>Monday - Thursday: 10:00 AM - 11:30 PM</p>
+                  <p>Friday: 10:00 AM - 12:30 AM</p>
+                  <p>Saturday: 10:00 AM - 12:30 AM</p>
+                  <p>Sunday: 10:00 AM - 11:30 PM</p>
                 </div>
               </div>
               
@@ -81,7 +90,7 @@ import Footer from '../components/Footer.astro';
                 <div class="font-josefin text-white/80 space-y-1">
                   <p>Email: <a href="mailto:bookings@thesolo.co.uk" class="text-brand-gold hover:text-white transition-colors">bookings@thesolo.co.uk</a></p>
                   <p>Phone: <a href="tel:+442080142656" class="text-brand-gold hover:text-white transition-colors">020 8014 2656</a></p>
-                  <p>Address: Museum Gardens, London, E2 9PA</p>
+                  <p>Address: Museum Gardens, Cambridge Heath Road, London E2 9PA</p>
                 </div>
               </div>
             </div>
@@ -90,7 +99,7 @@ import Footer from '../components/Footer.astro';
           <!-- Image -->
           <div>
             <div class="relative overflow-hidden rounded-2xl">
-              <img 
+              <img width="800" height="600" 
                 src="/images/restaurant-3.jpg" 
                 alt="Elegant dining area at TheSolo Kitchen & Bar" 
                 class="w-full h-96 lg:h-[500px] object-cover hover:scale-105 transition-transform duration-700"
@@ -116,13 +125,13 @@ import Footer from '../components/Footer.astro';
         
         <div class="flex flex-col sm:flex-row gap-6 justify-center">
           <a 
-            href="/contact"
+            href="/contact/"
             class="btn-primary text-lg px-8 py-4"
           >
             Contact Us
           </a>
           <a 
-            href="/menu"
+            href="/menu/"
             class="btn-secondary text-lg px-8 py-4"
           >
             View Our Menu

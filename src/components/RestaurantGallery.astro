@@ -8,8 +8,8 @@
     <!-- Section Header -->
     <div class="text-center mb-10 sm:mb-12 lg:mb-16">
       <h2 class="font-crimson text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-brand-gold mb-6 sm:mb-8">
-        Our Restaurant Looks<br>
-        <span class="text-white">Dining Area</span>
+        Our Restaurant<br>
+        <span class="text-white">&amp; Dining Spaces</span>
       </h2>
     </div>
     
@@ -30,11 +30,15 @@
           <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
           
           <!-- Image Overlay Info - Hidden on Mobile -->
-          <div class="absolute bottom-8 left-8 right-8 hidden lg:block">
-            <h3 class="font-crimson text-title-lg text-white mb-2">
+            <!--
+              A caption drawn over the photo, repeating the panel heading
+              beside it. Not a section of its own, so not an <h3>.
+            -->
+          <div class="absolute bottom-8 left-8 right-8 hidden lg:block" aria-hidden="true">
+            <p class="font-crimson text-title-lg text-white mb-2">
               Rooftop<br>
               Terrace
-            </h3>
+            </p>
           </div>
         </div>
       </div>
@@ -76,7 +80,7 @@
           <div class="mt-8">
             <button
               onclick="openEventsBrochure()"
-              class="inline-flex items-center bg-brand-gold text-neutral-light px-6 py-3 rounded-lg font-crimson text-base font-semibold hover:bg-brand-gold/90 transition-colors duration-300 group w-full justify-center"
+              class="inline-flex items-center bg-brand-gold text-brand-dark px-6 py-3 rounded-lg font-crimson text-base font-semibold hover:bg-brand-gold/90 transition-colors duration-300 group w-full justify-center"
             >
               <span class="mr-3">Events Brochure</span>
               <svg

@@ -34,9 +34,9 @@
         </div>
         
         <!-- Slider Navigation Dots -->
-        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          <button class="about-slider-dot w-2 h-2 bg-white/50 rounded-full transition-all duration-300" data-slide="0"></button>
-          <button class="about-slider-dot w-2 h-2 bg-white/50 rounded-full transition-all duration-300" data-slide="1"></button>
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
+          <button class="about-slider-dot w-2 h-2 bg-white/50 rounded-full transition-all duration-300" data-slide="0" aria-label="Show restaurant photo 1"></button>
+          <button class="about-slider-dot w-2 h-2 bg-white/50 rounded-full transition-all duration-300" data-slide="1" aria-label="Show restaurant photo 2"></button>
         </div>
       </div>
       
@@ -45,7 +45,7 @@
         <!-- Section Title -->
         <h2 class="font-crimson text-3xl sm:text-4xl font-normal text-brand-gold mb-4 leading-tight">
           Relax In Our<br>
-          <span class="text-white">Comfortable</span>
+          <span class="text-white">Comfortable Surroundings</span>
         </h2>
         
         <!-- Restaurant Name -->
@@ -61,7 +61,7 @@
         <!-- CTA Button -->
         <div class="flex justify-center">
           <a 
-            href="/about" 
+            href="/about/" 
             class="inline-flex items-center btn-secondary group"
             aria-label="Read more about TheSolo Kitchen & Bar"
           >
@@ -100,15 +100,22 @@
       <!-- Ortada Dar İçerik -->
       <div class="flex-1 max-w-md mx-8">
         <!-- Section Title -->
-        <h2 class="font-crimson text-5xl font-normal text-brand-gold mb-6 leading-tight">
+        <!--
+          Same heading as the mobile block above, re-rendered for the desktop
+          layout. Only one of the two is ever visible, but both sit in the DOM,
+          so this copy is not an <h2>: a duplicate entry in the heading outline
+          told search engines the page has two identical sections. role and
+          aria-level keep the landmark for desktop screen readers.
+        -->
+        <p role="heading" aria-level="2" class="font-crimson text-5xl font-normal text-brand-gold mb-6 leading-tight">
           Relax In Our<br>
-          <span class="text-white">Comfortable</span>
-        </h2>
+          <span class="text-white">Comfortable Surroundings</span>
+        </p>
         
         <!-- Restaurant Name -->
-        <h3 class="font-crimson text-2xl text-white mb-6">
+        <p role="heading" aria-level="3" class="font-crimson text-2xl text-white mb-6">
           The Solo Kitchen & Bar
-        </h3>
+        </p>
         
         <!-- Description -->
         <p class="font-josefin text-base text-white leading-relaxed mb-8">
@@ -118,7 +125,7 @@
         <!-- CTA Button -->
         <div class="flex items-center">
           <a 
-            href="/about" 
+            href="/about/" 
             class="inline-flex items-center btn-secondary group"
             aria-label="Read more about TheSolo Kitchen & Bar"
           >

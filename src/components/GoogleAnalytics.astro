@@ -6,8 +6,16 @@ const GOOGLE_TAG_MANAGER_ID = import.meta.env.GOOGLE_TAG_MANAGER_ID;
 
 {GOOGLE_ANALYTICS_ID && (
   <>
-    <!-- Google tag (gtag.js) -->
-    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}></script>
+    {/*
+      The gtag.js loader used to sit here. It is gone because the Google Tag
+      container below already loads the same runtime AND already fires this exact
+      measurement ID — the container source contains G-6G14ZQHWSZ — so the page
+      was downloading roughly 500 KB of identical tag runtime twice.
+
+      What stays is the dataLayer shim and the config call: gtag() only pushes
+      onto window.dataLayer, which the container reads, and this is the only place
+      the privacy options (IP anonymisation, no ad personalisation) are set.
+    */}
     <script is:inline define:vars={{ GOOGLE_ANALYTICS_ID }}>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
