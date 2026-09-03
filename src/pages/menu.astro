@@ -9,6 +9,8 @@ import breakfastPancakes from '@/assets/menu-breakfast-pancakes.jpg';
 import aLaCarteRisotto from '@/assets/menu-a-la-carte-risotto.jpg';
 import partyMeze from '@/assets/menu-party-meze.jpg';
 import bottomlessBrunch from '@/assets/menu-bottomless-brunch.jpg';
+import thursdayOffer from '@/assets/menu-thursday-offer.jpg';
+import fridayOffer from '@/assets/menu-friday-offer.jpg';
 import christmasSetMenu from '@/assets/menu-christmas.jpg';
 import drinksCocktails from '@/assets/menu-drinks-cocktails.jpg';
 ---
@@ -312,6 +314,105 @@ import drinksCocktails from '@/assets/menu-drinks-cocktails.jpg';
                 </h3>
                 <p class="font-josefin text-white/80 text-sm leading-relaxed mb-4">
                   Free-flowing drinks alongside brunch plates, served on the rooftop terrace at weekends.
+                </p>
+                <div class="flex items-center text-brand-gold text-sm font-josefin">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
+                  </svg>
+                  Click to view PDF
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Weekly offers, in the order they fall in the week. -->
+          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/thursday-offer.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+              <div class="relative group-hover:scale-105 transition-transform duration-300">
+                <Image 
+                  src={thursdayOffer}
+                  alt="Thursday Offer: sharing platter and a bottle of wine" 
+                  class="w-full h-64 object-cover"
+                  loading="lazy"
+                  width={926}
+                  widths={[463, 926]}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  format="webp"
+                  quality={80}
+                />
+                <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+                
+                <!-- PDF Icon Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="bg-brand-gold/90 rounded-full p-4 backdrop-blur-sm">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <div class="absolute top-4 right-4">
+                  <span class="bg-brand-gold/90 text-brand-dark px-3 py-1 text-sm font-josefin font-medium rounded-full backdrop-blur-sm">
+                    Thursdays
+                  </span>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h3 class="font-crimson text-xl lg:text-2xl text-white mb-3">
+                  Thursday Offer
+                </h3>
+                <p class="font-josefin text-white/80 text-sm leading-relaxed mb-4">
+                  A sharing platter with a bottle of wine, £35. Choose from six wines.
+                </p>
+                <div class="flex items-center text-brand-gold text-sm font-josefin">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3" />
+                  </svg>
+                  Click to view PDF
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card group cursor-pointer" onclick="openMenuPDF('/pdfs/friday-offer.pdf')">
+            <div class="bg-brand-dark-card rounded-xl overflow-hidden border border-brand-gold/20 hover:border-brand-gold/40 transition-all duration-300">
+              <div class="relative group-hover:scale-105 transition-transform duration-300">
+                <Image 
+                  src={fridayOffer}
+                  alt="Friday Offer: pizza and a bottle of prosecco" 
+                  class="w-full h-64 object-cover"
+                  loading="lazy"
+                  width={926}
+                  widths={[463, 926]}
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  format="webp"
+                  quality={80}
+                />
+                <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+                
+                <!-- PDF Icon Overlay -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="bg-brand-gold/90 rounded-full p-4 backdrop-blur-sm">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                </div>
+                
+                <div class="absolute top-4 right-4">
+                  <span class="bg-brand-gold/90 text-brand-dark px-3 py-1 text-sm font-josefin font-medium rounded-full backdrop-blur-sm">
+                    Fridays
+                  </span>
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h3 class="font-crimson text-xl lg:text-2xl text-white mb-3">
+                  Friday Offer
+                </h3>
+                <p class="font-josefin text-white/80 text-sm leading-relaxed mb-4">
+                  A pizza with a bottle of prosecco, £39. Choose one from the pizza list.
                 </p>
                 <div class="flex items-center text-brand-gold text-sm font-josefin">
                   <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

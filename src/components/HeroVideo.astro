@@ -80,7 +80,18 @@ const VIDEO_VERSION = 'v2';
       <span class="hp-mb">A Mediterranean kitchen and cocktail bar, with a rooftop terrace under a retractable roof.</span>
     </p>
 
+    <!--
+      Reservation CTA, phones only. It was removed from the hero at the client's
+      request, but on a phone the header collapses to a burger, so nothing on the
+      first screen led to a booking. On a desktop the RESERVATION button sits in
+      the header and the lede carries "See the menu", so the block stays hidden
+      there and the mount rule is left clear.
+    -->
     <div class="hp-cta-row hp-rise hp-d4">
+      <a class="hp-cta" href="/reservation/">
+        <span class="hp-cta-t">Book a table</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
       <a class="hp-menu-link" href="/menu/">Menu</a>
     </div>
 
@@ -210,13 +221,14 @@ const VIDEO_VERSION = 'v2';
   .hp-lede a:hover { color: var(--copper); }
 
   /*
-    The row that carried the copper "Book a table" block. The button was removed
-    at the client's request. On a phone the row still holds the quiet Menu link;
-    on a desktop the lede's "See the menu" already covers that, so the row has
-    nothing to show and stays out of the way.
+    Phone-only reservation block. The client asked for it off the desktop hero,
+    where the header's RESERVATION button is always visible; on a phone the
+    header is just a burger, so without this the first screen offered no way to
+    book. Both children are hidden above 1023px, which leaves the mount rule
+    clear exactly as the desktop design intends.
   */
   .hp-cta-row { position: absolute; z-index: 6; top: -28px; right: calc(var(--m) + 28px); }
-  .hp-menu-link { display: none; }
+  .hp-cta, .hp-menu-link { display: none; }
 
   /* Caption line under the print: hours, address and phone set like the foot of a menu. */
   .hp-ledger {
@@ -289,6 +301,17 @@ const VIDEO_VERSION = 'v2';
     .hp-title .hp-l2 { padding-top: 6px; }
     .hp-lede { margin: 12px 0 0; padding: 0; max-width: none; line-height: 1.55; }
     .hp-cta-row { position: static; display: flex; align-items: center; gap: 20px; margin-top: 16px; }
+    .hp-cta {
+      display: inline-flex; align-items: center; justify-content: space-between; gap: 16px;
+      flex: 1; height: 56px; padding: 0 22px 0 24px; border-radius: 2px;
+      background: var(--copper); color: var(--green);
+      font-family: 'Crimson Text', Georgia, serif; font-weight: 600; font-size: 18px; letter-spacing: .01em; line-height: 1;
+      transition: transform .45s var(--ease), background-color .3s var(--ease);
+    }
+    .hp-cta svg { width: 20px; height: 20px; flex: none; }
+    .hp-cta:active { transform: translateY(1px); }
+    .hp-cta:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+    .hp-cta-t { padding-top: 3px; }
     .hp-menu-link {
       display: flex; align-items: center; min-height: 44px; position: relative;
       font-family: 'Crimson Text', Georgia, serif; font-size: 18px; line-height: 1; padding-top: 2px; color: var(--cream);

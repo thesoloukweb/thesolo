@@ -8,6 +8,8 @@ import breakfastPancakes from '@/assets/menu-breakfast-pancakes.jpg';
 import aLaCarteRisotto from '@/assets/menu-a-la-carte-risotto.jpg';
 import partyMeze from '@/assets/menu-party-meze.jpg';
 import bottomlessBrunch from '@/assets/menu-bottomless-brunch.jpg';
+import thursdayOffer from '@/assets/menu-thursday-offer.jpg';
+import fridayOffer from '@/assets/menu-friday-offer.jpg';
 import christmasSetMenu from '@/assets/menu-christmas.jpg';
 import drinksCocktails from '@/assets/menu-drinks-cocktails.jpg';
 
@@ -267,8 +269,93 @@ const CARD_SIZES = '(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw';
           </div>
         </article>
 
+        <!-- Weekly offers, in the order they fall in the week. -->
+        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="5" onclick="openMenuPDF('/pdfs/thursday-offer.pdf')">
+          <div class="bg-brand-dark-card rounded-xl overflow-hidden group">
+            <div class="relative hover:scale-105 transition-transform duration-200">
+              <Image 
+                src={thursdayOffer}
+                alt="Thursday Offer: sharing platter and a bottle of wine" 
+                class="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                loading="lazy"
+                width={926}
+                widths={CARD_WIDTHS}
+                sizes={CARD_SIZES}
+                format="webp"
+                quality={80}
+              />
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+              
+              <!-- PDF Icon Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="bg-brand-gold/90 rounded-full p-4">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Offer Badge -->
+              <div class="absolute top-4 right-4">
+                <span class="bg-brand-gold/90 text-brand-dark px-3 py-1 text-sm font-josefin font-medium rounded-full backdrop-blur-sm">
+                  £35
+                </span>
+              </div>
+              
+              <!-- Category Label -->
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-brand-gold text-brand-dark px-3 py-1 text-sm font-semibold rounded-full">
+                  Thursday Offer
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="6" onclick="openMenuPDF('/pdfs/friday-offer.pdf')">
+          <div class="bg-brand-dark-card rounded-xl overflow-hidden group">
+            <div class="relative hover:scale-105 transition-transform duration-200">
+              <Image 
+                src={fridayOffer}
+                alt="Friday Offer: pizza and a bottle of prosecco" 
+                class="w-full h-48 sm:h-56 lg:h-64 object-cover"
+                loading="lazy"
+                width={926}
+                widths={CARD_WIDTHS}
+                sizes={CARD_SIZES}
+                format="webp"
+                quality={80}
+              />
+              <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
+              
+              <!-- PDF Icon Overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="bg-brand-gold/90 rounded-full p-4">
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+              </div>
+              
+              <!-- Offer Badge -->
+              <div class="absolute top-4 right-4">
+                <span class="bg-brand-gold/90 text-brand-dark px-3 py-1 text-sm font-josefin font-medium rounded-full backdrop-blur-sm">
+                  £39
+                </span>
+              </div>
+              
+              <!-- Category Label -->
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-brand-gold text-brand-dark px-3 py-1 text-sm font-semibold rounded-full">
+                  Friday Offer
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+
         <!-- Christmas Set Menu: seasonal, sits last so the year-round menus lead. -->
-        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="5" onclick="openMenuPDF('/pdfs/christmas-set-menu.pdf')">
+        <article class="menu-pdf-item flex-shrink-0 w-full sm:w-1/2 lg:w-1/4 px-3 cursor-pointer" data-index="7" onclick="openMenuPDF('/pdfs/christmas-set-menu.pdf')">
           <div class="bg-brand-dark-card rounded-xl overflow-hidden group">
             <div class="relative hover:scale-105 transition-transform duration-200">
               <Image 
@@ -316,6 +403,8 @@ const CARD_SIZES = '(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw';
         <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="3" aria-label="Show menu 4"></button>
         <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="4" aria-label="Show menu 5"></button>
         <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="5" aria-label="Show menu 6"></button>
+        <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="6" aria-label="Show menu 7"></button>
+        <button class="carousel-indicator w-4 h-4 p-1 rounded-full bg-brand-gold/30 hover:bg-brand-gold/60 transition-all duration-300 touch-manipulation" data-slide="7" aria-label="Show menu 8"></button>
       </div>
       
     </div>
@@ -356,7 +445,7 @@ const CARD_SIZES = '(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw';
     const currentMenuTitle = document.getElementById('current-menu-title');
     
     let currentSlide = 0;
-    const totalMenus = 6;
+    const totalMenus = 8;
     let isInitialized = false;
     
     // Get max slides based on screen size to prevent overflow
@@ -380,6 +469,8 @@ const CARD_SIZES = '(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw';
       'Drinks',
       'Party Menu',
       'Bottomless Brunch',
+      'Thursday Offer',
+      'Friday Offer',
       'Christmas Set Menu'
     ];
     
