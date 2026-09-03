@@ -5,8 +5,7 @@
  * Direction chosen by the September 2026 design panel ("framed film"). The film
  * is not a background behind a dark wash; it is a gallery print with a copper
  * hairline mount on the deep green page. The name rises out of the print's lower
- * edge, the facts a guest needs sit in a caption line under it, and the copper
- * "Book a table" block is pinned to the mount rule. Legibility comes from
+ * edge and the facts a guest needs sit in a caption line under it. Legibility comes from
  * geometry (type on the green mat), not from darkening the film. The only scrim
  * is a small corner floor under the word "Solo".
  *
@@ -82,10 +81,6 @@ const VIDEO_VERSION = 'v2';
     </p>
 
     <div class="hp-cta-row hp-rise hp-d4">
-      <a class="hp-cta" href="/reservation/">
-        <span class="hp-cta-t">Book a table</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
       <a class="hp-menu-link" href="/menu/">Menu</a>
     </div>
 
@@ -214,20 +209,13 @@ const VIDEO_VERSION = 'v2';
   .hp-lede a { color: var(--cream); border-bottom: 1px solid var(--copper); padding-bottom: 1px; transition: color .3s var(--ease); }
   .hp-lede a:hover { color: var(--copper); }
 
-  /* Primary CTA: a copper block pinned to the bottom rule at the right of the print. */
+  /*
+    The row that carried the copper "Book a table" block. The button was removed
+    at the client's request. On a phone the row still holds the quiet Menu link;
+    on a desktop the lede's "See the menu" already covers that, so the row has
+    nothing to show and stays out of the way.
+  */
   .hp-cta-row { position: absolute; z-index: 6; top: -28px; right: calc(var(--m) + 28px); }
-  .hp-cta {
-    display: inline-flex; align-items: center; justify-content: space-between; gap: 16px;
-    height: 56px; padding: 0 24px 0 28px; border-radius: 2px;
-    background: var(--copper); color: var(--green);
-    font-family: 'Crimson Text', Georgia, serif; font-weight: 600; font-size: 18px; letter-spacing: .01em; line-height: 1;
-    transition: transform .45s var(--ease), background-color .3s var(--ease);
-  }
-  .hp-cta svg { width: 20px; height: 20px; flex: none; transition: transform .45s var(--ease); }
-  .hp-cta:hover { transform: translateY(-2px); background: #D2AB97; }
-  .hp-cta:hover svg { transform: translateX(4px); }
-  .hp-cta:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
-  .hp-cta-t { padding-top: 3px; }
   .hp-menu-link { display: none; }
 
   /* Caption line under the print: hours, address and phone set like the foot of a menu. */
@@ -301,7 +289,6 @@ const VIDEO_VERSION = 'v2';
     .hp-title .hp-l2 { padding-top: 6px; }
     .hp-lede { margin: 12px 0 0; padding: 0; max-width: none; line-height: 1.55; }
     .hp-cta-row { position: static; display: flex; align-items: center; gap: 20px; margin-top: 16px; }
-    .hp-cta { flex: 1; height: 56px; padding: 0 22px 0 24px; }
     .hp-menu-link {
       display: flex; align-items: center; min-height: 44px; position: relative;
       font-family: 'Crimson Text', Georgia, serif; font-size: 18px; line-height: 1; padding-top: 2px; color: var(--cream);
