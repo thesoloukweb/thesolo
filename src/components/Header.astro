@@ -1,8 +1,31 @@
 ---
-// Header component for TheSolo Kitchen & Bar
+/**
+ * Site header.
+ *
+ * Pass `overlay` on a page whose first section is designed to sit under a
+ * transparent bar (the homepage hero): the header starts transparent and turns
+ * solid once the page scrolls past the top or the mobile menu opens. Every other
+ * page keeps the solid bar it always had.
+ *
+ * The header also publishes its own height as the --site-header-h custom
+ * property on <html>, so a section below can reserve exactly that space,
+ * including after the Blue Light Card banner is dismissed.
+ */
+interface Props {
+  overlay?: boolean;
+}
+const { overlay = false } = Astro.props;
 ---
 
-<header class="fixed top-0 left-0 w-full z-50 bg-brand-dark/90 backdrop-blur-md border-b border-brand-gold/20">
+<header
+  id="site-header"
+  class:list={[
+    'fixed top-0 left-0 w-full z-50 border-b',
+    overlay ? 'site-header-overlay border-transparent' : 'bg-brand-dark/90 backdrop-blur-md border-brand-gold/20',
+  ]}
+  data-overlay={overlay ? 'true' : undefined}
+  data-solid={overlay ? 'false' : undefined}
+>
   <!-- Blue Light Card Discount Banner -->
   <div class="bg-brand-gold/10 border-b border-brand-gold/20 relative" id="blc-banner">
     <div class="container-custom flex items-center justify-center py-1.5 px-4">
@@ -23,7 +46,7 @@
         </svg>
       </a>
       <button 
-        class="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors duration-300 p-1"
+        class="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors duration-300 p-1.5"
         id="close-blc-banner"
         aria-label="Close banner"
       >
@@ -58,25 +81,31 @@
           Home
         </a>
         <a 
-          href="/about" 
+          href="/about/" 
           class="font-crimson text-lg tracking-wider text-white hover:text-brand-gold transition-colors duration-300"
         >
           About us
         </a>
         <a 
-          href="/menu" 
+          href="/menu/" 
           class="font-crimson text-lg tracking-wider text-white hover:text-brand-gold transition-colors duration-300"
         >
           Menu
         </a>
         <a 
-          href="/gallery" 
+          href="/gallery/" 
           class="font-crimson text-lg tracking-wider text-white hover:text-brand-gold transition-colors duration-300"
         >
           Gallery
         </a>
         <a 
-          href="/contact"
+          href="/blog/"
+          class="font-crimson text-lg tracking-wider text-white hover:text-brand-gold transition-colors duration-300"
+        >
+          Blog
+        </a>
+        <a 
+          href="/contact/"
           class="font-crimson text-lg tracking-wider text-white hover:text-brand-gold transition-colors duration-300"
         >
           Contact Us
@@ -86,7 +115,7 @@
       <!-- Reservation Button -->
       <div class="hidden sm:block">
         <a 
-          href="/reservation"
+          href="/reservation/"
           class="btn-primary text-sm uppercase tracking-wider font-semibold"
           aria-label="Make a reservation"
         >
@@ -135,32 +164,38 @@
           Home
         </a>
         <a 
-          href="/about" 
+          href="/about/" 
           class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
         >
           About us
         </a>
         <a 
-          href="/menu" 
+          href="/menu/" 
           class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
         >
           Menu
         </a>
         <a 
-          href="/gallery" 
+          href="/gallery/" 
           class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
         >
           Gallery
         </a>
         <a 
-          href="/contact" 
+          href="/blog/" 
+          class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
+        >
+          Blog
+        </a>
+        <a 
+          href="/contact/" 
           class="block font-crimson text-xl text-white hover:text-brand-gold transition-colors duration-300 py-2"
         >
           Contact Us
         </a>
         <div class="pt-4">
           <a 
-            href="/reservation"
+            href="/reservation/"
             class="btn-primary w-full text-center block"
           >
             Reservation
@@ -171,8 +206,55 @@
   </div>
 </header>
 
+<style is:global>
+  .site-header-overlay {
+    background-color: transparent;
+    transition: background-color .4s cubic-bezier(.22, 1, .36, 1), border-color .4s cubic-bezier(.22, 1, .36, 1);
+  }
+  .site-header-overlay[data-solid="true"] {
+    background-color: rgba(16, 43, 42, .9);
+    border-color: rgba(196, 154, 133, .2);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+  /* On the overlay page the logo sits on the hero name's left edge (64px) and the
+     reservation pill on the print's right rule; inner pages keep the 32px gutter. */
+  @media (min-width: 1280px) {
+    .site-header-overlay .container-custom { padding-left: 64px; padding-right: 64px; }
+  }
+</style>
+
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    const header = document.getElementById('site-header');
+
+    // Publish the header's height so the hero can reserve exactly that space,
+    // including after the banner is dismissed or the viewport is resized.
+    if (header) {
+      const publish = () => document.documentElement.style.setProperty('--site-header-h', `${header.offsetHeight}px`);
+      publish();
+      if ('ResizeObserver' in window) new ResizeObserver(publish).observe(header);
+    }
+
+    // Overlay mode: transparent at the very top, solid once scrolled past 24px
+    // or while the mobile menu is open. A sentinel with IntersectionObserver
+    // replaces a scroll listener.
+    let atTop = true;
+    let menuOpen = false;
+    const syncHeader = () => {
+      if (header && header.dataset.overlay) header.dataset.solid = (!atTop || menuOpen) ? 'true' : 'false';
+    };
+    if (header && header.dataset.overlay && 'IntersectionObserver' in window) {
+      const sentinel = document.createElement('div');
+      sentinel.setAttribute('aria-hidden', 'true');
+      sentinel.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:25px;pointer-events:none;';
+      document.body.prepend(sentinel);
+      new IntersectionObserver((entries) => {
+        atTop = entries[0].isIntersecting;
+        syncHeader();
+      }).observe(sentinel);
+    }
+
     // Blue Light Card banner dismiss
     const blcBanner = document.getElementById('blc-banner');
     const closeBlcBtn = document.getElementById('close-blc-banner');
@@ -204,6 +286,8 @@
         
         // Toggle menu visibility
         mobileMenu.classList.toggle('hidden');
+        menuOpen = !isExpanded;
+        syncHeader();
         
         // Toggle icon
         hamburgerLine.classList.toggle('hidden');
@@ -215,6 +299,8 @@
       mobileLinks.forEach(link => {
         link.addEventListener('click', () => {
           mobileMenu.classList.add('hidden');
+          menuOpen = false;
+          syncHeader();
           mobileMenuButton.setAttribute('aria-expanded', 'false');
           mobileMenu.setAttribute('aria-hidden', 'true');
           hamburgerLine.classList.remove('hidden');

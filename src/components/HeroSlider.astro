@@ -1,6 +1,25 @@
 ---
 // Hero Section with static layout like Figma design
 import { Image } from 'astro:assets';
+import heroLeft from '@/assets/hero-left.jpg';
+import heroRight from '@/assets/hero-right.jpg';
+
+/**
+ * The two hero images are the whole of the mobile LCP problem: as unprocessed
+ * JPEGs in public/ they shipped 1,583 KB above the fold. Importing them makes
+ * astro:assets actually process them — the previous <Image src="/images/..."/>
+ * looked like optimisation but emitted the original file untouched.
+ *
+ * <Image> rather than <Picture> on purpose: <Picture> wraps the img in a
+ * <picture> element, and .hero-right-figma img { width:100%; height:100% }
+ * would then resolve against an inline wrapper instead of the sized container.
+ * One <img> with a srcset keeps the existing CSS working exactly as before.
+ *
+ * Both the mobile slider and the desktop layout render the same image with the
+ * same widths/sizes, so the browser downloads one set of candidates, not two.
+ */
+const HERO_LEFT = { widths: [360, 705], sizes: '(min-width: 1024px) 738px, 100vw' };
+const HERO_RIGHT = { widths: [480, 995], sizes: '(min-width: 1024px) 995px, 100vw' };
 ---
 
 <section class="relative min-h-screen w-full bg-brand-dark" id="hero" style="padding-top: 0;">
@@ -9,36 +28,37 @@ import { Image } from 'astro:assets';
     <div class="mobile-hero-slider relative w-full h-72 sm:h-96 overflow-hidden" id="mobile-hero-slider" style="margin-top: 100px;">
           <!-- Slide 1 -->
           <div class="slider-item absolute inset-0 transition-transform duration-500 ease-in-out" data-slide="0">
-            <Image 
-              src="/images/hero-left.jpg" 
-              alt="TheSolo Kitchen & Bar elegant lounge seating" 
+            <Image
+              src={heroLeft}
+              alt="TheSolo Kitchen & Bar elegant lounge seating"
               class="w-full h-full object-cover"
               loading="eager"
-              width={738}
-              height={738}
+              fetchpriority="high"
               format="webp"
-              quality={85}
+              quality={80}
+              widths={HERO_LEFT.widths}
+              sizes={HERO_LEFT.sizes}
             />
           </div>
           
           <!-- Slide 2 -->
           <div class="slider-item absolute inset-0 transition-transform duration-500 ease-in-out translate-x-full" data-slide="1">
-            <Image 
-              src="/images/hero-right.jpg" 
-              alt="TheSolo Kitchen & Bar dining area" 
+            <Image
+              src={heroRight}
+              alt="TheSolo Kitchen & Bar dining area"
               class="w-full h-full object-cover"
               loading="eager"
-              width={995}
-              height={776}
               format="webp"
-              quality={85}
+              quality={80}
+              widths={HERO_RIGHT.widths}
+              sizes={HERO_RIGHT.sizes}
             />
           </div>
           
       <!-- Slider Navigation Dots -->
-      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        <button class="slider-dot w-2 h-2 bg-white/50 rounded-full transition-all duration-300" data-slide="0"></button>
-        <button class="slider-dot w-2 h-2 bg-white/50 rounded-full transition-all duration-300" data-slide="1"></button>
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-4">
+        <button class="slider-dot w-2 h-2 bg-white/50 rounded-full transition-all duration-300" data-slide="0" aria-label="Show hero image 1"></button>
+        <button class="slider-dot w-2 h-2 bg-white/50 rounded-full transition-all duration-300" data-slide="1" aria-label="Show hero image 2"></button>
       </div>
     </div>
   </div>
@@ -64,7 +84,7 @@ import { Image } from 'astro:assets';
             </p>
             
             <div class="inline-flex">
-              <a href="/reservation" class="inline-flex items-center bg-transparent border-2 border-brand-gold text-white font-crimson px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all duration-300 hover:bg-brand-gold hover:text-brand-dark group" aria-label="Book a table now">
+              <a href="/reservation/" class="inline-flex items-center bg-transparent border-2 border-brand-gold text-white font-crimson px-6 sm:px-8 py-2 sm:py-3 rounded-full transition-all duration-300 hover:bg-brand-gold hover:text-brand-dark group" aria-label="Book a table now">
                 <span class="mr-3">Book Now</span>
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -86,29 +106,30 @@ import { Image } from 'astro:assets';
             
             <!-- Left Image - 738x590px (%20 kısaltıldı) -->
             <div class="hero-left-figma">
-              <Image 
-                src="/images/hero-left.jpg" 
-                alt="TheSolo Kitchen & Bar elegant lounge seating" 
+              <Image
+                src={heroLeft}
+                alt="TheSolo Kitchen & Bar elegant lounge seating"
                 class="w-full h-full object-cover rounded-[30px]"
                 loading="eager"
-                width={738}
-                height={590}
+                fetchpriority="high"
                 format="webp"
-                quality={90}
+                quality={80}
+                widths={HERO_LEFT.widths}
+                sizes={HERO_LEFT.sizes}
               />
             </div>
             
                                 <!-- Right Image with L-shape (Vector 157) - 995x776px -->
                     <div class="hero-right-figma">
                       <Image
-                        src="/images/hero-right.jpg"
+                        src={heroRight}
                         alt="TheSolo Kitchen & Bar dining area with elegant table setting"
                         class="w-full h-full object-cover"
                         loading="eager"
-                        width={995}
-                        height={776}
                         format="webp"
-                        quality={90}
+                        quality={80}
+                        widths={HERO_RIGHT.widths}
+                        sizes={HERO_RIGHT.sizes}
                       />
                       
                       <!-- Content positioned in the L-shape ÇIKINTI area -->
@@ -118,7 +139,7 @@ import { Image } from 'astro:assets';
                         </p>
 
                         <div class="inline-flex">
-                          <a href="/reservation" class="inline-flex items-center bg-transparent border-2 border-brand-gold text-white font-crimson px-8 py-3 rounded-full transition-all duration-300 hover:bg-brand-gold hover:text-brand-dark group" aria-label="Book a table now">
+                          <a href="/reservation/" class="inline-flex items-center bg-transparent border-2 border-brand-gold text-white font-crimson px-8 py-3 rounded-full transition-all duration-300 hover:bg-brand-gold hover:text-brand-dark group" aria-label="Book a table now">
                             <span class="mr-3">Book Now</span>
                             <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />

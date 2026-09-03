@@ -1,0 +1,399 @@
+---
+/**
+ * Hero: the client's film mounted as a print.
+ *
+ * Direction chosen by the September 2026 design panel ("framed film"). The film
+ * is not a background behind a dark wash; it is a gallery print with a copper
+ * hairline mount on the deep green page. The name rises out of the print's lower
+ * edge, the facts a guest needs sit in a caption line under it, and the copper
+ * "Book a table" block is pinned to the mount rule. Legibility comes from
+ * geometry (type on the green mat), not from darkening the film. The only scrim
+ * is a small corner floor under the word "Solo".
+ *
+ * Mechanics that must survive any redesign:
+ *   - The poster <img> is the LCP element (astro:assets, eager, high priority).
+ *   - The <video> has no source in HTML and preload="none". Sources are attached
+ *     after window.load plus a short delay (the mount draws first), then the
+ *     film fades in over the poster.
+ *   - prefers-reduced-motion, Save-Data and 2G get the poster only.
+ *   - A labelled pause control lives in the caption line (WCAG 2.2.2). It stays
+ *     hidden until the film is really playing.
+ *   - Header.astro is rendered with `overlay` on this page, so the bar is
+ *     transparent on the mat while the page is at the top. The header publishes
+ *     its height as --site-header-h; the first grid row reserves that space.
+ */
+import { Image } from 'astro:assets';
+import poster from '@/assets/hero-poster.jpg';
+
+// Bump when the encodes change so the immutable cache header cannot serve stale files.
+const VIDEO_VERSION = 'v1';
+---
+
+<section id="hero" class="hero-print" data-video-version={VIDEO_VERSION}>
+  <div class="hp-frame">
+    <span class="hp-ln hp-ln-t" aria-hidden="true"></span>
+    <span class="hp-ln hp-ln-r" aria-hidden="true"></span>
+    <span class="hp-ln hp-ln-b" aria-hidden="true"></span>
+    <span class="hp-ln hp-ln-l" aria-hidden="true"></span>
+    <div class="hp-film">
+      <Image
+        src={poster}
+        alt=""
+        class="hp-poster"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        format="webp"
+        quality={72}
+        width={1920}
+        widths={[640, 1024, 1600, 1920]}
+        sizes="(max-width: 1023px) calc(100vw - 56px), calc(100vw - 320px)"
+      />
+      <video
+        id="hero-video"
+        class="hp-video"
+        muted
+        playsinline
+        loop
+        preload="none"
+        aria-hidden="true"
+        tabindex="-1"
+        disablepictureinpicture
+        disableRemotePlayback
+      ></video>
+      <div class="hp-scrim" aria-hidden="true"></div>
+      <div class="hp-grain" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <p class="hp-eyebrow hp-rise hp-d1">Mediterranean<br>kitchen and bar<br>Rooftop terrace</p>
+
+  <div class="hp-foot">
+    <h1 class="hp-title">
+      <span class="hp-l1 hp-rise hp-d2">The Solo</span>
+      <span class="hp-l2 hp-rise hp-d3">Kitchen <span class="hp-amp">&amp;</span> Bar</span>
+    </h1>
+
+    <p class="hp-lede hp-rise hp-d4">
+      <span class="hp-dt">A Mediterranean kitchen and cocktail bar in Museum Gardens, Bethnal Green, with a rooftop terrace under a retractable roof, garden tables and bottomless brunch. <a href="/menu/">See the menu</a></span>
+      <span class="hp-mb">A Mediterranean kitchen and cocktail bar, with a rooftop terrace under a retractable roof.</span>
+    </p>
+
+    <div class="hp-cta-row hp-rise hp-d4">
+      <a class="hp-cta" href="/reservation/">
+        <span class="hp-cta-t">Book a table</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="hp-menu-link" href="/menu/">Menu</a>
+    </div>
+
+    <div class="hp-ledger">
+      <span class="hp-cell hp-hrs"><b>Open daily</b><span>10:00 to 23:30, Fri and Sat to 00:30</span></span>
+      <span class="hp-cell hp-addr"><b class="hp-dt">Find us</b><span>Museum Gardens, <span class="hp-dt">Cambridge Heath Road, </span>E2 9PA</span></span>
+      <a class="hp-cell" href="tel:+442080142656">020 8014 2656</a>
+      <span class="hp-spacer" aria-hidden="true"></span>
+      <button class="hp-pause" id="hero-video-toggle" type="button" data-state="playing" aria-label="Pause film" aria-hidden="true">
+        <svg class="hp-stop" viewBox="0 0 9 10" aria-hidden="true"><rect x="0" y="0" width="3" height="10"/><rect x="6" y="0" width="3" height="10"/></svg>
+        <svg class="hp-play" viewBox="0 0 9 10" aria-hidden="true"><path d="M0 0l9 5-9 5z"/></svg>
+        <span class="hp-pause-label"><span class="hp-w">Pause</span><span class="hp-dt"> film</span></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!--
+  Global on purpose: the poster is rendered by <Image>, and the selectors below
+  are namespaced with hp- so nothing leaks. Scoped styles would also rewrite
+  :root, which is where the header publishes its height.
+-->
+<style is:global>
+  .hero-print {
+    --m: 64px;          /* right page margin */
+    --mL: 240px;        /* left margin: eyebrow and the start of the name */
+    --mount: 8px;       /* gap between the copper hairline and the film */
+    --film-min: 440px;
+    --hdr: var(--site-header-h, 138px);
+    --green: #102B2A;
+    --copper: #C49A85;
+    --cream: #F3ECE4;
+    --card: #0D1B1E;
+    --line: rgba(196, 154, 133, .62);   /* copper hairline of the mount */
+    --hair: rgba(243, 236, 228, .18);   /* cream hairline of the foot */
+    --ease: cubic-bezier(.22, 1, .36, 1);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background: var(--green);
+    color: var(--cream);
+    font-family: 'Josefin Sans', system-ui, sans-serif;
+    display: grid;
+    grid-template-columns: var(--mL) 1fr var(--m);
+    grid-template-rows: calc(var(--hdr) + 12px) minmax(var(--film-min), 1fr) auto;
+  }
+  /* globals.css has #hero { min-height: 100vh }; the ID keeps this rule in charge. */
+  #hero.hero-print {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+  @media (min-width: 1024px) and (max-height: 800px) {
+    .hero-print { --film-min: 420px; }
+  }
+  /* Below xl the caption drops its long form so the row never wraps: no street, no label, no "film". */
+  @media (max-width: 1279px) {
+    .hp-ledger .hp-dt { display: none; }
+  }
+
+  /* The mount: four hairlines that draw themselves clockwise. */
+  .hp-frame { grid-column: 2; grid-row: 2; position: relative; padding: var(--mount); }
+  .hp-ln { position: absolute; background: var(--line); pointer-events: none; }
+  .hp-ln-t { top: 0; left: 0; right: 0; height: 1px; transform-origin: left; transform: scaleX(0); animation: hp-drawX 1.1s var(--ease) .05s forwards; }
+  .hp-ln-r { top: 0; right: 0; bottom: 0; width: 1px; transform-origin: top; transform: scaleY(0); animation: hp-drawY 1.1s var(--ease) .3s forwards; }
+  .hp-ln-b { bottom: 0; left: 0; right: 0; height: 1px; transform-origin: right; transform: scaleX(0); animation: hp-drawX 1.1s var(--ease) .55s forwards; }
+  .hp-ln-l { top: 0; left: 0; bottom: 0; width: 1px; transform-origin: bottom; transform: scaleY(0); animation: hp-drawY 1.1s var(--ease) .8s forwards; }
+  @keyframes hp-drawX { to { transform: scaleX(1); } }
+  @keyframes hp-drawY { to { transform: scaleY(1); } }
+
+  /* The print. */
+  .hp-film { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--card); }
+  .hp-film .hp-poster,
+  .hp-film .hp-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; }
+  .hp-video { opacity: 0; transition: opacity 1.2s var(--ease); }
+  .hp-video.is-on { opacity: 1; }
+  /* The only scrim: a corner floor under the word "Solo", pixel sized so it never grows with the viewport. */
+  .hp-scrim {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(460px 210px at 0% 100%, rgba(16, 43, 42, .76) 0%, rgba(16, 43, 42, .74) 40%, rgba(16, 43, 42, .42) 66%, rgba(16, 43, 42, 0) 100%);
+  }
+  .hp-grain {
+    position: absolute; inset: 0; pointer-events: none; opacity: .05;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Eyebrow: three short lines in the left margin, just above the name. */
+  .hp-eyebrow {
+    grid-column: 1; grid-row: 2; align-self: end; z-index: 5;
+    margin: 0; padding: 0 0 104px var(--m);
+    font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; line-height: 1.9;
+    color: var(--copper); white-space: nowrap;
+  }
+
+  /* Foot: the bottom paper margin, in normal flow so short viewports grow instead of clipping. */
+  .hp-foot {
+    grid-column: 1 / 4; grid-row: 3; position: relative; z-index: 5;
+    display: grid; grid-template-columns: var(--mL) 1fr var(--m); align-items: start;
+  }
+  .hp-title {
+    grid-column: 1 / 3; grid-row: 1;
+    margin: -.88em 0 0 var(--m);
+    font-family: 'Crimson Text', Georgia, serif; font-weight: 400;
+    font-size: clamp(56px, 7.5vw, 108px); line-height: .96; letter-spacing: -.005em;
+    color: var(--cream); width: max-content;
+  }
+  .hp-title > span { display: block; }
+  .hp-title .hp-amp { display: inline; color: var(--copper); }
+
+  .hp-lede {
+    grid-column: 2; grid-row: 1;
+    margin: 0 0 0 50%; padding-top: 18px; max-width: 330px;
+    font-size: 15px; font-weight: 300; line-height: 1.6; color: rgba(243, 236, 228, .82);
+  }
+  .hp-lede a { color: var(--cream); border-bottom: 1px solid var(--copper); padding-bottom: 1px; transition: color .3s var(--ease); }
+  .hp-lede a:hover { color: var(--copper); }
+
+  /* Primary CTA: a copper block pinned to the bottom rule at the right of the print. */
+  .hp-cta-row { position: absolute; z-index: 6; top: -28px; right: calc(var(--m) + 28px); }
+  .hp-cta {
+    display: inline-flex; align-items: center; justify-content: space-between; gap: 16px;
+    height: 56px; padding: 0 24px 0 28px; border-radius: 2px;
+    background: var(--copper); color: var(--green);
+    font-family: 'Crimson Text', Georgia, serif; font-weight: 600; font-size: 18px; letter-spacing: .01em; line-height: 1;
+    transition: transform .45s var(--ease), background-color .3s var(--ease);
+  }
+  .hp-cta svg { width: 20px; height: 20px; flex: none; transition: transform .45s var(--ease); }
+  .hp-cta:hover { transform: translateY(-2px); background: #D2AB97; }
+  .hp-cta:hover svg { transform: translateX(4px); }
+  .hp-cta:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+  .hp-cta-t { padding-top: 3px; }
+  .hp-menu-link { display: none; }
+
+  /* Caption line under the print: hours, address and phone set like the foot of a menu. */
+  .hp-ledger {
+    grid-column: 1 / 4; grid-row: 2; position: relative;
+    margin: 24px var(--m) 0; padding: 16px 0 28px;
+    display: flex; align-items: center; flex-wrap: wrap; row-gap: 14px;
+    font-size: 13px; font-weight: 400; letter-spacing: .02em; line-height: 1;
+    color: rgba(243, 236, 228, .78); white-space: nowrap;
+  }
+  .hp-ledger::before {
+    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--hair);
+    transform-origin: left; transform: scaleX(0); animation: hp-drawX 1.2s var(--ease) .9s forwards;
+  }
+  .hp-cell { padding: 0 22px; border-left: 1px solid var(--hair); display: inline-flex; align-items: baseline; gap: 10px; opacity: 0; animation: hp-fade .8s var(--ease) forwards; }
+  .hp-cell:first-child { padding-left: 0; border-left: 0; }
+  .hp-cell:nth-child(1) { animation-delay: 1.05s; }
+  .hp-cell:nth-child(2) { animation-delay: 1.13s; }
+  .hp-cell:nth-child(3) { animation-delay: 1.21s; }
+  .hp-cell b { font-weight: 500; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--copper); }
+  a.hp-cell { color: var(--cream); transition: color .4s var(--ease); }
+  a.hp-cell:hover { color: var(--copper); }
+  .hp-spacer { flex: 1; }
+  .hp-pause {
+    padding: 8px 0 8px 22px; min-height: 44px; margin: -8px 0; border-left: 1px solid var(--hair);
+    display: inline-flex; align-items: center; gap: 10px;
+    background: none; border-top: 0; border-right: 0; border-bottom: 0; cursor: pointer;
+    font: inherit; font-weight: 500; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--cream);
+    visibility: hidden; opacity: 0; transition: opacity .6s var(--ease), color .4s var(--ease);
+  }
+  .hp-pause.is-on { visibility: visible; opacity: 1; }
+  .hp-pause:hover { color: var(--copper); }
+  .hp-pause:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+  .hp-pause svg { width: 9px; height: 10px; fill: currentColor; flex: none; }
+  .hp-pause .hp-play { display: none; }
+  .hp-pause[data-state="paused"] .hp-play { display: block; }
+  .hp-pause[data-state="paused"] .hp-stop { display: none; }
+  .hp-pause-label { padding-top: 2px; }
+  @keyframes hp-fade { to { opacity: 1; } }
+
+  /* Entrance: the mount draws, then the type arrives, then the print wakes. */
+  .hp-rise { opacity: 0; transform: translateY(22px); animation: hp-rise .95s var(--ease) forwards; }
+  .hp-d1 { animation-delay: .35s; }
+  .hp-d2 { animation-delay: .47s; }
+  .hp-d3 { animation-delay: .62s; }
+  .hp-d4 { animation-delay: .74s; }
+  @keyframes hp-rise { to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hp-ln, .hp-rise, .hp-ledger::before, .hp-cell { animation: none; opacity: 1; transform: none; }
+    .hp-video, .hp-pause { display: none; }
+  }
+
+  /* lg (after the base rules, so these win at equal specificity): the left margin narrows with the name, so the eyebrow steps down one size
+     and the lede starts below the CTA block, which sits closer to it here. */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .hero-print { --mL: min(240px, calc(64px + 12.4vw)); }
+    .hp-eyebrow { font-size: 10px; letter-spacing: .14em; }
+    .hp-lede { padding-top: 40px; }
+  }
+
+  /* Phones and tablets: the print becomes a portrait card and the name notches into it. */
+  @media (max-width: 1023px) {
+    .hero-print { --m: 20px; --mL: 20px; --film-min: 300px; --hdr: var(--site-header-h, 104px); }
+    .hp-film .hp-poster, .hp-film .hp-video { object-position: 52% 60%; }
+    .hp-scrim, .hp-eyebrow { display: none; }
+    .hp-foot { display: block; padding: 0 var(--m); }
+    .hp-title { margin: -53px 0 0; font-size: clamp(44px, 13.8vw, 54px); line-height: .98; width: auto; }
+    /* "The Solo" rises into the print as a green tab: the mat notching into the picture. */
+    .hp-title .hp-l1 { display: inline-block; background: var(--green); margin-left: calc(-1 * var(--m)); padding: 12px 18px 2px var(--m); }
+    .hp-title .hp-l2 { padding-top: 6px; }
+    .hp-lede { margin: 12px 0 0; padding: 0; max-width: none; line-height: 1.55; }
+    .hp-cta-row { position: static; display: flex; align-items: center; gap: 20px; margin-top: 16px; }
+    .hp-cta { flex: 1; height: 56px; padding: 0 22px 0 24px; }
+    .hp-menu-link {
+      display: flex; align-items: center; min-height: 44px; position: relative;
+      font-family: 'Crimson Text', Georgia, serif; font-size: 18px; line-height: 1; padding-top: 2px; color: var(--cream);
+    }
+    .hp-menu-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 8px; height: 1px; background: var(--copper); }
+    .hp-ledger { margin: 16px 0 0; padding: 14px 0 18px; font-size: 12.5px; }
+    .hp-cell { padding: 0 12px; }
+    .hp-cell.hp-hrs { flex-basis: 100%; padding-left: 0; border-left: 0; }
+    .hp-cell.hp-addr { padding-left: 0; border-left: 0; }
+    .hp-spacer, .hp-dt { display: none; }
+    .hp-pause { padding-left: 12px; font-size: 10.5px; margin-left: auto; }
+  }
+  @media (min-width: 640px) and (max-width: 1023px) {
+    .hero-print { --hdr: var(--site-header-h, 144px); }
+  }
+  @media (min-width: 1024px) {
+    .hp-mb { display: none; }
+  }
+</style>
+
+<script>
+  const video = document.getElementById('hero-video') as HTMLVideoElement | null;
+  const toggle = document.getElementById('hero-video-toggle') as HTMLButtonElement | null;
+  const section = document.getElementById('hero');
+
+  if (video && toggle && section) {
+    const version = section.dataset.videoVersion || 'v1';
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const conn = (navigator as any).connection;
+    const slow = !!conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''));
+
+    // The film is a decoration. Anyone who asked for less motion, or is paying
+    // per megabyte, gets the poster and nothing else.
+    if (!reduced && !slow) {
+      let userPaused = false;
+      const word = toggle.querySelector('.hp-w');
+
+      const setState = (playing: boolean) => {
+        toggle.dataset.state = playing ? 'playing' : 'paused';
+        toggle.setAttribute('aria-label', playing ? 'Pause film' : 'Play film');
+        if (word) word.textContent = playing ? 'Pause' : 'Play';
+      };
+
+      const attach = () => {
+        const small = window.matchMedia('(max-width: 1023px)').matches;
+        const base = `/video/hero-${version}-${small ? '720' : '1080'}`;
+        // AV1 first for browsers that decode it; the codecs string lets Safari
+        // skip straight to the MP4 instead of downloading a file it cannot play.
+        for (const [type, ext] of [
+          ['video/webm; codecs="av01.0.05M.08"', 'webm'],
+          ['video/mp4', 'mp4'],
+        ]) {
+          const source = document.createElement('source');
+          source.src = `${base}.${ext}`;
+          source.type = type;
+          video.appendChild(source);
+        }
+        video.load();
+        video.addEventListener('canplay', () => {
+          video.play().then(() => {
+            video.classList.add('is-on');
+            toggle.classList.add('is-on');
+            toggle.removeAttribute('aria-hidden');
+            setState(true);
+          }).catch(() => { /* autoplay refused: the poster stays, no control */ });
+        }, { once: true });
+      };
+
+      // Nothing about the film starts until the page has loaded and the mount
+      // has drawn itself (the frame animation runs for about a second).
+      const DELAY = 1100;
+      if (document.readyState === 'complete') {
+        setTimeout(attach, DELAY);
+      } else {
+        window.addEventListener('load', () => setTimeout(attach, DELAY), { once: true });
+      }
+
+      toggle.addEventListener('click', () => {
+        if (video.paused) {
+          userPaused = false;
+          video.play().then(() => setState(true)).catch(() => {});
+        } else {
+          userPaused = true;
+          video.pause();
+          setState(false);
+        }
+      });
+
+      // Do not burn CPU and battery on a film nobody can see.
+      const visible = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (!video.querySelector('source')) return;
+          if (e.isIntersecting && !userPaused && document.visibilityState === 'visible') {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        }
+      }, { threshold: 0.15 });
+      visible.observe(section);
+
+      document.addEventListener('visibilitychange', () => {
+        if (!video.querySelector('source')) return;
+        if (document.visibilityState === 'hidden') video.pause();
+        else if (!userPaused) video.play().catch(() => {});
+      });
+    }
+  }
+</script>

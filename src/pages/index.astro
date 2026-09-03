@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
-import HeroSlider from '@/components/HeroSlider.astro';
+// HeroSlider.astro is kept in the repo untouched for an easy rollback.
+import HeroVideo from '@/components/HeroVideo.astro';
 import AboutSection from '@/components/AboutSection.astro';
 import CategorySection from '@/components/CategorySection.astro';
 import ReservationSection from '@/components/ReservationSection.astro';
@@ -15,16 +16,16 @@ import Footer from '@/components/Footer.astro';
 ---
 
 <BaseLayout
-  title="TheSolo Kitchen & Bar | Mediterranean Restaurant East London | Bethnal Green"
-  description="Experience authentic Mediterranean cuisine at TheSolo Kitchen & Bar in East London. Rooftop dining, craft cocktails, private events. Near Bethnal Green station. Book now!"
+  title="Mediterranean Restaurant East London | TheSolo Kitchen & Bar"
+  description="Authentic Mediterranean cuisine in East London. Rooftop dining, craft cocktails and private events, minutes from Bethnal Green station."
   image="/images/restaurant-1.jpg"
 >
   <main id="main-content" class="min-h-screen">
     <!-- Header with Navigation -->
-    <Header />
+    <Header overlay />
     
-    <!-- Hero Slider Section -->
-    <HeroSlider />
+    <!-- Hero: the client's film mounted as a print, under a transparent header -->
+    <HeroVideo />
     
     <!-- About Us Section -->
     <AboutSection />
