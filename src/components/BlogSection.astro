@@ -71,7 +71,7 @@ const postsToShow = latestPosts.length > 0 ? latestPosts : fallbackPosts;
         
         return (
           <article class="group">
-            <a href={post.slug !== '#' ? `/blog/${post.slug}` : '#'}>
+            <a href={post.slug !== '#' ? `/blog/${post.slug}/` : '#'}>
               <div class="relative overflow-hidden rounded-xl mb-6">
                 <img 
                   src={heroImage || `/images/blog-${index + 1}.jpg`}
@@ -109,9 +109,8 @@ const postsToShow = latestPosts.length > 0 ? latestPosts : fallbackPosts;
       <a 
         href="/blog/" 
         class="inline-flex items-center btn-secondary group"
-        aria-label="Read more blog posts"
       >
-        <span class="mr-3">Read More</span>
+        <span class="mr-3">Read More<span class="sr-only"> from the blog</span></span>
         <svg 
           class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" 
           fill="none" 

@@ -228,10 +228,23 @@ const { overlay = false } = Astro.props;
   document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('site-header');
 
-    // Publish the header's height so the hero can reserve exactly that space,
-    // including after the banner is dismissed or the viewport is resized.
-    if (header) {
-      const publish = () => document.documentElement.style.setProperty('--site-header-h', `${header.offsetHeight}px`);
+    // Publish the header's height so the section below can reserve exactly that
+    // space, including after the banner is dismissed or the viewport is resized.
+    //
+    // The custom property goes on the consuming section, never on <html>. Setting
+    // it on the root element invalidates style for every node in the document,
+    // and this page carries a large DOM; measured on the deployed site that one
+    // line was costing about 450 ms of style and layout on a throttled phone,
+    // repeated on every ResizeObserver tick. Scoped here it touches one subtree.
+    const heroSection = document.getElementById('hero');
+    if (header && heroSection) {
+      let last = -1;
+      const publish = () => {
+        const h = header.offsetHeight;
+        if (h === last) return;            // fonts settling fires this repeatedly
+        last = h;
+        heroSection.style.setProperty('--site-header-h', `${h}px`);
+      };
       publish();
       if ('ResizeObserver' in window) new ResizeObserver(publish).observe(header);
     }
