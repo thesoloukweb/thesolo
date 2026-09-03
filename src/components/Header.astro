@@ -7,15 +7,35 @@
  * solid once the page scrolls past the top or the mobile menu opens. Every other
  * page keeps the solid bar it always had.
  *
- * The header also publishes its own height as the --site-header-h custom
- * property on <html>, so a section below can reserve exactly that space,
- * including after the Blue Light Card banner is dismissed.
+ * The header's height is not measured at runtime. It is deterministic, so the
+ * hero declares it in CSS per breakpoint and keys off html[data-blc="closed"]
+ * when the Blue Light Card banner has been dismissed.
  */
 interface Props {
   overlay?: boolean;
 }
 const { overlay = false } = Astro.props;
 ---
+
+<!--
+  Runs during parse, before the banner paints. The dismissed state used to be
+  applied in DOMContentLoaded, so a returning visitor saw the banner for a frame
+  and the whole page relaid out when it vanished. An attribute on <html> lets CSS
+  hide it before the first paint, and lets the hero below know how tall the
+  header is without anyone measuring it.
+-->
+<script is:inline>
+  try {
+    if (sessionStorage.getItem('blc-banner-closed') === 'true') document.documentElement.dataset.blc = 'closed';
+  } catch (e) { /* private mode: keep the banner */ }
+</script>
+
+<!--
+  The overlay header turns solid once the page scrolls past this marker. It is
+  rendered here rather than inserted by script: adding a node to the top of body
+  after load invalidates layout for the whole document.
+-->
+<span id="header-top-sentinel" aria-hidden="true"></span>
 
 <header
   id="site-header"
@@ -207,6 +227,16 @@ const { overlay = false } = Astro.props;
 </header>
 
 <style is:global>
+  #header-top-sentinel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 25px;
+    pointer-events: none;
+  }
+  html[data-blc="closed"] #blc-banner { display: none; }
+
   .site-header-overlay {
     background-color: transparent;
     transition: background-color .4s cubic-bezier(.22, 1, .36, 1), border-color .4s cubic-bezier(.22, 1, .36, 1);
@@ -228,27 +258,6 @@ const { overlay = false } = Astro.props;
   document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('site-header');
 
-    // Publish the header's height so the section below can reserve exactly that
-    // space, including after the banner is dismissed or the viewport is resized.
-    //
-    // The custom property goes on the consuming section, never on <html>. Setting
-    // it on the root element invalidates style for every node in the document,
-    // and this page carries a large DOM; measured on the deployed site that one
-    // line was costing about 450 ms of style and layout on a throttled phone,
-    // repeated on every ResizeObserver tick. Scoped here it touches one subtree.
-    const heroSection = document.getElementById('hero');
-    if (header && heroSection) {
-      let last = -1;
-      const publish = () => {
-        const h = header.offsetHeight;
-        if (h === last) return;            // fonts settling fires this repeatedly
-        last = h;
-        heroSection.style.setProperty('--site-header-h', `${h}px`);
-      };
-      publish();
-      if ('ResizeObserver' in window) new ResizeObserver(publish).observe(header);
-    }
-
     // Overlay mode: transparent at the very top, solid once scrolled past 24px
     // or while the mobile menu is open. A sentinel with IntersectionObserver
     // replaces a scroll listener.
@@ -257,29 +266,21 @@ const { overlay = false } = Astro.props;
     const syncHeader = () => {
       if (header && header.dataset.overlay) header.dataset.solid = (!atTop || menuOpen) ? 'true' : 'false';
     };
-    if (header && header.dataset.overlay && 'IntersectionObserver' in window) {
-      const sentinel = document.createElement('div');
-      sentinel.setAttribute('aria-hidden', 'true');
-      sentinel.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:25px;pointer-events:none;';
-      document.body.prepend(sentinel);
+    const sentinel = document.getElementById('header-top-sentinel');
+    if (header && header.dataset.overlay && sentinel && 'IntersectionObserver' in window) {
       new IntersectionObserver((entries) => {
         atTop = entries[0].isIntersecting;
         syncHeader();
       }).observe(sentinel);
     }
 
-    // Blue Light Card banner dismiss
-    const blcBanner = document.getElementById('blc-banner');
+    // Blue Light Card banner dismiss. The inline script in the markup has already
+    // applied the stored state, so this only has to handle the click.
     const closeBlcBtn = document.getElementById('close-blc-banner');
-    
-    if (blcBanner && sessionStorage.getItem('blc-banner-closed') === 'true') {
-      blcBanner.style.display = 'none';
-    }
-    
-    if (closeBlcBtn && blcBanner) {
+    if (closeBlcBtn) {
       closeBlcBtn.addEventListener('click', function() {
-        blcBanner.style.display = 'none';
-        sessionStorage.setItem('blc-banner-closed', 'true');
+        document.documentElement.dataset.blc = 'closed';
+        try { sessionStorage.setItem('blc-banner-closed', 'true'); } catch (e) { /* private mode */ }
       });
     }
 

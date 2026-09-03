@@ -19,8 +19,8 @@
  *   - A labelled pause control lives in the caption line (WCAG 2.2.2). It stays
  *     hidden until the film is really playing.
  *   - Header.astro is rendered with `overlay` on this page, so the bar is
- *     transparent on the mat while the page is at the top. The header publishes
- *     its height as --site-header-h; the first grid row reserves that space.
+ *     transparent on the mat while the page is at the top. The first grid row
+ *     reserves the header's height, declared in CSS rather than measured.
  */
 import { Image } from 'astro:assets';
 import poster from '@/assets/hero-poster.jpg';
@@ -112,7 +112,7 @@ const VIDEO_VERSION = 'v1';
     --mL: 240px;        /* left margin: eyebrow and the start of the name */
     --mount: 8px;       /* gap between the copper hairline and the film */
     --film-min: 440px;
-    --hdr: var(--site-header-h, 138px);
+    --hdr: 140px;       /* banner 33 + nav 107, measured; breakpoints below */
     --green: #102B2A;
     --copper: #C49A85;
     --cream: #F3ECE4;
@@ -130,6 +130,18 @@ const VIDEO_VERSION = 'v1';
     grid-template-columns: var(--mL) 1fr var(--m);
     grid-template-rows: calc(var(--hdr) + 12px) minmax(var(--film-min), 1fr) auto;
   }
+  /*
+    Header height is deterministic, so it is declared here rather than measured.
+    Reading offsetHeight at load forced a full document layout and, with a DOM
+    this size, cost real time on a throttled phone. Values measured at every
+    breakpoint, with and without the dismissable discount banner.
+  */
+  @media (max-width: 639px) { .hero-print { --hdr: 102px; } }
+  @media (min-width: 640px) and (max-width: 1023px) { .hero-print { --hdr: 146px; } }
+  html[data-blc="closed"] .hero-print { --hdr: 107px; }
+  @media (max-width: 639px) { html[data-blc="closed"] .hero-print { --hdr: 73px; } }
+  @media (min-width: 640px) and (max-width: 1023px) { html[data-blc="closed"] .hero-print { --hdr: 113px; } }
+
   /* globals.css has #hero { min-height: 100vh }; the ID keeps this rule in charge. */
   #hero.hero-print {
     min-height: 100vh;
@@ -277,7 +289,7 @@ const VIDEO_VERSION = 'v1';
 
   /* Phones and tablets: the print becomes a portrait card and the name notches into it. */
   @media (max-width: 1023px) {
-    .hero-print { --m: 20px; --mL: 20px; --film-min: 300px; --hdr: var(--site-header-h, 104px); }
+    .hero-print { --m: 20px; --mL: 20px; --film-min: 300px; }
     .hp-film .hp-poster, .hp-film .hp-video { object-position: 52% 60%; }
     .hp-scrim, .hp-eyebrow { display: none; }
     .hp-foot { display: block; padding: 0 var(--m); }
@@ -299,9 +311,6 @@ const VIDEO_VERSION = 'v1';
     .hp-cell.hp-addr { padding-left: 0; border-left: 0; }
     .hp-spacer, .hp-dt { display: none; }
     .hp-pause { padding-left: 12px; font-size: 10.5px; margin-left: auto; }
-  }
-  @media (min-width: 640px) and (max-width: 1023px) {
-    .hero-print { --hdr: var(--site-header-h, 144px); }
   }
   @media (min-width: 1024px) {
     .hp-mb { display: none; }
