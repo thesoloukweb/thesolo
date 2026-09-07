@@ -139,16 +139,24 @@ const VIDEO_VERSION = 'v3';
   }
 
   /*
-    The film's box IS the film's shape: full width, aspect-ratio 16/9. The
-    sources are 16:9, so object-fit: cover scales without cutting anything;
-    it only absorbs sub-pixel rounding that object-fit: contain would render
-    as a hairline letterbox.
+    The film's box IS the film's shape: aspect-ratio 16/9, never cropped. Its
+    width obeys two ceilings at once:
+
+      - the page gutter on both sides, the same --page-gutter every section uses;
+      - the first screen: header plus film must not exceed the viewport, so the
+        width is also capped at (viewport height - header) x 16/9. On a short
+        wide screen the film simply gets narrower and stays centred, instead of
+        running past the fold or getting cropped.
+
+    The sources are 16:9, so object-fit: cover scales without cutting anything;
+    it only absorbs sub-pixel rounding that contain would render as a hairline.
   */
   .hc-media {
     position: relative;
-    width: 100%;
+    width: min(100% - 2 * var(--page-gutter, 16px), calc((100vh - var(--hdr)) * 16 / 9));
+    width: min(100% - 2 * var(--page-gutter, 16px), calc((100svh - var(--hdr)) * 16 / 9));
     aspect-ratio: 16 / 9;
-    margin-top: var(--hdr);   /* the fixed header sits above the page flow */
+    margin: var(--hdr) auto 0;   /* under the fixed header, centred when height-capped */
     background: #0D1B1E;
     overflow: hidden;
   }
