@@ -64,29 +64,23 @@ Rules
 - 020 8014 2656
 - Open daily from 10:00 (Mon to Thu until 23:30, Fri and Sat until 00:30, Sun until 23:30)
 
-## Hero (September 2026)
+## Hero (September 2026, third iteration)
 
-Direction: **the film as a mounted print**, not a background. Chosen by a design panel that scored four
-independent concepts under three lenses (brand, guest, engineering).
+Direction: **the whole film, uncropped**, on the client's explicit brief, referencing pink-cafe.co.uk.
+The framed-print concept (second iteration) was rejected: the client wants the obvious thing.
 
-- The film hangs inside a copper hairline mount (`--line: rgba(196,154,133,.62)`, 8px gap) on the green page.
-  Legibility comes from geometry, not from darkening the film: text sits on the green mat, outside the print.
-- The only scrim is a fixed-size radial corner floor under the word "Solo" (460x210px), so it never grows
-  with the viewport and never washes the picture.
-- The name rises out of the print's lower edge; the mount rule passes through the word space between
-  "The" and "Solo". Left margin `--mL` scales with the H1 so the straddle holds from 1024px up.
-- Under it a caption line, set like the foot of a printed menu: hours, address, phone, and the pause control
-  as its last cell.
-- Entrance: the four mount hairlines draw themselves clockwise, the type rises, the caption rule draws and
-  its cells fade in, then the film wakes 1.1s after load and crossfades over the poster.
-- Mobile: the print becomes a portrait card taking 46% of the screen; "The Solo" notches into it as a solid
-  green tab. Copper CTA and a Menu link sit in thumb reach.
+- Solid header; beneath it the film edge to edge at width 100% and `aspect-ratio: 16/9`, so nothing is
+  ever cut off the sides at any viewport, and at its full 33-second length (the 9-second loop was the
+  other complaint). No overlays on the picture, no frame, no scrim.
+- On a desktop this is effectively a full-height hero (1440px wide makes the film 810px tall); on a
+  phone it is a 219px letterbox band, the honest cost of "never crop", with the content right below.
+- Under the film: H1 ("The Solo" cream, "Kitchen & Bar" copper), one-sentence lede, the caption ledger
+  (hours, address, phone, pause control), and on phones the copper "Book a table" block.
+- Poster is frame 0 of the film (the Bethnal Green Underground sign), so playback takes over seamlessly.
+- Encodes v3, full duration, audio stripped: 1600x900 AV1 6.6MB / H.264 7.8MB, 854x480 AV1 2.1MB /
+  H.264 2.3MB. Deferred after window.load as before; poster stays the LCP element.
+- `#hero { min-height: 100vh }` from globals is overridden to `auto`: the film plus the band define the height.
 
-Header: `<Header overlay />` on the homepage only. Transparent on the mat at the top, solid
-(`rgba(16,43,42,.9)` plus 12px blur) past 24px of scroll or whenever the mobile menu is open. Every other
-page renders the solid bar server-side, so there is no transparent flash. The header publishes its own
-height as `--site-header-h`, which the hero's first grid row reserves.
-
-Measured on the built site: LCP is the poster image (mobile 112ms, desktop 108ms), CLS 0.0000, contrast of
-the ground under "Solo" 5.59 / 5.00 / 6.37 across three scenes of the film, film requested 1.1s after load,
-zero video bytes under `prefers-reduced-motion`, Save-Data or 2G.
+Measured on the built site at 1440/1920/768/390: media box ratio exactly 1.778 everywhere, video top
+equals header bottom, full 33.2s duration reported, pause control visible once playing, no horizontal
+overflow.

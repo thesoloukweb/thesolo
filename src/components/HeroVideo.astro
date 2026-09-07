@@ -1,324 +1,264 @@
 ---
 /**
- * Hero: the client's film mounted as a print.
+ * Hero: the client's film, whole and uncropped.
  *
- * Direction chosen by the September 2026 design panel ("framed film"). The film
- * is not a background behind a dark wash; it is a gallery print with a copper
- * hairline mount on the deep green page. The name rises out of the print's lower
- * edge and the facts a guest needs sit in a caption line under it. Legibility comes from
- * geometry (type on the green mat), not from darkening the film. The only scrim
- * is a small corner floor under the word "Solo".
+ * Third iteration, to the client's explicit brief (September 2026): do it like
+ * pink-cafe.co.uk. A solid header, and under it the film edge to edge at its
+ * own 16:9 aspect ratio, so nothing is ever cut off the sides, and at its full
+ * 33-second length, so nothing is cut out of the middle either. No overlays on
+ * the picture, no frame, no crop. The name and the facts sit in a band below.
+ *
+ * On a desktop a full-width 16:9 video effectively is a full-height hero
+ * (1440px wide makes it 810px tall); on a phone it becomes a letterbox band
+ * with the content right under it, which is the honest cost of "never crop".
  *
  * Mechanics that must survive any redesign:
  *   - The poster <img> is the LCP element (astro:assets, eager, high priority).
+ *     It is frame 0 of the film, the Bethnal Green Underground sign, so the
+ *     crossfade into playback is seamless.
  *   - The <video> has no source in HTML and preload="none". Sources are attached
- *     after window.load plus a short delay (the mount draws first), then the
- *     film fades in over the poster.
+ *     after window.load, then the film fades in over the poster.
  *   - prefers-reduced-motion, Save-Data and 2G get the poster only.
- *   - Phones get an 854x480 encode (568 KB), desktops 1600x900 (1.9 MB). The
- *     phone frame is 334 CSS px wide, so 854 still covers a 2x display.
- *   - A labelled pause control lives in the caption line (WCAG 2.2.2). It stays
- *     hidden until the film is really playing.
- *   - Header.astro is rendered with `overlay` on this page, so the bar is
- *     transparent on the mat while the page is at the top. The first grid row
- *     reserves the header's height, declared in CSS rather than measured.
+ *   - Phones get an 854x480 encode (2.2 MB), everything else 1600x900 (6.6 MB).
+ *     Full length costs weight; it is deferred, so first paint never pays it.
+ *   - A labelled pause control sits in the caption line under the film
+ *     (WCAG 2.2.2). It stays hidden until the film is really playing.
  */
 import { Image } from 'astro:assets';
 import poster from '@/assets/hero-poster.jpg';
 
 // Bump when the encodes change so the immutable cache header cannot serve stale files.
-const VIDEO_VERSION = 'v2';
+const VIDEO_VERSION = 'v3';
 ---
 
-<section id="hero" class="hero-print" data-video-version={VIDEO_VERSION}>
-  <div class="hp-frame">
-    <span class="hp-ln hp-ln-t" aria-hidden="true"></span>
-    <span class="hp-ln hp-ln-r" aria-hidden="true"></span>
-    <span class="hp-ln hp-ln-b" aria-hidden="true"></span>
-    <span class="hp-ln hp-ln-l" aria-hidden="true"></span>
-    <div class="hp-film">
-      <Image
-        src={poster}
-        alt=""
-        class="hp-poster"
-        loading="eager"
-        fetchpriority="high"
-        decoding="async"
-        format="webp"
-        quality={72}
-        width={1920}
-        widths={[640, 1024, 1600, 1920]}
-        sizes="(max-width: 1023px) calc(100vw - 56px), calc(100vw - 320px)"
-      />
-      <video
-        id="hero-video"
-        class="hp-video"
-        muted
-        playsinline
-        loop
-        preload="none"
-        aria-hidden="true"
-        tabindex="-1"
-        disablepictureinpicture
-        disableRemotePlayback
-      ></video>
-      <div class="hp-scrim" aria-hidden="true"></div>
-      <div class="hp-grain" aria-hidden="true"></div>
-    </div>
+<section id="hero" class="hero-cine" data-video-version={VIDEO_VERSION}>
+  <!-- The film: full width, its own aspect ratio, nothing cropped. -->
+  <div class="hc-media">
+    <Image
+      src={poster}
+      alt=""
+      class="hc-poster"
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      format="webp"
+      quality={72}
+      width={1920}
+      widths={[640, 1024, 1600, 1920]}
+      sizes="100vw"
+    />
+    <video
+      id="hero-video"
+      class="hc-video"
+      muted
+      playsinline
+      loop
+      preload="none"
+      aria-hidden="true"
+      tabindex="-1"
+      disablepictureinpicture
+      disableRemotePlayback
+    ></video>
   </div>
 
-  <p class="hp-eyebrow hp-rise hp-d1">Mediterranean<br>kitchen and bar<br>Rooftop terrace</p>
+  <!-- The name and the facts, on the green below the film. -->
+  <div class="hc-band">
+    <div class="container-custom hc-band-in">
+      <h1 class="hc-title hc-rise hc-d1">
+        The Solo <span class="hc-sub">Kitchen &amp; Bar</span>
+      </h1>
 
-  <div class="hp-foot">
-    <h1 class="hp-title">
-      <span class="hp-l1 hp-rise hp-d2">The Solo</span>
-      <span class="hp-l2 hp-rise hp-d3">Kitchen <span class="hp-amp">&amp;</span> Bar</span>
-    </h1>
+      <p class="hc-lede hc-rise hc-d2">
+        A Mediterranean kitchen and cocktail bar in Museum Gardens, Bethnal Green,
+        with a rooftop terrace under a retractable roof, garden tables and bottomless brunch.
+      </p>
 
-    <p class="hp-lede hp-rise hp-d4">
-      <span class="hp-dt">A Mediterranean kitchen and cocktail bar in Museum Gardens, Bethnal Green, with a rooftop terrace under a retractable roof, garden tables and bottomless brunch.</span>
-      <span class="hp-mb">A Mediterranean kitchen and cocktail bar, with a rooftop terrace under a retractable roof.</span>
-    </p>
+      <!--
+        Reservation CTA, phones only. On a phone the header collapses to a
+        burger, so without this nothing near the top leads to a booking. On a
+        desktop the header's RESERVATION button is always visible.
+      -->
+      <div class="hc-cta-row hc-rise hc-d2">
+        <a class="hc-cta" href="/reservation/">
+          <span class="hc-cta-t">Book a table</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
 
-    <!--
-      Reservation CTA, phones only. On a phone the header collapses to a burger,
-      so without this nothing on the first screen leads to a booking. On a desktop
-      the header's RESERVATION button is always visible, so the block stays hidden
-      there and the mount rule is left clear.
-    -->
-    <div class="hp-cta-row hp-rise hp-d4">
-      <a class="hp-cta" href="/reservation/">
-        <span class="hp-cta-t">Book a table</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
-
-    <div class="hp-ledger">
-      <span class="hp-cell hp-hrs"><b>Open daily</b><span>10:00 to 23:30, Fri and Sat to 00:30</span></span>
-      <span class="hp-cell hp-addr"><b class="hp-dt">Find us</b><span>Museum Gardens, <span class="hp-dt">Cambridge Heath Road, </span>E2 9PA</span></span>
-      <a class="hp-cell" href="tel:+442080142656">020 8014 2656</a>
-      <span class="hp-spacer" aria-hidden="true"></span>
-      <button class="hp-pause" id="hero-video-toggle" type="button" data-state="playing" aria-label="Pause film" aria-hidden="true">
-        <svg class="hp-stop" viewBox="0 0 9 10" aria-hidden="true"><rect x="0" y="0" width="3" height="10"/><rect x="6" y="0" width="3" height="10"/></svg>
-        <svg class="hp-play" viewBox="0 0 9 10" aria-hidden="true"><path d="M0 0l9 5-9 5z"/></svg>
-        <span class="hp-pause-label"><span class="hp-w">Pause</span><span class="hp-dt"> film</span></span>
-      </button>
+      <div class="hc-ledger hc-rise hc-d3">
+        <span class="hc-cell hc-hrs"><b>Open daily</b><span>10:00 to 23:30, Fri and Sat to 00:30</span></span>
+        <span class="hc-cell hc-addr"><b class="hc-dt">Find us</b><span>Museum Gardens, <span class="hc-dt">Cambridge Heath Road, </span>E2 9PA</span></span>
+        <a class="hc-cell" href="tel:+442080142656">020 8014 2656</a>
+        <span class="hc-spacer" aria-hidden="true"></span>
+        <button class="hc-pause" id="hero-video-toggle" type="button" data-state="playing" aria-label="Pause film" aria-hidden="true">
+          <svg class="hc-stop" viewBox="0 0 9 10" aria-hidden="true"><rect x="0" y="0" width="3" height="10"/><rect x="6" y="0" width="3" height="10"/></svg>
+          <svg class="hc-play" viewBox="0 0 9 10" aria-hidden="true"><path d="M0 0l9 5-9 5z"/></svg>
+          <span class="hc-pause-label"><span class="hc-w">Pause</span><span class="hc-dt"> film</span></span>
+        </button>
+      </div>
     </div>
   </div>
 </section>
 
 <!--
-  Global on purpose: the poster is rendered by <Image>, and the selectors below
-  are namespaced with hp- so nothing leaks. Scoped styles would also rewrite
-  :root, which is where the header publishes its height.
+  Global on purpose: the poster is rendered by <Image>, and every selector below
+  is namespaced with hc- so nothing leaks.
 -->
 <style is:global>
-  .hero-print {
-    --m: 64px;          /* right page margin */
-    --mL: 240px;        /* left margin: eyebrow and the start of the name */
-    --mount: 8px;       /* gap between the copper hairline and the film */
-    --film-min: 440px;
-    --hdr: 140px;       /* banner 33 + nav 107, measured; breakpoints below */
+  .hero-cine {
+    --hdr: 140px;       /* fixed header: banner 33 + nav 107, measured; breakpoints below */
     --green: #102B2A;
     --copper: #C49A85;
     --cream: #F3ECE4;
-    --card: #0D1B1E;
-    --line: rgba(196, 154, 133, .62);   /* copper hairline of the mount */
-    --hair: rgba(243, 236, 228, .18);   /* cream hairline of the foot */
+    --hair: rgba(243, 236, 228, .18);
     --ease: cubic-bezier(.22, 1, .36, 1);
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
     background: var(--green);
     color: var(--cream);
     font-family: 'Josefin Sans', system-ui, sans-serif;
-    display: grid;
-    grid-template-columns: var(--mL) 1fr var(--m);
-    grid-template-rows: calc(var(--hdr) + 12px) minmax(var(--film-min), 1fr) auto;
   }
   /*
-    Header height is deterministic, so it is declared here rather than measured.
-    Reading offsetHeight at load forced a full document layout and, with a DOM
-    this size, cost real time on a throttled phone. Values measured at every
-    breakpoint, with and without the dismissable discount banner.
+    Header height is deterministic, so it is declared rather than measured
+    (reading offsetHeight at load forced a full document layout; see the
+    performance work of 5 September). Measured per breakpoint, with and without
+    the dismissable discount banner.
   */
-  @media (max-width: 639px) { .hero-print { --hdr: 102px; } }
-  @media (min-width: 640px) and (max-width: 1023px) { .hero-print { --hdr: 146px; } }
-  html[data-blc="closed"] .hero-print { --hdr: 107px; }
-  @media (max-width: 639px) { html[data-blc="closed"] .hero-print { --hdr: 73px; } }
-  @media (min-width: 640px) and (max-width: 1023px) { html[data-blc="closed"] .hero-print { --hdr: 113px; } }
-
-  /* globals.css has #hero { min-height: 100vh }; the ID keeps this rule in charge. */
-  #hero.hero-print {
-    min-height: 100vh;
-    min-height: 100svh;
-  }
-  @media (min-width: 1024px) and (max-height: 800px) {
-    .hero-print { --film-min: 420px; }
-  }
-  /* Below xl the caption drops its long form so the row never wraps: no street, no label, no "film". */
-  @media (max-width: 1279px) {
-    .hp-ledger .hp-dt { display: none; }
-  }
-
-  /* The mount: four hairlines that draw themselves clockwise. */
-  .hp-frame { grid-column: 2; grid-row: 2; position: relative; padding: var(--mount); }
-  .hp-ln { position: absolute; background: var(--line); pointer-events: none; }
-  .hp-ln-t { top: 0; left: 0; right: 0; height: 1px; transform-origin: left; transform: scaleX(0); animation: hp-drawX 1.1s var(--ease) .05s forwards; }
-  .hp-ln-r { top: 0; right: 0; bottom: 0; width: 1px; transform-origin: top; transform: scaleY(0); animation: hp-drawY 1.1s var(--ease) .3s forwards; }
-  .hp-ln-b { bottom: 0; left: 0; right: 0; height: 1px; transform-origin: right; transform: scaleX(0); animation: hp-drawX 1.1s var(--ease) .55s forwards; }
-  .hp-ln-l { top: 0; left: 0; bottom: 0; width: 1px; transform-origin: bottom; transform: scaleY(0); animation: hp-drawY 1.1s var(--ease) .8s forwards; }
-  @keyframes hp-drawX { to { transform: scaleX(1); } }
-  @keyframes hp-drawY { to { transform: scaleY(1); } }
-
-  /* The print. */
-  .hp-film { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--card); }
-  .hp-film .hp-poster,
-  .hp-film .hp-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; }
-  .hp-video { opacity: 0; transition: opacity 1.2s var(--ease); }
-  .hp-video.is-on { opacity: 1; }
-  /* The only scrim: a corner floor under the word "Solo", pixel sized so it never grows with the viewport. */
-  .hp-scrim {
-    position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(460px 210px at 0% 100%, rgba(16, 43, 42, .76) 0%, rgba(16, 43, 42, .74) 40%, rgba(16, 43, 42, .42) 66%, rgba(16, 43, 42, 0) 100%);
-  }
-  .hp-grain {
-    position: absolute; inset: 0; pointer-events: none; opacity: .05;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* Eyebrow: three short lines in the left margin, just above the name. */
-  .hp-eyebrow {
-    grid-column: 1; grid-row: 2; align-self: end; z-index: 5;
-    margin: 0; padding: 0 0 104px var(--m);
-    font-size: 11px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; line-height: 1.9;
-    color: var(--copper); white-space: nowrap;
-  }
-
-  /* Foot: the bottom paper margin, in normal flow so short viewports grow instead of clipping. */
-  .hp-foot {
-    grid-column: 1 / 4; grid-row: 3; position: relative; z-index: 5;
-    display: grid; grid-template-columns: var(--mL) 1fr var(--m); align-items: start;
-  }
-  .hp-title {
-    grid-column: 1 / 3; grid-row: 1;
-    margin: -.88em 0 0 var(--m);
-    font-family: 'Crimson Text', Georgia, serif; font-weight: 400;
-    font-size: clamp(56px, 7.5vw, 108px); line-height: .96; letter-spacing: -.005em;
-    color: var(--cream); width: max-content;
-  }
-  .hp-title > span { display: block; }
-  .hp-title .hp-amp { display: inline; color: var(--copper); }
-
-  .hp-lede {
-    grid-column: 2; grid-row: 1;
-    margin: 0 0 0 50%; padding-top: 18px; max-width: 330px;
-    font-size: 15px; font-weight: 300; line-height: 1.6; color: rgba(243, 236, 228, .82);
-  }
-  .hp-lede a { color: var(--cream); border-bottom: 1px solid var(--copper); padding-bottom: 1px; transition: color .3s var(--ease); }
-  .hp-lede a:hover { color: var(--copper); }
+  @media (max-width: 639px) { .hero-cine { --hdr: 102px; } }
+  @media (min-width: 640px) and (max-width: 1023px) { .hero-cine { --hdr: 146px; } }
+  html[data-blc="closed"] .hero-cine { --hdr: 107px; }
+  @media (max-width: 639px) { html[data-blc="closed"] .hero-cine { --hdr: 73px; } }
+  @media (min-width: 640px) and (max-width: 1023px) { html[data-blc="closed"] .hero-cine { --hdr: 113px; } }
 
   /*
-    Phone-only reservation block. The client asked for it off the desktop hero,
-    where the header's RESERVATION button is always visible; on a phone the
-    header is just a burger, so without this the first screen offered no way to
-    book. Hidden above 1023px, which leaves the mount rule clear exactly as the
-    desktop design intends.
+    globals.css has #hero { min-height: 100vh }. This hero's height is whatever
+    the uncropped film plus the band add up to; on a desktop that already fills
+    the screen, and on a phone stretching it would just pad the band with empty
+    green. The ID keeps this rule in charge.
   */
-  .hp-cta-row { position: absolute; z-index: 6; top: -28px; right: calc(var(--m) + 28px); }
-  .hp-cta { display: none; }
+  #hero.hero-cine {
+    min-height: auto;
+  }
 
-  /* Caption line under the print: hours, address and phone set like the foot of a menu. */
-  .hp-ledger {
-    grid-column: 1 / 4; grid-row: 2; position: relative;
-    margin: 24px var(--m) 0; padding: 16px 0 28px;
+  /*
+    The film's box IS the film's shape: full width, aspect-ratio 16/9. The
+    sources are 16:9, so object-fit: cover scales without cutting anything;
+    it only absorbs sub-pixel rounding that object-fit: contain would render
+    as a hairline letterbox.
+  */
+  .hc-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin-top: var(--hdr);   /* the fixed header sits above the page flow */
+    background: #0D1B1E;
+    overflow: hidden;
+  }
+  .hc-poster,
+  .hc-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .hc-video { opacity: 0; transition: opacity 1.2s var(--ease); }
+  .hc-video.is-on { opacity: 1; }
+
+  /* The band under the film. */
+  .hc-band { padding: 40px 0 44px; }
+  .hc-band-in { max-width: 1400px; }
+  .hc-title {
+    margin: 0 0 14px;
+    font-family: 'Crimson Text', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(34px, 4.6vw, 58px);
+    line-height: 1.08;
+    color: var(--cream);
+  }
+  /* One accessible name, two visual weights: "The Solo" leads, the rest in copper. */
+  .hc-title .hc-sub { color: var(--copper); }
+  .hc-lede {
+    margin: 0;
+    max-width: 640px;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: rgba(243, 236, 228, .85);
+  }
+
+  .hc-cta-row { display: none; }
+
+  /* Caption line: hours, address, phone, and the pause control as its last cell. */
+  .hc-ledger {
+    position: relative;
+    margin-top: 26px;
+    padding: 16px 0 0;
     display: flex; align-items: center; flex-wrap: wrap; row-gap: 14px;
     font-size: 13px; font-weight: 400; letter-spacing: .02em; line-height: 1;
     color: rgba(243, 236, 228, .78); white-space: nowrap;
   }
-  .hp-ledger::before {
-    content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--hair);
-    transform-origin: left; transform: scaleX(0); animation: hp-drawX 1.2s var(--ease) .9s forwards;
-  }
-  .hp-cell { padding: 0 22px; border-left: 1px solid var(--hair); display: inline-flex; align-items: baseline; gap: 10px; opacity: 0; animation: hp-fade .8s var(--ease) forwards; }
-  .hp-cell:first-child { padding-left: 0; border-left: 0; }
-  .hp-cell:nth-child(1) { animation-delay: 1.05s; }
-  .hp-cell:nth-child(2) { animation-delay: 1.13s; }
-  .hp-cell:nth-child(3) { animation-delay: 1.21s; }
-  .hp-cell b { font-weight: 500; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--copper); }
-  a.hp-cell { color: var(--cream); transition: color .4s var(--ease); }
-  a.hp-cell:hover { color: var(--copper); }
-  .hp-spacer { flex: 1; }
-  .hp-pause {
+  .hc-ledger::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--hair); }
+  .hc-cell { padding: 0 22px; border-left: 1px solid var(--hair); display: inline-flex; align-items: baseline; gap: 10px; }
+  .hc-cell:first-child { padding-left: 0; border-left: 0; }
+  .hc-cell b { font-weight: 500; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--copper); }
+  a.hc-cell { color: var(--cream); transition: color .4s var(--ease); }
+  a.hc-cell:hover { color: var(--copper); }
+  .hc-spacer { flex: 1; }
+  .hc-pause {
     padding: 8px 0 8px 22px; min-height: 44px; margin: -8px 0; border-left: 1px solid var(--hair);
     display: inline-flex; align-items: center; gap: 10px;
     background: none; border-top: 0; border-right: 0; border-bottom: 0; cursor: pointer;
     font: inherit; font-weight: 500; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--cream);
     visibility: hidden; opacity: 0; transition: opacity .6s var(--ease), color .4s var(--ease);
   }
-  .hp-pause.is-on { visibility: visible; opacity: 1; }
-  .hp-pause:hover { color: var(--copper); }
-  .hp-pause:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
-  .hp-pause svg { width: 9px; height: 10px; fill: currentColor; flex: none; }
-  .hp-pause .hp-play { display: none; }
-  .hp-pause[data-state="paused"] .hp-play { display: block; }
-  .hp-pause[data-state="paused"] .hp-stop { display: none; }
-  .hp-pause-label { padding-top: 2px; }
-  @keyframes hp-fade { to { opacity: 1; } }
+  .hc-pause.is-on { visibility: visible; opacity: 1; }
+  .hc-pause:hover { color: var(--copper); }
+  .hc-pause:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+  .hc-pause svg { width: 9px; height: 10px; fill: currentColor; flex: none; }
+  .hc-pause .hc-play { display: none; }
+  .hc-pause[data-state="paused"] .hc-play { display: block; }
+  .hc-pause[data-state="paused"] .hc-stop { display: none; }
+  .hc-pause-label { padding-top: 2px; }
 
-  /* Entrance: the mount draws, then the type arrives, then the print wakes. */
-  .hp-rise { opacity: 0; transform: translateY(22px); animation: hp-rise .95s var(--ease) forwards; }
-  .hp-d1 { animation-delay: .35s; }
-  .hp-d2 { animation-delay: .47s; }
-  .hp-d3 { animation-delay: .62s; }
-  .hp-d4 { animation-delay: .74s; }
-  @keyframes hp-rise { to { opacity: 1; transform: none; } }
+  /* Entrance: the band only. The poster is the LCP element and never animates. */
+  .hc-rise { opacity: 0; transform: translateY(16px); animation: hc-rise .8s var(--ease) forwards; }
+  .hc-d1 { animation-delay: .1s; }
+  .hc-d2 { animation-delay: .22s; }
+  .hc-d3 { animation-delay: .34s; }
+  @keyframes hc-rise { to { opacity: 1; transform: none; } }
 
   @media (prefers-reduced-motion: reduce) {
-    .hp-ln, .hp-rise, .hp-ledger::before, .hp-cell { animation: none; opacity: 1; transform: none; }
-    .hp-video, .hp-pause { display: none; }
+    .hc-rise { animation: none; opacity: 1; transform: none; }
+    .hc-video, .hc-pause { display: none; }
   }
 
-  /* lg (after the base rules, so these win at equal specificity): the left margin narrows with the name, so the eyebrow steps down one size
-     and the lede starts below the CTA block, which sits closer to it here. */
-  @media (min-width: 1024px) and (max-width: 1279px) {
-    .hero-print { --mL: min(240px, calc(64px + 12.4vw)); }
-    .hp-eyebrow { font-size: 10px; letter-spacing: .14em; }
-    .hp-lede { padding-top: 40px; }
+  /* Below xl the caption drops its long form so the row never wraps. */
+  @media (max-width: 1279px) {
+    .hc-ledger .hc-dt { display: none; }
   }
 
-  /* Phones and tablets: the print becomes a portrait card and the name notches into it. */
-  @media (max-width: 1023px) {
-    .hero-print { --m: 20px; --mL: 20px; --film-min: 300px; }
-    .hp-film .hp-poster, .hp-film .hp-video { object-position: 52% 60%; }
-    .hp-scrim, .hp-eyebrow { display: none; }
-    .hp-foot { display: block; padding: 0 var(--m); }
-    .hp-title { margin: -53px 0 0; font-size: clamp(44px, 13.8vw, 54px); line-height: .98; width: auto; }
-    /* "The Solo" rises into the print as a green tab: the mat notching into the picture. */
-    .hp-title .hp-l1 { display: inline-block; background: var(--green); margin-left: calc(-1 * var(--m)); padding: 12px 18px 2px var(--m); }
-    .hp-title .hp-l2 { padding-top: 6px; }
-    .hp-lede { margin: 12px 0 0; padding: 0; max-width: none; line-height: 1.55; }
-    .hp-cta-row { position: static; display: flex; align-items: center; gap: 20px; margin-top: 16px; }
-    .hp-cta {
+  @media (max-width: 767px) {
+    .hc-band { padding: 26px 0 30px; }
+    .hc-title { font-size: clamp(30px, 8.4vw, 36px); margin-bottom: 10px; }
+    .hc-lede { font-size: 15px; line-height: 1.55; }
+    .hc-cta-row { display: flex; margin-top: 18px; }
+    .hc-cta {
       display: inline-flex; align-items: center; justify-content: space-between; gap: 16px;
-      flex: 1; height: 56px; padding: 0 22px 0 24px; border-radius: 2px;
+      flex: 1; height: 54px; padding: 0 22px 0 24px; border-radius: 2px;
       background: var(--copper); color: var(--green);
       font-family: 'Crimson Text', Georgia, serif; font-weight: 600; font-size: 18px; letter-spacing: .01em; line-height: 1;
       transition: transform .45s var(--ease), background-color .3s var(--ease);
     }
-    .hp-cta svg { width: 20px; height: 20px; flex: none; }
-    .hp-cta:active { transform: translateY(1px); }
-    .hp-cta:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
-    .hp-cta-t { padding-top: 3px; }
-    .hp-ledger { margin: 16px 0 0; padding: 14px 0 18px; font-size: 12.5px; }
-    .hp-cell { padding: 0 12px; }
-    .hp-cell.hp-hrs { flex-basis: 100%; padding-left: 0; border-left: 0; }
-    .hp-cell.hp-addr { padding-left: 0; border-left: 0; }
-    .hp-spacer, .hp-dt { display: none; }
-    .hp-pause { padding-left: 12px; font-size: 10.5px; margin-left: auto; }
-  }
-  @media (min-width: 1024px) {
-    .hp-mb { display: none; }
+    .hc-cta svg { width: 20px; height: 20px; flex: none; }
+    .hc-cta:active { transform: translateY(1px); }
+    .hc-cta:focus-visible { outline: 2px solid var(--cream); outline-offset: 3px; }
+    .hc-cta-t { padding-top: 3px; }
+    .hc-ledger { margin-top: 22px; font-size: 12.5px; }
+    .hc-cell { padding: 0 12px; }
+    .hc-cell.hc-hrs { flex-basis: 100%; padding-left: 0; border-left: 0; }
+    .hc-cell.hc-addr { padding-left: 0; border-left: 0; }
+    .hc-spacer { display: none; }
+    .hc-pause { padding-left: 12px; font-size: 10.5px; margin-left: auto; }
   }
 </style>
 
@@ -328,7 +268,7 @@ const VIDEO_VERSION = 'v2';
   const section = document.getElementById('hero');
 
   if (video && toggle && section) {
-    const version = section.dataset.videoVersion || 'v1';
+    const version = section.dataset.videoVersion || 'v3';
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const conn = (navigator as any).connection;
     const slow = !!conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''));
@@ -337,7 +277,7 @@ const VIDEO_VERSION = 'v2';
     // per megabyte, gets the poster and nothing else.
     if (!reduced && !slow) {
       let userPaused = false;
-      const word = toggle.querySelector('.hp-w');
+      const word = toggle.querySelector('.hc-w');
 
       const setState = (playing: boolean) => {
         toggle.dataset.state = playing ? 'playing' : 'paused';
@@ -346,7 +286,7 @@ const VIDEO_VERSION = 'v2';
       };
 
       const attach = () => {
-        const small = window.matchMedia('(max-width: 1023px)').matches;
+        const small = window.matchMedia('(max-width: 767px)').matches;
         const base = `/video/hero-${version}-${small ? '720' : '1080'}`;
         // AV1 first for browsers that decode it; the codecs string lets Safari
         // skip straight to the MP4 instead of downloading a file it cannot play.
@@ -370,9 +310,8 @@ const VIDEO_VERSION = 'v2';
         }, { once: true });
       };
 
-      // Nothing about the film starts until the page has loaded and the mount
-      // has drawn itself (the frame animation runs for about a second).
-      const DELAY = 1100;
+      // Nothing about the film starts until the page has finished loading.
+      const DELAY = 300;
       if (document.readyState === 'complete') {
         setTimeout(attach, DELAY);
       } else {
