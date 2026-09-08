@@ -4,6 +4,8 @@ import HeaderAbout from '@/components/HeaderAbout.astro';
 import FooterAbout from '@/components/FooterAbout.astro';
 import { Image } from 'astro:assets';
 import heroLeft from '@/assets/hero-left.jpg';
+import rooftopPoster from '@/assets/space-rooftop-poster.jpg';
+import olivePoster from '@/assets/space-olive-poster.jpg';
 ---
 
 <BaseLayout
@@ -102,19 +104,52 @@ import heroLeft from '@/assets/hero-left.jpg';
           <!-- Rooftop Terrace -->
           <div class="group">
             <div class="relative overflow-hidden rounded-2xl mb-6">
-              <img width="1333" height="949" 
-                src="/images/restaurant-1.jpg" 
-                alt="Rooftop Terrace with panoramic London views" 
-                class="w-full h-64 lg:h-80 object-cover group-hover:scale-105 transition-transform duration-700"
-                loading="lazy"
-              />
+              <div class="sp-media w-full h-64 lg:h-80 group-hover:scale-105 transition-transform duration-700">
+                <Image
+                  src={rooftopPoster}
+                  alt="Rooftop Terrace with panoramic London views"
+                  class="sp-layer"
+                  width={960}
+                  widths={[480, 960]}
+                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  format="webp"
+                  quality={72}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <video
+                  class="sp-layer sp-video"
+                  data-space-video
+                  data-webm="/video/space-rooftop.webm"
+                  data-mp4="/video/space-rooftop.mp4"
+                  muted
+                  playsinline
+                  loop
+                  preload="none"
+                  aria-hidden="true"
+                  tabindex="-1"
+                ></video>
+              </div>
               <div class="absolute inset-0 bg-gradient-to-t to-transparent" style="background: linear-gradient(to top, rgba(16, 43, 42, 0.9), transparent);"></div>
               <!-- Space Name Overlay -->
               <div class="absolute top-6 left-6 right-6">
-                <div class="backdrop-blur-sm px-4 py-2 rounded-lg border border-brand-gold/30" style="background-color: rgba(16, 43, 42, 0.8);">
+                <div class="relative backdrop-blur-sm px-4 py-2 rounded-lg border border-brand-gold/30" style="background-color: rgba(16, 43, 42, 0.8);">
                   <h3 class="font-crimson text-lg sm:text-xl text-brand-gold font-semibold text-center">
                     Rooftop Terrace
                   </h3>
+                  <button
+                    type="button"
+                    class="sp-pause"
+                    data-space-pause
+                    data-state="playing"
+                    data-label-pause="Pause the Rooftop Terrace film"
+                    data-label-play="Play the Rooftop Terrace film"
+                    aria-label="Pause the Rooftop Terrace film"
+                    hidden
+                  >
+                    <svg class="sp-ico-pause" viewBox="0 0 9 10" aria-hidden="true"><rect x="0" y="0" width="3" height="10"/><rect x="6" y="0" width="3" height="10"/></svg>
+                    <svg class="sp-ico-play" viewBox="0 0 9 10" aria-hidden="true"><path d="M0 0l9 5-9 5z"/></svg>
+                  </button>
                 </div>
               </div>
               <div class="absolute bottom-6 left-6 right-6">
@@ -128,19 +163,52 @@ import heroLeft from '@/assets/hero-left.jpg';
           <!-- Olive Garden -->
           <div class="group">
             <div class="relative overflow-hidden rounded-2xl mb-6">
-              <img width="800" height="600" 
-                src="/images/restaurant-3.jpg" 
-                alt="Olive Garden intimate dining area" 
-                class="w-full h-64 lg:h-80 object-cover group-hover:scale-105 transition-transform duration-700"
-                loading="lazy"
-              />
+              <div class="sp-media w-full h-64 lg:h-80 group-hover:scale-105 transition-transform duration-700">
+                <Image
+                  src={olivePoster}
+                  alt="Olive Garden intimate dining area"
+                  class="sp-layer"
+                  width={960}
+                  widths={[480, 960]}
+                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  format="webp"
+                  quality={72}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <video
+                  class="sp-layer sp-video"
+                  data-space-video
+                  data-webm="/video/space-olive.webm"
+                  data-mp4="/video/space-olive.mp4"
+                  muted
+                  playsinline
+                  loop
+                  preload="none"
+                  aria-hidden="true"
+                  tabindex="-1"
+                ></video>
+              </div>
               <div class="absolute inset-0 bg-gradient-to-t to-transparent" style="background: linear-gradient(to top, rgba(16, 43, 42, 0.9), transparent);"></div>
               <!-- Space Name Overlay -->
               <div class="absolute top-6 left-6 right-6">
-                <div class="backdrop-blur-sm px-4 py-2 rounded-lg border border-brand-gold/30" style="background-color: rgba(16, 43, 42, 0.8);">
+                <div class="relative backdrop-blur-sm px-4 py-2 rounded-lg border border-brand-gold/30" style="background-color: rgba(16, 43, 42, 0.8);">
                   <h3 class="font-crimson text-lg sm:text-xl text-brand-gold font-semibold text-center">
                     Olive Garden
                   </h3>
+                  <button
+                    type="button"
+                    class="sp-pause"
+                    data-space-pause
+                    data-state="playing"
+                    data-label-pause="Pause the Olive Garden film"
+                    data-label-play="Play the Olive Garden film"
+                    aria-label="Pause the Olive Garden film"
+                    hidden
+                  >
+                    <svg class="sp-ico-pause" viewBox="0 0 9 10" aria-hidden="true"><rect x="0" y="0" width="3" height="10"/><rect x="6" y="0" width="3" height="10"/></svg>
+                    <svg class="sp-ico-play" viewBox="0 0 9 10" aria-hidden="true"><path d="M0 0l9 5-9 5z"/></svg>
+                  </button>
                 </div>
               </div>
               <div class="absolute bottom-6 left-6 right-6">
@@ -212,4 +280,105 @@ import heroLeft from '@/assets/hero-left.jpg';
   
   <!-- Footer -->
   <FooterAbout />
+<style>
+  /* Our Spaces: two of the three cards are film, one is a photograph. The
+     poster sits under the video and is what the card looks like until the
+     film is attached, so the card never changes size or flashes empty. */
+  .sp-media { position: relative; display: block; overflow: hidden; background: #0D1B1E; }
+  .sp-layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .sp-video { opacity: 0; transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .sp-video.is-on { opacity: 1; }
+
+  .sp-pause {
+    position: absolute; top: 50%; right: 2px; transform: translateY(-50%);
+    width: 40px; height: 40px; display: grid; place-items: center;
+    padding: 0; margin: 0; border: 0; background: none; cursor: pointer;
+    color: #C49A85; border-radius: 999px;
+    transition: color 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .sp-pause[hidden] { display: none; }
+  .sp-pause:hover { color: #F3ECE4; }
+  .sp-pause:focus-visible { outline: 2px solid #C49A85; outline-offset: 2px; }
+  .sp-pause svg { width: 9px; height: 10px; fill: currentColor; }
+  .sp-pause .sp-ico-play { display: none; }
+  .sp-pause[data-state="paused"] .sp-ico-pause { display: none; }
+  .sp-pause[data-state="paused"] .sp-ico-play { display: block; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sp-media { transition: none; }
+    .sp-video { transition: none; }
+  }
+</style>
+
+<script>
+  // The films are decoration, so they cost nothing until they can be seen:
+  // sources are attached after the page has loaded and only once the card
+  // scrolls into range, playback stops again when it leaves, and a visitor who
+  // has asked for reduced motion never gets past the poster.
+  const films = document.querySelectorAll<HTMLVideoElement>('video[data-space-video]');
+
+  if (films.length) {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const controlFor = (video: HTMLVideoElement) =>
+      video.closest('.group')?.querySelector<HTMLButtonElement>('[data-space-pause]') ?? null;
+
+    const attach = (video: HTMLVideoElement) => {
+      if (video.dataset.ready) return;
+      video.dataset.ready = '1';
+      const sources: Array<[string, string | undefined]> = [
+        ['video/webm', video.dataset.webm],
+        ['video/mp4', video.dataset.mp4],
+      ];
+      for (const [type, src] of sources) {
+        if (!src) continue;
+        const source = document.createElement('source');
+        source.type = type;
+        source.src = src;
+        video.appendChild(source);
+      }
+      video.load();
+    };
+
+    const start = (video: HTMLVideoElement) => {
+      if (reduced.matches || video.dataset.userPaused === '1') return;
+      attach(video);
+      video.play().then(() => {
+        video.classList.add('is-on');
+        const button = controlFor(video);
+        if (button) button.hidden = false;
+      }).catch(() => {
+        // Autoplay refused: the poster stays, which is a complete card on its own.
+      });
+    };
+
+    const watcher = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) start(video);
+        else if (!video.paused) video.pause();
+      }
+    }, { rootMargin: '200px 0px', threshold: 0.01 });
+
+    const begin = () => films.forEach((video) => watcher.observe(video));
+    if (document.readyState === 'complete') begin();
+    else window.addEventListener('load', begin, { once: true });
+
+    for (const button of document.querySelectorAll<HTMLButtonElement>('[data-space-pause]')) {
+      button.addEventListener('click', () => {
+        const video = button.closest('.group')?.querySelector<HTMLVideoElement>('video[data-space-video]');
+        if (!video) return;
+        const resume = video.paused;
+        video.dataset.userPaused = resume ? '0' : '1';
+        button.dataset.state = resume ? 'playing' : 'paused';
+        button.setAttribute('aria-label', (resume ? button.dataset.labelPause : button.dataset.labelPlay) ?? '');
+        if (resume) video.play().catch(() => {});
+        else video.pause();
+      });
+    }
+
+    reduced.addEventListener('change', (event) => {
+      if (event.matches) films.forEach((video) => video.pause());
+    });
+  }
+</script>
 </BaseLayout>

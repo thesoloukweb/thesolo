@@ -100,3 +100,22 @@ overflow.
   any post without its own picture, not a numbered slot.
 - Heroes sit behind a scrim and a headline, so faces and plated detail belong
   away from the centre; the cards crop to roughly 3:2 and keep the middle.
+
+## Our Spaces (about page)
+
+Two of the three cards are film, one is a photograph, and they must read as one row.
+
+- The card box does not change: `h-64 lg:h-80`, `object-cover`, 30px radius, one height
+  across the row. The films are 16:9 and crop to it exactly as the photographs did.
+- Under each film is its own first frame as a poster, through `astro:assets`. The poster
+  is what the card is until the film is attached, so nothing resizes and no card is ever
+  blank. It is also the whole card for anyone the film never reaches.
+- Nothing is fetched up front: sources are attached after `window.load` and only once an
+  `IntersectionObserver` says the card is within 200px of the viewport. Playback stops
+  again when it leaves. On a visit that never reaches the section, the films cost zero.
+- `prefers-reduced-motion: reduce` skips the attach entirely — no request, no motion.
+- Each film carries a pause control at the right of its name badge, 40x40, revealed only
+  once playback actually starts. A visitor's choice to pause is remembered, so scrolling
+  away and back does not restart it.
+- Encodes: 960x540, silent, AV1 WebM plus H.264 MP4, about 1.2MB each. The card is at
+  most 432px wide, so 960 covers a 2x display.
