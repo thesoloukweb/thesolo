@@ -6,6 +6,7 @@ import { Image } from 'astro:assets';
 import heroLeft from '@/assets/hero-left.jpg';
 import rooftopPoster from '@/assets/space-rooftop-poster.jpg';
 import olivePoster from '@/assets/space-olive-poster.jpg';
+import palmPhoto from '@/assets/space-palm.jpg';
 ---
 
 <BaseLayout
@@ -222,12 +223,20 @@ import olivePoster from '@/assets/space-olive-poster.jpg';
           <!-- Palm Garden -->
           <div class="group">
             <div class="relative overflow-hidden rounded-2xl mb-6">
-              <img width="800" height="600" 
-                src="/images/restaurant-5.jpg" 
-                alt="Palm Garden elegant dining space" 
-                class="w-full h-64 lg:h-80 object-cover group-hover:scale-105 transition-transform duration-700"
-                loading="lazy"
-              />
+              <div class="sp-media w-full h-64 lg:h-80 group-hover:scale-105 transition-transform duration-700">
+                <Image
+                  src={palmPhoto}
+                  alt="Palm Garden elegant dining space"
+                  class="sp-layer"
+                  width={960}
+                  widths={[480, 960]}
+                  sizes="(min-width: 1024px) 33vw, 100vw"
+                  format="webp"
+                  quality={72}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
               <div class="absolute inset-0 bg-gradient-to-t to-transparent" style="background: linear-gradient(to top, rgba(16, 43, 42, 0.9), transparent);"></div>
               <!-- Space Name Overlay -->
               <div class="absolute top-6 left-6 right-6">
