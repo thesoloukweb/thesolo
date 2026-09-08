@@ -2,9 +2,9 @@
 // Blog Section component - Latest News & Blogs
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
-import blogMediterranean from '@/assets/blog-mediterranean.jpg';
-import blogCocktails from '@/assets/blog-cocktails.jpg';
-import blogBrunch from '@/assets/blog-brunch.jpg';
+import blogPhoto1 from '@/assets/blog-1.jpg';
+import blogPhoto2 from '@/assets/blog-2.jpg';
+import blogPhoto3 from '@/assets/blog-3.jpg';
 // Only reached if a post is published without a hero of its own.
 import blogDefault from '@/assets/blog-default.jpg';
 
@@ -21,7 +21,7 @@ const fallbackPosts = [
     data: {
       title: 'Every day is a good day for your restaurant The only thing love more than food!',
       pubDate: new Date('2024-03-22'),
-      heroImage: blogMediterranean
+      heroImage: blogPhoto1
     }
   },
   {
@@ -29,7 +29,7 @@ const fallbackPosts = [
     data: {
       title: 'The only thing we\'re serious about is food. Your grub hub taste Rain.',
       pubDate: new Date('2024-06-10'),
-      heroImage: blogCocktails
+      heroImage: blogPhoto2
     }
   },
   {
@@ -37,7 +37,7 @@ const fallbackPosts = [
     data: {
       title: 'If you can call out organic beef sustainable farming great to highlight.',
       pubDate: new Date('2024-07-05'),
-      heroImage: blogBrunch
+      heroImage: blogPhoto3
     }
   }
 ];

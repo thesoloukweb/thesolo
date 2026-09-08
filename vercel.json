@@ -22,7 +22,7 @@
       "permanent": false
     },
     {
-      "source": "/az/:path*",
+      "source": "/az/(.*)",
       "destination": "/",
       "permanent": false
     }
