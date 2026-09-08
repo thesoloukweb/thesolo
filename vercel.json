@@ -10,6 +10,21 @@
       "source": "/menu/",
       "destination": "/#menus",
       "permanent": true
+    },
+    {
+      "source": "/az",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/az/",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/az/:path*",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "headers": [

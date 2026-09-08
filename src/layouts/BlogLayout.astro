@@ -2,13 +2,16 @@
 import BaseLayout from './BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+// Used when a post carries no hero of its own: the Palm Garden terrace.
+import blogDefault from '@/assets/blog-default.jpg';
 
 export interface Props {
   title: string;
   seoTitle?: string;
   description: string;
   pubDate: Date;
-  heroImage?: string;
+  heroImage?: ImageMetadata;
   tags?: string[];
   author?: string;
 }
@@ -36,7 +39,7 @@ const blogPosting = {
   description,
   datePublished: pubDate.toISOString(),
   inLanguage: 'en-GB',
-  ...(heroImage ? { image: new URL(heroImage, Astro.site).toString() } : {}),
+  ...(heroImage ? { image: new URL(heroImage.src, Astro.site).toString() } : {}),
   ...(tags.length ? { keywords: tags.join(', ') } : {}),
   // Both point at the business node already declared in BaseLayout. Spelling the
   // author out as a fresh Organization created a second entity whose name differed
@@ -51,7 +54,7 @@ const blogPosting = {
 <BaseLayout
   title={`${seoTitle ?? title} | TheSolo Kitchen & Bar`}
   description={description}
-  image={heroImage}
+  image={(heroImage ?? blogDefault).src}
   jsonLd={blogPosting}
 >
   <Header />
@@ -69,14 +72,18 @@ const blogPosting = {
     <section class="relative min-h-[70svh] lg:min-h-screen flex items-center justify-center bg-brand-dark overflow-hidden">
       <!-- Hero Background Image -->
       <div class="absolute inset-0 z-0">
-        <img 
-          src={heroImage || "/images/restaurant-2.jpg"}
-          alt={title}
-          width="500"
-          height="288"
+        <Image
+          src={heroImage ?? blogDefault}
+          alt=""
           class="w-full h-full object-cover"
           loading="eager"
-          onerror="this.src='/images/restaurant-2.jpg'"
+          fetchpriority="high"
+          decoding="async"
+          format="webp"
+          quality={74}
+          width={2160}
+          widths={[640, 1024, 1600, 2160]}
+          sizes="100vw"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/80 to-brand-dark/40"></div>
       </div>
@@ -179,14 +186,17 @@ const blogPosting = {
                 <!-- Featured Image -->
                 {heroImage && (
                   <div class="w-full">
-                    <img 
+                    <Image
                       src={heroImage}
                       alt={title}
-                      width="500"
-                      height="288"
                       class="w-full h-80 lg:h-96 object-cover"
-                      loading="eager"
-                      onerror="this.style.display='none'"
+                      loading="lazy"
+                      decoding="async"
+                      format="webp"
+                      quality={80}
+                      width={1400}
+                      widths={[700, 1400]}
+                      sizes="(min-width: 1024px) 700px, 100vw"
                     />
                   </div>
                 )}

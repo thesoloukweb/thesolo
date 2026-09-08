@@ -3,6 +3,8 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import { Image } from 'astro:assets';
+import blogDefault from '@/assets/blog-default.jpg';
 
 // Get all blog posts and sort by date (newest first)
 const blogPosts = await getCollection('blog');
@@ -16,7 +18,7 @@ const seoDescription = 'Mediterranean recipes, dining tips and stories from TheS
 <BaseLayout
   title={seoTitle}
   description={seoDescription}
-  image="/images/blog-1.jpg"
+  image={blogDefault.src}
 >
   <Header />
   
@@ -26,11 +28,18 @@ const seoDescription = 'Mediterranean recipes, dining tips and stories from TheS
     <section class="relative h-96 sm:h-[500px] lg:h-[600px] flex items-center justify-center bg-brand-dark">
       <!-- Hero Background Image -->
       <div class="absolute inset-0 z-0">
-        <img 
-          src="/images/blog-default.jpg" 
-          alt="TheSolo Kitchen & Bar Blog" 
+        <Image
+          src={blogDefault}
+          alt=""
           class="w-full h-full object-cover"
           loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          format="webp"
+          quality={74}
+          width={2160}
+          widths={[640, 1024, 1600, 2160]}
+          sizes="100vw"
         />
         <div class="absolute inset-0 bg-brand-dark/75"></div>
       </div>
@@ -78,13 +87,17 @@ const seoDescription = 'Mediterranean recipes, dining tips and stories from TheS
                   <!-- Image -->
                   <div class="relative overflow-hidden">
                     <a href={`/blog/${post.slug}/`}>
-                      <img 
-                        src={heroImage || '/images/blog-default.jpg'}
+                      <Image
+                        src={heroImage ?? blogDefault}
                         alt={title}
                         class="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
                         loading="lazy"
-                        width="560"
-                        height="256"
+                        decoding="async"
+                        format="webp"
+                        quality={80}
+                        width={1120}
+                        widths={[560, 1120]}
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                       />
                       <div class="absolute inset-0 bg-brand-dark/20 group-hover:bg-brand-dark/40 transition-colors duration-300"></div>
                     </a>
