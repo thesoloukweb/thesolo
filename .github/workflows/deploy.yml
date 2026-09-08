@@ -1,0 +1,70 @@
+# Build on push to main and send the result to the VPS.
+#
+# This replaces what Vercel was doing automatically. The build happens here
+# rather than on the server so that a broken build never reaches the live
+# directory: if this job fails, the site keeps serving the previous release.
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # Off until the VPS is live. Vercel is still serving the site, and a job
+    # that fails on every push because its secrets are not set teaches everyone
+    # to ignore a red tick. Set the repository variable DEPLOY_ENABLED to
+    # "true" at cutover; that is the whole switch.
+    if: vars.DEPLOY_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        env:
+          SITE_URL: https://www.thesolo.co.uk
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+          GOOGLE_TAG_MANAGER_ID: ${{ secrets.GOOGLE_TAG_MANAGER_ID }}
+        run: npm run build
+
+      - name: Refuse to deploy an empty build
+        run: |
+          test -f dist/index.html
+          pages=$(find dist -name index.html | wc -l)
+          echo "pages: $pages"
+          test "$pages" -ge 10
+
+      - name: Authorise SSH
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf '%s\n' "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+
+      - name: Upload and switch
+        env:
+          TARGET: ${{ secrets.DEPLOY_TARGET }}
+        run: SKIP_BUILD=1 deploy/push.sh "$TARGET"
+
+      - name: Check the site answers
+        run: |
+          for path in / /about/ /blog/ /contact/ /gallery/ /faq/ /reservation/; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://www.thesolo.co.uk$path")
+            echo "$path -> $code"
+            test "$code" = "200"
+          done

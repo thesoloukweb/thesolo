@@ -1,0 +1,34 @@
+[Unit]
+Description=TheSolo mail endpoint
+Documentation=file:///var/www/thesolo/api/server.mjs
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=thesolo
+Group=thesolo
+WorkingDirectory=/var/www/thesolo/api
+EnvironmentFile=/etc/thesolo/api.env
+ExecStart=/usr/bin/node /var/www/thesolo/api/server.mjs
+Restart=always
+RestartSec=3
+
+# The service reads one env file, opens one loopback port and sends mail.
+# Nothing else needs to be reachable from it.
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6
+RestrictNamespaces=true
+LockPersonality=true
+MemoryMax=256M
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target

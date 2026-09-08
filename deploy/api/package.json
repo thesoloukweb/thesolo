@@ -1,0 +1,10 @@
+{
+  "name": "thesolo-api",
+  "private": true,
+  "type": "module",
+  "description": "The mail endpoint that used to be a Vercel function.",
+  "main": "server.mjs",
+  "dependencies": {
+    "nodemailer": "^7.0.5"
+  }
+}
