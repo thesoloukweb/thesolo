@@ -84,3 +84,19 @@ The framed-print concept (second iteration) was rejected: the client wants the o
 Measured on the built site at 1440/1920/768/390: media box ratio exactly 1.778 everywhere, video top
 equals header bottom, full 33.2s duration reported, pause control visible once playing, no horizontal
 overflow.
+
+## Blog photographs
+
+- One size covers every slot: **2160 x 1440** (3:2), JPEG, sRGB. The largest
+  slot is the full-bleed post hero, which asks for 2160w; nothing upscales.
+- They live in `src/assets/` and go through `astro:assets`, so each slot gets
+  its own WebP srcset from the one original: 560w and 1120w for the cards,
+  640 / 1024 / 1600 / 2160 for the heroes.
+- Filenames carry the client's numbering — `blog-1`, `blog-2`, `blog-3` — and
+  that numbering is the ordering contract: photo N goes in card N, left to
+  right, matching how the client numbers a batch. Do not rename them after what
+  is in the frame; the frame is not what decides where they go.
+- `blog-default` is the exception: it is the listing hero and the fallback for
+  any post without its own picture, not a numbered slot.
+- Heroes sit behind a scrim and a headline, so faces and plated detail belong
+  away from the centre; the cards crop to roughly 3:2 and keep the middle.
