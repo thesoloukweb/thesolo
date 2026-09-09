@@ -339,6 +339,8 @@ import Footer from '@/components/Footer.astro';
 </BaseLayout>
 
 <script>
+  import { isValidName, isValidPhone, isValidEmail, NAME_HINT, PHONE_HINT, EMAIL_HINT } from '@/scripts/form-validation';
+
   // Contact form handling
   document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contact-form') as HTMLFormElement;
@@ -450,33 +452,20 @@ import Footer from '@/components/Footer.astro';
           return;
         }
         
-        // Validate name (minimum 4 characters, no numbers)
-        if (name.length < 4) {
-          (window as any).showNotification('Name must be at least 4 characters long.', 'warning');
+        if (!isValidName(name)) {
+          (window as any).showNotification(NAME_HINT, 'warning');
           return;
         }
-        
-        if (!/^[a-zA-Z\s]+$/.test(name)) {
-          (window as any).showNotification('Name should only contain letters and spaces.', 'warning');
+
+        if (!isValidEmail(email)) {
+          (window as any).showNotification(EMAIL_HINT, 'warning');
           return;
         }
-        
-        // Validate email format
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-          (window as any).showNotification('Please enter a valid email address (e.g., name@gmail.com).', 'warning');
+
+        // The phone field is optional on this form.
+        if (phone && phone !== 'Not provided' && !isValidPhone(phone)) {
+          (window as any).showNotification(PHONE_HINT, 'warning');
           return;
-        }
-        
-        // Validate UK phone number if provided
-        if (phone && phone !== 'Not provided') {
-          const phoneRegex = /^0[1-9]\d{8,9}$/;
-          const cleanPhone = phone.replace(/\s+/g, '');
-          
-          if (!phoneRegex.test(cleanPhone)) {
-            (window as any).showNotification('Please enter a valid UK phone number (11 digits starting with 0).', 'warning');
-            return;
-          }
         }
         
         // Validate subject selection

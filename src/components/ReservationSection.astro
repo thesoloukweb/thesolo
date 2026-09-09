@@ -389,6 +389,8 @@ import reservationDinner from '@/assets/reservation-dinner.jpg';
 </section>
 
 <script>
+  import { isValidName, isValidPhone, isValidEmail, NAME_HINT, PHONE_HINT, EMAIL_HINT } from '@/scripts/form-validation';
+
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('reservation-form');
     const dateInput = document.getElementById('date');
@@ -731,30 +733,18 @@ import reservationDinner from '@/assets/reservation-dinner.jpg';
         return false;
       }
       
-      // Validate full name (minimum 4 characters, no numbers)
-      if (fullName.length < 4) {
-        (window as any).showNotification('Full name must be at least 4 characters long.', 'warning');
+      if (!isValidName(fullName)) {
+        (window as any).showNotification(NAME_HINT, 'warning');
         return false;
       }
-      
-      if (!/^[a-zA-Z\s]+$/.test(fullName)) {
-        (window as any).showNotification('Full name should only contain letters and spaces.', 'warning');
+
+      if (!isValidEmail(email)) {
+        (window as any).showNotification(EMAIL_HINT, 'warning');
         return false;
       }
-      
-      // Validate email format
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        (window as any).showNotification('Please enter a valid email address (e.g., name@gmail.com).', 'warning');
-        return false;
-      }
-      
-      // Validate UK phone number (11 digits starting with 0)
-      const phoneRegex = /^0[1-9]\d{8,9}$/;
-      const cleanPhone = mobile.replace(/\s+/g, '');
-      
-      if (!phoneRegex.test(cleanPhone)) {
-        (window as any).showNotification('Please enter a valid UK phone number (11 digits starting with 0).', 'warning');
+
+      if (!isValidPhone(mobile)) {
+        (window as any).showNotification(PHONE_HINT, 'warning');
         return false;
       }
       
