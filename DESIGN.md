@@ -62,7 +62,7 @@ Rules
 
 - Museum Gardens, Cambridge Heath Road, London E2 9PA
 - 020 8014 2656
-- Open daily from 10:00 (Mon to Thu until 23:30, Fri and Sat until 00:30, Sun until 23:30)
+- Open daily from 10:00 (Mon to Wed until 23:30, Thu to Sat until 00:30, Sun until 23:30)
 
 ## Hero (September 2026, third iteration)
 

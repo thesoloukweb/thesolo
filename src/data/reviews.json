@@ -1,12 +1,109 @@
 {
-  "fetchedAt": "2026-09-02T07:35:36.471Z",
+  "fetchedAt": "2026-09-09T07:44:36.989Z",
   "source": "Google",
   "placeId": "ChIJAWxvnYUddkgRYDdKMNbeyTo",
   "placeUrl": "https://g.page/r/CWA3SjDW3sk6EBM",
-  "totalReviewCount": 763,
+  "reviewUrl": "https://g.page/r/CWA3SjDW3sk6EBM/review",
+  "totalReviewCount": 775,
   "rating": 4.8,
   "scraped": 400,
   "reviews": [
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT2pac1Z5MW9hM05NUmxsb05uRk5hMnhmUkY5SFZsRRAB",
+      "name": "Jordan Bishop",
+      "stars": 5,
+      "text": "Hosted an engagement party at the rooftop and it was the perfect venue. The roof opens which kept it cool as we had quite a lot of people and it was decorated beautifully. The drinks were a very reasonable price for London and they allowed us to play our own…",
+      "publishedAt": "2026-09-08T06:26:50.934Z",
+      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pac1Z5MW9hM05NUmxsb05uRk5hMnhmUkY5SFZsRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOjZsVy1oa3NMRlloNnFNa2xfRF9HVlE%7C%7C?hl=en",
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjUCJXEgdfuptEeb7KtAchjn6dNKGr_sFRxomQNUE-CZqnS4v9GaOw=s96-c",
+      "localGuide": true,
+      "reviewCount": 32,
+      "ownerReply": null
+    },
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT2xSMWFsSnlhMFF0YkZaRE1FNWFaalp1VjFSb2IxRRAB",
+      "name": "Fatih Temel",
+      "stars": 5,
+      "text": "Foods are really delicious, cocktails are very tasty and service are amazing. I will definitely come back. It is a hidden gem 👍",
+      "publishedAt": "2026-09-07T13:43:36.693Z",
+      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2xSMWFsSnlhMFF0YkZaRE1FNWFaalp1VjFSb2IxRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOlR1alJya0QtbFZDME5aZjZuV1Rob1E%7C%7C?hl=en",
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocKedq4cXxh_-pMRd0CpChnNX7Pr00Swulzi-_LoGN9gwq-oTQ=s96-c",
+      "localGuide": false,
+      "reviewCount": 1,
+      "ownerReply": null
+    },
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT2toWGQyRjZZbk5SVlc5U1ZrWnZkM1p6V21Rek9XYxAB",
+      "name": "Mark Scott",
+      "stars": 5,
+      "text": "Good vegan choices, great for outdoor dining. Very relaxed.",
+      "publishedAt": "2026-09-06T13:01:40.775Z",
+      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2toWGQyRjZZbk5SVlc5U1ZrWnZkM1p6V21Rek9XYxAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOkhXd2F6YnNRVW9SVkZvd3ZzWmQzOWc%7C%7C?hl=en",
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocJ3LHYyCNVTa-9Le8b4EmklMyF3HmTRCXYGq0uwl-aYrHtm5A=s96-c",
+      "localGuide": false,
+      "reviewCount": 2,
+      "ownerReply": "Thank you so much, Mark, for your wonderful 5-star review! We’re delighted to hear that you enjoyed our vegan options, relaxed atmosphere, and outdoor dining experience. It’s great to know you found The Solo welcoming and suitable for different dietary preferences.\n\nWe truly appreciate your recommendation and look forward to welcoming you back again soon!\n\nWarm regards,\nThe Solo Team"
+    },
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT201YVIzSlNNWEYyUjNkdWNYQXliamRzWm5vd2EzYxAB",
+      "name": "Kevin Finlay",
+      "stars": 5,
+      "text": "Great food, great drinks and Saugat was an amazing waiter!",
+      "publishedAt": "2026-09-06T12:39:14.332Z",
+      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT201YVIzSlNNWEYyUjNkdWNYQXliamRzWm5vd2EzYxAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOm5aR3JSMXF2R3ducXAybjdsZnowa3c%7C%7C?hl=en",
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocIUlGHgieloYws7QqeDAoSwNLCVpyAsEAehAeNO79QWld_32g=s96-c",
+      "localGuide": false,
+      "reviewCount": 2,
+      "ownerReply": "Thank you so much, Kevin, for your fantastic 5-star review! We’re delighted to hear that you enjoyed the food and drinks, and we’re especially pleased that Saugat made your experience even better with his amazing service.\n\nWe truly appreciate your kind words and look forward to welcoming you back again soon!\n\nWarm regards,\nThe Solo Team"
+    },
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT2pOWVUyYzRZMVpsV2t4R05IQkhRMjFsYm5CS1YwRRAB",
+      "name": "always butts",
+      "stars": 5,
+      "text": "Thank you saugat for amazing service and breakfast!!",
+      "publishedAt": "2026-09-05T11:33:41.088Z",
+      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pOWVUyYzRZMVpsV2t4R05IQkhRMjFsYm5CS1YwRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOjNYU2c4Y1ZlWkxGNHBHQ21lbnBKV0E%7C%7C?hl=en",
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocKreC2lOBIvO6D4vMyq-QmxCxW55IdqxIgnQWvUZIyKvuYGtxk=s96-c",
+      "localGuide": false,
+      "reviewCount": 3,
+      "ownerReply": "Thank you so much for your wonderful 5-star review! We’re delighted to hear that you enjoyed your breakfast and had such a great experience. We’ll be sure to pass your kind words on to Saugat!\n\nWe truly appreciate your support and look forward to welcoming you back again soon!\n\nWarm regards,\nThe Solo Team"
+    },
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT25aQ01IbFhNa3Q0U1hSRlNISndTakJLWW5sVFYxRRAB",
+      "name": "Lilli Christin",
+      "stars": 5,
+      "text": "\"Don't miss The Solo Kitchen & Bar in London, right at Bethnal Green Station! It is run with a palpable passion for great food and amazing cocktails. The staff are wonderfully friendly and cheerful — especially Rico („vielleicht spreche ich ja auch Deutsch…",
+      "publishedAt": "2026-09-03T12:01:16.152Z",
+      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT25aQ01IbFhNa3Q0U1hSRlNISndTakJLWW5sVFYxRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOnZCMHlXMkt4SXRFSHJwSjBKYnlTV1E%7C%7C?hl=en",
+      "photo": "https://lh3.googleusercontent.com/a/ACg8ocJ2WFXURDXNsFvaK3OPwLTDkSLZzZDLcWmI32dy0mzs9gASfg=s96-c",
+      "localGuide": false,
+      "reviewCount": 3,
+      "ownerReply": "Thank you so much, Lilli, for your fantastic 5-star review! We’re delighted to hear that you enjoyed the food, cocktails, and welcoming atmosphere at The Solo. It’s especially wonderful to know that Rico helped make your visit such a memorable one — we’ll be sure to share your lovely words with him!\n\nThank you for recommending us, and we look forward to welcoming you back for another special evening soon!\n\nWarm regards,\nThe Solo Team"
+    },
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT25KeE0yeDFTRVExY0hOaU0yMHlWbVZrVm5SbVkxRRAB",
+      "name": "Thales Rodrigues",
+      "stars": 5,
+      "text": "I had a really good portobello burger—especially the fries—and the service was impeccable. Avin.",
+      "publishedAt": "2026-09-03T11:13:20.898Z",
+      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT25KeE0yeDFTRVExY0hOaU0yMHlWbVZrVm5SbVkxRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOnJxM2x1SEQ1cHNiM20yVmVkVnRmY1E%7C%7C?hl=en",
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXMD2li0t7uZSMcpEaFYGfZzvnW_rhK2wjLDLwH7vFb4_4XdaS8=s96-c",
+      "localGuide": false,
+      "reviewCount": 5,
+      "ownerReply": "Thank you so much, Thales, for your fantastic 5-star review! We’re delighted to hear that you enjoyed the Portobello burger and especially the fries. It’s also wonderful to know that Avin provided impeccable service and helped make your visit even more enjoyable.\n\nWe truly appreciate your kind words and look forward to welcoming you back again soon!\n\nWarm regards,\nThe Solo Team"
+    },
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT2pkU1kyMUxkMjl6TjJGMmFGOUJPWGhxTWxsUlFVRRAB",
+      "name": "Jeannie Sullivan",
+      "stars": 5,
+      "text": "Incredibly nice staff (especially Rico <3), good food, amazing drinks, and a really good atmosphere. I absolutely recommend! <3",
+      "publishedAt": "2026-09-02T15:14:44.544Z",
+      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pkU1kyMUxkMjl6TjJGMmFGOUJPWGhxTWxsUlFVRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOjdSY21Ld29zN2F2aF9BOXhqMllRQUE%7C%7C?hl=en",
+      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjWo5kgu5owyWCs6Kl4D5UNiNaMVdj8YuSZ18NZr6kXhBxopDaY=s96-c",
+      "localGuide": true,
+      "reviewCount": 23,
+      "ownerReply": "Thank you so much, Jeannie, for your amazing 5-star review! We’re delighted to hear that you enjoyed the food, drinks, and atmosphere. Your lovely words about our team, especially Rico, mean so much to us — we’ll be sure to pass them on! ❤️\n\nThank you for recommending us, and we look forward to welcoming you back again soon!\n\nWarm regards,\nThe Solo Team"
+    },
     {
       "id": "Ci9DQUlRQUNvZENodHljRjlvT25sRmVHazRjRXhPTXpWWFdETjBNR05LUm5veWQxRRAB",
       "name": "Ella Giemza",
@@ -16,8 +113,8 @@
       "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT25sRmVHazRjRXhPTXpWWFdETjBNR05LUm5veWQxRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOnlFeGk4cExOMzVXWDN0MGNKRnoyd1E%7C%7C?hl=en",
       "photo": "https://lh3.googleusercontent.com/a/ACg8ocL5N-YIKhmKxbTyPF2VcObaF2fLHGf1WYohw5IGk4mcbZ4jQg=s96-c",
       "localGuide": false,
-      "reviewCount": 4,
-      "ownerReply": null
+      "reviewCount": 5,
+      "ownerReply": "Thank you so much, Ella, for your wonderful 5-star review! We’re delighted to hear that you enjoyed your meal, drinks, and cocktails. Your lovely words about Valeria and Rico mean a lot to us, and we’ll be sure to share your compliments with them! 🩷✨\n\nWe’re so pleased they helped make your visit extra special, and we look forward to welcoming you back for another memorable experience soon!\n\nWarm regards,\nThe Solo Team"
     },
     {
       "id": "Ci9DQUlRQUNvZENodHljRjlvT25wMWRGRTRla0p0TlhwR1JWUnJkbmRCTldWMGVHYxAB",
@@ -160,7 +257,7 @@
       "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT25GWFdHMXRWM0p5VDFWVGQxUjJVa3BwYjNacFQwRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOnFXWG1tV3JyT1VTd1R2Ukppb3ZpT0E%7C%7C?hl=en",
       "photo": "https://lh3.googleusercontent.com/a-/ALV-UjWkAUF5W_nuY1WRKz7zqEPtQEYZ1wFqMM-vrKL0GHxeCOkhNCBr=s96-c",
       "localGuide": false,
-      "reviewCount": 96,
+      "reviewCount": 99,
       "ownerReply": "Thank you so much for taking the time to share such a thoughtful and glowing 5-star review!\n\nWe are honored that you chose to visit us for the first time with your wife and thrilled to hear that you loved our outdoor seating area and relaxing atmosphere. Knowing that you felt we serve the best cocktail in Hackney is a massive compliment—our bar team will be over the moon to hear this!\n\nA special thank you as well from our General Manager, Uno, and Victorious from our security team. We will definitely pass along your kind appreciation to both of them.\n\nNext time, we hope you can skip the other plans and make a full night of it with us! Thank you for visiting, and we look forward to welcoming you both back to The Solo Kitchen & Bar again soon.\n\nBest regards,\nThe Solo Kitchen & Bar team"
     },
     {
@@ -198,103 +295,6 @@
       "localGuide": true,
       "reviewCount": 25,
       "ownerReply": "Thank you so much, Ruth, for your lovely 5-star review! We’re delighted to hear that you enjoyed the food and our setting. It’s also wonderful to know that Saugat made your visit even more enjoyable with his friendly service. We’ll be sure to pass your kind words on to him!\n\nWe truly appreciate your support and look forward to welcoming you back again soon.\n\nBest regards,\nThe Solo Kitchen & Bar team"
-    },
-    {
-      "id": "Ci9DQUlRQUNvZENodHljRjlvT2pka2JqRTJVbWRVYzE5ak5tZzBNSGMyV0RsRmRWRRAB",
-      "name": "Lisa Colquitt",
-      "stars": 5,
-      "text": "Today we went here for my birthday drinks and some food upon arrival we was greeted with beautiful smiles and very friendly staff the cocktails were absolutely delicious 😋 with a great selection. The food was nice the chicken ceaser was delicious better then…",
-      "publishedAt": "2026-08-17T17:46:47.309Z",
-      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2pka2JqRTJVbWRVYzE5ak5tZzBNSGMyV0RsRmRWRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOjdkbjE2UmdUc19jNmg0MHc2WDlFdVE%7C%7C?hl=en",
-      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXI5IQCTNpufdc6hnkZOswDM7XxrqZBYM3i0BU2wLa0W99i1FY=s96-c",
-      "localGuide": false,
-      "reviewCount": 7,
-      "ownerReply": "Dear Lisa,\n\nHappy Birthday from all of us! 🥳✨\n\nThank you so much for choosing to celebrate your special day with us and for leaving such a wonderful 5-star review!\n\nWe are so thrilled to hear that you were welcomed with warm smiles and that you enjoyed our delicious cocktails and food. Knowing that our Chicken Caesar salad stood out and beat out most other places is such a high compliment for our kitchen team!\n\nReceiving a perfect 5/5 rating across food, service, and atmosphere—along with your A**** recommendation—means the world to us. Thank you for dining with us, and we look forward to welcoming you back to The Solo Kitchen & Bar for many more celebrations!\n\nBest regards,\nThe Solo Kitchen & Bar team"
-    },
-    {
-      "id": "Ci9DQUlRQUNvZENodHljRjlvT2xwSWVuWTFSMGxZVDFsV1lqQkVXR1ZaY25OSmQxRRAB",
-      "name": "mya j",
-      "stars": 4,
-      "text": "I went Friday that’s just passed and the restaurant was quiet and had a homey atmosphere. The service was quick and easy and the staff members were so welcoming and the food came out surprisingly fast and it was really good quality.",
-      "publishedAt": "2026-08-17T10:45:35.412Z",
-      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2xwSWVuWTFSMGxZVDFsV1lqQkVXR1ZaY25OSmQxRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOlpIenY1R0lYT1lWYjBEWGVZcnNJd1E%7C%7C?hl=en",
-      "photo": "https://lh3.googleusercontent.com/a/ACg8ocLDwtWr5aY2yoyA7ynGWKHSRhLAiWwuT_-nRBVe6aKxSg8N2A=s96-c",
-      "localGuide": false,
-      "reviewCount": 7,
-      "ownerReply": "Thank you so much, Mya, for your lovely review! We’re delighted to hear that you enjoyed the warm, homely atmosphere and felt welcomed by our team. It’s also great to know that you appreciated the quick service and the quality of your food.\n\nThank you for choosing to spend your Friday evening with us. We truly appreciate your support and look forward to welcoming you back for another enjoyable meal soon!\n\nBest regards,\nThe Solo Kitchen & Bar team"
-    },
-    {
-      "id": "Ci9DQUlRQUNvZENodHljRjlvT2w5WlZEZ3hNbTk0TURkSlJUWnpiV1JaYWtOV2IwRRAB",
-      "name": "Emilia Busek",
-      "stars": 5,
-      "text": "Great food and beautiful view ! The guy named rico was super nice !",
-      "publishedAt": "2026-08-16T12:45:53.388Z",
-      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2w5WlZEZ3hNbTk0TURkSlJUWnpiV1JaYWtOV2IwRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOl9ZVDgxMm94MDdJRTZzbWRZakNWb0E%7C%7C?hl=en",
-      "photo": "https://lh3.googleusercontent.com/a/ACg8ocLEEfHJ9Kb7hcmz3LnFpCYI9EU9XULlxFZtiIp6CLQnxXkmpQ=s96-c",
-      "localGuide": false,
-      "reviewCount": 4,
-      "ownerReply": "Thank you so much, Emilia, for your wonderful 5-star review! We’re delighted to hear that you enjoyed the food and the beautiful view. It’s also lovely to know that Rico made your experience even more enjoyable with his friendly service — we’ll be sure to pass your kind words on to him!\n\nWe truly appreciate your support and look forward to welcoming you back again soon!\n\nBest regards,\nThe Solo Kitchen & Bar team"
-    },
-    {
-      "id": "Ci9DQUlRQUNvZENodHljRjlvT2poeFF6bDZhVmx6ZVhkcU0zcHVUR28xUWxWcFkzYxAB",
-      "name": "Samantha Alma",
-      "stars": 5,
-      "text": "Great service and the food was healthy / good.",
-      "publishedAt": "2026-08-15T13:36:08.688Z",
-      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2poeFF6bDZhVmx6ZVhkcU0zcHVUR28xUWxWcFkzYxAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOjhxQzl6aVlzeXdqM3puTGo1QlVpY3c%7C%7C?hl=en",
-      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXPqJXdYvkou7uxFAiirDeKYblNUewTeBe1AkM0_g5IICGcdtkB=s96-c",
-      "localGuide": false,
-      "reviewCount": 7,
-      "ownerReply": "Thank you so much, Samantha, for your wonderful 5-star review! We’re delighted to hear that you enjoyed both our service and the fresh, healthy food. Your kind feedback means a lot to our team, and we’re so pleased you had a great experience with us.\n\nWe look forward to welcoming you back again soon!\n\nBest regards,\nThe Solo Kitchen & Bar team"
-    },
-    {
-      "id": "Ci9DQUlRQUNvZENodHljRjlvT20xaFYxUjFWRUp4WW1kM0xYaGxhamhzTkZBMVJrRRAB",
-      "name": "John",
-      "stars": 5,
-      "text": "I had an amazing experience saugat was a great server!",
-      "publishedAt": "2026-08-15T13:35:43.715Z",
-      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT20xaFYxUjFWRUp4WW1kM0xYaGxhamhzTkZBMVJrRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOm1hV1R1VEJxYmd3LXhlajhsNFA1RkE%7C%7C?hl=en",
-      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjVn0523NzixtxF_3vco_hOm38Cfpyq-lNatdjXpnpO-L7GiroA=s96-c",
-      "localGuide": false,
-      "reviewCount": 6,
-      "ownerReply": "Thank you so much, John, for your fantastic 5-star review! We’re delighted to hear that you had an amazing experience with us and that Saugat provided such great service. We’ll be sure to pass your kind words on to him!\n\nWe truly appreciate your support and look forward to welcoming you back again soon.\n\nBest regards,\nThe Solo Kitchen & Bar team"
-    },
-    {
-      "id": "Ci9DQUlRQUNvZENodHljRjlvT2xSamIycGpOMjlFZUVWTFUxcGlablpCZEU1bk0wRRAB",
-      "name": "H Jackson",
-      "stars": 5,
-      "text": "Lovely outside seating by the museum gardens. Very friendly service, delicious food and lovely cocktails. We were served by Rico, who was very kind and knowledgeable x",
-      "publishedAt": "2026-08-15T13:33:04.740Z",
-      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2xSamIycGpOMjlFZUVWTFUxcGlablpCZEU1bk0wRRAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOlRjb2pjN29EeEVLU1piZnZBdE5nM0E%7C%7C?hl=en",
-      "photo": "https://lh3.googleusercontent.com/a/ACg8ocKeyonLXPxzqPvPRJQJFlNrVKqaPI3YXZWf8J1vzmosWdJRbg=s96-c",
-      "localGuide": true,
-      "reviewCount": 15,
-      "ownerReply": "Thank you so much for your lovely 5-star review! We’re thrilled that you enjoyed the outdoor seating by the museum gardens, as well as our food and cocktails. It’s wonderful to hear that Rico made your experience even more enjoyable with his friendly and knowledgeable service. We’ll make sure to share your kind words with him!\n\nWe really appreciate your support and hope to welcome you back again very soon.\n\nBest regards,\nThe Solo Kitchen & Bar team"
-    },
-    {
-      "id": "Ci9DQUlRQUNvZENodHljRjlvT21RNU1XbE9VbXB5WWpaRE9HSktUMVIwZUZobWVYYxAB",
-      "name": "H E",
-      "stars": 5,
-      "text": "So lovely and our waiter saugat was fantastic! Thank you!",
-      "publishedAt": "2026-08-15T13:22:20.160Z",
-      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT21RNU1XbE9VbXB5WWpaRE9HSktUMVIwZUZobWVYYxAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOmQ5MWlOUmpyYjZDOGJKT1R0eFhmeXc%7C%7C?hl=en",
-      "photo": "https://lh3.googleusercontent.com/a/ACg8ocJI_fopXozXaC623g-hG55-rDXDxCeJSP0tXNf07ePrlAVu6A=s96-c",
-      "localGuide": true,
-      "reviewCount": 23,
-      "ownerReply": "Thank you so much for your wonderful 5-star review! We’re delighted to hear that you had such a lovely brunch experience with us. It’s especially great to know that Saugat provided fantastic service — we’ll be sure to pass your kind words on to him!\n\nThank you for your support, and we look forward to welcoming you back again soon.\n\nBest regards,\nThe Solo Kitchen & Bar team"
-    },
-    {
-      "id": "Ci9DQUlRQUNvZENodHljRjlvT2taQmFWUm9SVmRxYTI5WGVIbHJZMjB4YnpBMmFtYxAB",
-      "name": "Becca Turton",
-      "stars": 5,
-      "text": "We had a lovely meal here at The Solo. Our waiter Avin was excellent and attentive, he gave us a box for our leftover pizzas which we thoroughly enjoyed. The calamari and veggie platter were delicious and pizzas were great. Atmosphere and vibe on the outside…",
-      "publishedAt": "2026-08-14T20:30:34.596Z",
-      "url": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sCi9DQUlRQUNvZENodHljRjlvT2taQmFWUm9SVmRxYTI5WGVIbHJZMjB4YnpBMmFtYxAB!2m1!1s0x0:0x3ac9ded6304a3760!3m1!1s2@1:CAIQACodChtycF9oOkZBaVRoRVdqa29XeHlrY20xbzA2amc%7C%7C?hl=en",
-      "photo": "https://lh3.googleusercontent.com/a-/ALV-UjXk8aZQDIido7KQ-Rk6NTSyX8U_nE9nxAU7bp36cgIaZjUmpR9A=s96-c",
-      "localGuide": false,
-      "reviewCount": 2,
-      "ownerReply": "Thank you so much, Becca, for your wonderful 5-star review! We’re delighted to hear that you enjoyed your meal, especially the calamari, veggie platter, and pizzas. It’s also great to know that our vegetarian options worked well for your group and that you enjoyed the atmosphere on our outdoor terrace on a summer evening.\n\nWe’re especially pleased to hear that Avin took such good care of you with his attentive service. We’ll be sure to pass your kind words on to him!\n\nThank you for your support, and we look forward to welcoming you back to The Solo again soon.\n\nBest regards,\nThe Solo Kitchen & Bar team"
     }
-  ],
-  "reviewUrl": "https://g.page/r/CWA3SjDW3sk6EBM/review"
+  ]
 }
