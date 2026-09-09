@@ -3,7 +3,10 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import Header from '@/components/Header.astro';
 // HeroSlider.astro is kept in the repo untouched for an easy rollback.
 import HeroVideo from '@/components/HeroVideo.astro';
-import CategorySection from '@/components/CategorySection.astro';
+// Exceptional Dining & Cocktail Moments is off the home page at the client's
+// request (September 2026). The component is untouched, so putting it back
+// is this import and the tag below.
+// import CategorySection from '@/components/CategorySection.astro';
 import ReservationSection from '@/components/ReservationSection.astro';
 import MenuGrid from '@/components/MenuGrid.astro';
 import EventsSection from '@/components/EventsSection.astro';
@@ -29,8 +32,9 @@ import Footer from '@/components/Footer.astro';
     <!-- The same menu grid the /menu/ page shows, one component, no drift. -->
     <MenuGrid />
     
-    <!-- Category Section (Private Dining & Cocktail Bar) -->
-    <CategorySection />
+    <!-- Category Section (Private Dining & Cocktail Bar) — hidden at the
+         client's request; uncomment this and the import to bring it back. -->
+    <!-- <CategorySection /> -->
     
     <!-- Events Section -->
     <EventsSection />
